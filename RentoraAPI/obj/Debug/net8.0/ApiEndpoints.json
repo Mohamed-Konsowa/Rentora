@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "ContainingType": "RentoraAPI.Controllers.AuthController",
+    "Method": "AddRoleAsync",
+    "RelativePath": "api/Auth/addrole",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RentoraAPI.Models.AddRoleModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RentoraAPI.Controllers.AuthController",
+    "Method": "RegisterAsync",
+    "RelativePath": "api/Auth/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RentoraAPI.Models.RegisterModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RentoraAPI.Controllers.AuthController",
+    "Method": "GetTokenAsync",
+    "RelativePath": "api/Auth/token",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RentoraAPI.Models.TokenRequestModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
