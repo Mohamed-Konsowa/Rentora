@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentoraAPI.Models;
 
@@ -11,9 +12,11 @@ using RentoraAPI.Models;
 namespace RentoraAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250210150614_Rental-Notification-Favorite")]
+    partial class RentalNotificationFavorite
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,32 +156,6 @@ namespace RentoraAPI.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("RentoraAPI.Models.ActivityLog", b =>
-                {
-                    b.Property<int>("ActivityLogId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ActivityLogId"));
-
-                    b.Property<string>("Action")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ActivityLogId");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.ToTable("ActivityLog");
                 });
 
             modelBuilder.Entity("RentoraAPI.Models.ApplicationUser", b =>
@@ -436,144 +413,6 @@ namespace RentoraAPI.Migrations
                     b.ToTable("Rental");
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.RentalCart", b =>
-                {
-                    b.Property<int>("RentalCartId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RentalCartId"));
-
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RentalCartId");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("RentalCart");
-                });
-
-            modelBuilder.Entity("RentoraAPI.Models.Report", b =>
-                {
-                    b.Property<int>("ReportId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReportId"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ReportedUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ReporterUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ReportId");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("ReportedUserId");
-
-                    b.HasIndex("ReporterUserId");
-
-                    b.ToTable("Report");
-                });
-
-            modelBuilder.Entity("RentoraAPI.Models.Review", b =>
-                {
-                    b.Property<int>("ReviewId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReviewId"));
-
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.HasKey("ReviewId");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Review");
-                });
-
-            modelBuilder.Entity("RentoraAPI.Models.TransactionHistory", b =>
-                {
-                    b.Property<int>("TransactionHistoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionHistoryId"));
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FromUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ToUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("TransactionHistoryId");
-
-                    b.HasIndex("FromUserId");
-
-                    b.HasIndex("ToUserId");
-
-                    b.ToTable("TransactionHistory");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -623,17 +462,6 @@ namespace RentoraAPI.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("RentoraAPI.Models.ActivityLog", b =>
-                {
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("ActivityLogs")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("RentoraAPI.Models.Favorite", b =>
@@ -704,113 +532,15 @@ namespace RentoraAPI.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.RentalCart", b =>
-                {
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("RentalCarts")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RentoraAPI.Models.Product", "Product")
-                        .WithMany("RentalCarts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationUser");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("RentoraAPI.Models.Report", b =>
-                {
-                    b.HasOne("RentoraAPI.Models.Product", "Product")
-                        .WithMany("Reports")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "ReportedUser")
-                        .WithMany("Reporteds")
-                        .HasForeignKey("ReportedUserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "ReporterUser")
-                        .WithMany("Reports")
-                        .HasForeignKey("ReporterUserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("ReportedUser");
-
-                    b.Navigation("ReporterUser");
-                });
-
-            modelBuilder.Entity("RentoraAPI.Models.Review", b =>
-                {
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("Reviews")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RentoraAPI.Models.Product", "Product")
-                        .WithMany("Reviews")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationUser");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("RentoraAPI.Models.TransactionHistory", b =>
-                {
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "FromUser")
-                        .WithMany("FromTransactionHistories")
-                        .HasForeignKey("FromUserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "ToUser")
-                        .WithMany("ToTransactionHistories")
-                        .HasForeignKey("ToUserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("FromUser");
-
-                    b.Navigation("ToUser");
-                });
-
             modelBuilder.Entity("RentoraAPI.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("ActivityLogs");
-
                     b.Navigation("Favorites");
-
-                    b.Navigation("FromTransactionHistories");
 
                     b.Navigation("Notifications");
 
                     b.Navigation("Products");
 
-                    b.Navigation("RentalCarts");
-
                     b.Navigation("Rentals");
-
-                    b.Navigation("Reporteds");
-
-                    b.Navigation("Reports");
-
-                    b.Navigation("Reviews");
-
-                    b.Navigation("ToTransactionHistories");
                 });
 
             modelBuilder.Entity("RentoraAPI.Models.Category", b =>
@@ -822,13 +552,7 @@ namespace RentoraAPI.Migrations
                 {
                     b.Navigation("Favorites");
 
-                    b.Navigation("RentalCarts");
-
                     b.Navigation("Rentals");
-
-                    b.Navigation("Reports");
-
-                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

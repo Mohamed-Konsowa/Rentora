@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentoraAPI.Models;
 
@@ -11,9 +12,11 @@ using RentoraAPI.Models;
 namespace RentoraAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250210165521_adding-TransactionHistory")]
+    partial class addingTransactionHistory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -444,7 +447,10 @@ namespace RentoraAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RentalCartId"));
 
-                    b.Property<string>("ApplicationUserId")
+                    b.Property<int>("ApplicationUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ApplicationUserId1")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -453,7 +459,7 @@ namespace RentoraAPI.Migrations
 
                     b.HasKey("RentalCartId");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("ApplicationUserId1");
 
                     b.HasIndex("ProductId");
 
@@ -708,7 +714,7 @@ namespace RentoraAPI.Migrations
                 {
                     b.HasOne("RentoraAPI.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("RentalCarts")
-                        .HasForeignKey("ApplicationUserId")
+                        .HasForeignKey("ApplicationUserId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

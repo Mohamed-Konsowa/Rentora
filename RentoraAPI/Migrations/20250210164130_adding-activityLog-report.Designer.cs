@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentoraAPI.Models;
 
@@ -11,9 +12,11 @@ using RentoraAPI.Models;
 namespace RentoraAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250210164130_adding-activityLog-report")]
+    partial class addingactivityLogreport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -444,7 +447,10 @@ namespace RentoraAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RentalCartId"));
 
-                    b.Property<string>("ApplicationUserId")
+                    b.Property<int>("ApplicationUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ApplicationUserId1")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -453,7 +459,7 @@ namespace RentoraAPI.Migrations
 
                     b.HasKey("RentalCartId");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("ApplicationUserId1");
 
                     b.HasIndex("ProductId");
 
@@ -533,45 +539,6 @@ namespace RentoraAPI.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Review");
-                });
-
-            modelBuilder.Entity("RentoraAPI.Models.TransactionHistory", b =>
-                {
-                    b.Property<int>("TransactionHistoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionHistoryId"));
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FromUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ToUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("TransactionHistoryId");
-
-                    b.HasIndex("FromUserId");
-
-                    b.HasIndex("ToUserId");
-
-                    b.ToTable("TransactionHistory");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -708,7 +675,7 @@ namespace RentoraAPI.Migrations
                 {
                     b.HasOne("RentoraAPI.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("RentalCarts")
-                        .HasForeignKey("ApplicationUserId")
+                        .HasForeignKey("ApplicationUserId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -769,32 +736,11 @@ namespace RentoraAPI.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.TransactionHistory", b =>
-                {
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "FromUser")
-                        .WithMany("FromTransactionHistories")
-                        .HasForeignKey("FromUserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "ToUser")
-                        .WithMany("ToTransactionHistories")
-                        .HasForeignKey("ToUserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("FromUser");
-
-                    b.Navigation("ToUser");
-                });
-
             modelBuilder.Entity("RentoraAPI.Models.ApplicationUser", b =>
                 {
                     b.Navigation("ActivityLogs");
 
                     b.Navigation("Favorites");
-
-                    b.Navigation("FromTransactionHistories");
 
                     b.Navigation("Notifications");
 
@@ -809,8 +755,6 @@ namespace RentoraAPI.Migrations
                     b.Navigation("Reports");
 
                     b.Navigation("Reviews");
-
-                    b.Navigation("ToTransactionHistories");
                 });
 
             modelBuilder.Entity("RentoraAPI.Models.Category", b =>
