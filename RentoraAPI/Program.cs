@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RentoraAPI.Helpers;
 using RentoraAPI.Models;
+using RentoraAPI.Repository;
 using RentoraAPI.Services;
 using System.Text;
 
@@ -22,6 +23,10 @@ namespace RentoraAPI
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
             );
+
+            builder.Services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
+            builder.Services.AddScoped<ProductRepository>();
+
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
