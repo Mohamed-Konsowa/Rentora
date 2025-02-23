@@ -51,6 +51,8 @@ namespace RentoraAPI.Models
                 .HasOne(r => r.ApplicationUser)
                 .WithMany(u => u.RentalCarts)
                 .HasForeignKey(r => r.ApplicationUserId);
+
+            builder.Entity<Product>().ToTable("Product");
         }
     }
 }
