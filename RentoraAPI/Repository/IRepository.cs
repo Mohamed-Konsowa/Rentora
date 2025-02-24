@@ -7,7 +7,7 @@ namespace RentoraAPI.Repository
         List<T> GetAll();
         T GetById(int id);
         T Add(T entity);
-        T Update(int id, T entity);
+        T Update(T entity);
         bool Delete(int id);
     }
 }

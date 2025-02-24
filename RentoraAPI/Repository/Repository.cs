@@ -26,7 +26,6 @@ namespace RentoraAPI.Repository
         public T Add(T entity)
         {
             _dbSet.Add(entity);
-            _context.SaveChanges();
             return entity;
         }
 
@@ -36,17 +35,15 @@ namespace RentoraAPI.Repository
             if(entity != null)
             {
                 _dbSet.Remove(entity);
-                _context.SaveChanges();
                 return true;
             }
             return false;
         }
 
 
-        public T Update(int id, T entity)
+        public T Update(T entity)
         {
             _dbSet.Update(entity);
-            _context.SaveChanges();
             return entity;
         }
     }
