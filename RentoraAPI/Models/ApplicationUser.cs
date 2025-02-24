@@ -10,6 +10,16 @@ namespace RentoraAPI.Models
 
         [Required, MaxLength(30)]
         public string LastName { get; set; }
+
+        public string? NationalID {  get; set; }
+        public string? IDImage { get; set; }
+        public string? Address { get; set; }
+        public string? Governorate { get; set; }
+        public string? DetailedLocation { get; set; }
+        public decimal? Balance { get; set; }
+        public string? ProfileImage { get; set; }
+
+
         public List<Product> Products { get; set; }
         public List<Rental> Rentals { get; set; }
         public List<Notification> Notifications { get; set; }

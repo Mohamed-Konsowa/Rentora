@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RentoraAPI.DTOs;
 using RentoraAPI.Models;
 using RentoraAPI.Repository;
+using RentoraAPI.Services;
 
 namespace RentoraAPI.Controllers
 {
@@ -10,23 +11,23 @@ namespace RentoraAPI.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public ProductController(IUnitOfWork unitOfWork)
+        private readonly IProductService _productService;
+        public ProductController(IProductService productService)
         {
-            _unitOfWork = unitOfWork;
+            _productService = productService;
         }
 
         [HttpGet("GetProducts")]
         public IActionResult GetProducts()
         {
-            var products = _unitOfWork.products.GetAll();
+            var products = _productService.GetProducts();
             return Ok(products);
         }
 
         [HttpGet("GetProduct")]
         public IActionResult GetProduct(int id)
         {
-            var product = _unitOfWork.products.GetById(id);
+            var product = _productService.GetProductById(id);
             if(product is not null)
             return Ok(product);
             return BadRequest("Product not found");
@@ -35,6 +36,8 @@ namespace RentoraAPI.Controllers
         [HttpPost("AddProduct")]
         public IActionResult AddProduct(ProductDTO productDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             var product = new Product()
             {
                 ApplicationUserId = productDto.ApplicationUserId,
@@ -50,15 +53,16 @@ namespace RentoraAPI.Controllers
                 Status = productDto.Status,
                 CreatedAt = DateTime.UtcNow
             };
-            _unitOfWork.products.Add(product);
-            _unitOfWork.Save();
+            _productService.AddProduct(product);
             return Ok(product);
         }
 
         [HttpPut]
         public IActionResult UpdateProduct(int ProductId, ProductDTO productDto)
         {
-            var product = _unitOfWork.products.GetById(ProductId);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var product = _productService.GetProductById(ProductId);
             if(product is null) return BadRequest("Product not found");
 
             product.ApplicationUserId = productDto.ApplicationUserId;
@@ -72,17 +76,15 @@ namespace RentoraAPI.Controllers
             product.Latitude = productDto.Latitude;
             product.Longitude = productDto.Longitude;
             product.Status = productDto.Status;
-            
-            _unitOfWork.products.Update(product);
-            _unitOfWork.Save();
+
+            _productService.UpdateProduct(product);
             return Ok(productDto);
         }
 
         [HttpDelete("DeleteProduct")]
         public IActionResult DeleteProduct(int id)
         {
-            var result = _unitOfWork.products.Delete(id);
-            _unitOfWork.Save();
+            var result = _productService.DeleteProduct(id);
             if(result)
                 return Ok("The product is deleted.");
             else

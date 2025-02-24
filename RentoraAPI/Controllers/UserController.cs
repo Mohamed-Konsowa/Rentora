@@ -8,12 +8,18 @@ namespace RentoraAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class UserController : ControllerBase
     {
-        private readonly IAuthService _authService;
-        public AuthController(IAuthService authService)
+        private readonly IUserService _authService;
+        public UserController(IUserService authService)
         {
             _authService = authService;
+        }
+
+        [HttpGet("getAllUsers")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            return Ok(await _authService.GetAllUsers());
         }
 
         [HttpPost("register")]
@@ -28,7 +34,7 @@ namespace RentoraAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPost("token")]
+        [HttpPost("login")]
         public async Task<IActionResult> GetTokenAsync([FromBody] TokenRequestModel model)
         {
             if (!ModelState.IsValid)
