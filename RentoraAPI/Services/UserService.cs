@@ -9,13 +9,13 @@ using System.Text;
 
 namespace RentoraAPI.Services
 {
-    public class AuthService : IAuthService
+    public class UserService : IUserService
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly JWT _jwt;
 
-        public AuthService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IOptions<JWT> jwt)
+        public UserService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IOptions<JWT> jwt)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -124,6 +124,12 @@ namespace RentoraAPI.Services
 
             var result = await _userManager.AddToRoleAsync(user, model.Role);
             return !result.Succeeded ? "Something went wrong" : "";
+        }
+
+        public async Task<List<ApplicationUser>> GetAllUsers()
+        {
+            var users = _userManager.Users.ToList();
+            return users;
         }
     }
 }

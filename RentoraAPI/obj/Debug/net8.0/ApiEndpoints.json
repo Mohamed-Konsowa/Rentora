@@ -1,53 +1,5 @@
 [
   {
-    "ContainingType": "RentoraAPI.Controllers.AuthController",
-    "Method": "AddRoleAsync",
-    "RelativePath": "api/Auth/addrole",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "RentoraAPI.Models.AddRoleModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RentoraAPI.Controllers.AuthController",
-    "Method": "RegisterAsync",
-    "RelativePath": "api/Auth/register",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "RentoraAPI.Models.RegisterModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "RentoraAPI.Controllers.AuthController",
-    "Method": "GetTokenAsync",
-    "RelativePath": "api/Auth/token",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "RentoraAPI.Models.TokenRequestModel",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "RentoraAPI.Controllers.ProductController",
     "Method": "UpdateProduct",
     "RelativePath": "api/Product",
@@ -124,6 +76,64 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RentoraAPI.Controllers.UserController",
+    "Method": "AddRoleAsync",
+    "RelativePath": "api/User/addrole",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RentoraAPI.Models.AddRoleModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RentoraAPI.Controllers.UserController",
+    "Method": "GetAllUsers",
+    "RelativePath": "api/User/getAllUsers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RentoraAPI.Controllers.UserController",
+    "Method": "GetTokenAsync",
+    "RelativePath": "api/User/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RentoraAPI.Models.TokenRequestModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RentoraAPI.Controllers.UserController",
+    "Method": "RegisterAsync",
+    "RelativePath": "api/User/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "RentoraAPI.Models.RegisterModel",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   }
 ]
