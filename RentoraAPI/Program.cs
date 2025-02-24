@@ -24,8 +24,7 @@ namespace RentoraAPI
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
             );
 
-            builder.Services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
-            builder.Services.AddScoped<ProductRepository>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddAuthentication(options =>
             {

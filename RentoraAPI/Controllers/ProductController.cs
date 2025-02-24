@@ -10,26 +10,26 @@ namespace RentoraAPI.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly ProductRepository _productRepository;
-        public ProductController(ProductRepository productRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public ProductController(IUnitOfWork unitOfWork)
         {
-            _productRepository = productRepository;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet("GetProducts")]
         public IActionResult GetProducts()
         {
-            var products = _productRepository.GetAll();
+            var products = _unitOfWork.products.GetAll();
             return Ok(products);
         }
 
         [HttpGet("GetProduct")]
         public IActionResult GetProduct(int id)
         {
-            var product = _productRepository.GetById(id);
+            var product = _unitOfWork.products.GetById(id);
             if(product is not null)
             return Ok(product);
-            return BadRequest();
+            return BadRequest("Product not found");
         }
 
         [HttpPost("AddProduct")]
@@ -50,18 +50,43 @@ namespace RentoraAPI.Controllers
                 Status = productDto.Status,
                 CreatedAt = DateTime.UtcNow
             };
-            _productRepository.Add(product);
+            _unitOfWork.products.Add(product);
+            _unitOfWork.Save();
             return Ok(product);
+        }
+
+        [HttpPut]
+        public IActionResult UpdateProduct(int ProductId, ProductDTO productDto)
+        {
+            var product = _unitOfWork.products.GetById(ProductId);
+            if(product is null) return BadRequest("Product not found");
+
+            product.ApplicationUserId = productDto.ApplicationUserId;
+            product.CategoryId = productDto.CategoryId;
+            product.Title = productDto.Title;
+            product.Description = productDto.Description;
+            product.Images = productDto.Images;
+            product.Quantity = productDto.Quantity;
+            product.PricePerDay = productDto.PricePerDay;
+            product.Location = productDto.Location;
+            product.Latitude = productDto.Latitude;
+            product.Longitude = productDto.Longitude;
+            product.Status = productDto.Status;
+            
+            _unitOfWork.products.Update(product);
+            _unitOfWork.Save();
+            return Ok(productDto);
         }
 
         [HttpDelete("DeleteProduct")]
         public IActionResult DeleteProduct(int id)
         {
-            var result = _productRepository.Delete(id);
+            var result = _unitOfWork.products.Delete(id);
+            _unitOfWork.Save();
             if(result)
-                return Ok();
+                return Ok("The product is deleted.");
             else
-                return BadRequest();
+                return BadRequest("Error");
         }
     }
 }
