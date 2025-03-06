@@ -1,0 +1,119 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0": {
+      "Rentora.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Rentora.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Rentora.Domain.dll": {}
+        }
+      },
+      "Rentors.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Rentora.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Rentors.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Rentors.Application.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Rentora.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Rentora.Domain/Rentora.Domain.csproj",
+      "msbuildProject": "../Rentora.Domain/Rentora.Domain.csproj"
+    },
+    "Rentors.Application/1.0.0": {
+      "type": "project",
+      "path": "../Rentors.Application/Rentors.Application.csproj",
+      "msbuildProject": "../Rentors.Application/Rentors.Application.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "Rentora.Domain >= 1.0.0",
+      "Rentors.Application >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\m\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\Graduation-Project\\Rentora\\Rentora.Persistence\\Rentora.Persistence.csproj",
+      "projectName": "Rentora.Persistence",
+      "projectPath": "D:\\Graduation-Project\\Rentora\\Rentora.Persistence\\Rentora.Persistence.csproj",
+      "packagesPath": "C:\\Users\\m\\.nuget\\packages\\",
+      "outputPath": "D:\\Graduation-Project\\Rentora\\Rentora.Persistence\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\m\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {
+            "D:\\Graduation-Project\\Rentora\\Rentora.Domain\\Rentora.Domain.csproj": {
+              "projectPath": "D:\\Graduation-Project\\Rentora\\Rentora.Domain\\Rentora.Domain.csproj"
+            },
+            "D:\\Graduation-Project\\Rentora\\Rentors.Application\\Rentors.Application.csproj": {
+              "projectPath": "D:\\Graduation-Project\\Rentora\\Rentors.Application\\Rentors.Application.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      }
+    },
+    "frameworks": {
+      "net8.0": {
+        "targetAlias": "net8.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

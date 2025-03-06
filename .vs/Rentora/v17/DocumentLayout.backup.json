@@ -1,40 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Graduation-Project\\Rentora\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}|RentoraAPI\\RentoraAPI.csproj|d:\\graduation-project\\rentora\\rentoraapi\\dtos\\authentication\\addrolemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}|RentoraAPI\\RentoraAPI.csproj|solutionrelative:rentoraapi\\dtos\\authentication\\addrolemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}|RentoraAPI\\RentoraAPI.csproj|d:\\graduation-project\\rentora\\rentoraapi\\dtos\\authentication\\authmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}|RentoraAPI\\RentoraAPI.csproj|solutionrelative:rentoraapi\\dtos\\authentication\\authmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}|RentoraAPI\\RentoraAPI.csproj|d:\\graduation-project\\rentora\\rentoraapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}|RentoraAPI\\RentoraAPI.csproj|solutionrelative:rentoraapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}|RentoraAPI\\RentoraAPI.csproj|d:\\graduation-project\\rentora\\rentoraapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}|RentoraAPI\\RentoraAPI.csproj|solutionrelative:rentoraapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}|RentoraAPI\\RentoraAPI.csproj|d:\\graduation-project\\rentora\\rentoraapi\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}|RentoraAPI\\RentoraAPI.csproj|solutionrelative:rentoraapi\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}|RentoraAPI\\RentoraAPI.csproj|d:\\graduation-project\\rentora\\rentoraapi\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}|RentoraAPI\\RentoraAPI.csproj|solutionrelative:rentoraapi\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}|RentoraAPI\\RentoraAPI.csproj|d:\\graduation-project\\rentora\\rentoraapi\\repository\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}|RentoraAPI\\RentoraAPI.csproj|solutionrelative:rentoraapi\\repository\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}|RentoraAPI\\RentoraAPI.csproj|d:\\graduation-project\\rentora\\rentoraapi\\repository\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}|RentoraAPI\\RentoraAPI.csproj|solutionrelative:rentoraapi\\repository\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -42,119 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": -1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AddRoleModel.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\RentoraAPI\\DTOs\\Authentication\\AddRoleModel.cs",
-              "RelativeDocumentMoniker": "RentoraAPI\\DTOs\\Authentication\\AddRoleModel.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\RentoraAPI\\DTOs\\Authentication\\AddRoleModel.cs*",
-              "RelativeToolTip": "RentoraAPI\\DTOs\\Authentication\\AddRoleModel.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T15:16:11.291Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AuthModel.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\RentoraAPI\\DTOs\\Authentication\\AuthModel.cs",
-              "RelativeDocumentMoniker": "RentoraAPI\\DTOs\\Authentication\\AuthModel.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\RentoraAPI\\DTOs\\Authentication\\AuthModel.cs*",
-              "RelativeToolTip": "RentoraAPI\\DTOs\\Authentication\\AuthModel.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T15:15:14.986Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{fbcae063-e2c0-4ab1-a516-996ea3dafb72}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\RentoraAPI\\Program.cs",
-              "RelativeDocumentMoniker": "RentoraAPI\\Program.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\RentoraAPI\\Program.cs",
-              "RelativeToolTip": "RentoraAPI\\Program.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAtwB0AAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T15:10:10.163Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ProductController.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\RentoraAPI\\Controllers\\ProductController.cs",
-              "RelativeDocumentMoniker": "RentoraAPI\\Controllers\\ProductController.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\RentoraAPI\\Controllers\\ProductController.cs*",
-              "RelativeToolTip": "RentoraAPI\\Controllers\\ProductController.cs*",
-              "ViewState": "AgIAABQAAAAAAAAAAIA9wB0AAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T14:38:56.114Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "IProductRepository.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\RentoraAPI\\Repository\\IProductRepository.cs",
-              "RelativeDocumentMoniker": "RentoraAPI\\Repository\\IProductRepository.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\RentoraAPI\\Repository\\IProductRepository.cs",
-              "RelativeToolTip": "RentoraAPI\\Repository\\IProductRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA+AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T13:28:34.096Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ProductRepository.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\RentoraAPI\\Repository\\ProductRepository.cs",
-              "RelativeDocumentMoniker": "RentoraAPI\\Repository\\ProductRepository.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\RentoraAPI\\Repository\\ProductRepository.cs",
-              "RelativeToolTip": "RentoraAPI\\Repository\\ProductRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAABMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T13:27:54.049Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\RentoraAPI\\Services\\UserService.cs",
-              "RelativeDocumentMoniker": "RentoraAPI\\Services\\UserService.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\RentoraAPI\\Services\\UserService.cs*",
-              "RelativeToolTip": "RentoraAPI\\Services\\UserService.cs*",
-              "ViewState": "AgIAABkAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T13:24:18.851Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ProductService.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\RentoraAPI\\Services\\ProductService.cs",
-              "RelativeDocumentMoniker": "RentoraAPI\\Services\\ProductService.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\RentoraAPI\\Services\\ProductService.cs",
-              "RelativeToolTip": "RentoraAPI\\Services\\ProductService.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAA5wCAAAABBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T13:23:31.652Z",
-              "EditorCaption": ""
             }
           ]
         }
