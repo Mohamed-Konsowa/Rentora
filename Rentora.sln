@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentoraAPI", "RentoraAPI\RentoraAPI.csproj", "{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rentora.Presentation", "Rentora.Presentation\Rentora.Presentation.csproj", "{BFBBF7D8-83FE-4B08-8B48-9648884FD56F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rentors.Application", "Rentors.Application\Rentors.Application.csproj", "{080CEF5E-4906-468A-A2CB-7F0C1D33E1FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rentora.Domain", "Rentora.Domain\Rentora.Domain.csproj", "{39CD5DFC-E466-4FD0-9D5E-860DCC6E7298}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rentora.Persistence", "Rentora.Persistence\Rentora.Persistence.csproj", "{FE54A0D3-3425-48D7-8ACF-85C7D2896867}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +17,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2BC1B623-94C7-41B9-BC50-C31EDCC8FCFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFBBF7D8-83FE-4B08-8B48-9648884FD56F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFBBF7D8-83FE-4B08-8B48-9648884FD56F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFBBF7D8-83FE-4B08-8B48-9648884FD56F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFBBF7D8-83FE-4B08-8B48-9648884FD56F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{080CEF5E-4906-468A-A2CB-7F0C1D33E1FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{080CEF5E-4906-468A-A2CB-7F0C1D33E1FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{080CEF5E-4906-468A-A2CB-7F0C1D33E1FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{080CEF5E-4906-468A-A2CB-7F0C1D33E1FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39CD5DFC-E466-4FD0-9D5E-860DCC6E7298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39CD5DFC-E466-4FD0-9D5E-860DCC6E7298}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39CD5DFC-E466-4FD0-9D5E-860DCC6E7298}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39CD5DFC-E466-4FD0-9D5E-860DCC6E7298}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE54A0D3-3425-48D7-8ACF-85C7D2896867}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE54A0D3-3425-48D7-8ACF-85C7D2896867}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE54A0D3-3425-48D7-8ACF-85C7D2896867}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE54A0D3-3425-48D7-8ACF-85C7D2896867}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
