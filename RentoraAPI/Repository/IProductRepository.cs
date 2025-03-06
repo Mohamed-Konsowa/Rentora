@@ -1,6 +1,8 @@
-﻿namespace RentoraAPI.Repository
+﻿using RentoraAPI.Models;
+
+namespace RentoraAPI.Repository
 {
-    public interface IProductRepository
+    public interface IProductRepository : IRepository<Product>
     {
     }
 }

@@ -1,8 +1,10 @@
-﻿namespace RentoraAPI.Repository
+﻿using System;
+
+namespace RentoraAPI.Repository
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
-        ProductRepository products { get; }
-        void Save();
+        IProductRepository products { get; }
+        Task Save();
     }
 }

@@ -4,10 +4,10 @@ namespace RentoraAPI.Services
 {
     public interface IProductService
     {
-        List<Product> GetProducts();
-        Product GetProductById(int id);
-        Product AddProduct(Product product);
-        Product UpdateProduct(Product product);
-        bool DeleteProduct(int id);
+        Task<List<Product>> GetProducts();
+        Task<Product> GetProductById(int id);
+        Task<Product> AddProduct(Product product);
+        Task<Product> UpdateProduct(Product product);
+        Task<bool> DeleteProduct(int id);
     }
 }

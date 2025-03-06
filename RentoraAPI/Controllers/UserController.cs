@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RentoraAPI.DTOs.Authentication;
 using RentoraAPI.Models;
 using RentoraAPI.Services;
 

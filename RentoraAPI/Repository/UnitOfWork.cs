@@ -5,17 +5,22 @@ namespace RentoraAPI.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
-        public ProductRepository products { get; }
+        public IProductRepository products { get; }
 
-        public UnitOfWork(ApplicationDbContext context)
+        public UnitOfWork(ApplicationDbContext context, IProductRepository productRepository)
         {
             _context = context;
-            products = new ProductRepository(context);
+            products = productRepository;
         }
 
-        public void Save()
+        public async Task Save()
         {
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+        }
+
+        public void Dispose()
+        {
+             _context.Dispose();
         }
     }
 }

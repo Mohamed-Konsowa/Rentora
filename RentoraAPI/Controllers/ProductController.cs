@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RentoraAPI.DTOs;
+using RentoraAPI.DTOs.Authentication.Product;
 using RentoraAPI.Models;
 using RentoraAPI.Repository;
 using RentoraAPI.Services;
@@ -25,16 +25,16 @@ namespace RentoraAPI.Controllers
         }
 
         [HttpGet("GetProduct")]
-        public IActionResult GetProduct(int id)
+        public async Task<IActionResult> GetProductAsync(int id)
         {
-            var product = _productService.GetProductById(id);
+            var product = await _productService.GetProductById(id);
             if(product is not null)
             return Ok(product);
             return BadRequest("Product not found");
         }
 
         [HttpPost("AddProduct")]
-        public IActionResult AddProduct(ProductDTO productDto)
+        public async Task<IActionResult> AddProductAsync(ProductDTO productDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -53,16 +53,16 @@ namespace RentoraAPI.Controllers
                 Status = productDto.Status,
                 CreatedAt = DateTime.UtcNow
             };
-            _productService.AddProduct(product);
+            await _productService.AddProduct(product);
             return Ok(product);
         }
 
         [HttpPut]
-        public IActionResult UpdateProduct(int ProductId, ProductDTO productDto)
+        public async Task<IActionResult> UpdateProduct(int ProductId, ProductDTO productDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var product = _productService.GetProductById(ProductId);
+            var product = await _productService.GetProductById(ProductId);
             if(product is null) return BadRequest("Product not found");
 
             product.ApplicationUserId = productDto.ApplicationUserId;
@@ -82,9 +82,9 @@ namespace RentoraAPI.Controllers
         }
 
         [HttpDelete("DeleteProduct")]
-        public IActionResult DeleteProduct(int id)
+        public async Task<IActionResult> DeleteProductAsync(int id)
         {
-            var result = _productService.DeleteProduct(id);
+            var result = await _productService.DeleteProduct(id);
             if(result)
                 return Ok("The product is deleted.");
             else

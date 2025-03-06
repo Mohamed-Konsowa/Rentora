@@ -1,4 +1,4 @@
-﻿namespace RentoraAPI.Models
+﻿namespace RentoraAPI.DTOs.Authentication
 {
     public class AuthModel
     {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using RentoraAPI.DTOs.Authentication;
 using RentoraAPI.Helpers;
 using RentoraAPI.Models;
 using System.IdentityModel.Tokens.Jwt;
