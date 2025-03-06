@@ -14,22 +14,22 @@ namespace RentoraAPI.Repository
             _dbSet = context.Set<T>();
         }
 
-        public List<T> GetAll()
+        public async Task<List<T>> GetAll()
         {
             return _dbSet.ToList();
         }
-        public T GetById(int id)
+        public async Task<T> GetById(int id)
         {
             return _dbSet.Find(id);
         }
 
-        public T Add(T entity)
+        public async Task<T> Add(T entity)
         {
             _dbSet.Add(entity);
             return entity;
         }
 
-        public bool Delete(int id)
+        public async Task<bool> Delete(int id)
         {
             var entity = _dbSet.Find(id);
             if(entity != null)
@@ -41,7 +41,7 @@ namespace RentoraAPI.Repository
         }
 
 
-        public T Update(T entity)
+        public async  Task<T> Update(T entity)
         {
             _dbSet.Update(entity);
             return entity;

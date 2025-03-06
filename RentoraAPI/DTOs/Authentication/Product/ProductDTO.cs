@@ -1,4 +1,4 @@
-﻿namespace RentoraAPI.DTOs
+﻿namespace RentoraAPI.DTOs.Authentication.Product
 {
     public class ProductDTO
     {

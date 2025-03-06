@@ -14,7 +14,7 @@
       },
       {
         "Name": "productDto",
-        "Type": "RentoraAPI.DTOs.ProductDTO",
+        "Type": "RentoraAPI.DTOs.Authentication.Product.ProductDTO",
         "IsRequired": true
       }
     ],
@@ -22,7 +22,7 @@
   },
   {
     "ContainingType": "RentoraAPI.Controllers.ProductController",
-    "Method": "AddProduct",
+    "Method": "AddProductAsync",
     "RelativePath": "api/Product/AddProduct",
     "HttpMethod": "POST",
     "IsController": true,
@@ -30,7 +30,7 @@
     "Parameters": [
       {
         "Name": "productDto",
-        "Type": "RentoraAPI.DTOs.ProductDTO",
+        "Type": "RentoraAPI.DTOs.Authentication.Product.ProductDTO",
         "IsRequired": true
       }
     ],
@@ -38,7 +38,7 @@
   },
   {
     "ContainingType": "RentoraAPI.Controllers.ProductController",
-    "Method": "DeleteProduct",
+    "Method": "DeleteProductAsync",
     "RelativePath": "api/Product/DeleteProduct",
     "HttpMethod": "DELETE",
     "IsController": true,
@@ -54,7 +54,7 @@
   },
   {
     "ContainingType": "RentoraAPI.Controllers.ProductController",
-    "Method": "GetProduct",
+    "Method": "GetProductAsync",
     "RelativePath": "api/Product/GetProduct",
     "HttpMethod": "GET",
     "IsController": true,
@@ -88,7 +88,7 @@
     "Parameters": [
       {
         "Name": "model",
-        "Type": "RentoraAPI.Models.AddRoleModel",
+        "Type": "RentoraAPI.DTOs.Authentication.AddRoleModel",
         "IsRequired": true
       }
     ],
@@ -130,7 +130,7 @@
     "Parameters": [
       {
         "Name": "model",
-        "Type": "RentoraAPI.Models.RegisterModel",
+        "Type": "RentoraAPI.DTOs.Authentication.RegisterModel",
         "IsRequired": true
       }
     ],

@@ -1,4 +1,5 @@
-﻿using RentoraAPI.Models;
+﻿using RentoraAPI.DTOs.Authentication;
+using RentoraAPI.Models;
 
 namespace RentoraAPI.Services
 {
