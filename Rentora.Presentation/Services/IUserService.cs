@@ -1,7 +1,7 @@
-﻿using RentoraAPI.DTOs.Authentication;
-using RentoraAPI.Models;
+﻿using Rentora.Presentation.DTOs.Authentication;
+using Rentora.Domain.Models;
 
-namespace RentoraAPI.Services
+namespace Rentora.Presentation.Services
 {
     public interface IUserService
     {

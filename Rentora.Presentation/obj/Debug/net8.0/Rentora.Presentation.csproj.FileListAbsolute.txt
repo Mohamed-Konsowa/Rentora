@@ -549,7 +549,6 @@ D:\Graduation-Project\Rentora\Rentora.Presentation\obj\Debug\net8.0\Rentora.Pres
 D:\Graduation-Project\Rentora\Rentora.Presentation\obj\Debug\net8.0\Rentora.Presentation.AssemblyInfoInputs.cache
 D:\Graduation-Project\Rentora\Rentora.Presentation\obj\Debug\net8.0\Rentora.Presentation.AssemblyInfo.cs
 D:\Graduation-Project\Rentora\Rentora.Presentation\obj\Debug\net8.0\Rentora.Presentation.csproj.CoreCompileInputs.cache
-D:\Graduation-Project\Rentora\Rentora.Presentation\obj\Debug\net8.0\Rentora.Presentation.MvcApplicationPartsAssemblyInfo.cs
 D:\Graduation-Project\Rentora\Rentora.Presentation\obj\Debug\net8.0\Rentora.Presentation.MvcApplicationPartsAssemblyInfo.cache
 D:\Graduation-Project\Rentora\Rentora.Presentation\obj\Debug\net8.0\Rentora.Presentation.sourcelink.json
 D:\Graduation-Project\Rentora\Rentora.Presentation\obj\Debug\net8.0\staticwebassets.build.json
@@ -566,3 +565,12 @@ D:\Graduation-Project\Rentora\Rentora.Presentation\obj\Debug\net8.0\refint\Rento
 D:\Graduation-Project\Rentora\Rentora.Presentation\obj\Debug\net8.0\Rentora.Presentation.pdb
 D:\Graduation-Project\Rentora\Rentora.Presentation\obj\Debug\net8.0\Rentora.Presentation.genruntimeconfig.cache
 D:\Graduation-Project\Rentora\Rentora.Presentation\obj\Debug\net8.0\ref\Rentora.Presentation.dll
+D:\Graduation-Project\Rentora\Rentora.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+D:\Graduation-Project\Rentora\Rentora.Presentation\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+D:\Graduation-Project\Rentora\Rentora.Presentation\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
+D:\Graduation-Project\Rentora\Rentora.Presentation\bin\Debug\net8.0\Rentora.Application.dll
+D:\Graduation-Project\Rentora\Rentora.Presentation\bin\Debug\net8.0\Rentora.Domain.dll
+D:\Graduation-Project\Rentora\Rentora.Presentation\bin\Debug\net8.0\Rentora.Persistence.dll
+D:\Graduation-Project\Rentora\Rentora.Presentation\bin\Debug\net8.0\Rentora.Application.pdb
+D:\Graduation-Project\Rentora\Rentora.Presentation\bin\Debug\net8.0\Rentora.Persistence.pdb
+D:\Graduation-Project\Rentora\Rentora.Presentation\bin\Debug\net8.0\Rentora.Domain.pdb

@@ -3,11 +3,15 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using RentoraAPI.Helpers;
-using RentoraAPI.Models;
-using RentoraAPI.Repository;
-using RentoraAPI.Services;
+using Rentora.Presentation.Helpers;
+using Rentora.Domain.Models;
+using Rentora.Application.Repositories;
+using Rentora.Application.Dependancies;
+using Rentora.Presentation.Services;
+using Rentora.Persistence.Dependances;
+
 using System.Text;
+using Rentora.Persistence.Repositories;
 
 namespace RentoraAPI
 {
@@ -19,14 +23,12 @@ namespace RentoraAPI
 
             // Add services to the container.
             builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-            );
 
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            builder.Services.AddScoped<IProductRepository,ProductRepository>();
-            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddApplication().AddPersistence(builder.Configuration.GetConnectionString("DefaultConnection")!);
+
+            //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //builder.Services.AddScoped<IProductRepository,ProductRepository>();
+            //builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -48,6 +50,8 @@ namespace RentoraAPI
                 };
             });
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IProductService, ProductService>();
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

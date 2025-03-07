@@ -1,7 +1,7 @@
-﻿using RentoraAPI.Models;
-using RentoraAPI.Repository;
+﻿using Rentora.Domain.Models;
+using Rentora.Application.Repositories;
 
-namespace RentoraAPI.Services
+namespace Rentora.Presentation.Services
 {
     public class ProductService : IProductService
     {
