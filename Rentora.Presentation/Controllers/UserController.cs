@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RentoraAPI.DTOs.Authentication;
-using RentoraAPI.Models;
-using RentoraAPI.Services;
+using Rentora.Presentation.DTOs.Authentication;
+using Rentora.Presentation.Services;
 
-namespace RentoraAPI.Controllers
+namespace Rentora.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

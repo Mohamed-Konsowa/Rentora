@@ -1,6 +1,6 @@
 [
   {
-    "ContainingType": "RentoraAPI.Controllers.ProductController",
+    "ContainingType": "Rentora.Presentation.Controllers.ProductController",
     "Method": "UpdateProduct",
     "RelativePath": "api/Product",
     "HttpMethod": "PUT",
@@ -14,14 +14,14 @@
       },
       {
         "Name": "productDto",
-        "Type": "RentoraAPI.DTOs.Authentication.Product.ProductDTO",
+        "Type": "Rentora.Presentation.DTOs.Product.ProductDTO",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "RentoraAPI.Controllers.ProductController",
+    "ContainingType": "Rentora.Presentation.Controllers.ProductController",
     "Method": "AddProductAsync",
     "RelativePath": "api/Product/AddProduct",
     "HttpMethod": "POST",
@@ -30,14 +30,14 @@
     "Parameters": [
       {
         "Name": "productDto",
-        "Type": "RentoraAPI.DTOs.Authentication.Product.ProductDTO",
+        "Type": "Rentora.Presentation.DTOs.Product.ProductDTO",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "RentoraAPI.Controllers.ProductController",
+    "ContainingType": "Rentora.Presentation.Controllers.ProductController",
     "Method": "DeleteProductAsync",
     "RelativePath": "api/Product/DeleteProduct",
     "HttpMethod": "DELETE",
@@ -53,7 +53,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "RentoraAPI.Controllers.ProductController",
+    "ContainingType": "Rentora.Presentation.Controllers.ProductController",
     "Method": "GetProductAsync",
     "RelativePath": "api/Product/GetProduct",
     "HttpMethod": "GET",
@@ -69,7 +69,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "RentoraAPI.Controllers.ProductController",
+    "ContainingType": "Rentora.Presentation.Controllers.ProductController",
     "Method": "GetProducts",
     "RelativePath": "api/Product/GetProducts",
     "HttpMethod": "GET",
@@ -79,7 +79,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "RentoraAPI.Controllers.UserController",
+    "ContainingType": "Rentora.Presentation.Controllers.UserController",
     "Method": "AddRoleAsync",
     "RelativePath": "api/User/addrole",
     "HttpMethod": "POST",
@@ -88,14 +88,14 @@
     "Parameters": [
       {
         "Name": "model",
-        "Type": "RentoraAPI.DTOs.Authentication.AddRoleModel",
+        "Type": "Rentora.Presentation.DTOs.Authentication.AddRoleModel",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "RentoraAPI.Controllers.UserController",
+    "ContainingType": "Rentora.Presentation.Controllers.UserController",
     "Method": "GetAllUsers",
     "RelativePath": "api/User/getAllUsers",
     "HttpMethod": "GET",
@@ -105,7 +105,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "RentoraAPI.Controllers.UserController",
+    "ContainingType": "Rentora.Presentation.Controllers.UserController",
     "Method": "GetTokenAsync",
     "RelativePath": "api/User/login",
     "HttpMethod": "POST",
@@ -114,14 +114,14 @@
     "Parameters": [
       {
         "Name": "model",
-        "Type": "RentoraAPI.Models.TokenRequestModel",
+        "Type": "Rentora.Presentation.DTOs.Authentication.TokenRequestModel",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "RentoraAPI.Controllers.UserController",
+    "ContainingType": "Rentora.Presentation.Controllers.UserController",
     "Method": "RegisterAsync",
     "RelativePath": "api/User/register",
     "HttpMethod": "POST",
@@ -130,7 +130,7 @@
     "Parameters": [
       {
         "Name": "model",
-        "Type": "RentoraAPI.DTOs.Authentication.RegisterModel",
+        "Type": "Rentora.Presentation.DTOs.Authentication.RegisterModel",
         "IsRequired": true
       }
     ],

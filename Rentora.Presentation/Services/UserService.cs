@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using RentoraAPI.DTOs.Authentication;
-using RentoraAPI.Helpers;
-using RentoraAPI.Models;
+using Rentora.Presentation.DTOs.Authentication;
+using Rentora.Presentation.Helpers;
+using Rentora.Domain.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace RentoraAPI.Services
+namespace Rentora.Presentation.Services
 {
     public class UserService : IUserService
     {

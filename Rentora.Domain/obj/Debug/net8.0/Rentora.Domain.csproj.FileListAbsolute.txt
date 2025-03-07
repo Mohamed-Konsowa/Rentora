@@ -1,0 +1,13 @@
+D:\Graduation-Project\Rentora\Rentora.Domain\bin\Debug\net8.0\Rentora.Domain.deps.json
+D:\Graduation-Project\Rentora\Rentora.Domain\bin\Debug\net8.0\Rentora.Domain.dll
+D:\Graduation-Project\Rentora\Rentora.Domain\bin\Debug\net8.0\Rentora.Domain.pdb
+D:\Graduation-Project\Rentora\Rentora.Domain\obj\Debug\net8.0\Rentora.Domain.csproj.AssemblyReference.cache
+D:\Graduation-Project\Rentora\Rentora.Domain\obj\Debug\net8.0\Rentora.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Graduation-Project\Rentora\Rentora.Domain\obj\Debug\net8.0\Rentora.Domain.AssemblyInfoInputs.cache
+D:\Graduation-Project\Rentora\Rentora.Domain\obj\Debug\net8.0\Rentora.Domain.AssemblyInfo.cs
+D:\Graduation-Project\Rentora\Rentora.Domain\obj\Debug\net8.0\Rentora.Domain.csproj.CoreCompileInputs.cache
+D:\Graduation-Project\Rentora\Rentora.Domain\obj\Debug\net8.0\Rentora.Domain.sourcelink.json
+D:\Graduation-Project\Rentora\Rentora.Domain\obj\Debug\net8.0\Rentora.Domain.dll
+D:\Graduation-Project\Rentora\Rentora.Domain\obj\Debug\net8.0\refint\Rentora.Domain.dll
+D:\Graduation-Project\Rentora\Rentora.Domain\obj\Debug\net8.0\Rentora.Domain.pdb
+D:\Graduation-Project\Rentora\Rentora.Domain\obj\Debug\net8.0\ref\Rentora.Domain.dll

@@ -3,24 +3,12 @@
   "WorkspaceRootPath": "D:\\Graduation-Project\\Rentora\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FE54A0D3-3425-48D7-8ACF-85C7D2896867}|Rentora.Persistence\\Rentora.Persistence.csproj|d:\\graduation-project\\rentora\\rentora.persistence\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE54A0D3-3425-48D7-8ACF-85C7D2896867}|Rentora.Persistence\\Rentora.Persistence.csproj|solutionrelative:rentora.persistence\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FE54A0D3-3425-48D7-8ACF-85C7D2896867}|Rentora.Persistence\\Rentora.Persistence.csproj|d:\\graduation-project\\rentora\\rentora.persistence\\dependances\\dependancyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE54A0D3-3425-48D7-8ACF-85C7D2896867}|Rentora.Persistence\\Rentora.Persistence.csproj|solutionrelative:rentora.persistence\\dependances\\dependancyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BFBBF7D8-83FE-4B08-8B48-9648884FD56F}|Rentora.Presentation\\Rentora.Presentation.csproj|d:\\graduation-project\\rentora\\rentora.presentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BFBBF7D8-83FE-4B08-8B48-9648884FD56F}|Rentora.Presentation\\Rentora.Presentation.csproj|solutionrelative:rentora.presentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BFBBF7D8-83FE-4B08-8B48-9648884FD56F}|Rentora.Presentation\\Rentora.Presentation.csproj|d:\\graduation-project\\rentora\\rentora.presentation\\rentora.presentation.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{BFBBF7D8-83FE-4B08-8B48-9648884FD56F}|Rentora.Presentation\\Rentora.Presentation.csproj|solutionrelative:rentora.presentation\\rentora.presentation.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39CD5DFC-E466-4FD0-9D5E-860DCC6E7298}|Rentora.Domain\\Rentora.Domain.csproj|d:\\graduation-project\\rentora\\rentora.domain\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39CD5DFC-E466-4FD0-9D5E-860DCC6E7298}|Rentora.Domain\\Rentora.Domain.csproj|solutionrelative:rentora.domain\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{080CEF5E-4906-468A-A2CB-7F0C1D33E1FC}|Rentors.Application\\Rentors.Application.csproj|d:\\graduation-project\\rentora\\rentors.application\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{080CEF5E-4906-468A-A2CB-7F0C1D33E1FC}|Rentors.Application\\Rentors.Application.csproj|solutionrelative:rentors.application\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,24 +18,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{fbcae063-e2c0-4ab1-a516-996ea3dafb72}"
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Persistence\\Class1.cs",
-              "RelativeDocumentMoniker": "Rentora.Persistence\\Class1.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Persistence\\Class1.cs",
-              "RelativeToolTip": "Rentora.Persistence\\Class1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T21:05:13.081Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{fbcae063-e2c0-4ab1-a516-996ea3dafb72}"
             },
             {
               "$type": "Document",
@@ -57,48 +36,22 @@
               "RelativeDocumentMoniker": "Rentora.Presentation\\Program.cs",
               "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Presentation\\Program.cs",
               "RelativeToolTip": "Rentora.Presentation\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACsAAAAAAAAAAAAowDQAAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T20:50:36.578Z",
+              "WhenOpened": "2025-03-07T00:36:36.318Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Rentora.Presentation",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Presentation\\Rentora.Presentation.csproj",
-              "RelativeDocumentMoniker": "Rentora.Presentation\\Rentora.Presentation.csproj",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Presentation\\Rentora.Presentation.csproj",
-              "RelativeToolTip": "Rentora.Presentation\\Rentora.Presentation.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-03-06T20:50:23.66Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Domain\\Class1.cs",
-              "RelativeDocumentMoniker": "Rentora.Domain\\Class1.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Domain\\Class1.cs",
-              "RelativeToolTip": "Rentora.Domain\\Class1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "DependancyInjection.cs",
+              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Persistence\\Dependances\\DependancyInjection.cs",
+              "RelativeDocumentMoniker": "Rentora.Persistence\\Dependances\\DependancyInjection.cs",
+              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Persistence\\Dependances\\DependancyInjection.cs",
+              "RelativeToolTip": "Rentora.Persistence\\Dependances\\DependancyInjection.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T20:41:36.355Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentors.Application\\Class1.cs",
-              "RelativeDocumentMoniker": "Rentors.Application\\Class1.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentors.Application\\Class1.cs",
-              "RelativeToolTip": "Rentors.Application\\Class1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T20:41:10.529Z",
+              "WhenOpened": "2025-03-07T00:38:07.782Z",
               "EditorCaption": ""
             }
           ]
