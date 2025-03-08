@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Rentora.Presentation.Helpers;
+using Rentora.Persistence.Helpers;
 using Rentora.Domain.Models;
-using Rentora.Application.Repositories;
 using Rentora.Application.Dependancies;
 using Rentora.Presentation.Services;
 using Rentora.Persistence.Dependances;
@@ -13,7 +12,7 @@ using Rentora.Persistence.Dependances;
 using System.Text;
 using Rentora.Persistence.Repositories;
 
-namespace RentoraAPI
+namespace Rentora.Presentation
 {
     public class Program
     {

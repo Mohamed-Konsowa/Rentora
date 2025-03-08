@@ -1,17 +1,18 @@
-﻿using Rentora.Application.Repositories;
-using Rentora.Persistence.Data.DbContext;
+﻿using Rentora.Persistence.Data.DbContext;
 
-namespace Rentora.Persistence.Repositories
+namespace Rentora.Application.IRepositories
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
         public IProductRepository products { get; }
+        public IUserRepository users { get; }
 
-        public UnitOfWork(ApplicationDbContext context, IProductRepository productRepository)
+        public UnitOfWork(ApplicationDbContext context, IProductRepository productRepository, IUserRepository userRepository)
         {
             _context = context;
             products = productRepository;
+            users = userRepository;
         }
 
         public async Task Save()

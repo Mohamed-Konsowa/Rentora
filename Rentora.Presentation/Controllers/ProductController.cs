@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Rentora.Presentation.DTOs.Product;
 using Rentora.Domain.Models;
-using Rentora.Application.Repositories;
+using Rentora.Application.IRepositories;
 using Rentora.Presentation.Services;
 
 namespace Rentora.Presentation.Controllers
@@ -77,7 +77,7 @@ namespace Rentora.Presentation.Controllers
             product.Longitude = productDto.Longitude;
             product.Status = productDto.Status;
 
-            _productService.UpdateProduct(product);
+            await _productService.UpdateProduct(product);
             return Ok(productDto);
         }
 

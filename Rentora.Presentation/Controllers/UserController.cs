@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Rentora.Presentation.DTOs.Authentication;
+using Rentora.Application.DTOs.Authentication;
 using Rentora.Presentation.Services;
 
 namespace Rentora.Presentation.Controllers
