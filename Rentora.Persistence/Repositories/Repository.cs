@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Rentora.Application.Repositories;
+using Rentora.Application.IRepositories;
 using Rentora.Persistence.Data.DbContext;
 
 namespace Rentora.Persistence.Repositories

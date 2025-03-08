@@ -1,6 +1,6 @@
 ﻿using Rentora.Domain.Models;
 
-namespace Rentora.Application.Repositories
+namespace Rentora.Application.IRepositories
 {
     public interface IRepository<T>
     {

@@ -1,4 +1,4 @@
-﻿using Rentora.Presentation.DTOs.Authentication;
+﻿using Rentora.Application.DTOs.Authentication;
 using Rentora.Domain.Models;
 
 namespace Rentora.Presentation.Services

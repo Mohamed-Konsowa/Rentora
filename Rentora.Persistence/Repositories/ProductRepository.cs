@@ -1,4 +1,4 @@
-﻿using Rentora.Application.Repositories;
+﻿using Rentora.Application.IRepositories;
 using Rentora.Domain.Models;
 using Rentora.Persistence.Data.DbContext;
 namespace Rentora.Persistence.Repositories

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Client;
-using Rentora.Application.Repositories;
+using Rentora.Application.IRepositories;
 using Rentora.Persistence.Repositories;
 using System;
 using System.Collections.Generic;
@@ -38,6 +38,8 @@ namespace Rentora.Persistence.Dependances
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
             //services.AddScoped<IAccount, Account>();
             //services.AddScoped(typeof(Cookie));
             //services.AddIdentity<ApplicationUser, IdentityRole>()
