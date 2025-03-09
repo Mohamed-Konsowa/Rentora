@@ -9,17 +9,22 @@ using System.Security.Claims;
 using System.Text;
 using Rentora.Application.IRepositories;
 using Azure.Core;
+using System.Net.Mail;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace Rentora.Presentation.Services
 {
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IConfiguration _configuration;
         private readonly JWT _jwt;
 
-        public UserService(IUnitOfWork unitOfWork, IOptions<JWT> jwt)
+        public UserService(IUnitOfWork unitOfWork, IOptions<JWT> jwt, IConfiguration configuration)
         {
             _unitOfWork = unitOfWork;
+            _configuration = configuration;
             _jwt = jwt.Value;
         }
         public async Task<AuthModel> RegisterAsync(RegisterModel model)
@@ -138,6 +143,33 @@ namespace Rentora.Presentation.Services
         {
             var users = await _unitOfWork.users.GetAll();
             return users;
+        }
+
+        public async Task<string> SendEmail(string email, string message, string subj)
+        {
+            var sendGridOptions = _configuration.GetSection("SendGrid").Get<SendGridOptions>();
+            var apiKey = sendGridOptions.ApiKey; // API Key
+            var client = new SendGridClient(apiKey);
+
+            var from = new EmailAddress(sendGridOptions.SenderEmail, sendGridOptions.SenderName); // sender
+            var subject = subj;
+            var to = new EmailAddress(email); // reciever
+
+            var msg = new SendGridMessage()
+            {
+                From = from,
+                Subject = subject,
+                PlainTextContent = "Hello, this is an email sent from .NET using SendGrid!",
+                HtmlContent = $"<strong>{message}</strong>"
+            };
+            
+            msg.AddTo(to); 
+
+            //msg.ReplyTo = new MailAddress("reply-to@example.com");
+
+            var response = (SendGrid.Response)await client.SendEmailAsync(msg);
+
+            return response.StatusCode.ToString();
         }
     }
 }

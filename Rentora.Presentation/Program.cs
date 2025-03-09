@@ -2,16 +2,15 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using Rentora.Persistence.Helpers;
 using Rentora.Domain.Models;
 using Rentora.Application.Dependancies;
 using Rentora.Presentation.Services;
 using Rentora.Persistence.Dependances;
-
-using System.Text;
 using Rentora.Persistence.Repositories;
-using Microsoft.OpenApi.Models;
+using System.Text;
 
 namespace Rentora.Presentation
 {
@@ -47,6 +46,7 @@ namespace Rentora.Presentation
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
                 };
             });
+
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IProductService, ProductService>();
 
@@ -67,7 +67,6 @@ namespace Rentora.Presentation
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 
-                
                 options.OperationFilter<FileUploadOperationFilter>();
             });
 
@@ -84,7 +83,6 @@ namespace Rentora.Presentation
 
             app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.MapControllers();
 

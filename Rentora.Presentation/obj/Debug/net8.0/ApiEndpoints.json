@@ -190,5 +190,21 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Rentora.Presentation.Controllers.UserController",
+    "Method": "SendEmail",
+    "RelativePath": "api/User/sendEmail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Rentora.Application.DTOs.Authentication.SendEmailDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

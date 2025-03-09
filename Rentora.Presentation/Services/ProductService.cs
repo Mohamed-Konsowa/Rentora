@@ -32,8 +32,8 @@ namespace Rentora.Presentation.Services
 
         public async Task<Product> UpdateProduct(Product product)
         {
-            _unitOfWork.products.Update(product);
-            _unitOfWork.Save();
+            await _unitOfWork.products.Update(product);
+            await _unitOfWork.Save();
             return product;
         }
 

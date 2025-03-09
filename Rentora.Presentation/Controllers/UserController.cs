@@ -61,5 +61,17 @@ namespace Rentora.Presentation.Controllers
                 return BadRequest(result);
             return Ok(model);
         }
+
+        [HttpPost("sendEmail")]
+        public async Task<ActionResult> SendEmail(SendEmailDTO model)
+        {
+            if(!ModelState.IsValid) return BadRequest(ModelState);
+
+            var statuscode = await _authService.SendEmail(model.Email, model.Message, model.Subject);
+            
+            if (statuscode == "Accepted")
+                return Ok(statuscode);
+            return BadRequest(statuscode);
+        }
     }
 }
