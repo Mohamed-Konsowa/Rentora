@@ -23,7 +23,8 @@ namespace Rentora.Presentation.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterAsync([FromBody] RegisterModel model)
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> RegisterAsync([FromForm] RegisterModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

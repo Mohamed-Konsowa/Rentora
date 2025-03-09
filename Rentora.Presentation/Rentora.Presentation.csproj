@@ -28,4 +28,8 @@
     <ProjectReference Include="..\Rentora.Persistence\Rentora.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Uploads\" />
+  </ItemGroup>
+
 </Project>

@@ -8,6 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Rentora.Application.IRepositories;
+using Azure.Core;
 
 namespace Rentora.Presentation.Services
 {
@@ -27,12 +28,19 @@ namespace Rentora.Presentation.Services
                 return new AuthModel { Message = "Email already exist!" };
             if (await _unitOfWork.users.GetByName(model.Username) is not null)
                 return new AuthModel { Message = "Username already exist!" };
+
+            using var memoryStream = new MemoryStream();
+            await model.ProfileImage.CopyToAsync(memoryStream);
+            var imageBytes = memoryStream.ToArray();
+            var profileImageBase64 = Convert.ToBase64String(imageBytes);
+
             var user = new ApplicationUser()
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
-                UserName = model.Username
+                UserName = model.Username,
+                ProfileImage = profileImageBase64
             };
             var result = await _unitOfWork.users.Create(user, model.Password);
             if (!result.Succeeded)
@@ -51,6 +59,7 @@ namespace Rentora.Presentation.Services
             {
                 Id = user.Id,
                 Email = user.Email,
+                ProfileImageBase64 = profileImageBase64,
                 ExpireOn = jwtSecurityToken.ValidTo,
                 IsAuthinticated = true,
                 Roles = new List<string> { "User" },

@@ -129,9 +129,64 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "model",
-        "Type": "Rentora.Application.DTOs.Authentication.RegisterModel",
-        "IsRequired": true
+        "Name": "ProfileImage",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Username",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "NationalID",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Personal_summary",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Governorate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Town",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

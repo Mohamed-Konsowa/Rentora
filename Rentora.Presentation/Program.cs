@@ -11,6 +11,7 @@ using Rentora.Persistence.Dependances;
 
 using System.Text;
 using Rentora.Persistence.Repositories;
+using Microsoft.OpenApi.Models;
 
 namespace Rentora.Presentation
 {
@@ -25,9 +26,7 @@ namespace Rentora.Presentation
 
             builder.Services.AddApplication().AddPersistence(builder.Configuration.GetConnectionString("DefaultConnection")!);
 
-            //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //builder.Services.AddScoped<IProductRepository,ProductRepository>();
-            //builder.Services.AddScoped<IProductService, ProductService>();
+            
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -56,6 +55,22 @@ namespace Rentora.Presentation
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", policy =>
+                {
+                    policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
+            });
+
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+
+                
+                options.OperationFilter<FileUploadOperationFilter>();
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -72,6 +87,8 @@ namespace Rentora.Presentation
 
 
             app.MapControllers();
+
+            app.UseCors("AllowAll");
 
             app.Run();
         }

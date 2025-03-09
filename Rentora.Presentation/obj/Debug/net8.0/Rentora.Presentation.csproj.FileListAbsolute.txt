@@ -574,3 +574,5 @@ D:\Graduation-Project\Rentora\Rentora.Presentation\bin\Debug\net8.0\Rentora.Pers
 D:\Graduation-Project\Rentora\Rentora.Presentation\bin\Debug\net8.0\Rentora.Application.pdb
 D:\Graduation-Project\Rentora\Rentora.Presentation\bin\Debug\net8.0\Rentora.Persistence.pdb
 D:\Graduation-Project\Rentora\Rentora.Presentation\bin\Debug\net8.0\Rentora.Domain.pdb
+D:\Graduation-Project\Rentora\Rentora.Presentation\bin\Debug\net8.0\Rentora.Presentation.staticwebassets.runtime.json
+D:\Graduation-Project\Rentora\Rentora.Presentation\obj\Debug\net8.0\Rentora.Presentation.MvcApplicationPartsAssemblyInfo.cs

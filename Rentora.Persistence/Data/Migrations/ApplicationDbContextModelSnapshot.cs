@@ -155,7 +155,7 @@ namespace Rentora.Persistence.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.ActivityLog", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.ActivityLog", b =>
                 {
                     b.Property<int>("ActivityLogId")
                         .ValueGeneratedOnAdd()
@@ -178,10 +178,10 @@ namespace Rentora.Persistence.Data.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("ActivityLogs");
+                    b.ToTable("ActivityLogs", (string)null);
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -199,9 +199,6 @@ namespace Rentora.Persistence.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DetailedLocation")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -217,7 +214,10 @@ namespace Rentora.Persistence.Data.Migrations
                     b.Property<string>("Governorate")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IDImage")
+                    b.Property<string>("IDImageBack")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IDImageFront")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
@@ -245,6 +245,9 @@ namespace Rentora.Persistence.Data.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Personal_summary")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -255,6 +258,9 @@ namespace Rentora.Persistence.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Town")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -277,7 +283,7 @@ namespace Rentora.Persistence.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.Category", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.Category", b =>
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
@@ -299,10 +305,10 @@ namespace Rentora.Persistence.Data.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.Favorite", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.Favorite", b =>
                 {
                     b.Property<int>("FavoriteId")
                         .ValueGeneratedOnAdd()
@@ -323,10 +329,10 @@ namespace Rentora.Persistence.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Favorites");
+                    b.ToTable("Favorites", (string)null);
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.Notification", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.Notification", b =>
                 {
                     b.Property<int>("NotificationId")
                         .ValueGeneratedOnAdd()
@@ -352,10 +358,10 @@ namespace Rentora.Persistence.Data.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("Notifications");
+                    b.ToTable("Notifications", (string)null);
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.Product", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.Product", b =>
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
@@ -414,7 +420,7 @@ namespace Rentora.Persistence.Data.Migrations
                     b.ToTable("Product", (string)null);
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.Rental", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.Rental", b =>
                 {
                     b.Property<int>("RentalId")
                         .ValueGeneratedOnAdd()
@@ -454,10 +460,10 @@ namespace Rentora.Persistence.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Rentals");
+                    b.ToTable("Rentals", (string)null);
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.RentalCart", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.RentalCart", b =>
                 {
                     b.Property<int>("RentalCartId")
                         .ValueGeneratedOnAdd()
@@ -478,10 +484,10 @@ namespace Rentora.Persistence.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("RentalCarts");
+                    b.ToTable("RentalCarts", (string)null);
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.Report", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.Report", b =>
                 {
                     b.Property<int>("ReportId")
                         .ValueGeneratedOnAdd()
@@ -519,10 +525,10 @@ namespace Rentora.Persistence.Data.Migrations
 
                     b.HasIndex("ReporterUserId");
 
-                    b.ToTable("Reports");
+                    b.ToTable("Reports", (string)null);
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.Review", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.Review", b =>
                 {
                     b.Property<int>("ReviewId")
                         .ValueGeneratedOnAdd()
@@ -553,10 +559,10 @@ namespace Rentora.Persistence.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.TransactionHistory", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.TransactionHistory", b =>
                 {
                     b.Property<int>("TransactionHistoryId")
                         .ValueGeneratedOnAdd()
@@ -592,7 +598,7 @@ namespace Rentora.Persistence.Data.Migrations
 
                     b.HasIndex("ToUserId");
 
-                    b.ToTable("TransactionHistories");
+                    b.ToTable("TransactionHistories", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -606,7 +612,7 @@ namespace Rentora.Persistence.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", null)
+                    b.HasOne("Rentora.Domain.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -615,7 +621,7 @@ namespace Rentora.Persistence.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", null)
+                    b.HasOne("Rentora.Domain.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -630,7 +636,7 @@ namespace Rentora.Persistence.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", null)
+                    b.HasOne("Rentora.Domain.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -639,16 +645,16 @@ namespace Rentora.Persistence.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", null)
+                    b.HasOne("Rentora.Domain.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.ActivityLog", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.ActivityLog", b =>
                 {
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("Rentora.Domain.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("ActivityLogs")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -657,15 +663,15 @@ namespace Rentora.Persistence.Data.Migrations
                     b.Navigation("ApplicationUser");
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.Favorite", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.Favorite", b =>
                 {
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("Rentora.Domain.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Favorites")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RentoraAPI.Models.Product", "Product")
+                    b.HasOne("Rentora.Domain.Models.Product", "Product")
                         .WithMany("Favorites")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -676,9 +682,9 @@ namespace Rentora.Persistence.Data.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.Notification", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.Notification", b =>
                 {
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("Rentora.Domain.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Notifications")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -687,15 +693,15 @@ namespace Rentora.Persistence.Data.Migrations
                     b.Navigation("ApplicationUser");
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.Product", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.Product", b =>
                 {
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("Rentora.Domain.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Products")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RentoraAPI.Models.Category", "Category")
+                    b.HasOne("Rentora.Domain.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -706,15 +712,15 @@ namespace Rentora.Persistence.Data.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.Rental", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.Rental", b =>
                 {
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("Rentora.Domain.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Rentals")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RentoraAPI.Models.Product", "Product")
+                    b.HasOne("Rentora.Domain.Models.Product", "Product")
                         .WithMany("Rentals")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -725,15 +731,15 @@ namespace Rentora.Persistence.Data.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.RentalCart", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.RentalCart", b =>
                 {
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("Rentora.Domain.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("RentalCarts")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RentoraAPI.Models.Product", "Product")
+                    b.HasOne("Rentora.Domain.Models.Product", "Product")
                         .WithMany("RentalCarts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -744,21 +750,21 @@ namespace Rentora.Persistence.Data.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.Report", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.Report", b =>
                 {
-                    b.HasOne("RentoraAPI.Models.Product", "Product")
+                    b.HasOne("Rentora.Domain.Models.Product", "Product")
                         .WithMany("Reports")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "ReportedUser")
+                    b.HasOne("Rentora.Domain.Models.ApplicationUser", "ReportedUser")
                         .WithMany("Reporteds")
                         .HasForeignKey("ReportedUserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "ReporterUser")
+                    b.HasOne("Rentora.Domain.Models.ApplicationUser", "ReporterUser")
                         .WithMany("Reports")
                         .HasForeignKey("ReporterUserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -771,15 +777,15 @@ namespace Rentora.Persistence.Data.Migrations
                     b.Navigation("ReporterUser");
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.Review", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.Review", b =>
                 {
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("Rentora.Domain.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Reviews")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RentoraAPI.Models.Product", "Product")
+                    b.HasOne("Rentora.Domain.Models.Product", "Product")
                         .WithMany("Reviews")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -790,15 +796,15 @@ namespace Rentora.Persistence.Data.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.TransactionHistory", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.TransactionHistory", b =>
                 {
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "FromUser")
+                    b.HasOne("Rentora.Domain.Models.ApplicationUser", "FromUser")
                         .WithMany("FromTransactionHistories")
                         .HasForeignKey("FromUserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("RentoraAPI.Models.ApplicationUser", "ToUser")
+                    b.HasOne("Rentora.Domain.Models.ApplicationUser", "ToUser")
                         .WithMany("ToTransactionHistories")
                         .HasForeignKey("ToUserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -809,7 +815,7 @@ namespace Rentora.Persistence.Data.Migrations
                     b.Navigation("ToUser");
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.ApplicationUser", b =>
                 {
                     b.Navigation("ActivityLogs");
 
@@ -834,12 +840,12 @@ namespace Rentora.Persistence.Data.Migrations
                     b.Navigation("ToTransactionHistories");
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.Category", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.Category", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("RentoraAPI.Models.Product", b =>
+            modelBuilder.Entity("Rentora.Domain.Models.Product", b =>
                 {
                     b.Navigation("Favorites");
 
