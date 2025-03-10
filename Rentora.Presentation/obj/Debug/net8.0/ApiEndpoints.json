@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "Rentora.Presentation.Controllers.EmailController",
+    "Method": "SendEmail",
+    "RelativePath": "api/Email/sendEmail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Rentora.Application.DTOs.Email.SendEmailDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Rentora.Presentation.Controllers.ProductController",
     "Method": "UpdateProduct",
     "RelativePath": "api/Product",
@@ -187,22 +203,6 @@
         "Name": "Address",
         "Type": "System.String",
         "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Rentora.Presentation.Controllers.UserController",
-    "Method": "SendEmail",
-    "RelativePath": "api/User/sendEmail",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "Rentora.Application.DTOs.Authentication.SendEmailDTO",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []

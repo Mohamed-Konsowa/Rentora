@@ -10,6 +10,5 @@ namespace Rentora.Presentation.Services
         Task<AuthModel> RegisterAsync(RegisterModel model);
         Task<AuthModel> GetTokenAsync(TokenRequestModel model);
         Task<string> AddRoleAsync(AddRoleModel model);
-        Task<string> SendEmail(string email, string message, string subj);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Rentora.Presentation
+namespace Rentora.Presentation.Swagger
 {
     public class FileUploadOperationFilter : IOperationFilter
     {

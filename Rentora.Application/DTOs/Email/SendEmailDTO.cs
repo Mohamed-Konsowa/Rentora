@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rentora.Application.DTOs.Authentication
+namespace Rentora.Application.DTOs.Email
 {
     public class SendEmailDTO
     {

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Rentora.Application.DTOs.Authentication;
+using Rentora.Application.DTOs.Email;
 using Rentora.Presentation.Services;
 
 namespace Rentora.Presentation.Controllers
@@ -60,18 +61,6 @@ namespace Rentora.Presentation.Controllers
             if (!string.IsNullOrEmpty(result))
                 return BadRequest(result);
             return Ok(model);
-        }
-
-        [HttpPost("sendEmail")]
-        public async Task<ActionResult> SendEmail(SendEmailDTO model)
-        {
-            if(!ModelState.IsValid) return BadRequest(ModelState);
-
-            var statuscode = await _authService.SendEmail(model.Email, model.Message, model.Subject);
-            
-            if (statuscode == "Accepted")
-                return Ok(statuscode);
-            return BadRequest(statuscode);
         }
     }
 }
