@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rentora.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Rentora.Application.IRepositories
 {
     public interface IEmailRepository
     {
+        Task<bool> AddOtp(OTP otp);
 
     }
 }

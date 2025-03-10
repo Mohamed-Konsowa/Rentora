@@ -18,6 +18,7 @@ namespace Rentora.Persistence.Data.DbContext
         public DbSet<Report> Reports { get; set; }
         public DbSet<TransactionHistory> TransactionHistories { get; set; }
         public DbSet<ActivityLog> ActivityLogs { get; set; }
+        public DbSet<OTP> OTPs { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
             

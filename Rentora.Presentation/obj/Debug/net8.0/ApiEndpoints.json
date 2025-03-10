@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "Rentora.Presentation.Controllers.EmailController",
+    "Method": "SendOTP",
+    "RelativePath": "api/Email/send-otp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Rentora.Presentation.Controllers.EmailController",
     "Method": "SendEmail",
     "RelativePath": "api/Email/sendEmail",
     "HttpMethod": "POST",

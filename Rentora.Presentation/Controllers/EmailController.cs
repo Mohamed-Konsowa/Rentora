@@ -27,12 +27,14 @@ namespace Rentora.Presentation.Controllers
             return BadRequest(statuscode);
         }
 
-        //[HttpPost]
-        //[Route("send-otp")]
-        //public async Task<ActionResult> SendOTP(string email)
-        //{
-        //    await;
-        //    return Ok("");
-        //}
+        [HttpPost]
+        [Route("send-otp")]
+        public async Task<ActionResult> SendOTP(string email)
+        {
+            var result = await _emailService.SendOTP(email);
+            if(result)
+            return Ok("OTP sent successfully.");
+            return BadRequest("Failed to send OTP");
+        }
     }
 }

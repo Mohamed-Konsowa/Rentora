@@ -3,5 +3,6 @@
     public interface IEmailService
     {
         Task<string> SendEmail(string email, string message, string subj);
+        Task<bool> SendOTP(string email);
     }
 }

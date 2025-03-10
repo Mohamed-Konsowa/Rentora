@@ -39,6 +39,7 @@ namespace Rentora.Persistence.Dependances
 
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IEmailRepository, EmailRepository>();
 
             //services.AddScoped<IAccount, Account>();
             //services.AddScoped(typeof(Cookie));

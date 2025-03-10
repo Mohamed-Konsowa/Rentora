@@ -1,16 +1,21 @@
 ﻿using Rentora.Persistence.Helpers;
 using SendGrid.Helpers.Mail;
 using SendGrid;
+using Rentora.Domain.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Rentora.Application.IRepositories;
 
 namespace Rentora.Presentation.Services
 {
     public class EmailService : IEmailService
     {
         private readonly IConfiguration _configuration;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public EmailService(IConfiguration configuration)
+        public EmailService(IConfiguration configuration, IUnitOfWork unitOfWork)
         {
             _configuration = configuration;
+            _unitOfWork = unitOfWork;
         }
         public async Task<string> SendEmail(string email, string message, string subj)
         {
@@ -26,7 +31,7 @@ namespace Rentora.Presentation.Services
             {
                 From = from,
                 Subject = subject,
-                PlainTextContent = "Hello, this is an email sent from .NET using SendGrid!",
+                PlainTextContent = $"Hello, this is an email sent from {sendGridOptions.SenderName} using SendGrid!",
                 HtmlContent = $"<strong>{message}</strong>"
             };
 
@@ -34,9 +39,27 @@ namespace Rentora.Presentation.Services
 
             //msg.ReplyTo = new MailAddress("reply-to@example.com");
 
-            var response = (SendGrid.Response)await client.SendEmailAsync(msg);
+            var response = await client.SendEmailAsync(msg);
 
             return response.StatusCode.ToString();
+        }
+
+        public async Task<bool> SendOTP(string email)
+        {
+            var otpCode = new Random().Next(1000, 9999);
+            var result = await SendEmail(email, $"Your OTP : {otpCode}", "Verify your email!");
+            if(result == "Accepted")
+            {
+                var otp = new OTP
+                {
+                    Email = email,
+                    Code = otpCode.ToString(),
+                };
+                await _unitOfWork.emails.AddOtp(otp);
+                await _unitOfWork.Save();
+                return true;
+            }
+            return false;
         }
     }
 }

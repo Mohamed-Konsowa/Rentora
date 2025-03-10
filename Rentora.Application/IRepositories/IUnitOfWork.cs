@@ -6,6 +6,7 @@ namespace Rentora.Application.IRepositories
     {
         IProductRepository products { get; }
         IUserRepository users { get; }
+        IEmailRepository emails { get; }
         Task Save();
     }
 }
