@@ -10,6 +10,6 @@ namespace Rentora.Application.IRepositories
     public interface IEmailRepository
     {
         Task<bool> AddOtp(OTP otp);
-
+        Task<OTP> GetOtp(string email, string otpCode);
     }
 }

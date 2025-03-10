@@ -36,5 +36,15 @@ namespace Rentora.Presentation.Controllers
             return Ok("OTP sent successfully.");
             return BadRequest("Failed to send OTP");
         }
+
+        [HttpGet]
+        [Route("verify-otp")]
+        public async Task<ActionResult> VerifyOTP(string email, string otpCode)
+        {
+            var result = await _emailService.VerifyOtp(email, otpCode);
+            if(result.Success) 
+                return Ok(result.Data);
+            return BadRequest(result.Data);
+        }
     }
 }

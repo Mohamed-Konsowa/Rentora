@@ -32,6 +32,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Rentora.Presentation.Controllers.EmailController",
+    "Method": "VerifyOTP",
+    "RelativePath": "api/Email/verify-otp",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "otpCode",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Rentora.Presentation.Controllers.ProductController",
     "Method": "UpdateProduct",
     "RelativePath": "api/Product",

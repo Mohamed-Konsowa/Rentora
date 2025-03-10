@@ -1,4 +1,5 @@
-﻿using Rentora.Application.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using Rentora.Application.IRepositories;
 using Rentora.Domain.Models;
 using Rentora.Persistence.Data.DbContext;
 using System;
@@ -20,6 +21,13 @@ namespace Rentora.Persistence.Repositories
         {
             var r = await _context.OTPs.AddAsync(otp);
             return r != null;
+        }
+
+        public async Task<OTP> GetOtp(string email, string otpCode)
+        {
+            var otp = await _context.OTPs.
+                FirstOrDefaultAsync(otp => otp.Email == email && otp.Code == otpCode);
+            return otp;
         }
     }
 }
