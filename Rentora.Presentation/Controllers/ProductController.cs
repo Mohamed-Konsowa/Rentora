@@ -44,7 +44,6 @@ namespace Rentora.Presentation.Controllers
                 CategoryId = productDto.CategoryId,
                 Title = productDto.Title,
                 Description = productDto.Description,
-                Images = productDto.Images,
                 Quantity = productDto.Quantity,
                 PricePerDay = productDto.PricePerDay,
                 Location = productDto.Location,
@@ -69,7 +68,6 @@ namespace Rentora.Presentation.Controllers
             product.CategoryId = productDto.CategoryId;
             product.Title = productDto.Title;
             product.Description = productDto.Description;
-            product.Images = productDto.Images;
             product.Quantity = productDto.Quantity;
             product.PricePerDay = productDto.PricePerDay;
             product.Location = productDto.Location;

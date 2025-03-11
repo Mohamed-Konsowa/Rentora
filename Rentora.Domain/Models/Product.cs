@@ -7,7 +7,6 @@
         public int CategoryId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public string Images { get; set; } // JSON array of image URLs
         public int Quantity { get; set; } = 1;
         public decimal PricePerDay { get; set; }
         public string Location { get; set; }
@@ -24,6 +23,7 @@
         public List<Review> Reviews { get; set; }
         public List<RentalCart> RentalCarts { get; set; }
         public List<Report> Reports { get; set; }
+        public List<ProductImage> ProductImages { get; set; }
 
     }
 }

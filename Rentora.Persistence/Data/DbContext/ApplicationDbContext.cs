@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 //using System.Composition;
 using System.Reflection.Emit;
 using Rentora.Domain.Models;
+using Rentora.Domain.Models.Categories;
 namespace Rentora.Persistence.Data.DbContext
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -19,6 +20,12 @@ namespace Rentora.Persistence.Data.DbContext
         public DbSet<TransactionHistory> TransactionHistories { get; set; }
         public DbSet<ActivityLog> ActivityLogs { get; set; }
         public DbSet<OTP> OTPs { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<Sport> sports { get; set; }
+        public DbSet<Transportation> Transportations { get; set; }
+        public DbSet<Travel> Travels { get; set; }
+        public DbSet<Electronic> Electronics { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
             
