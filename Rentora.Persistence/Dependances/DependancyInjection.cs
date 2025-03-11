@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Authorization;
 using Rentora.Domain.Models;
+using Rentora.Persistence.Services;
 
 
 namespace Rentora.Persistence.Dependances
@@ -66,6 +67,9 @@ namespace Rentora.Persistence.Dependances
             //services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
             //services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
             //services.AddSingleton(nameof(IEmailSender));
+
+            services.AddHostedService<OtpCleanupService>();
+
             return services;
         }
     }

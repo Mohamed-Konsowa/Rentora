@@ -5,7 +5,6 @@ using Rentora.Domain.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Rentora.Application.IRepositories;
 using Microsoft.AspNetCore.Mvc;
-using Rentora.Persistence.Helpers;
 namespace Rentora.Presentation.Services
 {
     public class EmailService : IEmailService
