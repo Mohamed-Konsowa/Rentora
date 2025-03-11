@@ -195,7 +195,23 @@
       },
       {
         "Name": "productDto",
-        "Type": "Rentora.Presentation.DTOs.Product.ProductDTO",
+        "Type": "Rentora.Presentation.DTOs.Product.AddProductDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Rentora.Presentation.Controllers.ProductController",
+    "Method": "AddProdectImage",
+    "RelativePath": "api/Product/add-image",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productImage",
+        "Type": "Rentora.Domain.Models.ProductImage",
         "IsRequired": true
       }
     ],
@@ -211,7 +227,7 @@
     "Parameters": [
       {
         "Name": "productDto",
-        "Type": "Rentora.Presentation.DTOs.Product.ProductDTO",
+        "Type": "Rentora.Presentation.DTOs.Product.AddProductDTO",
         "IsRequired": true
       }
     ],

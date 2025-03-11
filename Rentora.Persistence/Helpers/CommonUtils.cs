@@ -21,5 +21,6 @@ namespace Rentora.Persistence.Helpers
         {
             return System.Text.RegularExpressions.Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
         }
+
     }
 }

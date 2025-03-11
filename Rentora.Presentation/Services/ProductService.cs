@@ -1,5 +1,6 @@
 ﻿using Rentora.Domain.Models;
 using Rentora.Application.IRepositories;
+using Rentora.Persistence.Helpers;
 
 namespace Rentora.Presentation.Services
 {
@@ -44,5 +45,18 @@ namespace Rentora.Presentation.Services
             return result;
         }
 
+        public async Task<bool> AddProductImage(ProductImage productImage)
+        {
+            //var image = new ProductImage() {ProductId = id ,Image = imageBase64 };
+            var result = await _unitOfWork.products.AddProductImage(productImage);
+            return result;
+        }
+
+        public async Task<bool> AddProductCategory<T>(T category) where T : class
+        {
+            var result = await _unitOfWork.products.AddProductCategory(category);
+            await _unitOfWork.Save();
+            return result != null;
+        }
     }
 }

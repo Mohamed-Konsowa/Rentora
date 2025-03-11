@@ -4,6 +4,8 @@ using Rentora.Presentation.DTOs.Product;
 using Rentora.Domain.Models;
 using Rentora.Application.IRepositories;
 using Rentora.Presentation.Services;
+using Rentora.Domain.Models.Categories;
+using Microsoft.VisualBasic.FileIO;
 
 namespace Rentora.Presentation.Controllers
 {
@@ -34,10 +36,12 @@ namespace Rentora.Presentation.Controllers
         }
 
         [HttpPost("AddProduct")]
-        public async Task<IActionResult> AddProductAsync(ProductDTO productDto)
+        public async Task<IActionResult> AddProductAsync(AddProductDTO productDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+            if (productDto.CategoryId < 1 || productDto.CategoryId > 4)
+                return BadRequest("Invalid Category Id");
             var product = new Product()
             {
                 ApplicationUserId = productDto.ApplicationUserId,
@@ -45,7 +49,8 @@ namespace Rentora.Presentation.Controllers
                 Title = productDto.Title,
                 Description = productDto.Description,
                 Quantity = productDto.Quantity,
-                PricePerDay = productDto.PricePerDay,
+                Price = productDto.Price,
+                RentalPeriod = productDto.RentalPeriod,
                 Location = productDto.Location,
                 Latitude = productDto.Latitude,
                 Longitude = productDto.Longitude,
@@ -53,11 +58,41 @@ namespace Rentora.Presentation.Controllers
                 CreatedAt = DateTime.UtcNow
             };
             await _productService.AddProduct(product);
+            switch (productDto.CategoryId)
+            {
+                case 1: await _productService.AddProductCategory(new Sport()
+                {
+                    ProductId = product.ProductId,
+                    Brand = productDto.Brand,
+                    Model = productDto.Model,
+                    Condition = productDto.Condition
+                }); break;
+                case 2: await _productService.AddProductCategory(new Transportation()
+                {
+                    ProductId = product.ProductId,
+                    Transmission = productDto.Transmission,
+                    Body_Type = productDto.Body_Type,
+                    Fuel_Type = productDto.Fuel_Type
+                }); break;
+                case 3: await _productService.AddProductCategory(new Travel()
+                {
+                    ProductId = product.ProductId,
+                    Condition = productDto.Condition
+                }); break;
+                case 4: await _productService.AddProductCategory(new Electronic()
+                {
+                    ProductId = product.ProductId,
+                    Brand = productDto.Brand,
+                    Model = productDto.Model,
+                    Condition = productDto.Condition
+                }); break;
+            }
+
             return Ok(product);
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateProduct(int ProductId, ProductDTO productDto)
+        public async Task<IActionResult> UpdateProduct(int ProductId, AddProductDTO productDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -69,7 +104,8 @@ namespace Rentora.Presentation.Controllers
             product.Title = productDto.Title;
             product.Description = productDto.Description;
             product.Quantity = productDto.Quantity;
-            product.PricePerDay = productDto.PricePerDay;
+            product.Price = productDto.Price;
+            product.RentalPeriod = productDto.RentalPeriod;
             product.Location = productDto.Location;
             product.Latitude = productDto.Latitude;
             product.Longitude = productDto.Longitude;
@@ -87,6 +123,13 @@ namespace Rentora.Presentation.Controllers
                 return Ok("The product is deleted.");
             else
                 return BadRequest("Error");
+        }
+        [HttpPost("add-image")]
+        public async Task<IActionResult> AddProdectImage(ProductImage productImage)
+        {
+            var result = await _productService.AddProductImage(productImage);
+            if (result) return Ok("Image was added successfully");
+            return BadRequest("Failed to add Image!");
         }
     }
 }

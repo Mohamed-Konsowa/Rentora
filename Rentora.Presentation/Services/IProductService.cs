@@ -9,5 +9,8 @@ namespace Rentora.Presentation.Services
         Task<Product> AddProduct(Product product);
         Task<Product> UpdateProduct(Product product);
         Task<bool> DeleteProduct(int id);
+        Task<bool> AddProductImage(ProductImage productImage);
+        Task<bool> AddProductCategory<T>(T category) where T : class;
+
     }
 }
