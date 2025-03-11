@@ -42,12 +42,6 @@ namespace Rentora.Persistence.Dependances
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IEmailRepository, EmailRepository>();
 
-            //services.AddScoped<IAccount, Account>();
-            //services.AddScoped(typeof(Cookie));
-            //services.AddIdentity<ApplicationUser, IdentityRole>()
-            //    .AddEntityFrameworkStores<ApplicationDbContext>()
-            //    .AddDefaultTokenProviders();
-
             services.AddIdentityCore<ApplicationUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();

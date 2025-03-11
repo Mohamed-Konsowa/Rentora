@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Rentora.Application.DTOs.Authentication;
 using Rentora.Persistence.Helpers;
 using Rentora.Domain.Models;
+using Rentora.Persistence.Helpers;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -32,18 +33,31 @@ namespace Rentora.Presentation.Services
             if (await _unitOfWork.users.GetByName(model.Username) is not null)
                 return new AuthModel { Message = "Username already exist!" };
 
-            using var memoryStream = new MemoryStream();
-            await model.ProfileImage.CopyToAsync(memoryStream);
-            var imageBytes = memoryStream.ToArray();
-            var profileImageBase64 = Convert.ToBase64String(imageBytes);
+           
+           var allowedTypes = new[] { "image/jpeg", "image/png", "image/gif" };
+           if (!allowedTypes.Contains(model.ProfileImage.ContentType)
+                || !allowedTypes.Contains(model.IDImageFront.ContentType)
+                || !allowedTypes.Contains(model.IDImageBack.ContentType))
+           {
+               return new AuthModel {
+                   Message = "Invalid file type. Only JPEG, PNG, and GIF are allowed." 
+               };
+           }
+           
 
+            var profileImageBase64 = await CommonUtils.ConvertImageToBase64(model.ProfileImage);
+            var IDImageFrontBase64 = await CommonUtils.ConvertImageToBase64(model.IDImageFront);
+            var IDImageBackBase64 = await CommonUtils.ConvertImageToBase64(model.IDImageBack);
             var user = new ApplicationUser()
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
                 UserName = model.Username,
-                ProfileImage = profileImageBase64
+                EmailConfirmed = model.EmailConfirmed,
+                ProfileImage = profileImageBase64,
+                IDImageFront = IDImageFrontBase64,
+                IDImageBack = IDImageBackBase64
             };
             var result = await _unitOfWork.users.Create(user, model.Password);
             if (!result.Succeeded)
@@ -142,6 +156,6 @@ namespace Rentora.Presentation.Services
             var users = await _unitOfWork.users.GetAll();
             return users;
         }
-
+        
     }
 }

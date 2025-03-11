@@ -9,10 +9,10 @@ namespace Rentora.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class AccountController : ControllerBase
     {
         private readonly IUserService _authService;
-        public UserController(IUserService authService)
+        public AccountController(IUserService authService)
         {
             _authService = authService;
         }
