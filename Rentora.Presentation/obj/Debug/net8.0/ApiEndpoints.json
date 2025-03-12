@@ -189,13 +189,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "ProductId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
         "Name": "productDto",
-        "Type": "Rentora.Presentation.DTOs.Product.AddProductDTO",
+        "Type": "Rentora.Presentation.DTOs.Product.UpdateProductDTO",
         "IsRequired": true
       }
     ],
@@ -210,8 +205,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "productImage",
-        "Type": "Rentora.Domain.Models.ProductImage",
+        "Name": "productImageDTO",
+        "Type": "Rentora.Application.DTOs.Product.ProductImageDTO",
         "IsRequired": true
       }
     ],
@@ -220,7 +215,7 @@
   {
     "ContainingType": "Rentora.Presentation.Controllers.ProductController",
     "Method": "AddProductAsync",
-    "RelativePath": "api/Product/AddProduct",
+    "RelativePath": "api/Product/addProduct",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -236,7 +231,7 @@
   {
     "ContainingType": "Rentora.Presentation.Controllers.ProductController",
     "Method": "DeleteProductAsync",
-    "RelativePath": "api/Product/DeleteProduct",
+    "RelativePath": "api/Product/deleteProduct",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -252,7 +247,7 @@
   {
     "ContainingType": "Rentora.Presentation.Controllers.ProductController",
     "Method": "GetProductAsync",
-    "RelativePath": "api/Product/GetProduct",
+    "RelativePath": "api/Product/getProductById",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -268,7 +263,7 @@
   {
     "ContainingType": "Rentora.Presentation.Controllers.ProductController",
     "Method": "GetProducts",
-    "RelativePath": "api/Product/GetProducts",
+    "RelativePath": "api/Product/getProducts",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

@@ -11,6 +11,7 @@ namespace Rentora.Presentation.Services
         Task<bool> DeleteProduct(int id);
         Task<bool> AddProductImage(ProductImage productImage);
         Task<bool> AddProductCategory<T>(T category) where T : class;
-
+        Task<bool> UpdateProductCategory<T>(int id, T category) where T : class;
+        int GetProductCategoryId(int id);
     }
 }

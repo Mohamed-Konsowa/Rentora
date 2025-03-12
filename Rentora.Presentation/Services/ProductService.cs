@@ -38,10 +38,12 @@ namespace Rentora.Presentation.Services
             return product;
         }
 
-        public Task<bool> DeleteProduct(int id)
+        public async Task<bool> DeleteProduct(int id)
         {
-            var result = _unitOfWork.products.Delete(id);
-            _unitOfWork.Save();
+            _unitOfWork.products.DeleteProductCategory(id);
+            _unitOfWork.products.DeleteProductImages(id);
+            var result = await _unitOfWork.products.Delete(id);
+            await _unitOfWork.Save();
             return result;
         }
 
@@ -49,6 +51,7 @@ namespace Rentora.Presentation.Services
         {
             //var image = new ProductImage() {ProductId = id ,Image = imageBase64 };
             var result = await _unitOfWork.products.AddProductImage(productImage);
+            await _unitOfWork.Save();
             return result;
         }
 
@@ -57,6 +60,18 @@ namespace Rentora.Presentation.Services
             var result = await _unitOfWork.products.AddProductCategory(category);
             await _unitOfWork.Save();
             return result != null;
+        }
+
+        public async Task<bool> UpdateProductCategory<T>(int id, T category) where T : class
+        {
+            var result = _unitOfWork.products.UpdateProductCategory(id, category);
+            await _unitOfWork.Save();
+            return result != null;
+        }
+
+        public int GetProductCategoryId(int id)
+        {
+            return _unitOfWork.products.GetProductCategoryId(id);
         }
     }
 }

@@ -6,6 +6,7 @@ using Rentora.Application.IRepositories;
 using Rentora.Presentation.Services;
 using Rentora.Domain.Models.Categories;
 using Microsoft.VisualBasic.FileIO;
+using Rentora.Application.DTOs.Product;
 
 namespace Rentora.Presentation.Controllers
 {
@@ -19,14 +20,14 @@ namespace Rentora.Presentation.Controllers
             _productService = productService;
         }
 
-        [HttpGet("GetProducts")]
+        [HttpGet("getProducts")]
         public IActionResult GetProducts()
         {
             var products = _productService.GetProducts();
             return Ok(products);
         }
 
-        [HttpGet("GetProduct")]
+        [HttpGet("getProductById")]
         public async Task<IActionResult> GetProductAsync(int id)
         {
             var product = await _productService.GetProductById(id);
@@ -35,7 +36,7 @@ namespace Rentora.Presentation.Controllers
             return BadRequest("Product not found");
         }
 
-        [HttpPost("AddProduct")]
+        [HttpPost("addProduct")]
         public async Task<IActionResult> AddProductAsync(AddProductDTO productDto)
         {
             if (!ModelState.IsValid)
@@ -92,15 +93,13 @@ namespace Rentora.Presentation.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateProduct(int ProductId, AddProductDTO productDto)
+        public async Task<IActionResult> UpdateProduct(UpdateProductDTO productDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var product = await _productService.GetProductById(ProductId);
+            var product = await _productService.GetProductById(productDto.ProductId);
             if(product is null) return BadRequest("Product not found");
 
-            product.ApplicationUserId = productDto.ApplicationUserId;
-            product.CategoryId = productDto.CategoryId;
             product.Title = productDto.Title;
             product.Description = productDto.Description;
             product.Quantity = productDto.Quantity;
@@ -111,11 +110,50 @@ namespace Rentora.Presentation.Controllers
             product.Longitude = productDto.Longitude;
             product.Status = productDto.Status;
 
+            var categoryId = _productService.GetProductCategoryId(product.ProductId);
+            switch (product.CategoryId)
+            {
+                case 1:
+                    await _productService.UpdateProductCategory(1, new Sport()
+                    {
+                        Id = categoryId,
+                        ProductId = product.ProductId,
+                        Brand = productDto.Brand,
+                        Model = productDto.Model,
+                        Condition = productDto.Condition
+                    }); break;
+                case 2:
+                    await _productService.UpdateProductCategory(2, new Transportation()
+                    {
+                        Id = categoryId,
+                        ProductId = product.ProductId,
+                        Transmission = productDto.Transmission,
+                        Body_Type = productDto.Body_Type,
+                        Fuel_Type = productDto.Fuel_Type
+                    }); break;
+                case 3:
+                    await _productService.UpdateProductCategory(3, new Travel()
+                    {
+                        Id = categoryId,
+                        ProductId = product.ProductId,
+                        Condition = productDto.Condition
+                    }); break;
+                case 4:
+                    await _productService.UpdateProductCategory(4, new Electronic()
+                    {
+                        Id = categoryId,
+                        ProductId = product.ProductId,
+                        Brand = productDto.Brand,
+                        Model = productDto.Model,
+                        Condition = productDto.Condition
+                    }); break;
+            }
+
             await _productService.UpdateProduct(product);
             return Ok(productDto);
         }
 
-        [HttpDelete("DeleteProduct")]
+        [HttpDelete("deleteProduct")]
         public async Task<IActionResult> DeleteProductAsync(int id)
         {
             var result = await _productService.DeleteProduct(id);
@@ -124,10 +162,14 @@ namespace Rentora.Presentation.Controllers
             else
                 return BadRequest("Error");
         }
+
         [HttpPost("add-image")]
-        public async Task<IActionResult> AddProdectImage(ProductImage productImage)
+        public async Task<IActionResult> AddProdectImage(ProductImageDTO productImageDTO)
         {
-            var result = await _productService.AddProductImage(productImage);
+            var result = await _productService.AddProductImage(new ProductImage{ 
+                ProductId = productImageDTO.ProductId,
+                Image = productImageDTO.Image
+            });
             if (result) return Ok("Image was added successfully");
             return BadRequest("Failed to add Image!");
         }
