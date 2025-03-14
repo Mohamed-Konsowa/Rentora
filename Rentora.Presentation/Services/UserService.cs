@@ -14,6 +14,7 @@ using SendGrid;
 using SendGrid.Helpers.Mail;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using System.Net;
+using static NuGet.Packaging.PackagingConstants;
 
 namespace Rentora.Presentation.Services
 {
@@ -52,6 +53,7 @@ namespace Rentora.Presentation.Services
         public async Task<UserDTO> GetUserById(string id)
         {
             var user = await _unitOfWork.users.GetById(id);
+            user.ProfileImage = await GoogleDriveService.GetFileAsBase64Async(user.ProfileImage);
             return new UserDTO(user);
         }
         public async Task<bool> CheckIfEmailExists(string email)
@@ -76,14 +78,14 @@ namespace Rentora.Presentation.Services
                 || !allowedTypes.Contains(model.IDImageBack.ContentType))
            {
                return new AuthModel {
-                   Message = "Invalid file type. Only JPEG, PNG, and GIF are allowed." 
+                   Message = "Invalid file type. Only JPEG, PNG, and GIF are allowed."
                };
-           }
-           
+            }
 
-            var profileImageBase64 = await CommonUtils.ConvertImageToBase64(model.ProfileImage);
-            var IDImageFrontBase64 = await CommonUtils.ConvertImageToBase64(model.IDImageFront);
-            var IDImageBackBase64 = await CommonUtils.ConvertImageToBase64(model.IDImageBack);
+
+            var profileImageBase64 = await GoogleDriveService.UploadFileToDriveAsync(model.ProfileImage);// await CommonUtils.ConvertImageToBase64(model.ProfileImage);
+            var IDImageFrontBase64 = await GoogleDriveService.UploadFileToDriveAsync(model.IDImageFront);// await CommonUtils.ConvertImageToBase64(model.IDImageFront);
+            var IDImageBackBase64 = await GoogleDriveService.UploadFileToDriveAsync(model.IDImageBack);// await CommonUtils.ConvertImageToBase64(model.IDImageBack);
             var user = new ApplicationUser()
             {
                 FirstName = model.FirstName,
@@ -120,7 +122,7 @@ namespace Rentora.Presentation.Services
             {
                 Id = user.Id,
                 Email = user.Email,
-                ProfileImageBase64 = profileImageBase64,
+                ProfileImageBase64 = await GoogleDriveService.GetFileAsBase64Async(profileImageBase64),
                 ExpireOn = jwtSecurityToken.ValidTo,
                 IsAuthinticated = true,
                 Roles = new List<string> { "User" },
