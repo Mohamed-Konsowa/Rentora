@@ -43,7 +43,7 @@ namespace Rentora.Persistence.Repositories
 
         public async Task<List<ApplicationUser>> GetAll()
         {
-            var users = await _userManager.Users.ToListAsync();
+            var users = await _userManager.Users.AsNoTracking().ToListAsync();
             return users;
         }
 

@@ -30,7 +30,7 @@ namespace Rentora.Application.DTOs.Authentication
         public string NationalID { get; set; }
         [Required]
         public string Personal_summary { get; set; }
-        [Required]
+        [Required, Phone]
         public string PhoneNumber { get; set; }
         [Required]
         public string Governorate { get; set; }

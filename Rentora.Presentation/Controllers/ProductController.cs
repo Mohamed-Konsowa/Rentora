@@ -7,6 +7,7 @@ using Rentora.Presentation.Services;
 using Rentora.Domain.Models.Categories;
 using Microsoft.VisualBasic.FileIO;
 using Rentora.Application.DTOs.Product;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Rentora.Presentation.Controllers
 {
@@ -23,8 +24,7 @@ namespace Rentora.Presentation.Controllers
         [HttpGet("getProducts")]
         public IActionResult GetProducts()
         {
-            var products = _productService.GetProducts();
-            return Ok(products);
+            return Ok(_productService.GetProducts());
         }
 
         [HttpGet("getProductById")]
@@ -32,12 +32,13 @@ namespace Rentora.Presentation.Controllers
         {
             var product = await _productService.GetProductById(id);
             if(product is not null)
-            return Ok(product);
+            return Ok(new ProductDTO(product));
             return BadRequest("Product not found");
         }
 
+        [Authorize]
         [HttpPost("addProduct")]
-        public async Task<IActionResult> AddProductAsync(AddProductDTO productDto)
+        public async Task<IActionResult> AddProductAsync(ProductDTO productDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -93,6 +94,7 @@ namespace Rentora.Presentation.Controllers
         }
 
         [HttpPut]
+        [Route("updateProduct")]
         public async Task<IActionResult> UpdateProduct(UpdateProductDTO productDto)
         {
             if (!ModelState.IsValid)
@@ -153,6 +155,7 @@ namespace Rentora.Presentation.Controllers
             return Ok(productDto);
         }
 
+        [Authorize]
         [HttpDelete("deleteProduct")]
         public async Task<IActionResult> DeleteProductAsync(int id)
         {

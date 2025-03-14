@@ -24,9 +24,9 @@ namespace Rentora.Presentation
             // Add services to the container.
             builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
 
-            builder.Services.AddApplication().AddPersistence(builder.Configuration.GetConnectionString("DefaultConnection")!);
+            builder.Services.AddApplication().AddPersistence(builder.Configuration.GetConnectionString("DefaultConnection")!); //  db
 
-            
+
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -70,12 +70,36 @@ namespace Rentora.Presentation
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "Rentora API", Version = "v1" });
 
                 options.OperationFilter<FileUploadOperationFilter>();
+
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Enter 'Bearer' followed by a space and then your token."
+                });
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] {}
+                    }
+                });
             });
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
@@ -83,12 +107,13 @@ namespace Rentora.Presentation
 
             app.UseHttpsRedirection();
 
+            app.UseCors("AllowAll");
+
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();
 
-            app.UseCors("AllowAll");
 
             app.Run();
         }

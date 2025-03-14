@@ -1,6 +1,7 @@
 ﻿using Rentora.Domain.Models;
 using Rentora.Application.IRepositories;
 using Rentora.Persistence.Helpers;
+using Rentora.Presentation.DTOs.Product;
 
 namespace Rentora.Presentation.Services
 {
@@ -12,9 +13,10 @@ namespace Rentora.Presentation.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<Product>> GetProducts()
+        public async Task<List<ProductDTO>> GetProducts()
         {
-            var products = await _unitOfWork.products.GetAll();
+            var temp = await _unitOfWork.products.GetAll();
+            var products = temp.Select(p => new ProductDTO(p)).ToList();
             return products;
         }
 

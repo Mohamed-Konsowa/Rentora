@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Rentora.Application.DTOs.Email;
 using Rentora.Presentation.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace Rentora.Presentation.Controllers
 {
@@ -29,8 +30,10 @@ namespace Rentora.Presentation.Controllers
 
         [HttpPost]
         [Route("send-otp")]
-        public async Task<ActionResult> SendOTP(string email)
+        public async Task<ActionResult> SendOTP([EmailAddress]string email)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             var result = await _emailService.SendOTP(email);
             if(result)
             return Ok("OTP sent successfully.");
@@ -39,9 +42,9 @@ namespace Rentora.Presentation.Controllers
 
         [HttpGet]
         [Route("verify-otp")]
-        public async Task<ActionResult> VerifyOTP(string email, string otpCode)
+        public async Task<ActionResult> VerifyOTP(Verify_OTP_DTO vod)
         {
-            var result = await _emailService.VerifyOtp(email, otpCode);
+            var result = await _emailService.VerifyOtp(vod.Email, vod.OTPCode);
             if(result.Success) 
                 return Ok(result.Data);
             return BadRequest(result.Data);

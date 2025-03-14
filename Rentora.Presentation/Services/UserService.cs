@@ -4,7 +4,6 @@ using Microsoft.IdentityModel.Tokens;
 using Rentora.Application.DTOs.Authentication;
 using Rentora.Persistence.Helpers;
 using Rentora.Domain.Models;
-using Rentora.Persistence.Helpers;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -13,6 +12,8 @@ using Azure.Core;
 using System.Net.Mail;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using System.Net;
 
 namespace Rentora.Presentation.Services
 {
@@ -21,10 +22,45 @@ namespace Rentora.Presentation.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly JWT _jwt;
 
+
         public UserService(IUnitOfWork unitOfWork, IOptions<JWT> jwt)
         {
             _unitOfWork = unitOfWork;
             _jwt = jwt.Value;
+        }
+        public async Task<List<UserDTO>> GetAllUsers()
+        {
+            var allusers = await _unitOfWork.users.GetAll();
+            List<UserDTO> users = allusers.Select(u => new UserDTO(u)
+            {
+                Id = u.Id,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                Username = u.UserName,
+                Email = u.Email,
+                EmailConfirmed = u.EmailConfirmed,
+                NationalID = u.NationalID,
+                Personal_summary = u.Personal_summary,
+                PhoneNumber = u.PhoneNumber,
+                Governorate = u.Governorate,
+                Town = u.Governorate,
+                Address = u.Address,
+                ProfileImage = u.ProfileImage
+            }).ToList();
+            return users;
+        }
+        public async Task<UserDTO> GetUserById(string id)
+        {
+            var user = await _unitOfWork.users.GetById(id);
+            return new UserDTO(user);
+        }
+        public async Task<bool> CheckIfEmailExists(string email)
+        {
+            return await _unitOfWork.users.GetByEmail(email) is not null;
+        }
+        public async Task<bool> CheckIfUserNameExists(string username)
+        {
+            return await _unitOfWork.users.GetByName(username) is not null;
         }
         public async Task<AuthModel> RegisterAsync(RegisterModel model)
         {
@@ -57,7 +93,14 @@ namespace Rentora.Presentation.Services
                 EmailConfirmed = model.EmailConfirmed,
                 ProfileImage = profileImageBase64,
                 IDImageFront = IDImageFrontBase64,
-                IDImageBack = IDImageBackBase64
+                IDImageBack = IDImageBackBase64,
+                Personal_summary = model.Personal_summary,
+                NationalID = model.NationalID,
+                Governorate = model.Governorate,
+                Town = model.Town,
+                Address = model.Address,
+                PhoneNumber = model.PhoneNumber,
+
             };
             var result = await _unitOfWork.users.Create(user, model.Password);
             if (!result.Succeeded)
@@ -72,6 +115,7 @@ namespace Rentora.Presentation.Services
             await _unitOfWork.users.AddRole(user, "User");
 
             var jwtSecurityToken = await CreateJwtToken(user);
+
             return new AuthModel
             {
                 Id = user.Id,
@@ -150,11 +194,6 @@ namespace Rentora.Presentation.Services
 
             var result = await _unitOfWork.users.AddRole(user, model.Role);
             return !result.Succeeded ? "Something went wrong" : "";
-        }
-        public async Task<List<ApplicationUser>> GetAllUsers()
-        {
-            var users = await _unitOfWork.users.GetAll();
-            return users;
         }
         
     }

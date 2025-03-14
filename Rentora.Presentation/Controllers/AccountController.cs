@@ -22,6 +22,24 @@ namespace Rentora.Presentation.Controllers
         {
             return Ok(await _authService.GetAllUsers());
         }
+        [HttpGet]
+        [Route("getUserById")]
+        public async Task<IActionResult> GetUserById(string id)
+        {
+            return Ok(await _authService.GetUserById(id));
+        }
+        [HttpGet]
+        [Route("checkIfEmailExists")]
+        public async Task<IActionResult> CheckIfEmailExists(string email)
+        {
+            return Ok(await _authService.CheckIfEmailExists(email));
+        }
+        [HttpGet]
+        [Route("checkIfUserNameExists")]
+        public async Task<IActionResult> CheckIfUserNameExists(string userName)
+        {
+            return Ok(await _authService.CheckIfEmailExists(userName));
+        }
 
         [HttpPost("register")]
         [Consumes("multipart/form-data")]

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Rentora.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6f577ecc1e4c5ece719ff87dc6bd6e9c51f77a76")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e7e50afcb0fb1e5b9f0e94ad3d72cb8ae5a882a3")]
 [assembly: System.Reflection.AssemblyProductAttribute("Rentora.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Rentora.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
