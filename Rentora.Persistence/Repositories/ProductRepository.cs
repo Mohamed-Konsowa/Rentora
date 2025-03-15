@@ -14,7 +14,7 @@ namespace Rentora.Persistence.Repositories
         }
 
         //specific tasks
-        public async Task<T> AddProductCategory<T>(T category) where T : class 
+        public async Task<T> AddProductSpecificCategory<T>(T category) where T : class 
         {
             var result = await _context.Set<T>().AddAsync(category);
             return category;
@@ -102,7 +102,7 @@ namespace Rentora.Persistence.Repositories
             return true;
         }
 
-        public int GetProductCategoryId(int productId)
+        public int GetProductSpecificCategoryId(int productId)
         {
             var cat = _context.sports.FirstOrDefault(s => s.ProductId == productId);
             if (cat != null) return cat.ProductId;
@@ -117,6 +117,26 @@ namespace Rentora.Persistence.Repositories
             if (cat4 != null) return cat4.ProductId;
 
             return -1;
+        }
+
+        public async Task<List<ProductImage>> GetProductImages(int productId)
+        {
+            return  _context.ProductImages.ToList();
+        }
+
+        public async Task<ProductImage> GetProductImageById(int imageId)
+        {
+            return await _context.ProductImages.FindAsync(imageId);
+        }
+
+        public void DeleteProductImage(ProductImage productImage)
+        {
+            _context.ProductImages.Remove(productImage);
+        }
+
+        public async Task<T> GetProductSpecificCategory<T>(int specificId) where T : class
+        {
+            return await _context.Set<T>().FindAsync(specificId);
         }
     }
 }

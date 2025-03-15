@@ -2,6 +2,8 @@
 using Rentora.Application.IRepositories;
 using Rentora.Persistence.Helpers;
 using Rentora.Presentation.DTOs.Product;
+using Rentora.Application.DTOs.Product;
+using Rentora.Domain.Models.Categories;
 
 namespace Rentora.Presentation.Services
 {
@@ -20,12 +22,45 @@ namespace Rentora.Presentation.Services
             return products;
         }
 
-        public async Task<Product> GetProductById(int id)
+        public async Task<ProductDTO> GetProductDTOById(int id)
         {
-            var product = await  _unitOfWork.products.GetById(id);
+            var temp = await  _unitOfWork.products.GetById(id);
+            var product = new ProductDTO(temp);
+            switch (product.CategoryId)
+            {
+                case 1:
+                    var SpecificCategory = await _unitOfWork.products.GetProductSpecificCategory<Sport>(1);
+                    product.Brand = SpecificCategory.Brand;
+                    product.Model = SpecificCategory.Model;
+                    product.Condition = SpecificCategory.Condition;
+                break;
+
+                case 2:
+                    var SpecificCategory2 = await _unitOfWork.products.GetProductSpecificCategory<Transportation>(1);
+                    product.Transmission = SpecificCategory2.Transmission;
+                    product.Body_Type = SpecificCategory2.Body_Type;
+                    product.Fuel_Type = SpecificCategory2.Fuel_Type;
+                break;
+
+                case 3:
+                    var SpecificCategory3 = await _unitOfWork.products.GetProductSpecificCategory<Electronic>(1);
+                    product.Condition = SpecificCategory3.Condition;
+                break;
+
+                case 4:
+                    var SpecificCategory4 = await _unitOfWork.products.GetProductSpecificCategory<Electronic>(1);
+                    product.Brand = SpecificCategory4.Brand;
+                    product.Model = SpecificCategory4.Model;
+                    product.Condition = SpecificCategory4.Condition;
+                break;
+            }
             return product;
         }
-
+        public async Task<Product> GetProductById(int id)
+        {
+            var product = await _unitOfWork.products.GetById(id);            
+            return product;
+        }
         public async Task<Product> AddProduct(Product product)
         {
             await _unitOfWork.products.Add(product);
@@ -49,17 +84,21 @@ namespace Rentora.Presentation.Services
             return result;
         }
 
-        public async Task<bool> AddProductImage(ProductImage productImage)
+        public async Task<bool> AddProductImage(ProductImageDTO productImage)
         {
-            //var image = new ProductImage() {ProductId = id ,Image = imageBase64 };
-            var result = await _unitOfWork.products.AddProductImage(productImage);
+            var id = await GoogleDriveService.UploadFileToDriveAsync(productImage.Image);
+            var result = await _unitOfWork.products.AddProductImage(new ProductImage()
+            {
+                ProductId = productImage.ProductId,
+                Image = id
+            });
             await _unitOfWork.Save();
             return result;
         }
 
         public async Task<bool> AddProductCategory<T>(T category) where T : class
         {
-            var result = await _unitOfWork.products.AddProductCategory(category);
+            var result = await _unitOfWork.products.AddProductSpecificCategory(category);
             await _unitOfWork.Save();
             return result != null;
         }
@@ -73,7 +112,25 @@ namespace Rentora.Presentation.Services
 
         public int GetProductCategoryId(int id)
         {
-            return _unitOfWork.products.GetProductCategoryId(id);
+            return _unitOfWork.products.GetProductSpecificCategoryId(id);
+        }
+
+        public async Task<List<ProductImage>> GetProductImagesByIdAsync(int productId)
+        {
+            var images = await _unitOfWork.products.GetProductImages(productId);
+            foreach(var image in images) image.Image = 
+                    await GoogleDriveService.GetFileAsBase64Async(image.Image);
+            return images;
+        }
+
+        public async Task<bool> DeleteImageById(int imageId)
+        {
+            var image = await _unitOfWork.products.GetProductImageById(imageId);
+            _unitOfWork.products.DeleteProductImage(image);
+            await _unitOfWork.Save();
+            if (image is null) return false;
+            await GoogleDriveService.DeleteFileAsync(image.Image);
+            return true;
         }
     }
 }

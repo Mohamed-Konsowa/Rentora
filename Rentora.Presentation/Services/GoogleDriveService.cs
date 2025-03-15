@@ -8,57 +8,26 @@ using System.Threading.Tasks;
 
 namespace Rentora.Presentation.Services
 {
-    class GoogleDriveService2
-    {
-        private static readonly string[] Scopes = { DriveService.Scope.DriveFile };
-        private const string ApplicationName = "Rentora";
-        private const string CredentialsPath = "Resourses/rentora-453721-0bd2cc9b6341.json"; 
-
-        public static async Task<string> UploadFileAsync(string filePath, string folderId = "1kBrUx090uTdeHUx2ZUzDGTwTO0Ebx8Dh")
-        {
-            try
-            {
-                GoogleCredential credential;
-                using (var stream = new FileStream(CredentialsPath, FileMode.Open, FileAccess.Read))
-                {
-                    credential = GoogleCredential.FromStream(stream).CreateScoped(Scopes);
-                }
-
-                using var service = new DriveService(new BaseClientService.Initializer
-                {
-                    HttpClientInitializer = credential,
-                    ApplicationName = ApplicationName,
-                });
-
-                var fileMetadata = new Google.Apis.Drive.v3.Data.File
-                {
-                    Name = Path.GetFileName(filePath),
-                    Parents = new[] { folderId }
-                };
-
-                using var fileStream = new FileStream(filePath, FileMode.Open);
-                var request = service.Files.Create(fileMetadata, fileStream, "image/jpeg");
-                request.Fields = "id";
-                var result = await request.UploadAsync();
-
-                if (result.Status == UploadStatus.Failed)
-                    throw new Exception("Upload failed");
-
-                return $"https://drive.google.com/uc?id={request.ResponseBody.Id}"; // رابط الصورة
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error uploading file: {ex.Message}");
-                return null;
-            }
-        }
-    }
     class GoogleDriveService
     {
         private static readonly string[] Scopes = { DriveService.Scope.DriveFile };
         private const string ApplicationName = "Rentora";
         private const string CredentialsPath = "wwwroot/Resourses/rentora-453721-0bd2cc9b6341.json"; // تأكد أن الملف في هذا المسار
 
+        private static DriveService GetDriveService()
+        {
+            GoogleCredential credential;
+            using (var stream = new FileStream(CredentialsPath, FileMode.Open, FileAccess.Read))
+            {
+                credential = GoogleCredential.FromStream(stream).CreateScoped(Scopes);
+            }
+
+            return new DriveService(new BaseClientService.Initializer
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = ApplicationName,
+            });
+        }
         public static async Task<string> UploadFileToDriveAsync(IFormFile file, string folderId = "1kBrUx090uTdeHUx2ZUzDGTwTO0Ebx8Dh")
         {
             try
@@ -139,6 +108,21 @@ namespace Rentora.Presentation.Services
                 return null;
             }
         }
+        public static async Task<bool> DeleteFileAsync(string fileId)
+        {
+            try
+            {
+                using var service = GetDriveService();
+                await service.Files.Delete(fileId).ExecuteAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting file: {ex.Message}");
+                return false;
+            }
+        }
+
     }
 }
 

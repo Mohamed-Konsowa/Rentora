@@ -8,6 +8,7 @@ using Rentora.Domain.Models.Categories;
 using Microsoft.VisualBasic.FileIO;
 using Rentora.Application.DTOs.Product;
 using Microsoft.AspNetCore.Authorization;
+using Rentora.Application.DTOs.Authentication;
 
 namespace Rentora.Presentation.Controllers
 {
@@ -22,23 +23,24 @@ namespace Rentora.Presentation.Controllers
         }
 
         [HttpGet("getProducts")]
-        public IActionResult GetProducts()
+        public async Task<IActionResult> GetProducts()
         {
-            return Ok(_productService.GetProducts());
+            var products = await _productService.GetProducts();
+            return Ok(products);
         }
 
         [HttpGet("getProductById")]
         public async Task<IActionResult> GetProductAsync(int id)
         {
-            var product = await _productService.GetProductById(id);
-            if(product is not null)
-            return Ok(new ProductDTO(product));
+            var product = await _productService.GetProductDTOById(id);
+            if (product is not null)
+                return Ok(product);
             return BadRequest("Product not found");
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("addProduct")]
-        public async Task<IActionResult> AddProductAsync(ProductDTO productDto)
+        public async Task<IActionResult> AddProductAsync(AddProductDTO productDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -100,7 +102,7 @@ namespace Rentora.Presentation.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var product = await _productService.GetProductById(productDto.ProductId);
-            if(product is null) return BadRequest("Product not found");
+            if (product is null) return BadRequest("Product not found");
 
             product.Title = productDto.Title;
             product.Description = productDto.Description;
@@ -160,21 +162,38 @@ namespace Rentora.Presentation.Controllers
         public async Task<IActionResult> DeleteProductAsync(int id)
         {
             var result = await _productService.DeleteProduct(id);
-            if(result)
+            if (result)
                 return Ok("The product is deleted.");
             else
                 return BadRequest("Error");
         }
 
         [HttpPost("add-image")]
+        [Consumes("multipart/form-data")]
         public async Task<IActionResult> AddProdectImage(ProductImageDTO productImageDTO)
         {
-            var result = await _productService.AddProductImage(new ProductImage{ 
-                ProductId = productImageDTO.ProductId,
-                Image = productImageDTO.Image
-            });
+            var allowedTypes = new[] { "image/jpeg", "image/png", "image/gif" };
+            if (!allowedTypes.Contains(productImageDTO.Image.ContentType))
+            {
+                return BadRequest("Invalid file type. Only JPEG, PNG, and GIF are allowed.");
+            }
+            var result = await _productService.AddProductImage(productImageDTO);
             if (result) return Ok("Image was added successfully");
             return BadRequest("Failed to add Image!");
+        }
+        [HttpGet]
+        [Route("getProductImagesById")]
+        public async Task<IActionResult> GetProductImagesById(int productId)
+        {
+            return Ok(await _productService.GetProductImagesByIdAsync(productId));
+        }
+        [HttpDelete]
+        [Route("DeleteProductImageById")]
+        public async Task<IActionResult> DeleteImageById(int imageId)
+        {
+            var result = await _productService.DeleteImageById(imageId);
+            if (result) return Ok("Image deleted successfully.");
+            return BadRequest("Failed to delete the image");
         }
     }
 }
