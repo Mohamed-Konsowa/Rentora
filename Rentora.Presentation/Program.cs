@@ -20,7 +20,7 @@ namespace Rentora.Presentation
             // Add services to the container.
             builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
 
-            builder.Services.AddApplication().AddPersistence(builder.Configuration.GetConnectionString("DefaultConnection")!); //  db
+            builder.Services.AddApplication().AddPersistence(builder.Configuration.GetConnectionString("MonsterDB")!); // LocalDB   
 
 
             builder.Services.AddAuthentication(options =>
@@ -49,6 +49,7 @@ namespace Rentora.Presentation
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<IFavoriteService, FavoriteService>();
+            builder.Services.AddScoped<IRentService, RentService>();
             
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

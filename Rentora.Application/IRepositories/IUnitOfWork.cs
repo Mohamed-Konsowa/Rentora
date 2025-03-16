@@ -9,6 +9,7 @@ namespace Rentora.Application.IRepositories
         IEmailRepository emails { get; }
         ICartRepository carts { get; }
         IFavoriteRepository favorites { get; }
+        IRentRepository rentals { get; }
         Task Save();
     }
 }

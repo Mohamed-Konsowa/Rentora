@@ -6,7 +6,6 @@ namespace Rentora.Presentation.DTOs.Product
     public class AddProductDTO
     {
         // general
-        public int ProductId {  get; set; }
         public string ApplicationUserId { get; set; }
         public int CategoryId { get; set; }
         public string Title { get; set; }
