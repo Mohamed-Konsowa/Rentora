@@ -8,14 +8,16 @@ namespace Rentora.Application.IRepositories
         public IProductRepository products { get; }
         public IUserRepository users { get; }
         public IEmailRepository emails {  get; }
+        public ICartRepository carts { get; }
 
         public UnitOfWork(ApplicationDbContext context, IProductRepository productRepository, 
-            IUserRepository userRepository, IEmailRepository emailRepository)
+            IUserRepository userRepository, IEmailRepository emailRepository, ICartRepository cartRepository)
         {
             _context = context;
             products = productRepository;
             users = userRepository;
             emails = emailRepository;
+            carts = cartRepository;
         }
 
         public async Task Save()

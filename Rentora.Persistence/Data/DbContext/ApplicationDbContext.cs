@@ -61,6 +61,10 @@ namespace Rentora.Persistence.Data.DbContext
                 .HasForeignKey(r => r.ApplicationUserId);
 
             builder.Entity<Product>().ToTable("Product");
+
+            builder.Entity<RentalCart>()
+                .HasIndex(c => new { c.ApplicationUserId, c.ProductId })
+                .IsUnique();
         }
     }
 }

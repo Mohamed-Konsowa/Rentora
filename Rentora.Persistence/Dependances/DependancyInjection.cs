@@ -41,6 +41,7 @@ namespace Rentora.Persistence.Dependances
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IEmailRepository, EmailRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
 
             services.AddIdentityCore<ApplicationUser>()
                 .AddRoles<IdentityRole>()

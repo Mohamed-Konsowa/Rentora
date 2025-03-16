@@ -48,6 +48,7 @@ namespace Rentora.Presentation.Services
                 Address = u.Address,
                 ProfileImage = u.ProfileImage
             }).ToList();
+            foreach (var user in users) user.ProfileImage = await GoogleDriveService.GetFileAsBase64Async(user.ProfileImage);
             return users;
         }
         public async Task<UserDTO> GetUserById(string id)
