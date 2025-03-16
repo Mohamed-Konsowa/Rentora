@@ -1,15 +1,11 @@
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using Rentora.Persistence.Helpers;
-using Rentora.Domain.Models;
 using Rentora.Application.Dependancies;
 using Rentora.Presentation.Services;
 using Rentora.Persistence.Dependances;
-using Rentora.Persistence.Repositories;
 using System.Text;
 using Rentora.Presentation.Swagger;
 
@@ -52,7 +48,8 @@ namespace Rentora.Presentation
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<ICartService, CartService>();
-
+            builder.Services.AddScoped<IFavoriteService, FavoriteService>();
+            
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

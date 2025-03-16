@@ -1,6 +1,4 @@
-﻿using Rentora.Domain.Models;
-
-namespace Rentora.Presentation.Services
+﻿namespace Rentora.Presentation.Services
 {
     public interface ICartService
     {

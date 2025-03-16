@@ -1,5 +1,4 @@
-﻿
-using Rentora.Application.IRepositories;
+﻿using Rentora.Application.IRepositories;
 using Rentora.Domain.Models;
 
 namespace Rentora.Presentation.Services

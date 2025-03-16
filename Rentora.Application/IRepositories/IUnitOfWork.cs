@@ -8,6 +8,7 @@ namespace Rentora.Application.IRepositories
         IUserRepository users { get; }
         IEmailRepository emails { get; }
         ICartRepository carts { get; }
+        IFavoriteRepository favorites { get; }
         Task Save();
     }
 }

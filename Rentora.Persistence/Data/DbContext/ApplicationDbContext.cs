@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-//using System.Composition;
-using System.Reflection.Emit;
 using Rentora.Domain.Models;
 using Rentora.Domain.Models.Categories;
+
 namespace Rentora.Persistence.Data.DbContext
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -64,6 +63,10 @@ namespace Rentora.Persistence.Data.DbContext
 
             builder.Entity<RentalCart>()
                 .HasIndex(c => new { c.ApplicationUserId, c.ProductId })
+                .IsUnique();
+
+            builder.Entity<Favorite>()
+                .HasIndex(f => new { f.ApplicationUserId, f.ProductId })
                 .IsUnique();
         }
     }

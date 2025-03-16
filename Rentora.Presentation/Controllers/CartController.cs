@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Rentora.Presentation.Services;
 
 namespace Rentora.Presentation.Controllers
@@ -20,20 +19,20 @@ namespace Rentora.Presentation.Controllers
             return Ok(_cartService.GetUserCartItems(userId));
         }
         [HttpPost]
-        [Route("addItemToCart")]
+        [Route("addProductToCart")]
         public async Task<IActionResult> AddItemAsync(string UserId, int productId)
         {
             var result = await _cartService.AddInCart(UserId, productId);
-            if(result) return Ok("Item added to cart successfully.");
-            return BadRequest("Failed to add Item!");
+            if(result) return Ok("Product added to cart successfully.");
+            return BadRequest("Failed to add product!");
         }
         [HttpDelete]
-        [Route("deleteItem")]
+        [Route("removeFromCart")]
         public async Task<IActionResult> DeleteItemAsync(string userId, int productId)
         {
             var result = await _cartService.RemoveFromCart(userId, productId);
-            if (result) return Ok("Item deleted successfully.");
-            return BadRequest("Failed to delete Item!");
+            if (result) return Ok("Product removed successfully.");
+            return BadRequest("Failed to remove product!");
         }
     }
 }

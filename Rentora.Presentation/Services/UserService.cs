@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Rentora.Application.DTOs.Authentication;
 using Rentora.Persistence.Helpers;
@@ -8,13 +7,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Rentora.Application.IRepositories;
-using Azure.Core;
-using System.Net.Mail;
-using SendGrid;
-using SendGrid.Helpers.Mail;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
-using System.Net;
-using static NuGet.Packaging.PackagingConstants;
 
 namespace Rentora.Presentation.Services
 {

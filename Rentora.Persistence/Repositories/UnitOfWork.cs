@@ -1,4 +1,5 @@
-﻿using Rentora.Persistence.Data.DbContext;
+﻿using Rentora.Domain.Models;
+using Rentora.Persistence.Data.DbContext;
 
 namespace Rentora.Application.IRepositories
 {
@@ -9,15 +10,17 @@ namespace Rentora.Application.IRepositories
         public IUserRepository users { get; }
         public IEmailRepository emails {  get; }
         public ICartRepository carts { get; }
-
+        public IFavoriteRepository favorites {  get; }
         public UnitOfWork(ApplicationDbContext context, IProductRepository productRepository, 
-            IUserRepository userRepository, IEmailRepository emailRepository, ICartRepository cartRepository)
+            IUserRepository userRepository, IEmailRepository emailRepository, 
+            ICartRepository cartRepository, IFavoriteRepository favoriteRepository)
         {
             _context = context;
             products = productRepository;
             users = userRepository;
             emails = emailRepository;
             carts = cartRepository;
+            favorites = favoriteRepository;
         }
 
         public async Task Save()

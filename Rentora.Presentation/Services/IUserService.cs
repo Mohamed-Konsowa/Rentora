@@ -1,6 +1,4 @@
 ﻿using Rentora.Application.DTOs.Authentication;
-using Rentora.Domain.Models;
-using SendGrid;
 
 namespace Rentora.Presentation.Services
 {

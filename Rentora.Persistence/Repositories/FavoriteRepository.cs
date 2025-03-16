@@ -4,23 +4,23 @@ using Rentora.Persistence.Data.DbContext;
 
 namespace Rentora.Persistence.Repositories
 {
-    public class CartRepository : Repository<RentalCart>, ICartRepository
+    public class FavoriteRepository : Repository<Favorite>, IFavoriteRepository
     {
         private readonly ApplicationDbContext _context;
-        public CartRepository(ApplicationDbContext context):base(context)
+        public FavoriteRepository(ApplicationDbContext context):base(context)
         {
             _context = context;
         }
 
-        public RentalCart GetCart(string userId, int productId)
+        public Favorite GetFavorite(string userId, int productId)
         {
-            return _context.RentalCarts.FirstOrDefault
+            return _context.Favorites.FirstOrDefault
                 (c => c.ApplicationUserId == userId && c.ProductId == productId);
         }
 
-        public  List<int> GetUserCartItems(string userId)
+        public  List<int> GetUserFavoriteItems(string userId)
         {
-            return _context.RentalCarts.Where
+            return _context.Favorites.Where
                 (c => c.ApplicationUserId == userId).Select(c => c.ProductId).ToList();
         }
     }

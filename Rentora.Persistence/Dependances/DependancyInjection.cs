@@ -1,23 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Identity.Client;
 using Rentora.Application.IRepositories;
 using Rentora.Persistence.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using Rentora.Persistence.Data.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.AspNetCore.Authorization;
 using Rentora.Domain.Models;
 using Rentora.Persistence.Services;
-
 
 namespace Rentora.Persistence.Dependances
 {
@@ -42,6 +33,7 @@ namespace Rentora.Persistence.Dependances
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IEmailRepository, EmailRepository>();
             services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<IFavoriteRepository, FavoriteRepository>();
 
             services.AddIdentityCore<ApplicationUser>()
                 .AddRoles<IdentityRole>()
