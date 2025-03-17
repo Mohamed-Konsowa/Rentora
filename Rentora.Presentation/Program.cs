@@ -8,6 +8,7 @@ using Rentora.Presentation.Services;
 using Rentora.Persistence.Dependances;
 using System.Text;
 using Rentora.Presentation.Swagger;
+using CloudinaryDotNet;
 
 namespace Rentora.Presentation
 {
@@ -44,12 +45,23 @@ namespace Rentora.Presentation
                 };
             });
 
+            var configuration = builder.Configuration;
+            var cloudinaryAccount = new Account(
+                configuration["Cloudinary:CloudName"],
+                configuration["Cloudinary:ApiKey"],
+                configuration["Cloudinary:ApiSecret"]
+            );
+
+            var cloudinary = new Cloudinary(cloudinaryAccount);
+            builder.Services.AddSingleton(cloudinary);
+
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<IFavoriteService, FavoriteService>();
             builder.Services.AddScoped<IRentService, RentService>();
+            builder.Services.AddScoped<CloudinaryService>();
             
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

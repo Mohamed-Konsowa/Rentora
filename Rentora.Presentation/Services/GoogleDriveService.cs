@@ -4,7 +4,7 @@ using Google.Apis.Services;
 
 namespace Rentora.Presentation.Services
 {
-    class GoogleDriveService
+    class GoogleDriveServicex
     {
         private static readonly string[] Scopes = { DriveService.Scope.DriveFile };
         private const string ApplicationName = "Rentora";
@@ -24,7 +24,7 @@ namespace Rentora.Presentation.Services
                 ApplicationName = ApplicationName,
             });
         }
-        public static async Task<string> UploadFileToDriveAsync(IFormFile file, string folderId = "1kBrUx090uTdeHUx2ZUzDGTwTO0Ebx8Dh")
+        public static async Task<string> UploadImageAsync(IFormFile file, string folderId = "1kBrUx090uTdeHUx2ZUzDGTwTO0Ebx8Dh")
         {
             try
             {
@@ -104,7 +104,7 @@ namespace Rentora.Presentation.Services
                 return null;
             }
         }
-        public static async Task<bool> DeleteFileAsync(string fileId)
+        public static async Task<bool> DeleteImageAsync(string fileId)
         {
             try
             {

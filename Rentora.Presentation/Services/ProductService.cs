@@ -9,9 +9,12 @@ namespace Rentora.Presentation.Services
     public class ProductService : IProductService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public ProductService(IUnitOfWork unitOfWork)
+        private readonly CloudinaryService _cloudinaryService;
+
+        public ProductService(IUnitOfWork unitOfWork, CloudinaryService cloudinaryService)
         {
             _unitOfWork = unitOfWork;
+            _cloudinaryService = cloudinaryService;
         }
 
         public async Task<List<ProductDTO>> GetProducts()
@@ -85,11 +88,11 @@ namespace Rentora.Presentation.Services
 
         public async Task<bool> AddProductImage(ProductImageDTO productImage)
         {
-            var id = await GoogleDriveService.UploadFileToDriveAsync(productImage.Image);
+            var imageUrl = await _cloudinaryService.UploadImageAsync(productImage.Image);
             var result = await _unitOfWork.products.AddProductImage(new ProductImage()
             {
                 ProductId = productImage.ProductId,
-                Image = id
+                Image = imageUrl
             });
             await _unitOfWork.Save();
             return result;
@@ -117,18 +120,18 @@ namespace Rentora.Presentation.Services
         public async Task<List<ProductImage>> GetProductImagesByIdAsync(int productId)
         {
             var images = await _unitOfWork.products.GetProductImages(productId);
-            foreach(var image in images) image.Image = 
-                    await GoogleDriveService.GetFileAsBase64Async(image.Image);
             return images;
         }
 
         public async Task<bool> DeleteImageById(int imageId)
         {
             var image = await _unitOfWork.products.GetProductImageById(imageId);
+            if (image is null) return false;
+
+            await _cloudinaryService.DeleteImageAsync(image.Image);
             _unitOfWork.products.DeleteProductImage(image);
             await _unitOfWork.Save();
-            if (image is null) return false;
-            await GoogleDriveService.DeleteFileAsync(image.Image);
+                       
             return true;
         }
     }

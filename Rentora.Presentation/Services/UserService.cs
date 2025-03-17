@@ -13,12 +13,14 @@ namespace Rentora.Presentation.Services
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly CloudinaryService _cloudinaryService;
         private readonly JWT _jwt;
 
-
-        public UserService(IUnitOfWork unitOfWork, IOptions<JWT> jwt)
+        public UserService(IUnitOfWork unitOfWork, IOptions<JWT> jwt, 
+            CloudinaryService cloudinaryService)
         {
             _unitOfWork = unitOfWork;
+            _cloudinaryService = cloudinaryService;
             _jwt = jwt.Value;
         }
         public async Task<List<UserDTO>> GetAllUsers()
@@ -40,13 +42,11 @@ namespace Rentora.Presentation.Services
                 Address = u.Address,
                 ProfileImage = u.ProfileImage
             }).ToList();
-            foreach (var user in users) user.ProfileImage = await GoogleDriveService.GetFileAsBase64Async(user.ProfileImage);
             return users;
         }
         public async Task<UserDTO> GetUserById(string id)
         {
             var user = await _unitOfWork.users.GetById(id);
-            user.ProfileImage = await GoogleDriveService.GetFileAsBase64Async(user.ProfileImage);
             return new UserDTO(user);
         }
         public async Task<bool> CheckIfEmailExists(string email)
@@ -76,9 +76,9 @@ namespace Rentora.Presentation.Services
             }
 
 
-            var profileImageBase64 = await GoogleDriveService.UploadFileToDriveAsync(model.ProfileImage);// await CommonUtils.ConvertImageToBase64(model.ProfileImage);
-            var IDImageFrontBase64 = await GoogleDriveService.UploadFileToDriveAsync(model.IDImageFront);// await CommonUtils.ConvertImageToBase64(model.IDImageFront);
-            var IDImageBackBase64 = await GoogleDriveService.UploadFileToDriveAsync(model.IDImageBack);// await CommonUtils.ConvertImageToBase64(model.IDImageBack);
+            var profileImage = await _cloudinaryService.UploadImageAsync(model.ProfileImage);// await GoogleDriveService.UploadImageAsync(model.ProfileImage);// await CommonUtils.ConvertImageToBase64(model.ProfileImage);
+            var IDImageFront = await _cloudinaryService.UploadImageAsync(model.IDImageFront);// await GoogleDriveService.UploadImageAsync(model.IDImageFront);// await CommonUtils.ConvertImageToBase64(model.IDImageFront);
+            var IDImageBack = await _cloudinaryService.UploadImageAsync(model.IDImageBack);// await GoogleDriveService.UploadImageAsync(model.IDImageBack);// await CommonUtils.ConvertImageToBase64(model.IDImageBack);
             var user = new ApplicationUser()
             {
                 FirstName = model.FirstName,
@@ -86,9 +86,9 @@ namespace Rentora.Presentation.Services
                 Email = model.Email,
                 UserName = model.Username,
                 EmailConfirmed = model.EmailConfirmed,
-                ProfileImage = profileImageBase64,
-                IDImageFront = IDImageFrontBase64,
-                IDImageBack = IDImageBackBase64,
+                ProfileImage = profileImage,
+                IDImageFront = IDImageFront,
+                IDImageBack = IDImageBack,
                 Personal_summary = model.Personal_summary,
                 NationalID = model.NationalID,
                 Governorate = model.Governorate,
@@ -115,7 +115,7 @@ namespace Rentora.Presentation.Services
             {
                 Id = user.Id,
                 Email = user.Email,
-                ProfileImageBase64 = await GoogleDriveService.GetFileAsBase64Async(profileImageBase64),
+                ProfileImageBase64 = user.ProfileImage,//await GoogleDriveService.GetFileAsBase64Async(profileImage),
                 ExpireOn = jwtSecurityToken.ValidTo,
                 IsAuthinticated = true,
                 Roles = new List<string> { "User" },
