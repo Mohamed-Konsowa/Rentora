@@ -9,6 +9,7 @@ using Microsoft.VisualBasic.FileIO;
 using Rentora.Application.DTOs.Product;
 using Microsoft.AspNetCore.Authorization;
 using Rentora.Application.DTOs.Authentication;
+using Rentora.Persistence.Helpers;
 
 namespace Rentora.Presentation.Controllers
 {
@@ -172,11 +173,9 @@ namespace Rentora.Presentation.Controllers
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> AddProdectImage(ProductImageDTO productImageDTO)
         {
-            var allowedTypes = new[] { "image/jpeg", "image/png", "image/gif" };
-            if (!allowedTypes.Contains(productImageDTO.Image.ContentType))
-            {
-                return BadRequest("Invalid file type. Only JPEG, PNG, and GIF are allowed.");
-            }
+            var isImage = CommonUtils.IsImage(productImageDTO.Image);
+            if(!isImage.Item1) return BadRequest(isImage.Item2);
+            
             var result = await _productService.AddProductImage(productImageDTO);
             if (result) return Ok("Image was added successfully");
             return BadRequest("Failed to add Image!");

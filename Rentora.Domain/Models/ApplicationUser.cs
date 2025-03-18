@@ -5,7 +5,7 @@ namespace Rentora.Domain.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        [Required, MaxLength(30)]
+        [Required, MaxLength(30, ErrorMessage = "Name must be at most 30 characters long")]
         public string FirstName { get; set; }
 
         [Required, MaxLength(30)]

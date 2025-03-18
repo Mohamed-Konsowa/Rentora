@@ -7,6 +7,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Rentora.Application.IRepositories;
+using Rentora.Application.DTOs.Product;
+using NuGet.Protocol;
 
 namespace Rentora.Presentation.Services
 {
@@ -44,9 +46,10 @@ namespace Rentora.Presentation.Services
             }).ToList();
             return users;
         }
-        public async Task<UserDTO> GetUserById(string id)
+        public async Task<UserDTO>? GetUserById(string id)
         {
             var user = await _unitOfWork.users.GetById(id);
+            if(user is null) return null;
             return new UserDTO(user);
         }
         public async Task<bool> CheckIfEmailExists(string email)
@@ -60,21 +63,22 @@ namespace Rentora.Presentation.Services
         public async Task<AuthModel> RegisterAsync(RegisterModel model)
         {
             if (await _unitOfWork.users.GetByEmail(model.Email) is not null)
-                return new AuthModel { Message = "Email already exist!" };
-            if (await _unitOfWork.users.GetByName(model.Username) is not null)
-                return new AuthModel { Message = "Username already exist!" };
+                return new AuthModel { Errors = new(){{"Email" , "Email already exist!" } }};
+            if (await _unitOfWork.users.GetByName(model.UserName) is not null)
+                return new AuthModel { Errors = new(){{ "UserName", "Username already exist!" } } };
 
-           
-           var allowedTypes = new[] { "image/jpeg", "image/png", "image/gif" };
-           if (!allowedTypes.Contains(model.ProfileImage.ContentType)
-                || !allowedTypes.Contains(model.IDImageFront.ContentType)
-                || !allowedTypes.Contains(model.IDImageBack.ContentType))
-           {
+            if (!CommonUtils.IsImage(model.ProfileImage).Item1)
                return new AuthModel {
-                   Message = "Invalid file type. Only JPEG, PNG, and GIF are allowed."
+                   Errors = new() { { "ProfileImage", "Invalid file type. Only JPEG, PNG, and GIF are allowed." } }
                };
-            }
-
+            if (!CommonUtils.IsImage(model.IDImageFront).Item1)
+                return new AuthModel {
+                    Errors = new() { { "IDImageFront", "Invalid file type. Only JPEG, PNG, and GIF are allowed." } }
+                };
+            if (!CommonUtils.IsImage(model.IDImageBack).Item1)
+                return new AuthModel {
+                    Errors = new() { { "IDImageBack", "Invalid file type. Only JPEG, PNG, and GIF are allowed." } }
+                };
 
             var profileImage = await _cloudinaryService.UploadImageAsync(model.ProfileImage);// await GoogleDriveService.UploadImageAsync(model.ProfileImage);// await CommonUtils.ConvertImageToBase64(model.ProfileImage);
             var IDImageFront = await _cloudinaryService.UploadImageAsync(model.IDImageFront);// await GoogleDriveService.UploadImageAsync(model.IDImageFront);// await CommonUtils.ConvertImageToBase64(model.IDImageFront);
@@ -84,7 +88,7 @@ namespace Rentora.Presentation.Services
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
-                UserName = model.Username,
+                UserName = model.UserName,
                 EmailConfirmed = model.EmailConfirmed,
                 ProfileImage = profileImage,
                 IDImageFront = IDImageFront,
@@ -95,17 +99,17 @@ namespace Rentora.Presentation.Services
                 Town = model.Town,
                 Address = model.Address,
                 PhoneNumber = model.PhoneNumber,
-
             };
             var result = await _unitOfWork.users.Create(user, model.Password);
             if (!result.Succeeded)
             {
-                var errors = string.Empty;
+                var authModel = new AuthModel();
+                authModel.Errors = new();
                 foreach (var error in result.Errors)
                 {
-                    errors += $"{error.Description},";
+                    authModel.Errors.Add($"{error.Code}", $"{error.Description}");
                 }
-                return new AuthModel() { Message = errors };
+                return authModel;
             }
             await _unitOfWork.users.AddRole(user, "User");
 
@@ -115,7 +119,7 @@ namespace Rentora.Presentation.Services
             {
                 Id = user.Id,
                 Email = user.Email,
-                ProfileImageBase64 = user.ProfileImage,//await GoogleDriveService.GetFileAsBase64Async(profileImage),
+                ProfileImage = user.ProfileImage,//await GoogleDriveService.GetFileAsBase64Async(profileImage),
                 ExpireOn = jwtSecurityToken.ValidTo,
                 IsAuthinticated = true,
                 Roles = new List<string> { "User" },
@@ -131,7 +135,7 @@ namespace Rentora.Presentation.Services
 
             if (user is null || !await _unitOfWork.users.CheckPassword(user, model.Password))
             {
-                authModel.Message = "Email or Password is incorrect!";
+                authModel.Errors = new(){{ "Error", "Email or Password is incorrect!" }};
                 return authModel;
             }
 

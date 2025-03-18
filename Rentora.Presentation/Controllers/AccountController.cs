@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Rentora.Application.DTOs.Authentication;
-using Rentora.Application.DTOs.Email;
 using Rentora.Presentation.Services;
 
 namespace Rentora.Presentation.Controllers
@@ -26,7 +23,9 @@ namespace Rentora.Presentation.Controllers
         [Route("getUserById")]
         public async Task<IActionResult> GetUserById(string id)
         {
-            return Ok(await _authService.GetUserById(id));
+            var user = await _authService.GetUserById(id);
+            if (user == null) return BadRequest("User not found.");
+            return Ok(user);
         }
         [HttpGet]
         [Route("checkIfEmailExists")]
@@ -45,12 +44,12 @@ namespace Rentora.Presentation.Controllers
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> RegisterAsync([FromForm] RegisterModel model)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             var result = await _authService.RegisterAsync(model);
 
             if (!result.IsAuthinticated)
-                return BadRequest(result.Message);
+                return BadRequest(result);
             return Ok(result);
         }
 
@@ -63,7 +62,7 @@ namespace Rentora.Presentation.Controllers
             var result = await _authService.GetTokenAsync(model);
 
             if (!result.IsAuthinticated)
-                return BadRequest(result.Message);
+                return BadRequest(result.Errors);
 
             return Ok(result);
         }

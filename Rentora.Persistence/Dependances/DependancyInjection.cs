@@ -36,21 +36,23 @@ namespace Rentora.Persistence.Dependances
             services.AddScoped<IFavoriteRepository, FavoriteRepository>();
             services.AddScoped<IRentRepository, RentRepository>();
 
-            services.AddIdentityCore<ApplicationUser>()
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-                //.AddDefaultTokenProviders();
-
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
                 options.Password.RequireUppercase = false;
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.SignIn.RequireConfirmedEmail = true;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromHours(1);
             });
+
+            services.AddIdentityCore<ApplicationUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+                //.AddDefaultTokenProviders();
+
+            
             //services.AddAuthentication();
             //services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
             //services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();

@@ -13,30 +13,53 @@ namespace Rentora.Application.DTOs.Authentication
 
         [Required]
         public IFormFile IDImageBack { get; set; }
-        
-        [Required, StringLength(100)]
+
+        [Required(ErrorMessage = "FirstName is required")]
+        [MinLength(3, ErrorMessage = "FirstName must be at least 3 characters long")]
+        [MaxLength(20, ErrorMessage = "FirstName must not exceed 20 characters")]
         public string FirstName { get; set; }
-        [Required, StringLength(100)]
+
+        [Required(ErrorMessage = "LastName is required")]
+        [MinLength(3, ErrorMessage = "LastName must be at least 3 characters long")]
+        [MaxLength(20, ErrorMessage = "LastName must not exceed 20 characters")]
         public string LastName { get; set; }
-        [Required, StringLength(100)]
-        public string Username { get; set; }
-        [Required, StringLength(100), EmailAddress]
+
+        [Required(ErrorMessage = "UserName is required")]
+        [MinLength(3, ErrorMessage = "UserName must be at least 3 characters long")]
+        [MaxLength(20, ErrorMessage = "UserName must not exceed 20 characters")]
+        public string UserName { get; set; }
+
+        [EmailAddress]
+        [Required(ErrorMessage = "Email is required")]
+        [MaxLength(40, ErrorMessage = "Email must not exceed 40 characters")]
         public string Email { get; set; }
 
+        [Required]
         public bool EmailConfirmed {  get; set; }
+
+
         [Required, StringLength(100)]
         public string Password { get; set; }
-        [Required]
+
+        [Required, StringLength(14, MinimumLength = 14, ErrorMessage = "NationalID must be exactly 14 digits")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "Only numbers are allowed")] 
         public string NationalID { get; set; }
+
         [Required]
         public string Personal_summary { get; set; }
-        [Required, Phone]
+
+        [Required, StringLength(11, MinimumLength = 11, ErrorMessage = "Phone number must be exactly 11 digits")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "Only numbers are allowed for Phone Number")] 
         public string PhoneNumber { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Governorate is required.")]
+        [MinLength(4, ErrorMessage = "Governorate must be at least 3 characters long")]
         public string Governorate { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Town is required.")]
         public string Town { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Address is required.")]
         public string Address { get; set; }
     }
 }

@@ -121,7 +121,7 @@ namespace Rentora.Persistence.Repositories
 
         public async Task<List<ProductImage>> GetProductImages(int productId)
         {
-            return  _context.ProductImages.ToList();
+            return _context.ProductImages.Where(i => i.ProductId == productId).ToList();
         }
 
         public async Task<ProductImage> GetProductImageById(int imageId)
