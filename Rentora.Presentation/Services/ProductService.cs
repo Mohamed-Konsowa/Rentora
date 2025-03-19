@@ -9,12 +9,12 @@ namespace Rentora.Presentation.Services
     public class ProductService : IProductService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly CloudinaryService _cloudinaryService;
+        private readonly IImageService _imageService;
 
-        public ProductService(IUnitOfWork unitOfWork, CloudinaryService cloudinaryService)
+        public ProductService(IUnitOfWork unitOfWork, IImageService imageService)
         {
             _unitOfWork = unitOfWork;
-            _cloudinaryService = cloudinaryService;
+            _imageService = imageService;
         }
 
         public async Task<List<ProductDTO>> GetProducts()
@@ -63,18 +63,123 @@ namespace Rentora.Presentation.Services
             var product = await _unitOfWork.products.GetById(id);            
             return product;
         }
-        public async Task<Product> AddProduct(Product product)
+        public async Task<ProductDTO> AddProduct(AddProductDTO productDto)
         {
+
+            var product = new Product()
+            {
+                ApplicationUserId = productDto.ApplicationUserId,
+                CategoryId = productDto.CategoryId,
+                Title = productDto.Title,
+                Description = productDto.Description,
+                Quantity = productDto.Quantity,
+                Price = productDto.Price,
+                RentalPeriod = productDto.RentalPeriod,
+                Location = productDto.Location,
+                Latitude = productDto.Latitude,
+                Longitude = productDto.Longitude,
+                Status = productDto.Status,
+                CreatedAt = DateTime.UtcNow
+            };
             await _unitOfWork.products.Add(product);
+
             await _unitOfWork.Save();
-            return product;
+            
+            switch (productDto.CategoryId)
+            {
+                case 1:
+                    await AddProductCategory(new Sport()
+                    {
+                        ProductId = product.ProductId,
+                        Brand = productDto.Brand,
+                        Model = productDto.Model,
+                        Condition = productDto.Condition
+                    }); break;
+                case 2:
+                    await AddProductCategory(new Transportation()
+                    {
+                        ProductId = product.ProductId,
+                        Transmission = productDto.Transmission,
+                        Body_Type = productDto.Body_Type,
+                        Fuel_Type = productDto.Fuel_Type
+                    }); break;
+                case 3:
+                    await AddProductCategory(new Travel()
+                    {
+                        ProductId = product.ProductId,
+                        Condition = productDto.Condition
+                    }); break;
+                case 4:
+                    await AddProductCategory(new Electronic()
+                    {
+                        ProductId = product.ProductId,
+                        Brand = productDto.Brand,
+                        Model = productDto.Model,
+                        Condition = productDto.Condition
+                    }); break;
+            }
+
+            await _unitOfWork.Save();
+            return await GetProductDTOById(product.ProductId);
         }
 
-        public async Task<Product> UpdateProduct(Product product)
+        public async Task<ProductDTO> UpdateProduct(UpdateProductDTO productDto)
         {
+            var product = await GetProductById(productDto.ProductId);
+            if (product is null) return null;
+
+            product.Title = productDto.Title;
+            product.Description = productDto.Description;
+            product.Quantity = productDto.Quantity;
+            product.Price = productDto.Price;
+            product.RentalPeriod = productDto.RentalPeriod;
+            product.Location = productDto.Location;
+            product.Latitude = productDto.Latitude;
+            product.Longitude = productDto.Longitude;
+            product.Status = productDto.Status;
+
+            var categoryId = GetProductSpecificCategoryId(product.ProductId);
+            switch (product.CategoryId)
+            {
+                case 1:
+                    await UpdateProductCategory(1, new Sport()
+                    {
+                        Id = categoryId,
+                        ProductId = product.ProductId,
+                        Brand = productDto.Brand,
+                        Model = productDto.Model,
+                        Condition = productDto.Condition
+                    }); break;
+                case 2:
+                    await UpdateProductCategory(2, new Transportation()
+                    {
+                        Id = categoryId,
+                        ProductId = product.ProductId,
+                        Transmission = productDto.Transmission,
+                        Body_Type = productDto.Body_Type,
+                        Fuel_Type = productDto.Fuel_Type
+                    }); break;
+                case 3:
+                    await UpdateProductCategory(3, new Travel()
+                    {
+                        Id = categoryId,
+                        ProductId = product.ProductId,
+                        Condition = productDto.Condition
+                    }); break;
+                case 4:
+                    await UpdateProductCategory(4, new Electronic()
+                    {
+                        Id = categoryId,
+                        ProductId = product.ProductId,
+                        Brand = productDto.Brand,
+                        Model = productDto.Model,
+                        Condition = productDto.Condition
+                    }); break;
+            }
+
             await _unitOfWork.products.Update(product);
             await _unitOfWork.Save();
-            return product;
+            return await GetProductDTOById(product.ProductId);
         }
 
         public async Task<bool> DeleteProduct(int id)
@@ -88,7 +193,7 @@ namespace Rentora.Presentation.Services
 
         public async Task<bool> AddProductImage(ProductImageDTO productImage)
         {
-            var imageUrl = await _cloudinaryService.UploadImageAsync(productImage.Image);
+            var imageUrl = await _imageService.UploadImageAsync(productImage.Image);
             var result = await _unitOfWork.products.AddProductImage(new ProductImage()
             {
                 ProductId = productImage.ProductId,
@@ -112,7 +217,7 @@ namespace Rentora.Presentation.Services
             return result != null;
         }
 
-        public int GetProductCategoryId(int id)
+        public int GetProductSpecificCategoryId(int id)
         {
             return _unitOfWork.products.GetProductSpecificCategoryId(id);
         }
@@ -128,7 +233,7 @@ namespace Rentora.Presentation.Services
             var image = await _unitOfWork.products.GetProductImageById(imageId);
             if (image is null) return false;
 
-            await _cloudinaryService.DeleteImageAsync(image.Image);
+            await _imageService.DeleteImageAsync(image.Image);
             _unitOfWork.products.DeleteProductImage(image);
             await _unitOfWork.Save();
                        

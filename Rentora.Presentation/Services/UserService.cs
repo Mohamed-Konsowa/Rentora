@@ -15,14 +15,14 @@ namespace Rentora.Presentation.Services
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly CloudinaryService _cloudinaryService;
+        private readonly IImageService _imageService;
         private readonly JWT _jwt;
 
-        public UserService(IUnitOfWork unitOfWork, IOptions<JWT> jwt, 
-            CloudinaryService cloudinaryService)
+        public UserService(IUnitOfWork unitOfWork, IOptions<JWT> jwt,
+            IImageService imageService)
         {
             _unitOfWork = unitOfWork;
-            _cloudinaryService = cloudinaryService;
+            _imageService = imageService;
             _jwt = jwt.Value;
         }
         public async Task<List<UserDTO>> GetAllUsers()
@@ -80,9 +80,9 @@ namespace Rentora.Presentation.Services
                     Errors = new() { { "IDImageBack", "Invalid file type. Only JPEG, PNG, and GIF are allowed." } }
                 };
 
-            var profileImage = await _cloudinaryService.UploadImageAsync(model.ProfileImage);// await GoogleDriveService.UploadImageAsync(model.ProfileImage);// await CommonUtils.ConvertImageToBase64(model.ProfileImage);
-            var IDImageFront = await _cloudinaryService.UploadImageAsync(model.IDImageFront);// await GoogleDriveService.UploadImageAsync(model.IDImageFront);// await CommonUtils.ConvertImageToBase64(model.IDImageFront);
-            var IDImageBack = await _cloudinaryService.UploadImageAsync(model.IDImageBack);// await GoogleDriveService.UploadImageAsync(model.IDImageBack);// await CommonUtils.ConvertImageToBase64(model.IDImageBack);
+            var profileImage = await _imageService.UploadImageAsync(model.ProfileImage);// await GoogleDriveService.UploadImageAsync(model.ProfileImage);// await CommonUtils.ConvertImageToBase64(model.ProfileImage);
+            var IDImageFront = await _imageService.UploadImageAsync(model.IDImageFront);// await GoogleDriveService.UploadImageAsync(model.IDImageFront);// await CommonUtils.ConvertImageToBase64(model.IDImageFront);
+            var IDImageBack = await _imageService.UploadImageAsync(model.IDImageBack);// await GoogleDriveService.UploadImageAsync(model.IDImageBack);// await CommonUtils.ConvertImageToBase64(model.IDImageBack);
             var user = new ApplicationUser()
             {
                 FirstName = model.FirstName,

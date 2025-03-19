@@ -61,7 +61,7 @@ namespace Rentora.Presentation
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<IFavoriteService, FavoriteService>();
             builder.Services.AddScoped<IRentService, RentService>();
-            builder.Services.AddScoped<CloudinaryService>();
+            builder.Services.AddScoped<IImageService, CloudinaryService>();
             
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

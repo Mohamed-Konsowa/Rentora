@@ -1,4 +1,5 @@
-﻿using System.Transactions;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Transactions;
 using Rentora.Domain.Models;
 
 namespace Rentora.Presentation.DTOs.Product
@@ -6,12 +7,19 @@ namespace Rentora.Presentation.DTOs.Product
     public class AddProductDTO
     {
         // general
+        [Required]
         public string ApplicationUserId { get; set; }
+        [Required]
         public int CategoryId { get; set; }
+        [Required]
         public string Title { get; set; }
+        [Required]
         public string Description { get; set; }
+        [Required]
         public int Quantity { get; set; } = 1;
+        [Required]
         public decimal Price { get; set; }
+        [Required]
         public string RentalPeriod { get; set; }
         public string Location { get; set; }
         public decimal Latitude { get; set; }

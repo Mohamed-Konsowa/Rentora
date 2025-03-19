@@ -3,7 +3,7 @@ using CloudinaryDotNet;
 
 namespace Rentora.Presentation.Services
 {
-    public class CloudinaryService
+    public class CloudinaryService : IImageService
     {
         private readonly Cloudinary _cloudinary;
 
