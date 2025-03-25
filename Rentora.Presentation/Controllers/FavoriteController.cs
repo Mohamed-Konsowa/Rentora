@@ -1,39 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Rentora.Application.IServices;
-using Rentora.Presentation.Services;
+using Rentora.Application.Features.Favorite.Commands.Models;
+using Rentora.Application.Features.Favorite.Queries.Models;
+using Rentora.Domain.AppMetaData;
+using Rentora.Presentation.Base;
 
 namespace Rentora.Presentation.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class FavoriteController : ControllerBase
+    public class FavoriteController : AppControllerBase
     {
-        private readonly IFavoriteService _FavoriteService;
-        public FavoriteController(IFavoriteService FavoriteService)
-        {
-            _FavoriteService = FavoriteService;
-        }
         [HttpGet]
-        [Route("getUserFavoriteItems")]
-        public  IActionResult GetUserCartItemsAsync(string userId)
+        [Route(Router.Favorite.GetUserFav)]
+        public async Task<IActionResult> GetUserFavoriteItemsAsync([FromRoute]string userId)
         {
-            return Ok(_FavoriteService.GetUserFavoriteItems(userId));
+            return NewResult(await _mediator.Send(new GetUserFavoriteItemsQuery { UserId = userId }));
         }
         [HttpPost]
-        [Route("addProductToFavorite")]
-        public async Task<IActionResult> AddItemAsync(string UserId, int productId)
+        [Route(Router.Favorite.Add)]
+        public async Task<IActionResult> AddItemAsync([FromQuery] AddInFavoriteCommand request)
         {
-            var result = await _FavoriteService.AddInFavorite(UserId, productId);
-            if(result) return Ok("Product added to favorites successfully.");
-            return BadRequest("Failed to add Product!");
+            return NewResult(await _mediator.Send(request));
         }
         [HttpDelete]
-        [Route("removeFromFavorite")]
-        public async Task<IActionResult> DeleteItemAsync(string userId, int productId)
+        [Route(Router.Favorite.Remove)]
+        public async Task<IActionResult> DeleteItemAsync([FromQuery]RemoveFromFavoriteCommand request)
         {
-            var result = await _FavoriteService.RemoveFromFavorite(userId, productId);
-            if (result) return Ok("Product removed successfully.");
-            return BadRequest("Failed to remove Product!");
+            return NewResult(await _mediator.Send(request));            
         }
     }
 }

@@ -5,6 +5,7 @@ using Rentora.Presentation.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +22,9 @@ namespace Rentora.Application.Dependancies
             services.AddScoped<IFavoriteService, FavoriteService>();
             services.AddScoped<IRentService, RentService>();
             services.AddScoped<IImageService, CloudinaryService>();
+
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+            
             return services;
         }
     }
