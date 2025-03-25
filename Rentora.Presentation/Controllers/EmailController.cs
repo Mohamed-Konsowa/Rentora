@@ -42,7 +42,7 @@ namespace Rentora.Presentation.Controllers
 
         [HttpGet]
         [Route("verify-otp")]
-        public async Task<ActionResult> VerifyOTP(Verify_OTP_DTO vod)
+        public async Task<ActionResult> VerifyOTP([FromQuery]Verify_OTP_DTO vod)
         {
             var result = await _emailService.VerifyOtp(vod.Email, vod.OTPCode);
             if(result.Success) 

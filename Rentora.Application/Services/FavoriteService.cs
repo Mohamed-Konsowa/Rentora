@@ -1,7 +1,8 @@
 ﻿using Rentora.Application.IRepositories;
+using Rentora.Application.IServices;
 using Rentora.Domain.Models;
 
-namespace Rentora.Presentation.Services
+namespace Rentora.Application.Services
 {
     public class FavoriteService : IFavoriteService
     {

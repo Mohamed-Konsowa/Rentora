@@ -2,7 +2,7 @@
 using Rentora.Domain.Models;
 using Rentora.Presentation.DTOs.Product;
 
-namespace Rentora.Presentation.Services
+namespace Rentora.Application.IServices
 {
     public interface IProductService
     {

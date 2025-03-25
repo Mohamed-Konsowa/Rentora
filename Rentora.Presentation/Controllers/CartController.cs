@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Rentora.Presentation.Services;
+using Rentora.Application.IServices;
 
 namespace Rentora.Presentation.Controllers
 {

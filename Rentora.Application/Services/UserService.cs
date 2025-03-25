@@ -1,16 +1,17 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Rentora.Application.DTOs.Authentication;
-using Rentora.Persistence.Helpers;
 using Rentora.Domain.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Rentora.Application.IRepositories;
 using Rentora.Application.DTOs.Product;
-using NuGet.Protocol;
+//using NuGet.Protocol;
+using Rentora.Application.IServices;
+using Rentora.Application.Helpers;
 
-namespace Rentora.Presentation.Services
+namespace Rentora.Application.Services
 {
     public class UserService : IUserService
     {

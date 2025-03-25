@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Rentora.Presentation.DTOs.Product;
-using Rentora.Domain.Models;
-using Rentora.Presentation.Services;
-using Rentora.Domain.Models.Categories;
 using Rentora.Application.DTOs.Product;
 using Microsoft.AspNetCore.Authorization;
-using Rentora.Persistence.Helpers;
+using Rentora.Application.Helpers;
+using Rentora.Application.IServices;
 
 namespace Rentora.Presentation.Controllers
 {

@@ -1,4 +1,4 @@
-﻿using Rentora.Persistence.Helpers;
+﻿using Rentora.Application.Helpers;
 
 namespace Rentora.Presentation.Services
 {

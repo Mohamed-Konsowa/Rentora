@@ -1,7 +1,9 @@
 ﻿using CloudinaryDotNet.Actions;
 using CloudinaryDotNet;
+using Rentora.Application.IServices;
+using Microsoft.AspNetCore.Http;
 
-namespace Rentora.Presentation.Services
+namespace Rentora.Application.Services
 {
     public class CloudinaryService : IImageService
     {

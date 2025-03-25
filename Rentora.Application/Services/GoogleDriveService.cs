@@ -1,8 +1,9 @@
 ﻿using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
+using Microsoft.AspNetCore.Http;
 
-namespace Rentora.Presentation.Services
+namespace Rentora.Application.Services
 {
     class GoogleDriveServicex
     {

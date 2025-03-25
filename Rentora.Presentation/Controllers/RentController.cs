@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Rentora.Application.DTOs.Rental;
+using Rentora.Application.IServices;
 using Rentora.Presentation.Services;
 
 namespace Rentora.Presentation.Controllers

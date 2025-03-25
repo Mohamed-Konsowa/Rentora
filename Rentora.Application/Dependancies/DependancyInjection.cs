@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Rentora.Application.IServices;
+using Rentora.Application.Services;
+using Rentora.Presentation.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +14,13 @@ namespace Rentora.Application.Dependancies
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            //services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependancyInjection).Assembly));
-            //services.AddAutoMapper(typeof(DependancyInjection).Assembly);
-            //services.AddValidatorsFromAssembly(typeof(DependancyInjection).Assembly);
-            //services.AddScoped(typeof(IPipelineBehavior<,>), typeof(BeheviorValidation<,>));
-            //services.AddTransient<CustomMiddleware>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<ICartService, CartService>();
+            services.AddScoped<IFavoriteService, FavoriteService>();
+            services.AddScoped<IRentService, RentService>();
+            services.AddScoped<IImageService, CloudinaryService>();
             return services;
         }
     }

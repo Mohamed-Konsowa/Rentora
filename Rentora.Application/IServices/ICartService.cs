@@ -1,4 +1,4 @@
-﻿namespace Rentora.Presentation.Services
+﻿namespace Rentora.Application.IServices
 {
     public interface ICartService
     {

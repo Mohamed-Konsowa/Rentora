@@ -1,9 +1,11 @@
-﻿using Rentora.Persistence.Helpers;
+﻿using Rentora.Application.Helpers;
 using SendGrid.Helpers.Mail;
 using SendGrid;
 using Rentora.Domain.Models;
 using Rentora.Application.IRepositories;
-namespace Rentora.Presentation.Services
+using Rentora.Presentation.Services;
+using Microsoft.Extensions.Configuration;
+namespace Rentora.Application.Services
 {
     public class EmailService : IEmailService
     {

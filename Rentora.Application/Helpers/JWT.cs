@@ -1,4 +1,4 @@
-﻿namespace Rentora.Persistence.Helpers
+﻿namespace Rentora.Application.Helpers
 {
     public class JWT
     {

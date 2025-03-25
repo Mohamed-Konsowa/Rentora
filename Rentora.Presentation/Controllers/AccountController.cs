@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Rentora.Application.DTOs.Authentication;
-using Rentora.Presentation.Services;
+using Rentora.Application.IServices;
 
 namespace Rentora.Presentation.Controllers
 {

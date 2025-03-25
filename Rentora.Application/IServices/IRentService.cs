@@ -1,6 +1,6 @@
 ﻿using Rentora.Application.DTOs.Rental;
 
-namespace Rentora.Presentation.Services
+namespace Rentora.Application.IServices
 {
     public interface IRentService
     {

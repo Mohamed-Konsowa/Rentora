@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
-using Rentora.Persistence.Helpers;
+using Rentora.Application.Helpers;
 using Rentora.Application.Dependancies;
 using Rentora.Presentation.Services;
 using Rentora.Persistence.Dependances;
@@ -55,13 +55,7 @@ namespace Rentora.Presentation
             var cloudinary = new Cloudinary(cloudinaryAccount);
             builder.Services.AddSingleton(cloudinary);
 
-            builder.Services.AddScoped<IUserService, UserService>();
-            builder.Services.AddScoped<IProductService, ProductService>();
-            builder.Services.AddScoped<IEmailService, EmailService>();
-            builder.Services.AddScoped<ICartService, CartService>();
-            builder.Services.AddScoped<IFavoriteService, FavoriteService>();
-            builder.Services.AddScoped<IRentService, RentService>();
-            builder.Services.AddScoped<IImageService, CloudinaryService>();
+            
             
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -3,8 +3,9 @@ using Rentora.Application.IRepositories;
 using Rentora.Presentation.DTOs.Product;
 using Rentora.Application.DTOs.Product;
 using Rentora.Domain.Models.Categories;
+using Rentora.Application.IServices;
 
-namespace Rentora.Presentation.Services
+namespace Rentora.Application.Services
 {
     public class ProductService : IProductService
     {

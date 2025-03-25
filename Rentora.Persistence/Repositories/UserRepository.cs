@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Rentora.Application.IRepositories;
 using Rentora.Domain.Models;
-using Rentora.Persistence.Helpers;
+using Rentora.Application.Helpers;
 
 namespace Rentora.Persistence.Repositories
 {

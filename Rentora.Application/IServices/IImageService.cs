@@ -1,4 +1,6 @@
-﻿namespace Rentora.Presentation.Services
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Rentora.Application.IServices
 {
     public interface IImageService
     {
