@@ -1,13 +1,11 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Rentora.Application.DTOs.Authentication;
+using Rentora.Application.DTOs.Account;
 using Rentora.Domain.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Rentora.Application.IRepositories;
-using Rentora.Application.DTOs.Product;
-//using NuGet.Protocol;
 using Rentora.Application.IServices;
 using Rentora.Application.Helpers;
 
@@ -26,32 +24,15 @@ namespace Rentora.Application.Services
             _imageService = imageService;
             _jwt = jwt.Value;
         }
-        public async Task<List<UserDTO>> GetAllUsers()
+        public async Task<List<ApplicationUser>> GetAllUsers()
         {
             var allusers = await _unitOfWork.users.GetAll();
-            List<UserDTO> users = allusers.Select(u => new UserDTO(u)
-            {
-                Id = u.Id,
-                FirstName = u.FirstName,
-                LastName = u.LastName,
-                Username = u.UserName,
-                Email = u.Email,
-                EmailConfirmed = u.EmailConfirmed,
-                NationalID = u.NationalID,
-                Personal_summary = u.Personal_summary,
-                PhoneNumber = u.PhoneNumber,
-                Governorate = u.Governorate,
-                Town = u.Governorate,
-                Address = u.Address,
-                ProfileImage = u.ProfileImage
-            }).ToList();
-            return users;
+            return allusers;
         }
-        public async Task<UserDTO>? GetUserById(string id)
+        public async Task<ApplicationUser> GetUserById(string id)
         {
             var user = await _unitOfWork.users.GetById(id);
-            if(user is null) return null;
-            return new UserDTO(user);
+            return user;
         }
         public async Task<bool> CheckIfEmailExists(string email)
         {

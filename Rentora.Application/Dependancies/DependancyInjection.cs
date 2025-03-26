@@ -2,12 +2,7 @@
 using Rentora.Application.IServices;
 using Rentora.Application.Services;
 using Rentora.Presentation.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rentora.Application.Dependancies
 {
@@ -23,8 +18,11 @@ namespace Rentora.Application.Dependancies
             services.AddScoped<IRentService, RentService>();
             services.AddScoped<IImageService, CloudinaryService>();
 
+            //Configuration of mediator
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
-            
+            //Configuration of automapper
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             return services;
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Rentora.Application.DTOs.Authentication
+namespace Rentora.Application.DTOs.Account
 {
     public class AddRoleModel
     {

@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Rentora.Application.DTOs.Authentication;
+using Rentora.Application.DTOs.Account;
+using Rentora.Application.Features.Account.Queries.Models;
 using Rentora.Application.IServices;
+using Rentora.Domain.AppMetaData;
+using Rentora.Presentation.Base;
 
 namespace Rentora.Presentation.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AccountController : ControllerBase
+    public class AccountController : AppControllerBase
     {
         private readonly IUserService _authService;
         public AccountController(IUserService authService)
@@ -14,30 +15,28 @@ namespace Rentora.Presentation.Controllers
             _authService = authService;
         }
 
-        [HttpGet("getAllUsers")]
+        [HttpGet(Router.Account.GetAll)]
         public async Task<IActionResult> GetAllUsers()
         {
-            return Ok(await _authService.GetAllUsers());
+            return NewResult(await _mediator.Send(new GetAllUsersQuery()));
         }
         [HttpGet]
-        [Route("getUserById")]
-        public async Task<IActionResult> GetUserById(string id)
+        [Route(Router.Account.GetById)]
+        public async Task<IActionResult> GetUserById(string userId)
         {
-            var user = await _authService.GetUserById(id);
-            if (user == null) return BadRequest("User not found.");
-            return Ok(user);
+            return NewResult(await _mediator.Send(new GetUserByIdQuery { UserId = userId}));
         }
         [HttpGet]
-        [Route("checkIfEmailExists")]
-        public async Task<IActionResult> CheckIfEmailExists(string email)
+        [Route(Router.Account.CheckIfEmailExists)]
+        public async Task<IActionResult> CheckIfEmailExists([FromRoute]string email)
         {
-            return Ok(await _authService.CheckIfEmailExists(email));
+            return NewResult(await _mediator.Send(new CheckIfEmailExistsQuery { Email = email}));
         }
         [HttpGet]
-        [Route("checkIfUserNameExists")]
+        [Route(Router.Account.CheckIfUserNameExists)]
         public async Task<IActionResult> CheckIfUserNameExists(string userName)
         {
-            return Ok(await _authService.CheckIfEmailExists(userName));
+            return NewResult(await _mediator.Send(new CheckIfUserNameExistsQuery { UserName = userName}));
         }
 
         [HttpPost("register")]

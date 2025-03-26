@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="CloudinaryDotNet" Version="1.27.4" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.69.0.3703" />
     <PackageReference Include="MediatR" Version="12.4.1" />
@@ -21,6 +22,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\empty - Copy\Commands\Handlers\" />
+    <Folder Include="Features\empty - Copy\Commands\Models\" />
+    <Folder Include="Features\empty - Copy\Commands\Validators\" />
+    <Folder Include="Features\empty - Copy\Queries\Handlers\" />
+    <Folder Include="Features\empty - Copy\Queries\Models\" />
+    <Folder Include="Features\empty - Copy\Queries\Validators\" />
+    <Folder Include="Features\Account\Commands\Models\" />
+    <Folder Include="Features\Account\Commands\Handlers\" />
+    <Folder Include="Features\Account\Commands\Validators\" />
+    <Folder Include="Features\Account\Queries\Validators\" />
     <Folder Include="Features\Favorite\Commands\Validators\" />
     <Folder Include="Features\Favorite\Queries\Validators\" />
   </ItemGroup>

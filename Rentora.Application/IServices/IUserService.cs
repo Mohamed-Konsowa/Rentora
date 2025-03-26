@@ -1,11 +1,12 @@
-﻿using Rentora.Application.DTOs.Authentication;
+﻿using Rentora.Application.DTOs.Account;
+using Rentora.Domain.Models;
 
 namespace Rentora.Application.IServices
 {
     public interface IUserService
     {
-        Task<List<UserDTO>> GetAllUsers();
-        Task<UserDTO> GetUserById(string id);
+        Task<List<ApplicationUser>> GetAllUsers();
+        Task<ApplicationUser> GetUserById(string id);
         Task<bool> CheckIfEmailExists(string email);
         Task<bool> CheckIfUserNameExists(string email);
         Task<AuthModel> RegisterAsync(RegisterModel model);
