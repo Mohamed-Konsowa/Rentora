@@ -19,6 +19,13 @@ namespace Rentora.Domain.AppMetaData
             public const string Login = Prefix + "login"; 
             public const string Role = Prefix + "addrole"; 
         }
+        public static class Cart
+        {
+            public const string Prefix = Rule + "Cart/";
+            public const string GetUserFav = Prefix + "getUserCartItems/{userId}";
+            public const string Add = Prefix + "addProductToCart";
+            public const string Remove = Prefix + "removeFromCart";
+        }
         public static class Favorite
         {
             public const string Prefix = Rule + "Favorite/";

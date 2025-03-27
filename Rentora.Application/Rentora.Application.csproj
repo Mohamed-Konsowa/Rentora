@@ -30,6 +30,8 @@
     <Folder Include="Features\empty - Copy\Queries\Validators\" />
     <Folder Include="Features\Account\Commands\Validators\" />
     <Folder Include="Features\Account\Queries\Validators\" />
+    <Folder Include="Features\Cart\Commands\Validators\" />
+    <Folder Include="Features\Cart\Queries\Validators\" />
     <Folder Include="Features\Favorite\Commands\Validators\" />
     <Folder Include="Features\Favorite\Queries\Validators\" />
   </ItemGroup>

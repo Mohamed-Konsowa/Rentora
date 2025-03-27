@@ -12,17 +12,17 @@ namespace Rentora.Presentation.Controllers
         [Route(Router.Favorite.GetUserFav)]
         public async Task<IActionResult> GetUserFavoriteItemsAsync([FromRoute]string userId)
         {
-            return NewResult(await _mediator.Send(new GetUserFavoriteItemsQuery { UserId = userId }));
+            return NewResult(await _mediator.Send(new GetUserCartItemsQuery { UserId = userId }));
         }
         [HttpPost]
         [Route(Router.Favorite.Add)]
-        public async Task<IActionResult> AddItemAsync([FromQuery] AddInFavoriteCommand request)
+        public async Task<IActionResult> AddItemAsync([FromQuery] AddInCartCommand request)
         {
             return NewResult(await _mediator.Send(request));
         }
         [HttpDelete]
         [Route(Router.Favorite.Remove)]
-        public async Task<IActionResult> DeleteItemAsync([FromQuery]RemoveFromFavoriteCommand request)
+        public async Task<IActionResult> DeleteItemAsync([FromQuery]RemoveFromCartCommand request)
         {
             return NewResult(await _mediator.Send(request));            
         }

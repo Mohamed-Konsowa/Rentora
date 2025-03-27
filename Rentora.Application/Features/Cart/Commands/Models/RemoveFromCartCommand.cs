@@ -1,8 +1,7 @@
-﻿
-using MediatR;
+﻿using MediatR;
 using Rentora.Application.Base;
 
-namespace Rentora.Application.Features.Favorite.Commands.Models
+namespace Rentora.Application.Features.Cart.Commands.Models
 {
     public class RemoveFromCartCommand : IRequest<Response<string>>
     {

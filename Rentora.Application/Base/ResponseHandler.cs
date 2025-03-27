@@ -15,14 +15,14 @@ namespace Rentora.Application.Base
                 Message = "Deleted Successfully"
             };
         }
-        public Response<T> Success<T>(T entity, object Meta = null)
+        public Response<T> Success<T>(T entity,string Message = null, object Meta = null)
         {
             return new Response<T>()
             {
                 Data = entity,
                 StatusCode = System.Net.HttpStatusCode.OK,
                 Succeeded = true,
-                Message = "Success",
+                Message = Message is null ? "Success" : Message,
                 Meta = Meta
             };
         }

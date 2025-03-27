@@ -2,7 +2,7 @@
 using Rentora.Application.Base;
 
 
-namespace Rentora.Application.Features.Favorite.Queries.Models
+namespace Rentora.Application.Features.Cart.Queries.Models
 {
     public class GetUserCartItemsQuery : IRequest<Response<List<int>>>
     {

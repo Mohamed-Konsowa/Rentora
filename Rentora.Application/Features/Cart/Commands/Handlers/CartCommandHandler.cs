@@ -1,30 +1,30 @@
 ﻿using MediatR;
 using Rentora.Application.Base;
-using Rentora.Application.Features.Favorite.Commands.Models;
+using Rentora.Application.Features.Cart.Commands.Models;
 using Rentora.Application.IServices;
 
-namespace Rentora.Application.Features.Favorite.Commands.Handlers
+namespace Rentora.Application.Features.Cart.Commands.Handlers
 {
     public class CartCommandHandler : ResponseHandler
                                         , IRequestHandler<AddInCartCommand, Response<string>>
                                         , IRequestHandler<RemoveFromCartCommand, Response<string>>
     {
-        private readonly IFavoriteService _favoriteService;
+        private readonly ICartService _cartService;
 
-        public CartCommandHandler(IFavoriteService favoriteService)
+        public CartCommandHandler(ICartService carteService)
         {
-            _favoriteService = favoriteService;
+            _cartService = carteService;
         }
         public async Task<Response<string>> Handle(AddInCartCommand request, CancellationToken cancellationToken)
         {
-            var result = await _favoriteService.AddInFavorite(request.UserId, request.ProductId);
-            if (result) return Success("", "Product added to favorites successfully.");
+            var result = await _cartService.AddInCart(request.UserId, request.ProductId);
+            if (result) return Success("", "Product added to Cart successfully.");
             return BadRequest<string>("Failed to add Product!");
         }
 
         public async Task<Response<string>> Handle(RemoveFromCartCommand request, CancellationToken cancellationToken)
         {
-            var result = await _favoriteService.RemoveFromFavorite(request.UserId, request.ProductId);
+            var result = await _cartService.RemoveFromCart(request.UserId, request.ProductId);
             if (result) return Success("", "Product removed successfully.");
             return BadRequest<string>("Failed to remove Product!");
         }

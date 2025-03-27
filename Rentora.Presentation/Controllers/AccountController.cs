@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Rentora.Application.Features.Account.Commands.Models;
 using Rentora.Application.Features.Account.Queries.Models;
-using Rentora.Application.IServices;
 using Rentora.Domain.AppMetaData;
 using Rentora.Presentation.Base;
 
@@ -9,12 +8,6 @@ namespace Rentora.Presentation.Controllers
 {
     public class AccountController : AppControllerBase
     {
-        private readonly IUserService _authService;
-        public AccountController(IUserService authService)
-        {
-            _authService = authService;
-        }
-
         [HttpGet(Router.Account.GetAll)]
         public async Task<IActionResult> GetAllUsers()
         {
