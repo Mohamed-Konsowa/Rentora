@@ -3,44 +3,24 @@
   "WorkspaceRootPath": "D:\\Graduation-Project\\Rentora\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|d:\\graduation-project\\rentora\\rentora.application\\features\\favorite\\commands\\handlers\\favoritecommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|solutionrelative:rentora.application\\features\\favorite\\commands\\handlers\\favoritecommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BFBBF7D8-83FE-4B08-8B48-9648884FD56F}|Rentora.Presentation\\Rentora.Presentation.csproj|d:\\graduation-project\\rentora\\rentora.presentation\\controllers\\emailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BFBBF7D8-83FE-4B08-8B48-9648884FD56F}|Rentora.Presentation\\Rentora.Presentation.csproj|solutionrelative:rentora.presentation\\controllers\\emailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|d:\\graduation-project\\rentora\\rentora.application\\features\\cart\\commands\\handlers\\cartcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|solutionrelative:rentora.application\\features\\cart\\commands\\handlers\\cartcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|d:\\graduation-project\\rentora\\rentora.application\\features\\email\\commands\\handlers\\emailcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|solutionrelative:rentora.application\\features\\email\\commands\\handlers\\emailcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|d:\\graduation-project\\rentora\\rentora.application\\features\\cart\\commands\\models\\addincartcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|solutionrelative:rentora.application\\features\\cart\\commands\\models\\addincartcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|d:\\graduation-project\\rentora\\rentora.application\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|solutionrelative:rentora.application\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|d:\\graduation-project\\rentora\\rentora.application\\features\\cart\\commands\\models\\removefromcartcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|solutionrelative:rentora.application\\features\\cart\\commands\\models\\removefromcartcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|d:\\graduation-project\\rentora\\rentora.application\\features\\email\\commands\\models\\verifyotpcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|solutionrelative:rentora.application\\features\\email\\commands\\models\\verifyotpcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|d:\\graduation-project\\rentora\\rentora.application\\base\\responsehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|solutionrelative:rentora.application\\base\\responsehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|d:\\graduation-project\\rentora\\rentora.application\\features\\cart\\queries\\handlers\\cartqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|solutionrelative:rentora.application\\features\\cart\\queries\\handlers\\cartqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|d:\\graduation-project\\rentora\\rentora.application\\features\\cart\\queries\\models\\getusercartitemsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|solutionrelative:rentora.application\\features\\cart\\queries\\models\\getusercartitemsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BFBBF7D8-83FE-4B08-8B48-9648884FD56F}|Rentora.Presentation\\Rentora.Presentation.csproj|d:\\graduation-project\\rentora\\rentora.presentation\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BFBBF7D8-83FE-4B08-8B48-9648884FD56F}|Rentora.Presentation\\Rentora.Presentation.csproj|solutionrelative:rentora.presentation\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BFBBF7D8-83FE-4B08-8B48-9648884FD56F}|Rentora.Presentation\\Rentora.Presentation.csproj|d:\\graduation-project\\rentora\\rentora.presentation\\controllers\\favoritecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BFBBF7D8-83FE-4B08-8B48-9648884FD56F}|Rentora.Presentation\\Rentora.Presentation.csproj|solutionrelative:rentora.presentation\\controllers\\favoritecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39CD5DFC-E466-4FD0-9D5E-860DCC6E7298}|Rentora.Domain\\Rentora.Domain.csproj|d:\\graduation-project\\rentora\\rentora.domain\\appmetadata\\router.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39CD5DFC-E466-4FD0-9D5E-860DCC6E7298}|Rentora.Domain\\Rentora.Domain.csproj|solutionrelative:rentora.domain\\appmetadata\\router.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|d:\\graduation-project\\rentora\\rentora.application\\features\\email\\commands\\models\\sendemailcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|solutionrelative:rentora.application\\features\\email\\commands\\models\\sendemailcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,132 +38,67 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FavoriteCommandHandler.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Favorite\\Commands\\Handlers\\FavoriteCommandHandler.cs",
-              "RelativeDocumentMoniker": "Rentora.Application\\Features\\Favorite\\Commands\\Handlers\\FavoriteCommandHandler.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Favorite\\Commands\\Handlers\\FavoriteCommandHandler.cs*",
-              "RelativeToolTip": "Rentora.Application\\Features\\Favorite\\Commands\\Handlers\\FavoriteCommandHandler.cs*",
-              "ViewState": "AgIAABAAAAAAAAAAAAAQwBQAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T15:57:17.132Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ResponseHandler.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Base\\ResponseHandler.cs",
-              "RelativeDocumentMoniker": "Rentora.Application\\Base\\ResponseHandler.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Base\\ResponseHandler.cs*",
-              "RelativeToolTip": "Rentora.Application\\Base\\ResponseHandler.cs*",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAowBgAAABAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T15:54:40.821Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "GetUserCartItemsQuery.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Cart\\Queries\\Models\\GetUserCartItemsQuery.cs",
-              "RelativeDocumentMoniker": "Rentora.Application\\Features\\Cart\\Queries\\Models\\GetUserCartItemsQuery.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Cart\\Queries\\Models\\GetUserCartItemsQuery.cs",
-              "RelativeToolTip": "Rentora.Application\\Features\\Cart\\Queries\\Models\\GetUserCartItemsQuery.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T15:48:43.282Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CartQueryHandler.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Cart\\Queries\\Handlers\\CartQueryHandler.cs",
-              "RelativeDocumentMoniker": "Rentora.Application\\Features\\Cart\\Queries\\Handlers\\CartQueryHandler.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Cart\\Queries\\Handlers\\CartQueryHandler.cs",
-              "RelativeToolTip": "Rentora.Application\\Features\\Cart\\Queries\\Handlers\\CartQueryHandler.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABIAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T15:48:32.14Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "RemoveFromCartCommand.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Cart\\Commands\\Models\\RemoveFromCartCommand.cs",
-              "RelativeDocumentMoniker": "Rentora.Application\\Features\\Cart\\Commands\\Models\\RemoveFromCartCommand.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Cart\\Commands\\Models\\RemoveFromCartCommand.cs",
-              "RelativeToolTip": "Rentora.Application\\Features\\Cart\\Commands\\Models\\RemoveFromCartCommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "VerifyOTPCommand.cs",
+              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Email\\Commands\\Models\\VerifyOTPCommand.cs",
+              "RelativeDocumentMoniker": "Rentora.Application\\Features\\Email\\Commands\\Models\\VerifyOTPCommand.cs",
+              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Email\\Commands\\Models\\VerifyOTPCommand.cs",
+              "RelativeToolTip": "Rentora.Application\\Features\\Email\\Commands\\Models\\VerifyOTPCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T15:45:24.929Z",
+              "WhenOpened": "2025-03-27T21:08:19.861Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "AddInCartCommand.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Cart\\Commands\\Models\\AddInCartCommand.cs",
-              "RelativeDocumentMoniker": "Rentora.Application\\Features\\Cart\\Commands\\Models\\AddInCartCommand.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Cart\\Commands\\Models\\AddInCartCommand.cs",
-              "RelativeToolTip": "Rentora.Application\\Features\\Cart\\Commands\\Models\\AddInCartCommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAArAAAAAAAAAA==",
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Services\\EmailService.cs",
+              "RelativeDocumentMoniker": "Rentora.Application\\Services\\EmailService.cs",
+              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Services\\EmailService.cs",
+              "RelativeToolTip": "Rentora.Application\\Services\\EmailService.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAYwAkAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T15:45:06.746Z",
+              "WhenOpened": "2025-03-27T20:38:51.689Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "CartCommandHandler.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Cart\\Commands\\Handlers\\CartCommandHandler.cs",
-              "RelativeDocumentMoniker": "Rentora.Application\\Features\\Cart\\Commands\\Handlers\\CartCommandHandler.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Cart\\Commands\\Handlers\\CartCommandHandler.cs*",
-              "RelativeToolTip": "Rentora.Application\\Features\\Cart\\Commands\\Handlers\\CartCommandHandler.cs*",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAzwBsAAAArAAAAAAAAAA==",
+              "Title": "EmailCommandHandler.cs",
+              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Email\\Commands\\Handlers\\EmailCommandHandler.cs",
+              "RelativeDocumentMoniker": "Rentora.Application\\Features\\Email\\Commands\\Handlers\\EmailCommandHandler.cs",
+              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Email\\Commands\\Handlers\\EmailCommandHandler.cs",
+              "RelativeToolTip": "Rentora.Application\\Features\\Email\\Commands\\Handlers\\EmailCommandHandler.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAYwCMAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T15:44:40.407Z",
+              "WhenOpened": "2025-03-27T20:33:56.781Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "FavoriteController.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Presentation\\Controllers\\FavoriteController.cs",
-              "RelativeDocumentMoniker": "Rentora.Presentation\\Controllers\\FavoriteController.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Presentation\\Controllers\\FavoriteController.cs",
-              "RelativeToolTip": "Rentora.Presentation\\Controllers\\FavoriteController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "SendEmailCommand.cs",
+              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Email\\Commands\\Models\\SendEmailCommand.cs",
+              "RelativeDocumentMoniker": "Rentora.Application\\Features\\Email\\Commands\\Models\\SendEmailCommand.cs",
+              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Email\\Commands\\Models\\SendEmailCommand.cs",
+              "RelativeToolTip": "Rentora.Application\\Features\\Email\\Commands\\Models\\SendEmailCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T15:41:37.993Z",
+              "WhenOpened": "2025-03-27T20:32:16.088Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "CartController.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Presentation\\Controllers\\CartController.cs",
-              "RelativeDocumentMoniker": "Rentora.Presentation\\Controllers\\CartController.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Presentation\\Controllers\\CartController.cs",
-              "RelativeToolTip": "Rentora.Presentation\\Controllers\\CartController.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAowCgAAAA3AAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "EmailController.cs",
+              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Presentation\\Controllers\\EmailController.cs",
+              "RelativeDocumentMoniker": "Rentora.Presentation\\Controllers\\EmailController.cs",
+              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Presentation\\Controllers\\EmailController.cs*",
+              "RelativeToolTip": "Rentora.Presentation\\Controllers\\EmailController.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T15:40:10.501Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Router.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Domain\\AppMetaData\\Router.cs",
-              "RelativeDocumentMoniker": "Rentora.Domain\\AppMetaData\\Router.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Domain\\AppMetaData\\Router.cs",
-              "RelativeToolTip": "Rentora.Domain\\AppMetaData\\Router.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAQwBsAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T15:40:37.213Z",
+              "WhenOpened": "2025-03-27T20:22:49.831Z",
               "EditorCaption": ""
             }
           ]

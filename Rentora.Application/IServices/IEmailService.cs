@@ -6,6 +6,6 @@ namespace Rentora.Presentation.Services
     {
         Task<string> SendEmail(string email, string message, string subj);
         Task<bool> SendOTP(string email);
-        Task<CustomResponse<string>> VerifyOtp(string email, string otpcode);
+        Task<(bool, string)> VerifyOtp(string email, string otpcode);
     }
 }

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MediatR;
+using Rentora.Application.Base;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Rentora.Application.DTOs.Email
+namespace Rentora.Application.Features.Email.Commands.Models
 {
-    public class Verify_OTP_DTO
+    public class VerifyOTPCommand : IRequest<Response<string>>
     {
         [Required, EmailAddress]
         public string Email { get; set; }

@@ -22,6 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Email\Commands\Validators\" />
+    <Folder Include="Features\Email\Queries\Handlers\" />
+    <Folder Include="Features\Email\Queries\Models\" />
+    <Folder Include="Features\Email\Queries\Validators\" />
     <Folder Include="Features\empty - Copy\Commands\Handlers\" />
     <Folder Include="Features\empty - Copy\Commands\Models\" />
     <Folder Include="Features\empty - Copy\Commands\Validators\" />

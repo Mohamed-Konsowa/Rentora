@@ -62,37 +62,30 @@ namespace Rentora.Application.Services
             return false;
         }
 
-        public async Task<CustomResponse<string>> VerifyOtp(string email, string otpcode)
+        public async Task<(bool, string)> VerifyOtp(string email, string otpcode)
         {
-            var response = new CustomResponse<string>();
             var otp = await _unitOfWork.emails.GetOtp(email, otpcode);
 
             if (otp == null)
             {
-                response.Success = false;
-                response.Data = "Invalid OTP or Email!";
+                return (false, "Invalid OTP or Email!");
             }
 
             else if (otp.IsUsed)
             {
-                response.Success = false;
-                response.Data = "OTP has already been used!";
+                return (false, "OTP has already been used!");
             }
 
             else if (otp.ExpiryTime < DateTime.UtcNow)
             {
-                response.Success = false;
-                response.Data = "OTP has expired!";
+                return (false, "OTP has expired!");
             }
             else
             {
-                response.Success = true;
-                response.Data = "OTP verified successfully!";
                 otp.IsUsed = true;
                 await _unitOfWork.Save();
+                return (true, "OTP verified successfully!");
             }
-            
-            return response;
         }
     }
 }

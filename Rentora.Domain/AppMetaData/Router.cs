@@ -26,6 +26,13 @@ namespace Rentora.Domain.AppMetaData
             public const string Add = Prefix + "addProductToCart";
             public const string Remove = Prefix + "removeFromCart";
         }
+        public static class Email
+        {
+            public const string Prefix = Rule + "Email/";
+            public const string Send = Prefix + "sendEmail";
+            public const string SendOTP = Prefix + "sendOTP";
+            public const string VerifyOTP = Prefix + "verifyOTP";
+        }
         public static class Favorite
         {
             public const string Prefix = Rule + "Favorite/";
