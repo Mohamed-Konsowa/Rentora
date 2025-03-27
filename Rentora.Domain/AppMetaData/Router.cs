@@ -15,6 +15,9 @@ namespace Rentora.Domain.AppMetaData
             public const string GetById = Prefix + "getUserById/{userId}";
             public const string CheckIfEmailExists = Prefix + "checkIfEmailExists/{email}";
             public const string CheckIfUserNameExists = Prefix + "checkIfUserNameExists/{userName}";
+            public const string Register = Prefix + "register";
+            public const string Login = Prefix + "login"; 
+            public const string Role = Prefix + "addrole"; 
         }
         public static class Favorite
         {

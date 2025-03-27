@@ -1,4 +1,5 @@
 ﻿using Rentora.Application.DTOs.Account;
+using Rentora.Application.Features.Account.Commands.Models;
 using Rentora.Domain.Models;
 
 namespace Rentora.Application.IServices
@@ -8,9 +9,9 @@ namespace Rentora.Application.IServices
         Task<List<ApplicationUser>> GetAllUsers();
         Task<ApplicationUser> GetUserById(string id);
         Task<bool> CheckIfEmailExists(string email);
-        Task<bool> CheckIfUserNameExists(string email);
-        Task<AuthModel> RegisterAsync(RegisterModel model);
-        Task<AuthModel> GetTokenAsync(TokenRequestModel model);
-        Task<string> AddRoleAsync(AddRoleModel model);
+        Task<bool> CheckIfUserNameExists(string userName);
+        Task<(bool, Dictionary<string, List<string>>)> RegisterAsync(RegisterCommand model);
+        Task<AuthModel> GetTokenAsync(LoginCommand model);
+        Task<(bool, string)> AddRoleAsync(AddRoleCommand model);
     }
 }

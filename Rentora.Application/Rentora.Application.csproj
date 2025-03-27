@@ -28,8 +28,6 @@
     <Folder Include="Features\empty - Copy\Queries\Handlers\" />
     <Folder Include="Features\empty - Copy\Queries\Models\" />
     <Folder Include="Features\empty - Copy\Queries\Validators\" />
-    <Folder Include="Features\Account\Commands\Models\" />
-    <Folder Include="Features\Account\Commands\Handlers\" />
     <Folder Include="Features\Account\Commands\Validators\" />
     <Folder Include="Features\Account\Queries\Validators\" />
     <Folder Include="Features\Favorite\Commands\Validators\" />

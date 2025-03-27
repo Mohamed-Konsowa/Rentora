@@ -8,6 +8,7 @@ using System.Text;
 using Rentora.Application.IRepositories;
 using Rentora.Application.IServices;
 using Rentora.Application.Helpers;
+using Rentora.Application.Features.Account.Commands.Models;
 
 namespace Rentora.Application.Services
 {
@@ -42,29 +43,28 @@ namespace Rentora.Application.Services
         {
             return await _unitOfWork.users.GetByName(username) is not null;
         }
-        public async Task<AuthModel> RegisterAsync(RegisterModel model)
+        public async Task<(bool, Dictionary<string, List<string>>)> RegisterAsync(RegisterCommand model)
         {
+            var errors = new Dictionary<string, List<string>>();
             if (await _unitOfWork.users.GetByEmail(model.Email) is not null)
-                return new AuthModel { Errors = new(){{"Email" , "Email already exist!" } }};
+                errors["Email"] = new() { "Email: already exist!" };
             if (await _unitOfWork.users.GetByName(model.UserName) is not null)
-                return new AuthModel { Errors = new(){{ "UserName", "Username already exist!" } } };
+                errors["Username"] = new(){"Username: already exist!"};
 
             if (!CommonUtils.IsImage(model.ProfileImage).Item1)
-               return new AuthModel {
-                   Errors = new() { { "ProfileImage", "Invalid file type. Only JPEG, PNG, and GIF are allowed." } }
-               };
+                errors["ProfileImage"] = new() { "ProfileImage: Invalid file type. Only JPEG, PNG, and GIF are allowed." };
+            
             if (!CommonUtils.IsImage(model.IDImageFront).Item1)
-                return new AuthModel {
-                    Errors = new() { { "IDImageFront", "Invalid file type. Only JPEG, PNG, and GIF are allowed." } }
-                };
+                errors["IDImageFront"] = new() { "IDImageFront: Invalid file type. Only JPEG, PNG, and GIF are allowed." };
+
             if (!CommonUtils.IsImage(model.IDImageBack).Item1)
-                return new AuthModel {
-                    Errors = new() { { "IDImageBack", "Invalid file type. Only JPEG, PNG, and GIF are allowed." } }
-                };
+                errors["IDImageBack"] = new() { "IDImageBack: Invalid file type. Only JPEG, PNG, and GIF are allowed." };
+            if(errors.Count > 0) return (false, errors);
 
             var profileImage = await _imageService.UploadImageAsync(model.ProfileImage);// await GoogleDriveService.UploadImageAsync(model.ProfileImage);// await CommonUtils.ConvertImageToBase64(model.ProfileImage);
             var IDImageFront = await _imageService.UploadImageAsync(model.IDImageFront);// await GoogleDriveService.UploadImageAsync(model.IDImageFront);// await CommonUtils.ConvertImageToBase64(model.IDImageFront);
             var IDImageBack = await _imageService.UploadImageAsync(model.IDImageBack);// await GoogleDriveService.UploadImageAsync(model.IDImageBack);// await CommonUtils.ConvertImageToBase64(model.IDImageBack);
+            
             var user = new ApplicationUser()
             {
                 FirstName = model.FirstName,
@@ -85,31 +85,17 @@ namespace Rentora.Application.Services
             var result = await _unitOfWork.users.Create(user, model.Password);
             if (!result.Succeeded)
             {
-                var authModel = new AuthModel();
-                authModel.Errors = new();
                 foreach (var error in result.Errors)
                 {
-                    authModel.Errors.Add($"{error.Code}", $"{error.Description}");
+                    errors[$"{error.Code}"] = new() { $"{error.Code}:" + $" {error.Description}" };
                 }
-                return authModel;
+                return (false, errors);
             }
             await _unitOfWork.users.AddRole(user, "User");
 
-            var jwtSecurityToken = await CreateJwtToken(user);
-
-            return new AuthModel
-            {
-                Id = user.Id,
-                Email = user.Email,
-                ProfileImage = user.ProfileImage,//await GoogleDriveService.GetFileAsBase64Async(profileImage),
-                ExpireOn = jwtSecurityToken.ValidTo,
-                IsAuthinticated = true,
-                Roles = new List<string> { "User" },
-                Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
-                Username = user.UserName
-            };
+            return (true, null);
         }
-        public async Task<AuthModel> GetTokenAsync(TokenRequestModel model)
+        public async Task<AuthModel> GetTokenAsync(LoginCommand model)
         {
             var authModel = new AuthModel();
 
@@ -117,7 +103,7 @@ namespace Rentora.Application.Services
 
             if (user is null || !await _unitOfWork.users.CheckPassword(user, model.Password))
             {
-                authModel.Errors = new(){{ "Error", "Email or Password is incorrect!" }};
+                authModel.Message ="Email or Password is incorrect!";
                 return authModel;
             }
 
@@ -131,6 +117,8 @@ namespace Rentora.Application.Services
             authModel.Username = user.UserName;
             authModel.ExpireOn = jwtSecurityToken.ValidTo;
             authModel.Roles = rolesList.ToList();
+            authModel.ProfileImage = user.ProfileImage;
+            authModel.EmailConfirmed = user.EmailConfirmed;
             return authModel;
         }
         private async Task<JwtSecurityToken> CreateJwtToken(ApplicationUser user)
@@ -164,17 +152,19 @@ namespace Rentora.Application.Services
 
             return jwtSecurityToken;
         }
-        public async Task<string> AddRoleAsync(AddRoleModel model)
+        public async Task<(bool,string)> AddRoleAsync(AddRoleCommand model)
         {
             var user = await _unitOfWork.users.GetById(model.UserId);
             var role = await _unitOfWork.users.RoleExists(model.Role);
             if (user is null || !role)
-                return "Invalid user Id or role name";
+                return (false, "Invalid user Id or role name");
             if (await _unitOfWork.users.IsInRole(user, model.Role))
-                return "Role assigned to user already";
+                return (false, "Role assigned to user already");
 
             var result = await _unitOfWork.users.AddRole(user, model.Role);
-            return !result.Succeeded ? "Something went wrong" : "";
+            if(!result.Succeeded) return (false,  "Something went wrong");
+
+            return (true, "Success");
         }
         
     }

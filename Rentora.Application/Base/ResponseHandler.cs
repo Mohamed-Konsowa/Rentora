@@ -3,7 +3,6 @@ namespace Rentora.Application.Base
 {
     public class ResponseHandler
     {
-
         public ResponseHandler()
         {
         }

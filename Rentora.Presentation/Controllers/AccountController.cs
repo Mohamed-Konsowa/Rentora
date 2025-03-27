@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Rentora.Application.DTOs.Account;
+using Rentora.Application.Features.Account.Commands.Models;
 using Rentora.Application.Features.Account.Queries.Models;
 using Rentora.Application.IServices;
 using Rentora.Domain.AppMetaData;
@@ -39,44 +39,30 @@ namespace Rentora.Presentation.Controllers
             return NewResult(await _mediator.Send(new CheckIfUserNameExistsQuery { UserName = userName}));
         }
 
-        [HttpPost("register")]
+        [HttpPost(Router.Account.Register)]
         [Consumes("multipart/form-data")]
-        public async Task<IActionResult> RegisterAsync([FromForm] RegisterModel model)
+        public async Task<IActionResult> RegisterAsync([FromForm] RegisterCommand request)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var result = await _authService.RegisterAsync(model);
-
-            if (!result.IsAuthinticated)
-                return BadRequest(result);
-            return Ok(result);
+            return NewResult(await _mediator.Send(request));
         }
 
-        [HttpPost("login")]
-        public async Task<IActionResult> GetTokenAsync([FromBody] TokenRequestModel model)
+        [HttpPost(Router.Account.Login)]
+        public async Task<IActionResult> GetTokenAsync([FromBody] LoginCommand request)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var result = await _authService.GetTokenAsync(model);
-
-            if (!result.IsAuthinticated)
-                return BadRequest(result.Errors);
-
-            return Ok(result);
+            return NewResult(await _mediator.Send(request));
         }
 
         //[Authorize(Roles = "Admin")]
-        [HttpPost("addrole")]
-        public async Task<IActionResult> AddRoleAsync(AddRoleModel model)
+        [HttpPost(Router.Account.Role)]
+        public async Task<IActionResult> AddRoleAsync(AddRoleCommand request)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            var result = await _authService.AddRoleAsync(model);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            if (!string.IsNullOrEmpty(result))
-                return BadRequest(result);
-            return Ok(model);
+            return NewResult(await _mediator.Send(request));
         }
     }
 }
