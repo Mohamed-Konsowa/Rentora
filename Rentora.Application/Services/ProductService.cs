@@ -4,6 +4,9 @@ using Rentora.Presentation.DTOs.Product;
 using Rentora.Application.DTOs.Product;
 using Rentora.Domain.Models.Categories;
 using Rentora.Application.IServices;
+using Microsoft.AspNetCore.Http;
+using Rentora.Application.Features.Product.Commands.Models;
+using AutoMapper;
 
 namespace Rentora.Application.Services
 {
@@ -11,11 +14,13 @@ namespace Rentora.Application.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IImageService _imageService;
+        private readonly IMapper _mapper;
 
-        public ProductService(IUnitOfWork unitOfWork, IImageService imageService)
+        public ProductService(IUnitOfWork unitOfWork, IImageService imageService, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _imageService = imageService;
+            _mapper = mapper;
         }
 
         public async Task<List<ProductDTO>> GetProducts()
@@ -33,26 +38,26 @@ namespace Rentora.Application.Services
             switch (product.CategoryId)
             {
                 case 1:
-                    var SpecificCategory = await _unitOfWork.products.GetProductSpecificCategory<Sport>(1);
+                    var SpecificCategory = await _unitOfWork.products.GetProductSpecificCategory<Sport>(c => c.ProductId == id);
                     product.Brand = SpecificCategory.Brand;
                     product.Model = SpecificCategory.Model;
                     product.Condition = SpecificCategory.Condition;
                 break;
 
                 case 2:
-                    var SpecificCategory2 = await _unitOfWork.products.GetProductSpecificCategory<Transportation>(1);
+                    var SpecificCategory2 = await _unitOfWork.products.GetProductSpecificCategory<Transportation>(c => c.ProductId == id);
                     product.Transmission = SpecificCategory2.Transmission;
                     product.Body_Type = SpecificCategory2.Body_Type;
                     product.Fuel_Type = SpecificCategory2.Fuel_Type;
                 break;
 
                 case 3:
-                    var SpecificCategory3 = await _unitOfWork.products.GetProductSpecificCategory<Electronic>(1);
+                    var SpecificCategory3 = await _unitOfWork.products.GetProductSpecificCategory<Electronic>(c => c.ProductId == id);
                     product.Condition = SpecificCategory3.Condition;
                 break;
 
                 case 4:
-                    var SpecificCategory4 = await _unitOfWork.products.GetProductSpecificCategory<Electronic>(1);
+                    var SpecificCategory4 = await _unitOfWork.products.GetProductSpecificCategory<Electronic>(c => c.ProductId == id);
                     product.Brand = SpecificCategory4.Brand;
                     product.Model = SpecificCategory4.Model;
                     product.Condition = SpecificCategory4.Condition;
@@ -125,20 +130,22 @@ namespace Rentora.Application.Services
             return await GetProductDTOById(product.ProductId);
         }
 
-        public async Task<ProductDTO> UpdateProduct(UpdateProductDTO productDto)
+        public async Task<ProductDTO> UpdateProduct(UpdateProductCommand request)
         {
-            var product = await GetProductById(productDto.ProductId);
+            var product = await GetProductById(request.ProductId);
             if (product is null) return null;
 
-            product.Title = productDto.Title;
-            product.Description = productDto.Description;
-            product.Quantity = productDto.Quantity;
-            product.Price = productDto.Price;
-            product.RentalPeriod = productDto.RentalPeriod;
-            product.Location = productDto.Location;
-            product.Latitude = productDto.Latitude;
-            product.Longitude = productDto.Longitude;
-            product.Status = productDto.Status;
+            //product.Title = productDto.Title;
+            //product.Description = productDto.Description;
+            //product.Quantity = productDto.Quantity;
+            //product.Price = productDto.Price;
+            //product.RentalPeriod = productDto.RentalPeriod;
+            //product.Location = productDto.Location;
+            //product.Latitude = productDto.Latitude;
+            //product.Longitude = productDto.Longitude;
+            //product.Status = productDto.Status;
+
+            _mapper.Map(request, product);
 
             var categoryId = GetProductSpecificCategoryId(product.ProductId);
             switch (product.CategoryId)
@@ -148,34 +155,34 @@ namespace Rentora.Application.Services
                     {
                         Id = categoryId,
                         ProductId = product.ProductId,
-                        Brand = productDto.Brand,
-                        Model = productDto.Model,
-                        Condition = productDto.Condition
+                        Brand = request.Brand,
+                        Model = request.Model,
+                        Condition = request.Condition
                     }); break;
                 case 2:
                     await UpdateProductCategory(2, new Transportation()
                     {
                         Id = categoryId,
                         ProductId = product.ProductId,
-                        Transmission = productDto.Transmission,
-                        Body_Type = productDto.Body_Type,
-                        Fuel_Type = productDto.Fuel_Type
+                        Transmission = request.Transmission,
+                        Body_Type = request.Body_Type,
+                        Fuel_Type = request.Fuel_Type
                     }); break;
                 case 3:
                     await UpdateProductCategory(3, new Travel()
                     {
                         Id = categoryId,
                         ProductId = product.ProductId,
-                        Condition = productDto.Condition
+                        Condition = request.Condition
                     }); break;
                 case 4:
                     await UpdateProductCategory(4, new Electronic()
                     {
                         Id = categoryId,
                         ProductId = product.ProductId,
-                        Brand = productDto.Brand,
-                        Model = productDto.Model,
-                        Condition = productDto.Condition
+                        Brand = request.Brand,
+                        Model = request.Model,
+                        Condition = request.Condition
                     }); break;
             }
 
@@ -193,12 +200,12 @@ namespace Rentora.Application.Services
             return result;
         }
 
-        public async Task<bool> AddProductImage(ProductImageDTO productImage)
+        public async Task<bool> AddProductImage(int productId, IFormFile file)
         {
-            var imageUrl = await _imageService.UploadImageAsync(productImage.Image);
+            var imageUrl = await _imageService.UploadImageAsync(file);
             var result = await _unitOfWork.products.AddProductImage(new ProductImage()
             {
-                ProductId = productImage.ProductId,
+                ProductId = productId,
                 Image = imageUrl
             });
             await _unitOfWork.Save();

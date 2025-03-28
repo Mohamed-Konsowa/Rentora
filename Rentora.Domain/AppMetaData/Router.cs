@@ -50,7 +50,7 @@ namespace Rentora.Domain.AppMetaData
             public const string Delete = Prefix + "deleteProduct";
             public const string AddImage = Prefix + "addImage"; 
             public const string GetImages = Prefix + "getProductImagesById/{productId}"; 
-            public const string DeleteImage = Prefix + "DeleteProductImageById"; 
+            public const string DeleteImage = Prefix + "DeleteProductImageById/{imageId}"; 
         }
     }
 }

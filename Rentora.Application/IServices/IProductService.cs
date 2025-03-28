@@ -1,4 +1,6 @@
-﻿using Rentora.Application.DTOs.Product;
+﻿using Microsoft.AspNetCore.Http;
+using Rentora.Application.DTOs.Product;
+using Rentora.Application.Features.Product.Commands.Models;
 using Rentora.Domain.Models;
 using Rentora.Presentation.DTOs.Product;
 
@@ -10,9 +12,9 @@ namespace Rentora.Application.IServices
         Task<ProductDTO> GetProductDTOById(int id);
         Task<Product> GetProductById(int id);
         Task<ProductDTO> AddProduct(AddProductDTO productDto);
-        Task<ProductDTO> UpdateProduct(UpdateProductDTO product);
+        Task<ProductDTO> UpdateProduct(UpdateProductCommand product);
         Task<bool> DeleteProduct(int id);
-        Task<bool> AddProductImage(ProductImageDTO productImage);
+        Task<bool> AddProductImage(int productId, IFormFile productImage);
         Task<bool> AddProductCategory<T>(T category) where T : class;
         Task<bool> UpdateProductCategory<T>(int id, T category) where T : class;
         int GetProductSpecificCategoryId(int id);

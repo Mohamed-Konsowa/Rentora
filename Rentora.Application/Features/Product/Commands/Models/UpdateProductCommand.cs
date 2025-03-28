@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Transactions;
+﻿using MediatR;
+using Rentora.Application.Base;
+using Rentora.Presentation.DTOs.Product;
+using System.ComponentModel.DataAnnotations;
 
-namespace Rentora.Presentation.DTOs.Product
+namespace Rentora.Application.Features.Product.Commands.Models
 {
-    public class UpdateProductDTO
+    public class UpdateProductCommand : IRequest<Response<ProductDTO>>
     {
-        // general
         [Required] public int ProductId { get; set; }
         [Required] public string Title { get; set; }
         [Required] public string Description { get; set; }

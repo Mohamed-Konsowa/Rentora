@@ -27,8 +27,6 @@
     <Folder Include="Features\Email\Queries\Handlers\" />
     <Folder Include="Features\Email\Queries\Models\" />
     <Folder Include="Features\Email\Queries\Validators\" />
-    <Folder Include="Features\Product\Commands\Handlers\" />
-    <Folder Include="Features\Product\Commands\Models\" />
     <Folder Include="Features\Product\Commands\Validators\" />
     <Folder Include="Features\Product\Queries\Validators\" />
     <Folder Include="Features\empty - Copy\Commands\Handlers\" />

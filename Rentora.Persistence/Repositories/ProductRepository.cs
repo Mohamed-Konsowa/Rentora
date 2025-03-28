@@ -1,7 +1,9 @@
-﻿using Rentora.Application.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using Rentora.Application.IRepositories;
 using Rentora.Domain.Models;
 using Rentora.Domain.Models.Categories;
 using Rentora.Persistence.Data.DbContext;
+using System.Linq.Expressions;
 
 namespace Rentora.Persistence.Repositories
 {
@@ -134,9 +136,9 @@ namespace Rentora.Persistence.Repositories
             _context.ProductImages.Remove(productImage);
         }
 
-        public async Task<T> GetProductSpecificCategory<T>(int specificId) where T : class
+        public async Task<T> GetProductSpecificCategory<T>(Expression<Func<T,bool>> expression) where T : class
         {
-            return await _context.Set<T>().FindAsync(specificId);
+            return await _context.Set<T>().SingleOrDefaultAsync(expression);
         }
     }
 }

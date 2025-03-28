@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MediatR;
+using Rentora.Application.Base;
+using Rentora.Presentation.DTOs.Product;
+using System.ComponentModel.DataAnnotations;
 
-namespace Rentora.Presentation.DTOs.Product
+namespace Rentora.Application.Features.Product.Commands.Models
 {
-    public class AddProductDTO
+    public class AddProductCommand : IRequest<Response<ProductDTO>>
     {
-        // general
         [Required]
         public string ApplicationUserId { get; set; }
         [Required]

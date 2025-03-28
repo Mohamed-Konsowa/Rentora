@@ -1,10 +1,12 @@
-﻿using System.Transactions;
-using Rentora.Domain.Models;
-
+﻿
 namespace Rentora.Presentation.DTOs.Product
 {
     public class ProductDTO
     {
+        public ProductDTO()
+        {
+            
+        }
         public ProductDTO(Rentora.Domain.Models.Product product)
         {
             ProductId = product.ProductId;

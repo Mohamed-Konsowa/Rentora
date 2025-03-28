@@ -1,23 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Rentora.Presentation.DTOs.Product;
-using Rentora.Application.DTOs.Product;
-using Microsoft.AspNetCore.Authorization;
-using Rentora.Application.Helpers;
-using Rentora.Application.IServices;
 using Rentora.Presentation.Base;
 using Rentora.Domain.AppMetaData;
 using Rentora.Application.Features.Product.Queries.Models;
+using Rentora.Application.Features.Product.Commands.Models;
 
 namespace Rentora.Presentation.Controllers
 {
     public class ProductController : AppControllerBase
     {
-        private readonly IProductService _productService;
-        public ProductController(IProductService productService)
-        {
-            _productService = productService;
-        }
-
         [HttpGet(Router.Product.GetAll)]
         public async Task<IActionResult> GetProducts()
         {
@@ -32,52 +22,32 @@ namespace Rentora.Presentation.Controllers
 
         //[Authorize]
         [HttpPost(Router.Product.Add)]
-        public async Task<IActionResult> AddProductAsync(AddProductDTO productDto)
+        public async Task<IActionResult> AddProductAsync(AddProductCommand request)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-
-            if (productDto.CategoryId < 1 || productDto.CategoryId > 4)
-                return BadRequest("Invalid Category Id, (1,2,3,4) only");
-            var product = await _productService.AddProduct(productDto);
-
-            return Ok(product);
+            return NewResult(await _mediator.Send(request));
         }
 
         [HttpPut]
         [Route(Router.Product.Update)]
-        public async Task<IActionResult> UpdateProduct(UpdateProductDTO productDto)
+        public async Task<IActionResult> UpdateProduct(UpdateProductCommand request)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-
-            var product = await _productService.GetProductById(productDto.ProductId);
-            if (product is null) return BadRequest("Product not found");
-
-            await _productService.UpdateProduct(productDto);
-            return Ok(productDto);
+            return NewResult(await _mediator.Send(request));
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpDelete(Router.Product.Delete)]
-        public async Task<IActionResult> DeleteProductAsync(int id)
+        public async Task<IActionResult> DeleteProductAsync(DeleteProductCommand request)
         {
-            var result = await _productService.DeleteProduct(id);
-            if (result)
-                return Ok("The product is deleted.");
-            else
-                return BadRequest("Error");
+            return NewResult(await _mediator.Send(request));
         }
 
         [HttpPost(Router.Product.AddImage)]
         [Consumes("multipart/form-data")]
-        public async Task<IActionResult> AddProdectImage(ProductImageDTO productImageDTO)
+        public async Task<IActionResult> AddProdectImage(AddImageCommand request)
         {
-            var isImage = CommonUtils.IsImage(productImageDTO.Image);
-            if(!isImage.Item1) return BadRequest(isImage.Item2);
-            
-            var result = await _productService.AddProductImage(productImageDTO);
-            if (result) return Ok("Image was added successfully");
-            return BadRequest("Failed to add Image!");
+            return NewResult(await _mediator.Send(request));
         }
+
         [HttpGet]
         [Route(Router.Product.GetImages)]
         public async Task<IActionResult> GetProductImagesById([FromRoute]int productId)
@@ -87,11 +57,9 @@ namespace Rentora.Presentation.Controllers
 
         [HttpDelete]
         [Route(Router.Product.DeleteImage)]
-        public async Task<IActionResult> DeleteImageById(int imageId)
+        public async Task<IActionResult> DeleteImageById([FromRoute]int imageId)
         {
-            var result = await _productService.DeleteImageById(imageId);
-            if (result) return Ok("Image deleted successfully.");
-            return BadRequest("Failed to delete the image");
+            return NewResult(await _mediator.Send(new DeleteImageCommand { ImageId = imageId}));
         }
     }
 }
