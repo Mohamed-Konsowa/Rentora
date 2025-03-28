@@ -4,7 +4,7 @@ namespace Rentora.Application.IServices
 {
     public interface IRentService
     {
-        List<int> GetUserRents(string userId);
+        Task<List<int>> GetUserRentsAsync(string userId);
         Task<bool> RentProduct(RentProductDTO rentProductDTO);
     }
 }

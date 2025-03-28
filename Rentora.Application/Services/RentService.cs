@@ -12,9 +12,9 @@ namespace Rentora.Application.Services
         {
             _unitOfWork = unitOfWork;
         }
-        public List<int> GetUserRents(string userId)
+        public async Task<List<int>> GetUserRentsAsync(string userId)
         {
-            return _unitOfWork.rentals.GetUserRents(userId);
+            return await _unitOfWork.rentals.GetUserRents(userId);
         }
 
         public async Task<bool> RentProduct(RentProductDTO rentProductDTO)

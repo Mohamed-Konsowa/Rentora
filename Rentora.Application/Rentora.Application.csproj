@@ -29,12 +29,8 @@
     <Folder Include="Features\Email\Queries\Validators\" />
     <Folder Include="Features\Product\Commands\Validators\" />
     <Folder Include="Features\Product\Queries\Validators\" />
-    <Folder Include="Features\empty - Copy\Commands\Handlers\" />
-    <Folder Include="Features\empty - Copy\Commands\Models\" />
-    <Folder Include="Features\empty - Copy\Commands\Validators\" />
-    <Folder Include="Features\empty - Copy\Queries\Handlers\" />
-    <Folder Include="Features\empty - Copy\Queries\Models\" />
-    <Folder Include="Features\empty - Copy\Queries\Validators\" />
+    <Folder Include="Features\Rent\Commands\Validators\" />
+    <Folder Include="Features\Rent\Queries\Validators\" />
     <Folder Include="Features\Account\Commands\Validators\" />
     <Folder Include="Features\Account\Queries\Validators\" />
     <Folder Include="Features\Cart\Commands\Validators\" />

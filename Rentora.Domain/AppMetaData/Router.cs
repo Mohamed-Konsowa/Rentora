@@ -52,5 +52,11 @@ namespace Rentora.Domain.AppMetaData
             public const string GetImages = Prefix + "getProductImagesById/{productId}"; 
             public const string DeleteImage = Prefix + "DeleteProductImageById/{imageId}"; 
         }
+        public static class Rent
+        {
+            public const string Prefix = Rule + "Rent/";
+            public const string GetUserRents = Prefix + "getUserRents/{userId}";
+            public const string RentProduct = Prefix + "rentProduct";
+        }
     }
 }

@@ -1,33 +1,25 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Rentora.Application.DTOs.Rental;
-using Rentora.Application.IServices;
-using Rentora.Presentation.Services;
+using Rentora.Application.Features.Rent.Commands.Models;
+using Rentora.Application.Features.Rent.Queries.Models;
+using Rentora.Domain.AppMetaData;
+using Rentora.Presentation.Base;
 
 namespace Rentora.Presentation.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class RentController : ControllerBase
+    public class RentController : AppControllerBase
     {
-        private readonly IRentService _rentService;
-        public RentController(IRentService rentService)
-        {
-            _rentService = rentService;
-        }
         [HttpGet]
-        [Route("getUserRents")]
-        public IActionResult GetUserRents(string  userId)
+        [Route(Router.Rent.GetUserRents)]
+        public async Task<IActionResult> GetUserRents([FromRoute]string  userId)
         {
-            return Ok(_rentService.GetUserRents(userId));
+            return NewResult(await _mediator.Send(new GetUserRents { UserId = userId}));
         }
         [HttpPost]
-        [Route("rentProduct")]
-        public async Task<IActionResult> RentProductAsync(RentProductDTO rentProductDTO)
+        [Route(Router.Rent.RentProduct)]
+        public async Task<IActionResult> RentProductAsync(RentProductDTO rent)
         {
-            var result = await _rentService.RentProduct(rentProductDTO);
-            if (result) return Ok("Success.");
-            return BadRequest("Error!");
+            return NewResult(await _mediator.Send(new RentProductCommand { DTO = rent}));
         }
     }
 }
