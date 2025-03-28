@@ -8,6 +8,7 @@ using Rentora.Persistence.Dependances;
 using System.Text;
 using Rentora.Presentation.Swagger;
 using CloudinaryDotNet;
+using Rentora.Application.Middlewares;
 
 namespace Rentora.Presentation
 {
@@ -110,6 +111,8 @@ namespace Rentora.Presentation
             }
 
             app.UseHttpsRedirection();
+
+            app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseCors("AllowAll");
 

@@ -40,5 +40,17 @@ namespace Rentora.Domain.AppMetaData
             public const string Add = Prefix + "addProductToFavorite";
             public const string Remove = Prefix + "removeFromFavorite";
         }
+        public static class Product
+        {
+            public const string Prefix = Rule + "Product/";
+            public const string GetAll = Prefix + "getProducts";
+            public const string GetPById = Prefix + "getProductById/{productId}";
+            public const string Add = Prefix + "addProduct"; 
+            public const string Update = Prefix + "updateProduct";
+            public const string Delete = Prefix + "deleteProduct";
+            public const string AddImage = Prefix + "addImage"; 
+            public const string GetImages = Prefix + "getProductImagesById/{productId}"; 
+            public const string DeleteImage = Prefix + "DeleteProductImageById"; 
+        }
     }
 }

@@ -4,12 +4,13 @@ using Rentora.Application.DTOs.Product;
 using Microsoft.AspNetCore.Authorization;
 using Rentora.Application.Helpers;
 using Rentora.Application.IServices;
+using Rentora.Presentation.Base;
+using Rentora.Domain.AppMetaData;
+using Rentora.Application.Features.Product.Queries.Models;
 
 namespace Rentora.Presentation.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductController : AppControllerBase
     {
         private readonly IProductService _productService;
         public ProductController(IProductService productService)
@@ -17,24 +18,20 @@ namespace Rentora.Presentation.Controllers
             _productService = productService;
         }
 
-        [HttpGet("getProducts")]
+        [HttpGet(Router.Product.GetAll)]
         public async Task<IActionResult> GetProducts()
         {
-            var products = await _productService.GetProducts();
-            return Ok(products);
+            return NewResult(await _mediator.Send(new GetProductsQuery()));
         }
 
-        [HttpGet("getProductById")]
-        public async Task<IActionResult> GetProductAsync(int id)
+        [HttpGet(Router.Product.GetPById)]
+        public async Task<IActionResult> GetProductAsync([FromRoute]int productId)
         {
-            var product = await _productService.GetProductDTOById(id);
-            if (product is not null)
-                return Ok(product);
-            return BadRequest("Product not found");
+            return NewResult(await _mediator.Send(new GetProductByIdQuery { ProductId = productId }));
         }
 
         //[Authorize]
-        [HttpPost("addProduct")]
+        [HttpPost(Router.Product.Add)]
         public async Task<IActionResult> AddProductAsync(AddProductDTO productDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -47,7 +44,7 @@ namespace Rentora.Presentation.Controllers
         }
 
         [HttpPut]
-        [Route("updateProduct")]
+        [Route(Router.Product.Update)]
         public async Task<IActionResult> UpdateProduct(UpdateProductDTO productDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -60,7 +57,7 @@ namespace Rentora.Presentation.Controllers
         }
 
         [Authorize]
-        [HttpDelete("deleteProduct")]
+        [HttpDelete(Router.Product.Delete)]
         public async Task<IActionResult> DeleteProductAsync(int id)
         {
             var result = await _productService.DeleteProduct(id);
@@ -70,7 +67,7 @@ namespace Rentora.Presentation.Controllers
                 return BadRequest("Error");
         }
 
-        [HttpPost("addImage")]
+        [HttpPost(Router.Product.AddImage)]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> AddProdectImage(ProductImageDTO productImageDTO)
         {
@@ -82,13 +79,14 @@ namespace Rentora.Presentation.Controllers
             return BadRequest("Failed to add Image!");
         }
         [HttpGet]
-        [Route("getProductImagesById")]
-        public async Task<IActionResult> GetProductImagesById(int productId)
+        [Route(Router.Product.GetImages)]
+        public async Task<IActionResult> GetProductImagesById([FromRoute]int productId)
         {
-            return Ok(await _productService.GetProductImagesByIdAsync(productId));
+            return NewResult(await _mediator.Send(new GetProductImagesQuery() { ProductId = productId}));
         }
+
         [HttpDelete]
-        [Route("DeleteProductImageById")]
+        [Route(Router.Product.DeleteImage)]
         public async Task<IActionResult> DeleteImageById(int imageId)
         {
             var result = await _productService.DeleteImageById(imageId);

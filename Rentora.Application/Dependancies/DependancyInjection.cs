@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Rentora.Application.IServices;
+using Rentora.Application.Middlewares;
 using Rentora.Application.Services;
 using Rentora.Presentation.Services;
 using System.Reflection;

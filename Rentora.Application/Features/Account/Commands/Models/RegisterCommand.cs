@@ -55,7 +55,7 @@ namespace Rentora.Application.Features.Account.Commands.Models
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Governorate: is required.")]
-        [MinLength(4, ErrorMessage = "Governorate must be at least 3 characters long")]
+        [MinLength(4, ErrorMessage = "Governorate must be at least 4 characters long")]
         public string Governorate { get; set; }
 
         [Required(ErrorMessage = "Town: is required.")]

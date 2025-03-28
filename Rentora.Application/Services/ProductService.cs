@@ -28,6 +28,7 @@ namespace Rentora.Application.Services
         public async Task<ProductDTO> GetProductDTOById(int id)
         {
             var temp = await  _unitOfWork.products.GetById(id);
+            if (temp == null) return null;
             var product = new ProductDTO(temp);
             switch (product.CategoryId)
             {
