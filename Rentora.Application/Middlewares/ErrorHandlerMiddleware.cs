@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Rentora.Application.Base;
-using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Text.Json;
 
@@ -40,12 +40,18 @@ namespace Rentora.Application.Middlewares
                     case ValidationException e:
                         // custom validation error
                         responseModel.Message = error.Message;
+                        responseModel.Errors = e.Errors
+                        .GroupBy(x => x.PropertyName)
+                        .ToDictionary(
+                            g => g.Key,
+                            g => g.Select(x => x.ErrorMessage).ToList()
+                        );
                         responseModel.StatusCode = HttpStatusCode.UnprocessableEntity;
                         response.StatusCode = (int)HttpStatusCode.UnprocessableEntity;
                         break;
                     case KeyNotFoundException e:
                         // not found error
-                        responseModel.Message = error.Message; ;
+                        responseModel.Message = error.Message; 
                         responseModel.StatusCode = HttpStatusCode.NotFound;
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         break;

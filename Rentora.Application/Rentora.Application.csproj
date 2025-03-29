@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="CloudinaryDotNet" Version="1.27.4" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.69.0.3703" />
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
@@ -31,7 +32,6 @@
     <Folder Include="Features\Product\Queries\Validators\" />
     <Folder Include="Features\Rent\Commands\Validators\" />
     <Folder Include="Features\Rent\Queries\Validators\" />
-    <Folder Include="Features\Account\Commands\Validators\" />
     <Folder Include="Features\Account\Queries\Validators\" />
     <Folder Include="Features\Cart\Commands\Validators\" />
     <Folder Include="Features\Cart\Queries\Validators\" />

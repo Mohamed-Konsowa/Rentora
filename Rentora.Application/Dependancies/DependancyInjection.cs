@@ -1,6 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using Rentora.Application.Behavior;
+using Rentora.Application.Features.Account.Commands.Validators;
 using Rentora.Application.IServices;
-using Rentora.Application.Middlewares;
 using Rentora.Application.Services;
 using Rentora.Presentation.Services;
 using System.Reflection;
@@ -23,6 +26,10 @@ namespace Rentora.Application.Dependancies
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
             //Configuration of automapper
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            //Get Validators
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
             return services;
         }

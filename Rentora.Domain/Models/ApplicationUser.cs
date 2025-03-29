@@ -1,25 +1,20 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
 
 namespace Rentora.Domain.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        [Required, MaxLength(30, ErrorMessage = "Name must be at most 30 characters long")]
         public string FirstName { get; set; }
-
-        [Required, MaxLength(30)]
         public string LastName { get; set; }
-
-        public string? Personal_summary { get; set; }
-        public string? NationalID {  get; set; }
-        public string? IDImageFront { get; set; }
-        public string? IDImageBack { get; set; }
-        public string? Governorate { get; set; }
-        public string? Town { get; set; }
-        public string? Address { get; set; }
-        public decimal? Balance { get; set; }
-        public string? ProfileImage { get; set; }
+        public string Personal_summary { get; set; }
+        public string NationalID {  get; set; }
+        public string IDImageFront { get; set; }
+        public string IDImageBack { get; set; }
+        public string Governorate { get; set; }
+        public string Town { get; set; }
+        public string Address { get; set; }
+        public decimal Balance { get; set; }
+        public string ProfileImage { get; set; }
 
 
         public List<Product> Products { get; set; }
