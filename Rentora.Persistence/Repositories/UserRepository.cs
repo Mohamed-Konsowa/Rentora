@@ -57,6 +57,15 @@ namespace Rentora.Persistence.Repositories
             return await _userManager.FindByNameAsync(name);
         }
 
+        public async Task<string> GeneratePasswordResetTokenAsync(ApplicationUser user)
+        {
+            return await _userManager.GeneratePasswordResetTokenAsync(user);
+        }
+        public async Task<bool> ResetPasswordAsync(ApplicationUser user, string token, string newPassword)
+        {
+            var result =  await _userManager.ResetPasswordAsync(user, token, newPassword);
+            return result.Succeeded;
+        }
         public async Task<IList<Claim>> GetClaims(ApplicationUser user)
         {
             return await _userManager.GetClaimsAsync(user);

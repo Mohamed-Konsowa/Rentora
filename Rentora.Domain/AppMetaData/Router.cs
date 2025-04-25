@@ -17,6 +17,7 @@ namespace Rentora.Domain.AppMetaData
             public const string CheckIfUserNameExists = Prefix + "checkIfUserNameExists/{userName}";
             public const string Register = Prefix + "register";
             public const string Login = Prefix + "login"; 
+            public const string ResetPassword = Prefix + "resetPassword";
             public const string Role = Prefix + "addrole"; 
         }
         public static class Cart
@@ -32,6 +33,7 @@ namespace Rentora.Domain.AppMetaData
             public const string Send = Prefix + "sendEmail";
             public const string SendOTP = Prefix + "sendOTP";
             public const string VerifyOTP = Prefix + "verifyOTP";
+            public const string SendResetPasswordToken = Prefix + "sendResetPasswordToken";
         }
         public static class Favorite
         {

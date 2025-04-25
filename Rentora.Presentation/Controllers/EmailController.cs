@@ -26,5 +26,11 @@ namespace Rentora.Presentation.Controllers
         {
             return NewResult(await _mediator.Send(request));
         }
+        
+        [HttpPost(Router.Email.SendResetPasswordToken)]
+        public async Task<ActionResult> SendResetPasswordToken(SendResetPasswordTokenCommand request)
+        {
+            return NewResult(await _mediator.Send(request));
+        }
     }
 }

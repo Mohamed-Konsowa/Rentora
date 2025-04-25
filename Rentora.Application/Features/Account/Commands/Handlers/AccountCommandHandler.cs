@@ -4,7 +4,6 @@ using Rentora.Application.Base;
 using Rentora.Application.DTOs.Account;
 using Rentora.Application.Features.Account.Commands.Models;
 using Rentora.Application.IServices;
-using Rentora.Domain.Models;
 
 namespace Rentora.Application.Features.Account.Commands.Handlers
 {
@@ -12,6 +11,7 @@ namespace Rentora.Application.Features.Account.Commands.Handlers
                                        , IRequestHandler<RegisterCommand, Response<string>>
                                        , IRequestHandler<LoginCommand, Response<AuthModel>>
                                        , IRequestHandler<AddRoleCommand, Response<string>>
+                                       , IRequestHandler<ResetPasswordCommand, Response<string>>
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
@@ -46,6 +46,18 @@ namespace Rentora.Application.Features.Account.Commands.Handlers
             var result = await _userService.AddRoleAsync(request);
             if (result.Item1) return Success(result.Item2);
             else return BadRequest<string>(result.Item2);
+        }
+
+        public async Task<Response<string>> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
+        {
+            var user = await _userService.GetUserByEmailAsync(request.Email);
+            if (user == null)
+                return NotFound<string>("User not found!");
+
+            var result = await _userService.ResetPasswordAsync(user, request.Token, request.NewPassword);
+            if (result)
+                return Success("Password has been reset.");
+            return BadRequest<string>("Invalid request!");
         }
     }
 }

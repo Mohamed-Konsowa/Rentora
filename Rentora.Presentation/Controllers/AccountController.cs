@@ -48,7 +48,13 @@ namespace Rentora.Presentation.Controllers
 
             return NewResult(await _mediator.Send(request));
         }
+        [HttpPost(Router.Account.ResetPassword)]
+        public async Task<IActionResult> ResetPassword(ResetPasswordCommand request)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
+            return NewResult(await _mediator.Send(request));
+        }
         //[Authorize(Roles = "Admin")]
         [HttpPost(Router.Account.Role)]
         public async Task<IActionResult> AddRoleAsync(AddRoleCommand request)

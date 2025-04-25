@@ -35,6 +35,10 @@ namespace Rentora.Application.Services
             var user = await _unitOfWork.users.GetById(id);
             return user;
         }
+        public async Task<ApplicationUser?> GetUserByEmailAsync(string email)
+        {
+            return await _unitOfWork.users.GetByEmail(email);
+        }
         public async Task<bool> CheckIfEmailExists(string email)
         {
             return await _unitOfWork.users.GetByEmail(email) is not null;
@@ -49,22 +53,22 @@ namespace Rentora.Application.Services
             if (await _unitOfWork.users.GetByEmail(model.Email) is not null)
                 errors["Email"] = new() { "Email: already exist!" };
             if (await _unitOfWork.users.GetByName(model.UserName) is not null)
-                errors["Username"] = new(){"Username: already exist!"};
+                errors["Username"] = new() { "Username: already exist!" };
 
             if (!CommonUtils.IsImage(model.ProfileImage).Item1)
                 errors["ProfileImage"] = new() { "ProfileImage: Invalid file type. Only JPEG, PNG, and GIF are allowed." };
-            
+
             if (!CommonUtils.IsImage(model.IDImageFront).Item1)
                 errors["IDImageFront"] = new() { "IDImageFront: Invalid file type. Only JPEG, PNG, and GIF are allowed." };
 
             if (!CommonUtils.IsImage(model.IDImageBack).Item1)
                 errors["IDImageBack"] = new() { "IDImageBack: Invalid file type. Only JPEG, PNG, and GIF are allowed." };
-            if(errors.Count > 0) return (false, errors);
+            if (errors.Count > 0) return (false, errors);
 
             var profileImage = await _imageService.UploadImageAsync(model.ProfileImage);// await GoogleDriveService.UploadImageAsync(model.ProfileImage);// await CommonUtils.ConvertImageToBase64(model.ProfileImage);
             var IDImageFront = await _imageService.UploadImageAsync(model.IDImageFront);// await GoogleDriveService.UploadImageAsync(model.IDImageFront);// await CommonUtils.ConvertImageToBase64(model.IDImageFront);
             var IDImageBack = await _imageService.UploadImageAsync(model.IDImageBack);// await GoogleDriveService.UploadImageAsync(model.IDImageBack);// await CommonUtils.ConvertImageToBase64(model.IDImageBack);
-            
+
             var user = new ApplicationUser()
             {
                 FirstName = model.FirstName,
@@ -103,7 +107,7 @@ namespace Rentora.Application.Services
 
             if (user is null || !await _unitOfWork.users.CheckPassword(user, model.Password))
             {
-                authModel.Message ="Email or Password is incorrect!";
+                authModel.Message = "Email or Password is incorrect!";
                 return authModel;
             }
 
@@ -120,6 +124,14 @@ namespace Rentora.Application.Services
             authModel.ProfileImage = user.ProfileImage;
             authModel.EmailConfirmed = user.EmailConfirmed;
             return authModel;
+        }
+        public async Task<string> GeneratePasswordResetTokenAsync(ApplicationUser user)
+        {
+            return await _unitOfWork.users.GeneratePasswordResetTokenAsync(user);
+        }
+        public async Task<bool> ResetPasswordAsync(ApplicationUser user, string token, string newPassword)
+        {
+            return await _unitOfWork.users.ResetPasswordAsync(user, token, newPassword);
         }
         private async Task<JwtSecurityToken> CreateJwtToken(ApplicationUser user)
         {
@@ -166,6 +178,6 @@ namespace Rentora.Application.Services
 
             return (true, "Success");
         }
-        
+
     }
 }

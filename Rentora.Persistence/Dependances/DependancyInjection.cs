@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
-using Rentora.Domain.Models;
 using Rentora.Persistence.Services;
 
 namespace Rentora.Persistence.Dependances
@@ -46,11 +45,6 @@ namespace Rentora.Persistence.Dependances
                 options.SignIn.RequireConfirmedEmail = true;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromHours(1);
             });
-
-            services.AddIdentityCore<ApplicationUser>()
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-                //.AddDefaultTokenProviders();
 
             
             //services.AddAuthentication();

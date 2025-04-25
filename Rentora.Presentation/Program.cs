@@ -9,6 +9,9 @@ using System.Text;
 using Rentora.Presentation.Swagger;
 using CloudinaryDotNet;
 using Rentora.Application.Middlewares;
+using Microsoft.AspNetCore.Identity;
+using Rentora.Domain.Models;
+using Rentora.Persistence.Data.DbContext;
 
 namespace Rentora.Presentation
 {
@@ -23,6 +26,9 @@ namespace Rentora.Presentation
 
             builder.Services.AddApplication().AddPersistence(builder.Configuration.GetConnectionString("MonsterDB")!); // LocalDB   
 
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             builder.Services.AddAuthentication(options =>
             {

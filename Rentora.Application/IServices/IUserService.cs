@@ -8,8 +8,11 @@ namespace Rentora.Application.IServices
     {
         Task<List<ApplicationUser>> GetAllUsers();
         Task<ApplicationUser> GetUserById(string id);
+        Task<ApplicationUser?> GetUserByEmailAsync(string email);
         Task<bool> CheckIfEmailExists(string email);
         Task<bool> CheckIfUserNameExists(string userName);
+        Task<string> GeneratePasswordResetTokenAsync(ApplicationUser user);
+        Task<bool> ResetPasswordAsync(ApplicationUser user, string token, string newPassword);
         Task<(bool, Dictionary<string, List<string>>)> RegisterAsync(RegisterCommand model);
         Task<AuthModel> GetTokenAsync(LoginCommand model);
         Task<(bool, string)> AddRoleAsync(AddRoleCommand model);
