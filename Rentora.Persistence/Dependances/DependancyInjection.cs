@@ -34,6 +34,8 @@ namespace Rentora.Persistence.Dependances
             services.AddScoped<ICartRepository, CartRepository>();
             services.AddScoped<IFavoriteRepository, FavoriteRepository>();
             services.AddScoped<IRentRepository, RentRepository>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
+
 
             services.Configure<IdentityOptions>(options =>
             {

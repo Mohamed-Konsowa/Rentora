@@ -12,10 +12,11 @@ namespace Rentora.Application.IRepositories
         public ICartRepository carts { get; }
         public IFavoriteRepository favorites {  get; }
         public IRentRepository rentals { get; }
+        public IReviewRepository reviews { get; }
         public UnitOfWork(ApplicationDbContext context, IProductRepository productRepository, 
             IUserRepository userRepository, IEmailRepository emailRepository, 
             ICartRepository cartRepository, IFavoriteRepository favoriteRepository,
-            IRentRepository rentRepository)
+            IRentRepository rentRepository, IReviewRepository reviewRepository)
         {
             _context = context;
             products = productRepository;
@@ -24,6 +25,7 @@ namespace Rentora.Application.IRepositories
             carts = cartRepository;
             favorites = favoriteRepository;
             rentals = rentRepository;
+            reviews = reviewRepository;
         }
 
         public async Task Save()

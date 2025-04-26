@@ -21,6 +21,7 @@ namespace Rentora.Application.Dependancies
             services.AddScoped<IFavoriteService, FavoriteService>();
             services.AddScoped<IRentService, RentService>();
             services.AddScoped<IImageService, CloudinaryService>();
+            services.AddScoped<IReviewService, ReviewService>();
 
             //Configuration of mediator
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));

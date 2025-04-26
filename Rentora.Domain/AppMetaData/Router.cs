@@ -60,5 +60,12 @@ namespace Rentora.Domain.AppMetaData
             public const string GetUserRents = Prefix + "getUserRents/{userId}";
             public const string RentProduct = Prefix + "rentProduct";
         }
+
+        public static class Review 
+        {
+            public const string Prefix = Rule + "Review/";
+            public const string AddReview = Prefix + "addReview";
+            public const string GetProductReviews = Prefix + "getProductReviews/{productId}";
+        }
     }
 }

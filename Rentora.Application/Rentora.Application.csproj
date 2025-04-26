@@ -37,6 +37,8 @@
     <Folder Include="Features\Cart\Queries\Validators\" />
     <Folder Include="Features\Favorite\Commands\Validators\" />
     <Folder Include="Features\Favorite\Queries\Validators\" />
+    <Folder Include="Features\Review\Commands\Validators\" />
+    <Folder Include="Features\Review\Queries\Validators\" />
   </ItemGroup>
 
 </Project>
