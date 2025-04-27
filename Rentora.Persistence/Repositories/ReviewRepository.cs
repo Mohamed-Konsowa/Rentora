@@ -11,5 +11,16 @@ namespace Rentora.Persistence.Repositories
         {
             _context = context;
         }
+
+        public IQueryable<Review> GetProductReviews(int productId)
+        {
+            return _context.Reviews.Where(r => r.ProductId == productId);
+        }
+
+        public bool IsUserReviewedBefore(string userId, int productId)
+        {
+            var r = _context.Reviews.Where(r => r.ApplicationUserId == userId && r.ProductId == productId);
+            return (r.Count() > 0) ;
+        }
     }
 }

@@ -1,13 +1,13 @@
 ﻿using MediatR;
 using Rentora.Application.Base;
-using Rentora.Application.DTOs.Reviev;
+using Rentora.Application.DTOs.Review;
 using Rentora.Application.Features.Review.Queries.Models;
 using Rentora.Application.IServices;
 
 namespace Rentora.Application.Features.Review.Queries.Handlers
 {
     internal class ReviewQueryHandler : ResponseHandler
-                                    , IRequestHandler<GetProductReviews, Response<List<GetProductReviewsDTO>>>
+                                    , IRequestHandler<GetProductReviewsQuery, Response<List<GetProductReviewsDTO>>>
     {
         private readonly IReviewService _reviewService;
 
@@ -16,9 +16,9 @@ namespace Rentora.Application.Features.Review.Queries.Handlers
             _reviewService = reviewService;
         }
 
-        public Task<Response<List<GetProductReviewsDTO>>> Handle(GetProductReviews request, CancellationToken cancellationToken)
+        public async Task<Response<List<GetProductReviewsDTO>>> Handle(GetProductReviewsQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Success(await _reviewService.GetProductReviewsAsync(request.ProductId));
         }
     }
 }

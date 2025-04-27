@@ -10,6 +10,7 @@ namespace Rentora.Application.IRepositories
         ICartRepository carts { get; }
         IFavoriteRepository favorites { get; }
         IRentRepository rentals { get; }
+        IReviewRepository reviews { get; }
         Task Save();
     }
 }

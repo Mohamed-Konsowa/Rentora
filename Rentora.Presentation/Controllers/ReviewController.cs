@@ -15,9 +15,9 @@ namespace Rentora.Presentation.Controllers
         }
 
         [HttpGet(Router.Review.GetProductReviews)]
-        public async Task<IActionResult> GetProductReviews([FromRoute] string ProductId)
+        public async Task<IActionResult> GetProductReviews([FromRoute] int productId)
         {
-            return NewResult(await _mediator.Send(new GetProductReviews() { ProductId = ProductId}));
+            return NewResult(await _mediator.Send(new GetProductReviewsQuery() { ProductId = productId}));
         }
     }
 }

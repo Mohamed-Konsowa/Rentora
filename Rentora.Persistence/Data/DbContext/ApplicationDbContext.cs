@@ -68,6 +68,10 @@ namespace Rentora.Persistence.Data.DbContext
             builder.Entity<Favorite>()
                 .HasIndex(f => new { f.ApplicationUserId, f.ProductId })
                 .IsUnique();
+
+            builder.Entity<Review>()
+                .HasIndex(r => new { r.ApplicationUserId, r.ProductId })
+                .IsUnique();
         }
     }
 }
