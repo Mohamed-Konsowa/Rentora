@@ -12,6 +12,7 @@ using Rentora.Application.Middlewares;
 using Microsoft.AspNetCore.Identity;
 using Rentora.Domain.Models;
 using Rentora.Persistence.Data.DbContext;
+using System.Reflection;
 
 namespace Rentora.Presentation
 {
@@ -105,6 +106,10 @@ namespace Rentora.Presentation
                         new string[] {}
                     }
                 });
+                
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
             });
 
             var app = builder.Build();
