@@ -1,4 +1,6 @@
-﻿namespace Rentora.Domain.Models
+﻿using Rentora.Domain.Enums.Product;
+
+namespace Rentora.Domain.Models
 {
     public class Rental
     {
@@ -8,7 +10,7 @@
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public decimal TotalPrice { get; set; }
-        public string Status { get; set; } = "Pending";
+        public ProductStatus RentStatus { get; set; }
         public decimal PenaltyFee { get; set; } = 0.00m;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 

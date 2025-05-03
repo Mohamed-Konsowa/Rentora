@@ -1,4 +1,6 @@
 ﻿
+using Rentora.Domain.Enums.Product;
+
 namespace Rentora.Presentation.DTOs.Product
 {
     public class ProductDTO
@@ -14,13 +16,11 @@ namespace Rentora.Presentation.DTOs.Product
             CategoryId = product.CategoryId;
             Title = product.Title;
             Description = product.Description;
-            Quantity = product.Quantity;
             Price = product.Price;
-            RentalPeriod = product.RentalPeriod;
             Location = product.Location;
             Latitude = product.Latitude;
             Longitude = product.Longitude;
-            Status = product.Status;
+            Status = product.ProductStatus;
         }
         // general
         public int ProductId {  get; set; }
@@ -28,13 +28,11 @@ namespace Rentora.Presentation.DTOs.Product
         public int CategoryId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public int Quantity { get; set; } = 1;
         public decimal Price { get; set; }
-        public string RentalPeriod { get; set; }
         public string Location { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
-        public string Status { get; set; } = "Available";
+        public ProductStatus Status { get; set; } 
 
         //Electronic & Sport
         public string Brand { get; set; }

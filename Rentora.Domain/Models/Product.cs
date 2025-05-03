@@ -1,4 +1,6 @@
-﻿namespace Rentora.Domain.Models
+﻿using Rentora.Domain.Enums.Product;
+
+namespace Rentora.Domain.Models
 {
     public class Product
     {
@@ -7,13 +9,11 @@
         public int CategoryId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public int Quantity { get; set; } = 1;
-        public string RentalPeriod { get; set; }
         public decimal Price { get; set; }
         public string Location { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
-        public string Status { get; set; } = "Available";
+        public ProductStatus ProductStatus { get; set; } = ProductStatus.Available;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         // Navigation properties

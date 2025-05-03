@@ -14,8 +14,8 @@ namespace Rentora.Application.Mapping.Product
         private void Map()
         {
             CreateMap<AddProductCommand, AddProductDTO > ().ReverseMap();
+            CreateMap<AddProductDTO, Rentora.Domain.Models.Product>().ReverseMap();
             CreateMap<UpdateProductCommand, Rentora.Domain.Models.Product> ().ReverseMap();
-
         }
     }
 }

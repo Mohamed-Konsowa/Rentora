@@ -1,7 +1,6 @@
 ﻿using Rentora.Domain.Models;
 using Rentora.Application.IRepositories;
 using Rentora.Presentation.DTOs.Product;
-using Rentora.Application.DTOs.Product;
 using Rentora.Domain.Models.Categories;
 using Rentora.Application.IServices;
 using Microsoft.AspNetCore.Http;
@@ -72,22 +71,7 @@ namespace Rentora.Application.Services
         }
         public async Task<ProductDTO> AddProduct(AddProductDTO productDto)
         {
-
-            var product = new Product()
-            {
-                ApplicationUserId = productDto.ApplicationUserId,
-                CategoryId = productDto.CategoryId,
-                Title = productDto.Title,
-                Description = productDto.Description,
-                Quantity = productDto.Quantity,
-                Price = productDto.Price,
-                RentalPeriod = productDto.RentalPeriod,
-                Location = productDto.Location,
-                Latitude = productDto.Latitude,
-                Longitude = productDto.Longitude,
-                Status = productDto.Status,
-                CreatedAt = DateTime.UtcNow
-            };
+            var product = _mapper.Map<Product>(productDto);
             await _unitOfWork.products.Add(product);
 
             await _unitOfWork.Save();
@@ -134,16 +118,6 @@ namespace Rentora.Application.Services
         {
             var product = await GetProductById(request.ProductId);
             if (product is null) return null;
-
-            //product.Title = productDto.Title;
-            //product.Description = productDto.Description;
-            //product.Quantity = productDto.Quantity;
-            //product.Price = productDto.Price;
-            //product.RentalPeriod = productDto.RentalPeriod;
-            //product.Location = productDto.Location;
-            //product.Latitude = productDto.Latitude;
-            //product.Longitude = productDto.Longitude;
-            //product.Status = productDto.Status;
 
             _mapper.Map(request, product);
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Rentora.Domain.Enums.Product;
+using System.ComponentModel.DataAnnotations;
 
 namespace Rentora.Presentation.DTOs.Product
 {
@@ -22,7 +23,7 @@ namespace Rentora.Presentation.DTOs.Product
         public string Location { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
-        public string Status { get; set; } = "Available";
+        public ProductStatus ProductStatus { get; set; }
 
         //Electronic & Sport
         public string Brand { get; set; }
