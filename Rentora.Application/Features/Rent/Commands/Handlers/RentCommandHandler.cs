@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using Rentora.Application.Base;
-using Rentora.Application.DTOs.Rental;
 using Rentora.Application.Features.Rent.Commands.Models;
-using Rentora.Application.IRepositories;
 using Rentora.Application.IServices;
 using Rentora.Domain.Enums.Product;
 
@@ -10,6 +8,7 @@ namespace Rentora.Application.Features.Rent.Commands.Handlers
 {
     internal class RentCommandHandler : ResponseHandler
                                     , IRequestHandler<RentProductCommand, Response<string>>
+                                    , IRequestHandler<ReturnProductCommand, Response<string>>
     {
         private readonly IRentService _rentService;
         private readonly IProductService _productService;
@@ -30,10 +29,23 @@ namespace Rentora.Application.Features.Rent.Commands.Handlers
             var result = await  _rentService.RentProduct(request.DTO);
             if(result) 
             { 
-                
                 return Success("Success operation."); 
             }
             return BadRequest<string>("Error!");
+        }
+
+        public async Task<Response<string>> Handle(ReturnProductCommand request, CancellationToken cancellationToken)
+        {
+            var rental = _rentService.GetRentalByProductIdAsync(request.ProductId);
+            var product = await _productService.GetProductById(request.ProductId);
+            if (rental is null || product is null) return BadRequest<string>("Error!");
+
+            rental.RentStatus = ProductStatus.Returned;
+            await _rentService.UpdateRentalAsync(rental);
+            product.ProductStatus = ProductStatus.Available;
+            await _productService.UpdateAsync(product);
+
+            return Success("Success operation.");
         }
     }
 }

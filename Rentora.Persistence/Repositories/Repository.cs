@@ -15,22 +15,22 @@ namespace Rentora.Persistence.Repositories
             _dbSet = context.Set<T>();
         }
 
-        public async Task<List<T>> GetAll()
+        public IQueryable<T> GetAll()
         {
-            return _dbSet.ToList();
+            return _dbSet.AsQueryable();
         }
-        public async Task<T> GetById(int id)
+        public T GetById(int id)
         {
             return _dbSet.Find(id);
         }
 
-        public async Task<T> Add(T entity)
+        public async Task<T> AddAsync(T entity)
         {
-            _dbSet.Add(entity);
+            await _dbSet.AddAsync(entity);
             return entity;
         }
 
-        public async Task<bool> Delete(int id)
+        public bool Delete(int id)
         {
             var entity = _dbSet.Find(id);
             if(entity != null)
@@ -41,8 +41,7 @@ namespace Rentora.Persistence.Repositories
             return false;
         }
 
-
-        public async  Task<T> Update(T entity)
+        public T Update(T entity)
         {
             _dbSet.Update(entity);
             return entity;

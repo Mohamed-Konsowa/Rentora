@@ -18,7 +18,7 @@ namespace Rentora.Application.Services
             {
                 return false; 
             }
-            var result = await _unitOfWork.carts.Add(new RentalCart {
+            var result = await _unitOfWork.carts.AddAsync(new RentalCart {
                 ApplicationUserId = userId,
                 ProductId = productId
             });
@@ -36,7 +36,7 @@ namespace Rentora.Application.Services
             var item = _unitOfWork.carts.GetCart(userId, productId);
             
             if(item is null) return false;
-            await _unitOfWork.carts.Delete(item.RentalCartId);
+            _unitOfWork.carts.Delete(item.RentalCartId);
             await _unitOfWork.Save();
             return true;
         }

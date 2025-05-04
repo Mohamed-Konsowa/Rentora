@@ -24,14 +24,14 @@ namespace Rentora.Application.Services
 
         public async Task<List<ProductDTO>> GetProducts()
         {
-            var temp = await _unitOfWork.products.GetAll();
+            var temp = _unitOfWork.products.GetAll();
             var products = temp.Select(p => new ProductDTO(p)).ToList();
             return products;
         }
 
         public async Task<ProductDTO> GetProductDTOById(int id)
         {
-            var temp = await  _unitOfWork.products.GetById(id);
+            var temp = _unitOfWork.products.GetById(id);
             if (temp == null) return null;
             var product = new ProductDTO(temp);
             switch (product.CategoryId)
@@ -66,13 +66,13 @@ namespace Rentora.Application.Services
         }
         public async Task<Product> GetProductById(int id)
         {
-            var product = await _unitOfWork.products.GetById(id);            
+            var product = _unitOfWork.products.GetById(id);            
             return product;
         }
         public async Task<ProductDTO> AddProduct(AddProductDTO productDto)
         {
             var product = _mapper.Map<Product>(productDto);
-            await _unitOfWork.products.Add(product);
+            await _unitOfWork.products.AddAsync(product);
 
             await _unitOfWork.Save();
             
@@ -160,16 +160,21 @@ namespace Rentora.Application.Services
                     }); break;
             }
 
-            await _unitOfWork.products.Update(product);
+            _unitOfWork.products.Update(product);
             await _unitOfWork.Save();
             return await GetProductDTOById(product.ProductId);
         }
-
+        public async Task<Product> UpdateAsync(Product product)
+        {
+            var p = _unitOfWork.products.Update(product);
+            await _unitOfWork.Save();
+            return p;
+        }
         public async Task<bool> DeleteProduct(int id)
         {
             _unitOfWork.products.DeleteProductCategory(id);
             _unitOfWork.products.DeleteProductImages(id);
-            var result = await _unitOfWork.products.Delete(id);
+            var result = _unitOfWork.products.Delete(id);
             await _unitOfWork.Save();
             return result;
         }

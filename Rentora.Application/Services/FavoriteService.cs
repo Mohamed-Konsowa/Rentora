@@ -18,7 +18,7 @@ namespace Rentora.Application.Services
             {
                 return false; 
             }
-            var result = await _unitOfWork.favorites.Add(new Favorite {
+            var result = await _unitOfWork.favorites.AddAsync(new Favorite {
                 ApplicationUserId = userId,
                 ProductId = productId
             });
@@ -36,7 +36,7 @@ namespace Rentora.Application.Services
             var item = _unitOfWork.favorites.GetFavorite(userId, productId);
             
             if(item is null) return false;
-            await _unitOfWork.favorites.Delete(item.FavoriteId);
+            _unitOfWork.favorites.Delete(item.FavoriteId);
             await _unitOfWork.Save();
             return true;
         }

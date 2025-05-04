@@ -24,7 +24,7 @@ namespace Rentora.Application.Services
                 Rating = reviewDTO.Rating,
                 Comment = reviewDTO.Comment
             };
-            var result = await _unitOfWork.reviews.Add(review);
+            var result = await _unitOfWork.reviews.AddAsync(review);
             await _unitOfWork.Save();
             return result is not null;
         }

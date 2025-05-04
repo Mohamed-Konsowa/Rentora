@@ -1,13 +1,12 @@
-﻿using Rentora.Domain.Models;
-
+﻿
 namespace Rentora.Application.IRepositories
 {
     public interface IRepository<T>
     {
-        Task<List<T>> GetAll();
-        Task<T> GetById(int id);
-        Task<T> Add(T entity);
-        Task<T> Update(T entity);
-        Task<bool> Delete(int id);
+        IQueryable<T> GetAll();
+        T GetById(int id);
+        Task<T> AddAsync(T entity);
+        T Update(T entity);
+        bool Delete(int id);
     }
 }

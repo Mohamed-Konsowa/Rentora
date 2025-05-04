@@ -13,6 +13,7 @@ namespace Rentora.Application.IServices
         Task<Product> GetProductById(int id);
         Task<ProductDTO> AddProduct(AddProductDTO productDto);
         Task<ProductDTO> UpdateProduct(UpdateProductCommand product);
+        Task<Product> UpdateAsync(Product product);
         Task<bool> DeleteProduct(int id);
         Task<bool> AddProductImage(int productId, IFormFile productImage);
         Task<bool> AddProductCategory<T>(T category) where T : class;

@@ -28,5 +28,15 @@ namespace Rentora.Presentation.Controllers
         {
             return NewResult(await _mediator.Send(new RentProductCommand { DTO = rent}));
         }
+
+        /// <summary>
+        /// Return a product to the owner.
+        /// </summary>
+        [HttpPost]
+        [Route(Router.Rent.ReturnProduct)]
+        public async Task<IActionResult> ReturnProduct([FromRoute(Name = "productId")] int ProductId)
+        {
+            return NewResult(await _mediator.Send(new ReturnProductCommand { ProductId = ProductId}));
+        }
     }
 }
