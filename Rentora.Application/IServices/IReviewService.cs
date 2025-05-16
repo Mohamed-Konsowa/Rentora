@@ -6,6 +6,6 @@ namespace Rentora.Application.IServices
     {
         Task<bool> AddReviewAsync(AddReviewDTO reviewDTO);
         Task<List<GetProductReviewsDTO>> GetProductReviewsAsync(int productId);
-        bool IsUserReviewedBefore(string userId, int productId);
+        Task<bool> IsUserReviewedBeforeAsync(string userId, int productId);
     }
 }

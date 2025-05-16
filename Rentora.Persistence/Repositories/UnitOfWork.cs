@@ -1,5 +1,4 @@
-﻿using Rentora.Domain.Models;
-using Rentora.Persistence.Data.DbContext;
+﻿using Rentora.Persistence.Data.DbContext;
 
 namespace Rentora.Application.IRepositories
 {
@@ -33,9 +32,9 @@ namespace Rentora.Application.IRepositories
             await _context.SaveChangesAsync();
         }
 
-        public void Dispose()
+        public async void Dispose()
         {
-             _context.Dispose();
+             await _context.DisposeAsync();
         }
     }
 }

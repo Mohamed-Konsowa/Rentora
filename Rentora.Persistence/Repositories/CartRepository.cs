@@ -1,4 +1,5 @@
-﻿using Rentora.Application.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using Rentora.Application.IRepositories;
 using Rentora.Domain.Models;
 using Rentora.Persistence.Data.DbContext;
 
@@ -12,16 +13,18 @@ namespace Rentora.Persistence.Repositories
             _context = context;
         }
 
-        public RentalCart GetCart(string userId, int productId)
+        public async Task<RentalCart> GetCart(string userId, int productId)
         {
-            return _context.RentalCarts.FirstOrDefault
+            return await _context.RentalCarts.FirstOrDefaultAsync
                 (c => c.ApplicationUserId == userId && c.ProductId == productId);
         }
 
-        public  List<int> GetUserCartItems(string userId)
+        public async Task<List<int>> GetUserCartItems(string userId)
         {
-            return _context.RentalCarts.Where
-                (c => c.ApplicationUserId == userId).Select(c => c.ProductId).ToList();
+            return await _context.RentalCarts
+                .Where(c => c.ApplicationUserId == userId)
+                .Select(c => c.ProductId)
+                .ToListAsync();
         }
     }
 }

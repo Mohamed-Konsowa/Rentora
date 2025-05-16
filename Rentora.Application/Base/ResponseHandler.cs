@@ -1,79 +1,66 @@
-﻿
+﻿using System.Net;
+
 namespace Rentora.Application.Base
 {
+
     public class ResponseHandler
     {
-        public ResponseHandler()
+        public Response<T> Success<T>(T entity, string message = null, object meta = null)
         {
-        }
-        public Response<T> Deleted<T>()
-        {
-            return new Response<T>()
-            {
-                StatusCode = System.Net.HttpStatusCode.OK,
-                Succeeded = true,
-                Message = "Deleted Successfully"
-            };
-        }
-        public Response<T> Success<T>(T entity,string Message = null, object Meta = null)
-        {
-            return new Response<T>()
+            return new Response<T>
             {
                 Data = entity,
-                StatusCode = System.Net.HttpStatusCode.OK,
+                StatusCode = HttpStatusCode.OK,
                 Succeeded = true,
-                Message = Message is null ? "Success" : Message,
-                Meta = Meta
-            };
-        }
-        public Response<T> Unauthorized<T>()
-        {
-            return new Response<T>()
-            {
-                StatusCode = System.Net.HttpStatusCode.Unauthorized,
-                Succeeded = true,
-                Message = "UnAuthorized"
-            };
-        }
-        public Response<T> BadRequest<T>(string Message = null)
-        {
-            return new Response<T>()
-            {
-                StatusCode = System.Net.HttpStatusCode.BadRequest,
-                Succeeded = false,
-                Message = Message == null ? "Bad Request" : Message
+                Message = message ?? Messages.Success,
+                Meta = meta
             };
         }
 
-        public Response<T> UnprocessableEntity<T>(string Message = null)
+        public Response<T> Created<T>(T entity, object meta = null)
         {
-            return new Response<T>()
-            {
-                StatusCode = System.Net.HttpStatusCode.UnprocessableEntity,
-                Succeeded = false,
-                Message = Message == null ? "Unprocessable Entity" : Message
-            };
+            var response = Success(entity, Messages.Created, meta);
+            response.StatusCode = HttpStatusCode.Created;
+            return response;
+        }
+        public Response<T> Deleted<T>()
+        {
+            return CreateResponse<T>(HttpStatusCode.OK, true, Messages.Deleted);
+        }
+
+        public Response<T> Unauthorized<T>()
+        {
+            return CreateResponse<T>(HttpStatusCode.Unauthorized, false, Messages.Unauthorized);
+        }
+
+        public Response<T> BadRequest<T>(string message = null)
+        {
+            return CreateResponse<T>(HttpStatusCode.BadRequest, false, message ?? Messages.BadRequest);
+        }
+
+        public Response<T> UnprocessableEntity<T>(string message = null)
+        {
+            return CreateResponse<T>(HttpStatusCode.UnprocessableEntity, false, message ?? Messages.Unprocessable);
         }
 
         public Response<T> NotFound<T>(string message = null)
         {
-            return new Response<T>()
-            {
-                StatusCode = System.Net.HttpStatusCode.NotFound,
-                Succeeded = false,
-                Message = message == null ? "Not Found" : message
-            };
+            return CreateResponse<T>(HttpStatusCode.NotFound, false, message ?? Messages.NotFound);
         }
 
-        public Response<T> Created<T>(T entity, object Meta = null)
+        public Response<T> InternalServerError<T>(string message = null)
         {
-            return new Response<T>()
+            return CreateResponse<T>(HttpStatusCode.InternalServerError, false, message ?? Messages.InternalServerError);
+        }
+
+        // Helper method to reduce repetition
+        private Response<T> CreateResponse<T>(HttpStatusCode statusCode, bool succeeded, string message)
+        {
+            return new Response<T>
             {
-                Data = entity,
-                StatusCode = System.Net.HttpStatusCode.Created,
-                Succeeded = true,
-                Message = "Created.",
-                Meta = Meta
+                StatusCode = statusCode,
+                Succeeded = succeeded,
+                Message = message
             };
         }
     }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Rentora.Application.DTOs.Review;
 using Rentora.Application.IRepositories;
 using Rentora.Application.IServices;
@@ -31,15 +32,15 @@ namespace Rentora.Application.Services
 
         public async Task<List<GetProductReviewsDTO>> GetProductReviewsAsync(int productId)
         {
-            var list = _unitOfWork.reviews.GetProductReviews(productId).ToList();
+            var list = await _unitOfWork.reviews.GetProductReviews(productId).ToListAsync();
             var result = new List<GetProductReviewsDTO>();
             list.ForEach(review => { result.Add(_mapper.Map<GetProductReviewsDTO>(review)); });
             return result;
         }
 
-        public bool IsUserReviewedBefore(string userId, int productId)
+        public async Task<bool> IsUserReviewedBeforeAsync(string userId, int productId)
         {
-            return _unitOfWork.reviews.IsUserReviewedBefore(userId, productId);
+            return await _unitOfWork.reviews.IsUserReviewedBefore(userId, productId);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Rentora.Application.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using Rentora.Application.IRepositories;
 using Rentora.Domain.Models;
 using Rentora.Persistence.Data.DbContext;
 using System;
@@ -22,8 +23,11 @@ namespace Rentora.Persistence.Repositories
         {
             var user = await _context.Users.FindAsync(userId);
             if (user == null) return null;
-            return _context.Rentals.Where(r => r.ApplicationUserId == userId).
-                Select(r => r.ProductId).ToList();
+            return await _context.Rentals
+                .AsNoTracking()
+                .Where(r => r.ApplicationUserId == userId)
+                .Select(r => r.ProductId)
+                .ToListAsync();
         }
     }
 }

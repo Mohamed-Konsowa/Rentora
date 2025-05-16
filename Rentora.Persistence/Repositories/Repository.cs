@@ -19,9 +19,9 @@ namespace Rentora.Persistence.Repositories
         {
             return _dbSet.AsQueryable();
         }
-        public T GetById(int id)
+        public async Task<T> GetByIdAsync(int id)
         {
-            return _dbSet.Find(id);
+            return await _dbSet.FindAsync(id);
         }
 
         public async Task<T> AddAsync(T entity)

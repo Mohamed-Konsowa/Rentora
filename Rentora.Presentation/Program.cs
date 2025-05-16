@@ -79,7 +79,17 @@ namespace Rentora.Presentation
 
             builder.Services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Rentora API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo 
+                {
+                    Version = "v1",
+                    Title = "Rentora",
+                    Description = "An API for managing rental properties.",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Rentora",
+                        Email = "app.rentora@gmail.com"
+                    }
+                });
 
                 options.OperationFilter<FileUploadOperationFilter>();
 
@@ -110,6 +120,8 @@ namespace Rentora.Presentation
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
+
+                
             });
 
             var app = builder.Build();

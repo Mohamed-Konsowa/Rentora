@@ -15,7 +15,7 @@ namespace Rentora.Application.Features.Cart.Queries.Handlers
         }
         public async Task<Response<List<int>>> Handle(GetUserCartItemsQuery request, CancellationToken cancellationToken)
         {
-            var Ids = _cartService.GetUserCartItems(request.UserId);
+            var Ids = await _cartService.GetUserCartItemsAsync(request.UserId);
             return Success(Ids);
         }
     }

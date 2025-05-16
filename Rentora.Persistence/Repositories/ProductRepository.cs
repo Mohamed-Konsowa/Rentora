@@ -22,12 +22,12 @@ namespace Rentora.Persistence.Repositories
             return category;
         }
 
-        public T UpdateProductCategory<T>(int id, T category) where T : class
+        public async Task<T> UpdateProductCategoryAsync<T>(int id, T category) where T : class
         {
             if(id == 1)
             {
                 var x = category as Sport;
-                var cat = _context.sports.FirstOrDefault(c => c.ProductId == x.Id);
+                var cat = await _context.sports.FirstOrDefaultAsync(c => c.ProductId == x.Id);
                 
                 cat.Brand = x.Brand;
                 cat.Model = x.Model;
@@ -37,7 +37,7 @@ namespace Rentora.Persistence.Repositories
             else if (id == 2)
             {
                 var x = category as Transportation;
-                var cat = _context.Transportations.FirstOrDefault(c => c.ProductId == x.Id);
+                var cat = await _context.Transportations.FirstOrDefaultAsync(c => c.ProductId == x.Id);
 
                 cat.Transmission = x.Transmission;
                 cat.Body_Type = x.Body_Type;
@@ -47,7 +47,7 @@ namespace Rentora.Persistence.Repositories
             else if (id == 3)
             {
                 var x = category as Travel;
-                var cat = _context.Travels.FirstOrDefault(c => c.ProductId == x.Id);
+                var cat = await _context.Travels.FirstOrDefaultAsync(c => c.ProductId == x.Id);
 
                 cat.Condition = x.Condition;
 
@@ -56,7 +56,7 @@ namespace Rentora.Persistence.Repositories
             else //4
             {
                 var x = category as Electronic;
-                var cat = _context.Electronics.FirstOrDefault(c => c.ProductId == x.Id);
+                var cat = await _context.Electronics.FirstOrDefaultAsync(c => c.ProductId == x.Id);
 
                 cat.Brand = x.Brand;
                 cat.Model = x.Model;
@@ -66,9 +66,13 @@ namespace Rentora.Persistence.Repositories
             
             return category;
         }
-        public bool DeleteProductCategory(int productId)
+        public async Task<bool> DeleteProductCategory(int productId)
         {
-            var categoryId = _context.Products.Find(productId).CategoryId;
+            var product = await _context.Products.FindAsync(productId);
+            if (product == null) return false;
+
+            var categoryId = product.CategoryId;
+
             bool result = true;
             switch (categoryId)
             {
@@ -123,7 +127,7 @@ namespace Rentora.Persistence.Repositories
 
         public async Task<List<ProductImage>> GetProductImages(int productId)
         {
-            return _context.ProductImages.Where(i => i.ProductId == productId).ToList();
+            return await _context.ProductImages.Where(i => i.ProductId == productId).ToListAsync();
         }
 
         public async Task<ProductImage> GetProductImageById(int imageId)

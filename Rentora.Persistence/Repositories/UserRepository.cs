@@ -8,7 +8,7 @@ using Rentora.Application.Helpers;
 
 namespace Rentora.Persistence.Repositories
 {
-    class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -23,7 +23,7 @@ namespace Rentora.Persistence.Repositories
 
         public async Task<IdentityResult> AddRole(ApplicationUser user, string role)
         {
-            return await _userManager.AddToRoleAsync(user, "User");
+            return await _userManager.AddToRoleAsync(user, role);
         }
 
         public async Task<bool> CheckPassword(ApplicationUser user, string password)

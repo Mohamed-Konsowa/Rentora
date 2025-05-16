@@ -52,12 +52,12 @@ namespace Rentora.Application.Features.Account.Commands.Handlers
         {
             var user = await _userService.GetUserByEmailAsync(request.Email);
             if (user == null)
-                return NotFound<string>("User not found!");
+                return NotFound<string>();
 
             var result = await _userService.ResetPasswordAsync(user, request.Token, request.NewPassword);
             if (result)
                 return Success("Password has been reset.");
-            return BadRequest<string>("Invalid request!");
+            return BadRequest<string>();
         }
     }
 }

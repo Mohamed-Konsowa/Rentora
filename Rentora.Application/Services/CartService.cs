@@ -26,14 +26,14 @@ namespace Rentora.Application.Services
             return result is not null;
         }
 
-        public List<int> GetUserCartItems(string userId)
+        public async Task<List<int>> GetUserCartItemsAsync(string userId)
         {
-            return _unitOfWork.carts.GetUserCartItems(userId);
+            return await _unitOfWork.carts.GetUserCartItems(userId);
         }
 
         public async Task<bool> RemoveFromCart(string userId, int productId)
         {
-            var item = _unitOfWork.carts.GetCart(userId, productId);
+            var item = await _unitOfWork.carts.GetCart(userId, productId);
             
             if(item is null) return false;
             _unitOfWork.carts.Delete(item.RentalCartId);

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Rentora.Application.Base;
+using Rentora.Application.DTOs.Account;
 using Rentora.Application.Features.Account.Commands.Models;
 using Rentora.Application.Features.Account.Queries.Models;
 using Rentora.Domain.AppMetaData;
@@ -20,8 +22,7 @@ namespace Rentora.Presentation.Controllers
         /// <summary>
         /// Gets a user by their unique ID.
         /// </summary>
-        [HttpGet]
-        [Route(Router.Account.GetById)]
+        [HttpGet(Router.Account.GetById)]
         public async Task<IActionResult> GetUserById(string userId)
         {
             return NewResult(await _mediator.Send(new GetUserByIdQuery { UserId = userId}));

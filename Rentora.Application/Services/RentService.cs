@@ -29,7 +29,7 @@ namespace Rentora.Application.Services
         public async Task<bool> RentProduct(RentProductDTO rentProductDTO)
         {
             var rental = _mapper.Map<Rental>(rentProductDTO);
-            var product = _unitOfWork.products.GetById(rentProductDTO.ProductId);
+            var product = await _unitOfWork.products.GetByIdAsync(rentProductDTO.ProductId);
             rental.EndDate = rentProductDTO.StartDate.AddDays(rentProductDTO.numOfDays);
             rental.TotalPrice = rentProductDTO.numOfDays * product.Price;
             rental.RentStatus = ProductStatus.Rented;

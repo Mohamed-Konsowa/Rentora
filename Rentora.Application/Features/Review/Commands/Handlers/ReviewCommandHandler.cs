@@ -21,7 +21,7 @@ namespace Rentora.Application.Features.Review.Commands.Handlers
 
         public async Task<Response<string>> Handle(AddReviewCommand request, CancellationToken cancellationToken)
         {
-            var IsUserReviewedBefore = _reviewService.IsUserReviewedBefore(request.UserId, request.ProductId);
+            var IsUserReviewedBefore = await _reviewService.IsUserReviewedBeforeAsync(request.UserId, request.ProductId);
             if (IsUserReviewedBefore)
             {
                 return BadRequest<string>("The User Reviewed Before!");

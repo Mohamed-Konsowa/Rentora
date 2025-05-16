@@ -6,6 +6,7 @@ using Rentora.Application.IServices;
 using Microsoft.AspNetCore.Http;
 using Rentora.Application.Features.Product.Commands.Models;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace Rentora.Application.Services
 {
@@ -25,13 +26,13 @@ namespace Rentora.Application.Services
         public async Task<List<ProductDTO>> GetProducts()
         {
             var temp = _unitOfWork.products.GetAll();
-            var products = temp.Select(p => new ProductDTO(p)).ToList();
+            var products = await temp.Select(p => new ProductDTO(p)).ToListAsync();
             return products;
         }
 
         public async Task<ProductDTO> GetProductDTOById(int id)
         {
-            var temp = _unitOfWork.products.GetById(id);
+            var temp = await _unitOfWork.products.GetByIdAsync(id);
             if (temp == null) return null;
             var product = new ProductDTO(temp);
             switch (product.CategoryId)
@@ -66,7 +67,7 @@ namespace Rentora.Application.Services
         }
         public async Task<Product> GetProductById(int id)
         {
-            var product = _unitOfWork.products.GetById(id);            
+            var product = await _unitOfWork.products.GetByIdAsync(id);            
             return product;
         }
         public async Task<ProductDTO> AddProduct(AddProductDTO productDto)
@@ -172,7 +173,7 @@ namespace Rentora.Application.Services
         }
         public async Task<bool> DeleteProduct(int id)
         {
-            _unitOfWork.products.DeleteProductCategory(id);
+            await _unitOfWork.products.DeleteProductCategory(id);
             _unitOfWork.products.DeleteProductImages(id);
             var result = _unitOfWork.products.Delete(id);
             await _unitOfWork.Save();
@@ -200,7 +201,7 @@ namespace Rentora.Application.Services
 
         public async Task<bool> UpdateProductCategory<T>(int id, T category) where T : class
         {
-            var result = _unitOfWork.products.UpdateProductCategory(id, category);
+            var result = _unitOfWork.products.UpdateProductCategoryAsync(id, category);
             await _unitOfWork.Save();
             return result != null;
         }

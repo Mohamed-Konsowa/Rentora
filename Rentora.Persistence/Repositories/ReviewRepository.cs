@@ -1,4 +1,5 @@
-﻿using Rentora.Application.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using Rentora.Application.IRepositories;
 using Rentora.Domain.Models;
 using Rentora.Persistence.Data.DbContext;
 
@@ -17,10 +18,10 @@ namespace Rentora.Persistence.Repositories
             return _context.Reviews.Where(r => r.ProductId == productId);
         }
 
-        public bool IsUserReviewedBefore(string userId, int productId)
+        public async Task<bool> IsUserReviewedBefore(string userId, int productId)
         {
-            var r = _context.Reviews.Where(r => r.ApplicationUserId == userId && r.ProductId == productId);
-            return (r.Count() > 0) ;
+            return await _context.Reviews
+                .AnyAsync(r => r.ApplicationUserId == userId && r.ProductId == productId); ;
         }
     }
 }

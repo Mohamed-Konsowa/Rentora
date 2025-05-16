@@ -1,4 +1,5 @@
-﻿using Rentora.Application.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using Rentora.Application.IRepositories;
 using Rentora.Domain.Models;
 using Rentora.Persistence.Data.DbContext;
 
@@ -12,16 +13,18 @@ namespace Rentora.Persistence.Repositories
             _context = context;
         }
 
-        public Favorite GetFavorite(string userId, int productId)
+        public async Task<Favorite> GetFavoriteAsync(string userId, int productId)
         {
-            return _context.Favorites.FirstOrDefault
-                (c => c.ApplicationUserId == userId && c.ProductId == productId);
+            return await _context.Favorites
+                .FirstOrDefaultAsync(c => c.ApplicationUserId == userId && c.ProductId == productId);
         }
 
-        public  List<int> GetUserFavoriteItems(string userId)
+        public async Task<List<int>> GetUserFavoriteItemsAsync(string userId)
         {
-            return _context.Favorites.Where
-                (c => c.ApplicationUserId == userId).Select(c => c.ProductId).ToList();
+            return await _context.Favorites
+                .Where(c => c.ApplicationUserId == userId)
+                .Select(c => c.ProductId)
+                .ToListAsync();
         }
     }
 }
