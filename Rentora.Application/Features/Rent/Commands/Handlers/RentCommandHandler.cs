@@ -6,9 +6,8 @@ using Rentora.Domain.Enums.Product;
 
 namespace Rentora.Application.Features.Rent.Commands.Handlers
 {
-    internal class RentCommandHandler : ResponseHandler
-                                    , IRequestHandler<RentProductCommand, Response<string>>
-                                    , IRequestHandler<ReturnProductCommand, Response<string>>
+    internal class RentCommandHandler : IRequestHandler<RentProductCommand, Response<string>>
+                                      , IRequestHandler<ReturnProductCommand, Response<string>>
     {
         private readonly IRentService _rentService;
         private readonly IProductService _productService;
@@ -24,28 +23,28 @@ namespace Rentora.Application.Features.Rent.Commands.Handlers
             var product = await _productService.GetProductById(request.DTO.ProductId);
             if (product.ProductStatus != ProductStatus.Available)
             {
-                return BadRequest<string>("Sorry, this product is not available!");
+                return ResponseHandler.BadRequest<string>("Sorry, this product is not available!");
             }
             var result = await  _rentService.RentProduct(request.DTO);
             if(result) 
             { 
-                return Success("Success operation."); 
+                return ResponseHandler.Success("Success operation."); 
             }
-            return BadRequest<string>("Error!");
+            return ResponseHandler.BadRequest<string>("Error!");
         }
 
         public async Task<Response<string>> Handle(ReturnProductCommand request, CancellationToken cancellationToken)
         {
             var rental = _rentService.GetRentalByProductIdAsync(request.ProductId);
             var product = await _productService.GetProductById(request.ProductId);
-            if (rental is null || product is null) return BadRequest<string>("Error!");
+            if (rental is null || product is null) return ResponseHandler.BadRequest<string>("Error!");
 
             rental.RentStatus = ProductStatus.Returned;
             await _rentService.UpdateRentalAsync(rental);
             product.ProductStatus = ProductStatus.Available;
             await _productService.UpdateAsync(product);
 
-            return Success("Success operation.");
+            return ResponseHandler.Success("Success operation.");
         }
     }
 }

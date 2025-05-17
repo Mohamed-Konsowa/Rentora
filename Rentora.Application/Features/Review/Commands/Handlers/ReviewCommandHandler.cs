@@ -7,8 +7,7 @@ using Rentora.Application.IServices;
 
 namespace Rentora.Application.Features.Review.Commands.Handlers
 {
-    internal class ReviewCommandHandler : ResponseHandler
-                                    , IRequestHandler<AddReviewCommand, Response<string>>
+    internal class ReviewCommandHandler : IRequestHandler<AddReviewCommand, Response<string>>
     {
         private readonly IReviewService _reviewService;
         private readonly IMapper _mapper;
@@ -24,12 +23,12 @@ namespace Rentora.Application.Features.Review.Commands.Handlers
             var IsUserReviewedBefore = await _reviewService.IsUserReviewedBeforeAsync(request.UserId, request.ProductId);
             if (IsUserReviewedBefore)
             {
-                return BadRequest<string>("The User Reviewed Before!");
+                return ResponseHandler.BadRequest<string>("The User Reviewed Before!");
             }
             var review = _mapper.Map<AddReviewDTO>(request);
             var result = await _reviewService.AddReviewAsync(review);
-            if(result) return Success("Review added successfully.");
-            return BadRequest<string>("Error!");
+            if(result) return ResponseHandler.Success("Review added successfully.");
+            return ResponseHandler.BadRequest<string>("Error!");
         }
     }
 }

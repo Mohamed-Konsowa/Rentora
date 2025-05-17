@@ -6,8 +6,7 @@ using Rentora.Application.IServices;
 
 namespace Rentora.Application.Features.Review.Queries.Handlers
 {
-    internal class ReviewQueryHandler : ResponseHandler
-                                    , IRequestHandler<GetProductReviewsQuery, Response<List<GetProductReviewsDTO>>>
+    internal class ReviewQueryHandler : IRequestHandler<GetProductReviewsQuery, Response<List<GetProductReviewsDTO>>>
     {
         private readonly IReviewService _reviewService;
 
@@ -18,7 +17,7 @@ namespace Rentora.Application.Features.Review.Queries.Handlers
 
         public async Task<Response<List<GetProductReviewsDTO>>> Handle(GetProductReviewsQuery request, CancellationToken cancellationToken)
         {
-            return Success(await _reviewService.GetProductReviewsAsync(request.ProductId));
+            return ResponseHandler.Success(await _reviewService.GetProductReviewsAsync(request.ProductId));
         }
     }
 }

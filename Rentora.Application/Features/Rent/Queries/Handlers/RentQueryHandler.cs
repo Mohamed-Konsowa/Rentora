@@ -5,8 +5,7 @@ using Rentora.Application.IServices;
 
 namespace Rentora.Application.Features.Rent.Queries.Handlers
 {
-    internal class RentCommandHandler : ResponseHandler
-                                    , IRequestHandler<GetUserRents, Response<List<int>>>
+    internal class RentCommandHandler : IRequestHandler<GetUserRents, Response<List<int>>>
     {
         private readonly IRentService _rentService;
 
@@ -17,8 +16,8 @@ namespace Rentora.Application.Features.Rent.Queries.Handlers
         public async Task<Response<List<int>>> Handle(GetUserRents request, CancellationToken cancellationToken)
         {
             var result = await _rentService.GetUserRentsAsync(request.UserId);
-            if(result == null) return NotFound<List<int>>("User not found!");
-            return Success(result);
+            if(result == null) return ResponseHandler.NotFound<List<int>>("User not found!");
+            return ResponseHandler.Success(result);
             throw new NotImplementedException();
         }
     }

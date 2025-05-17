@@ -5,8 +5,7 @@ using Rentora.Application.IServices;
 
 namespace Rentora.Application.Features.Favorite.Queries.Handlers
 {
-    public class CartQueryHandler : ResponseHandler
-                                      , IRequestHandler<GetUserCartItemsQuery, Response<List<int>>>
+    public class CartQueryHandler : IRequestHandler<GetUserCartItemsQuery, Response<List<int>>>
     {
         private readonly IFavoriteService _favoriteService;
         public CartQueryHandler(IFavoriteService favoriteService)
@@ -16,7 +15,7 @@ namespace Rentora.Application.Features.Favorite.Queries.Handlers
         public async Task<Response<List<int>>> Handle(GetUserCartItemsQuery request, CancellationToken cancellationToken)
         {
             var Ids = await _favoriteService.GetUserFavoriteItems(request.UserId);
-            return Success(Ids);
+            return ResponseHandler.Success(Ids);
         }
     }
 }

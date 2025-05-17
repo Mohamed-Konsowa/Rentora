@@ -7,8 +7,7 @@ using Rentora.Application.IServices;
 
 namespace Rentora.Application.Features.Account.Commands.Handlers
 {
-    public class AccountCommandHandler : ResponseHandler
-                                       , IRequestHandler<RegisterCommand, Response<string>>
+    public class AccountCommandHandler : IRequestHandler<RegisterCommand, Response<string>>
                                        , IRequestHandler<LoginCommand, Response<AuthModel>>
                                        , IRequestHandler<AddRoleCommand, Response<string>>
                                        , IRequestHandler<ResetPasswordCommand, Response<string>>
@@ -25,9 +24,9 @@ namespace Rentora.Application.Features.Account.Commands.Handlers
         public async Task<Response<string>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
             var result = await _userService.RegisterAsync(request);
-            if (result.Item1) return Created("");
+            if (result.Item1) return ResponseHandler.Created("");
             
-            var bad = BadRequest<string>();
+            var bad = ResponseHandler.BadRequest<string>();
             bad.Message = "There is an error!";
             bad.Errors = result.Item2;
             return bad;
@@ -36,28 +35,28 @@ namespace Rentora.Application.Features.Account.Commands.Handlers
         public async Task<Response<AuthModel>> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var result = await _userService.GetTokenAsync(request);
-            if (!result.IsAuthinticated) return NotFound<AuthModel>(result.Message);
+            if (!result.IsAuthinticated) return ResponseHandler.NotFound<AuthModel>(result.Message);
 
-            return Success(result);
+            return ResponseHandler.Success(result);
         }
 
         public async Task<Response<string>> Handle(AddRoleCommand request, CancellationToken cancellationToken)
         {
             var result = await _userService.AddRoleAsync(request);
-            if (result.Item1) return Success(result.Item2);
-            else return BadRequest<string>(result.Item2);
+            if (result.Item1) return ResponseHandler.Success(result.Item2);
+            else return ResponseHandler.BadRequest<string>(result.Item2);
         }
 
         public async Task<Response<string>> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
         {
             var user = await _userService.GetUserByEmailAsync(request.Email);
             if (user == null)
-                return NotFound<string>();
+                return ResponseHandler.NotFound<string>();
 
             var result = await _userService.ResetPasswordAsync(user, request.Token, request.NewPassword);
             if (result)
-                return Success("Password has been reset.");
-            return BadRequest<string>();
+                return ResponseHandler.Success("Password has been reset.");
+            return ResponseHandler.BadRequest<string>();
         }
     }
 }

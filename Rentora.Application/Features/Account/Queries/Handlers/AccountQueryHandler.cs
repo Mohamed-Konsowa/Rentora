@@ -7,8 +7,7 @@ using Rentora.Application.IServices;
 
 namespace Rentora.Application.Features.Account.Queries.Handlers
 {
-    public class AccountQueryHandler : ResponseHandler
-                                     , IRequestHandler<GetAllUsersQuery, Response<List<UserDTO>>>
+    public class AccountQueryHandler : IRequestHandler<GetAllUsersQuery, Response<List<UserDTO>>>
                                      , IRequestHandler<GetUserByIdQuery, Response<UserDTO>>
                                      , IRequestHandler<CheckIfEmailExistsQuery, Response<bool>>
                                      , IRequestHandler<CheckIfUserNameExistsQuery, Response<bool>>
@@ -25,27 +24,27 @@ namespace Rentora.Application.Features.Account.Queries.Handlers
         {
             var users = await _userService.GetAllUsers();
             var usersMapper = _mapper.Map<List<UserDTO>>(users);
-            return Success(usersMapper);
+            return ResponseHandler.Success(usersMapper);
         }
 
         public async Task<Response<UserDTO>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
             var user = await _userService.GetUserById(request.UserId);
-            if (user == null) return NotFound<UserDTO>();
+            if (user == null) return ResponseHandler.NotFound<UserDTO>();
             var userMapper = _mapper.Map<UserDTO>(user);
-            return Success(userMapper);
+            return ResponseHandler.Success(userMapper);
         }
 
         public async Task<Response<bool>> Handle(CheckIfEmailExistsQuery request, CancellationToken cancellationToken)
         {
             var result = await _userService.CheckIfEmailExists(request.Email);
-            return Success(result);
+            return ResponseHandler.Success(result);
         }
 
         public async Task<Response<bool>> Handle(CheckIfUserNameExistsQuery request, CancellationToken cancellationToken)
         {
             var result = await _userService.CheckIfUserNameExists(request.UserName);
-            return Success(result);
+            return ResponseHandler.Success(result);
         }
     }
 }

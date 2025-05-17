@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using Rentora.Domain.Models;
 using Rentora.Persistence.Data.DbContext;
 using System.Reflection;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace Rentora.Presentation
 {
@@ -121,8 +122,10 @@ namespace Rentora.Presentation
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
 
-                
+                options.ExampleFilters();
             });
+
+            builder.Services.AddSwaggerExamplesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();
 

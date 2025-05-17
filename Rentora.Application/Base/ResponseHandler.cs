@@ -3,9 +3,9 @@
 namespace Rentora.Application.Base
 {
 
-    public class ResponseHandler
+    public static class ResponseHandler
     {
-        public Response<T> Success<T>(T entity, string message = null, object meta = null)
+        public static Response<T> Success<T>(T entity, string message = null, object meta = null)
         {
             return new Response<T>
             {
@@ -17,44 +17,44 @@ namespace Rentora.Application.Base
             };
         }
 
-        public Response<T> Created<T>(T entity, object meta = null)
+        public static Response<T> Created<T>(T entity, object meta = null)
         {
             var response = Success(entity, Messages.Created, meta);
             response.StatusCode = HttpStatusCode.Created;
             return response;
         }
-        public Response<T> Deleted<T>()
+        public static Response<T> Deleted<T>()
         {
             return CreateResponse<T>(HttpStatusCode.OK, true, Messages.Deleted);
         }
 
-        public Response<T> Unauthorized<T>()
+        public static Response<T> Unauthorized<T>()
         {
             return CreateResponse<T>(HttpStatusCode.Unauthorized, false, Messages.Unauthorized);
         }
 
-        public Response<T> BadRequest<T>(string message = null)
+        public static Response<T> BadRequest<T>(string message = null)
         {
             return CreateResponse<T>(HttpStatusCode.BadRequest, false, message ?? Messages.BadRequest);
         }
 
-        public Response<T> UnprocessableEntity<T>(string message = null)
+        public static Response<T> UnprocessableEntity<T>(string message = null)
         {
             return CreateResponse<T>(HttpStatusCode.UnprocessableEntity, false, message ?? Messages.Unprocessable);
         }
 
-        public Response<T> NotFound<T>(string message = null)
+        public static Response<T> NotFound<T>(string message = null)
         {
             return CreateResponse<T>(HttpStatusCode.NotFound, false, message ?? Messages.NotFound);
         }
 
-        public Response<T> InternalServerError<T>(string message = null)
+        public static Response<T> InternalServerError<T>(string message = null)
         {
             return CreateResponse<T>(HttpStatusCode.InternalServerError, false, message ?? Messages.InternalServerError);
         }
 
         // Helper method to reduce repetition
-        private Response<T> CreateResponse<T>(HttpStatusCode statusCode, bool succeeded, string message)
+        private static Response<T> CreateResponse<T>(HttpStatusCode statusCode, bool succeeded, string message)
         {
             return new Response<T>
             {
