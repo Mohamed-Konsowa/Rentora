@@ -46,6 +46,7 @@ namespace Rentora.Domain.AppMetaData
         {
             public const string Prefix = Rule + "Product/";
             public const string GetAll = Prefix + "getProducts";
+            public const string GetPaginated = Prefix + "getProductsPaginated";
             public const string GetPById = Prefix + "getProductById/{productId}";
             public const string Add = Prefix + "addProduct"; 
             public const string Update = Prefix + "updateProduct";

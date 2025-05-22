@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Rentora.Application.DTOs.Product;
 using Rentora.Application.Features.Product.Commands.Models;
 using Rentora.Domain.Models;
 using Rentora.Presentation.DTOs.Product;
@@ -8,7 +7,8 @@ namespace Rentora.Application.IServices
 {
     public interface IProductService
     {
-        Task<List<ProductDTO>> GetProducts();
+        IQueryable<ProductDTO> GetProductsDTO();
+        IQueryable<Product> GetProducts();
         Task<ProductDTO> GetProductDTOById(int id);
         Task<Product> GetProductById(int id);
         Task<ProductDTO> AddProduct(AddProductDTO productDto);

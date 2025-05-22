@@ -18,6 +18,15 @@ namespace Rentora.Presentation.Controllers
         }
 
         /// <summary>
+        /// Search products with pagination.
+        /// </summary>
+        [HttpGet(Router.Product.GetPaginated)]
+        public async Task<IActionResult> GetProductsPaginated([FromQuery]GetProductsPaginatedQuery request)
+        {
+            return NewResult(await _mediator.Send(request));
+        }
+
+        /// <summary>
         /// Gets a product by its ID.
         /// </summary>
         [HttpGet(Router.Product.GetPById)]

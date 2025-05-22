@@ -23,13 +23,17 @@ namespace Rentora.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<List<ProductDTO>> GetProducts()
+        public  IQueryable<ProductDTO> GetProductsDTO()
         {
             var temp = _unitOfWork.products.GetAll();
-            var products = await temp.Select(p => new ProductDTO(p)).ToListAsync();
+            var products =  temp.Select(p => new ProductDTO(p)).AsQueryable();
             return products;
         }
-
+        public IQueryable<Product> GetProducts()
+        {
+            var products = _unitOfWork.products.GetAll();
+            return products;
+        }
         public async Task<ProductDTO> GetProductDTOById(int id)
         {
             var temp = await _unitOfWork.products.GetByIdAsync(id);
