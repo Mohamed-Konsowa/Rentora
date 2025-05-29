@@ -28,7 +28,6 @@
     <Folder Include="Features\Email\Queries\Handlers\" />
     <Folder Include="Features\Email\Queries\Models\" />
     <Folder Include="Features\Email\Queries\Validators\" />
-    <Folder Include="Features\Product\Commands\Validators\" />
     <Folder Include="Features\Product\Queries\Validators\" />
     <Folder Include="Features\Rent\Commands\Validators\" />
     <Folder Include="Features\Rent\Queries\Validators\" />

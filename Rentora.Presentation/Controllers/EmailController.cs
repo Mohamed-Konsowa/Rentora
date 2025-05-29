@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Rentora.Application.Features.Email.Commands.Models;
 using Rentora.Domain.AppMetaData;
 using Rentora.Presentation.Base;
 
 namespace Rentora.Presentation.Controllers
 {
+    //[Authorize]
     public class EmailController : AppControllerBase
     {
         /// <summary>

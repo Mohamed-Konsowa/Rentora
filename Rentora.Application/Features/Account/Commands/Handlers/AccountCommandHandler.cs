@@ -11,6 +11,7 @@ namespace Rentora.Application.Features.Account.Commands.Handlers
                                        , IRequestHandler<LoginCommand, Response<AuthModel>>
                                        , IRequestHandler<AddRoleCommand, Response<string>>
                                        , IRequestHandler<ResetPasswordCommand, Response<string>>
+                                       , IRequestHandler<UpdateProfileImageCommand, Response<string>>
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
@@ -50,12 +51,17 @@ namespace Rentora.Application.Features.Account.Commands.Handlers
         public async Task<Response<string>> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
         {
             var user = await _userService.GetUserByEmailAsync(request.Email);
-            if (user == null)
-                return ResponseHandler.NotFound<string>();
+            if (user == null) return ResponseHandler.NotFound<string>();
 
             var result = await _userService.ResetPasswordAsync(user, request.Token, request.NewPassword);
-            if (result)
-                return ResponseHandler.Success("Password has been reset.");
+            if (result) return ResponseHandler.Success(Messages.Success);
+            return ResponseHandler.BadRequest<string>();
+        }
+
+        public async Task<Response<string>> Handle(UpdateProfileImageCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _userService.UpdateProfileImageAsync(request);
+            if(result) return ResponseHandler.Success(Messages.Success);
             return ResponseHandler.BadRequest<string>();
         }
     }

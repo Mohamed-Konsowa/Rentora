@@ -18,6 +18,7 @@ namespace Rentora.Domain.AppMetaData
             public const string Register = Prefix + "register";
             public const string Login = Prefix + "login"; 
             public const string ResetPassword = Prefix + "resetPassword";
+            public const string UpdateProfileImage = Prefix + "updateProfileImage";
             public const string Role = Prefix + "addrole"; 
         }
         public static class Cart

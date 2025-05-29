@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Rentora.Application.DTOs.Rental;
 using Rentora.Application.Features.Rent.Commands.Models;
 using Rentora.Application.Features.Rent.Queries.Models;
@@ -7,6 +8,7 @@ using Rentora.Presentation.Base;
 
 namespace Rentora.Presentation.Controllers
 {
+    [Authorize]
     public class RentController : AppControllerBase
     {
         /// <summary>

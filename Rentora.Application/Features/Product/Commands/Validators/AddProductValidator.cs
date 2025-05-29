@@ -3,7 +3,7 @@ using FluentValidation;
 using Rentora.Application.Features.Product.Commands.Models;
 using Rentora.Application.IServices;
 
-namespace Rentora.Application.Features.Product.Validators
+namespace Rentora.Application.Features.Product.Commands.Validators
 {
     public class AddProductValidator : AbstractValidator<AddProductCommand>
     {

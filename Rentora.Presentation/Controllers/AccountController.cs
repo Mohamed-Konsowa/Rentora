@@ -13,6 +13,7 @@ using Swashbuckle.AspNetCore.Filters;
 
 namespace Rentora.Presentation.Controllers
 {
+    //[Authorize]
     public class AccountController : AppControllerBase
     {
         /// <summary>
@@ -74,8 +75,6 @@ namespace Rentora.Presentation.Controllers
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(ValidationFailedExample))]
         public async Task<IActionResult> RegisterAsync([FromForm] RegisterCommand request)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-
             return NewResult(await _mediator.Send(request));
         }
 
@@ -102,14 +101,22 @@ namespace Rentora.Presentation.Controllers
         }
 
         /// <summary>
+        /// Update user's Profile Image.
+        /// </summary>
+        [HttpPut(Router.Account.UpdateProfileImage)]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> UpdateProfileImageAsync([FromForm] UpdateProfileImageCommand request)
+        {
+            return NewResult(await _mediator.Send(request));
+        }
+
+        /// <summary>
         /// Adds a role to a user.
         /// </summary>
         [Authorize(Roles = "Admin")]
         [HttpPost(Router.Account.Role)]
         public async Task<IActionResult> AddRoleAsync(AddRoleCommand request)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-
             return NewResult(await _mediator.Send(request));
         }
     }

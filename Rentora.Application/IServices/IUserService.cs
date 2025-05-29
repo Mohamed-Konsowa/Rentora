@@ -15,6 +15,7 @@ namespace Rentora.Application.IServices
         Task<bool> ResetPasswordAsync(ApplicationUser user, string token, string newPassword);
         Task<(bool, Dictionary<string, List<string>>)> RegisterAsync(RegisterCommand model);
         Task<AuthModel> GetTokenAsync(LoginCommand model);
+        Task<bool> UpdateProfileImageAsync(UpdateProfileImageCommand model);
         Task<(bool, string)> AddRoleAsync(AddRoleCommand model);
     }
 }

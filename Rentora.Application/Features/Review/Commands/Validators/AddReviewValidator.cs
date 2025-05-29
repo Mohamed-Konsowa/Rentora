@@ -27,7 +27,7 @@ namespace Rentora.Application.Features.Review.Commands.Validators
                 .WithMessage("Product not found!");
 
             RuleFor(r => r.Rating)
-                .InclusiveBetween(1, 5).WithMessage("Rate must between 1 and 5!");
+                .InclusiveBetween(1, 5).WithMessage("Rate must between 1.0 and 5.0!");
 
             RuleFor(r => r.Comment)
                 .NotEmpty().WithMessage("Comment is required!");

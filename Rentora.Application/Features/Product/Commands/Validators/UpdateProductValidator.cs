@@ -1,13 +1,8 @@
 ﻿using FluentValidation;
 using Rentora.Application.Features.Product.Commands.Models;
 using Rentora.Application.IServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Rentora.Application.Features.Product.Validators
+namespace Rentora.Application.Features.Product.Commands.Validators
 {
     public class UpdateProductValidator : AbstractValidator<UpdateProductCommand>
     {

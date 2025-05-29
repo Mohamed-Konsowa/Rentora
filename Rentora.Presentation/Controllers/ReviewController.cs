@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Rentora.Application.Features.Review.Commands.Models;
 using Rentora.Application.Features.Review.Queries.Models;
 using Rentora.Domain.AppMetaData;
@@ -6,6 +7,7 @@ using Rentora.Presentation.Base;
 
 namespace Rentora.Presentation.Controllers
 {
+    [Authorize]
     public class ReviewController : AppControllerBase
     {
         /// <summary>

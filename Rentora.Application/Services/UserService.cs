@@ -133,6 +133,24 @@ namespace Rentora.Application.Services
         {
             return await _unitOfWork.users.ResetPasswordAsync(user, token, newPassword);
         }
+
+        public async Task<bool> UpdateProfileImageAsync(UpdateProfileImageCommand model)
+        {
+            //var errors = new Dictionary<string, List<string>>();
+
+            //if (!CommonUtils.IsImage(model.Image).Item1)
+            //    errors["Image"] = new() { "Image: Invalid file type. Only JPEG, PNG, and GIF are allowed." };
+
+            //if (errors.Count > 0) return (false, errors);
+
+            var profileImage = await _imageService.UploadImageAsync(model.Image);
+            var user = await _unitOfWork.users.GetById(model.UserId);
+            var result = await _imageService.DeleteImageAsync(user.ProfileImage);
+            user.ProfileImage = profileImage;
+            await _unitOfWork.Save();
+            return true;
+        }
+
         private async Task<JwtSecurityToken> CreateJwtToken(ApplicationUser user)
         {
             var userClaims = await _unitOfWork.users.GetClaims(user);

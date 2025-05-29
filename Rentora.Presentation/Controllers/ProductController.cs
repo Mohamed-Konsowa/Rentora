@@ -3,9 +3,11 @@ using Rentora.Presentation.Base;
 using Rentora.Domain.AppMetaData;
 using Rentora.Application.Features.Product.Queries.Models;
 using Rentora.Application.Features.Product.Commands.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Rentora.Presentation.Controllers
 {
+    [Authorize]
     public class ProductController : AppControllerBase
     {
         /// <summary>
