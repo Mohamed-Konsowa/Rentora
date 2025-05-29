@@ -13,7 +13,7 @@ namespace Rentora.Application.Mapping.Review
         }
         private void Map()
         {
-            CreateMap<AddReviewCommand, AddReviewDTO>()
+            CreateMap<AddOrUpdateReviewCommand, AddReviewDTO>()
                 .ForMember(r => r.ReviewerId, opc => opc.MapFrom(src => src.UserId));
 
             CreateMap<Domain.Models.Review, GetProductReviewsDTO>()

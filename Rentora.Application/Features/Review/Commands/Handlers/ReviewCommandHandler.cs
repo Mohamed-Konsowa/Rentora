@@ -7,7 +7,8 @@ using Rentora.Application.IServices;
 
 namespace Rentora.Application.Features.Review.Commands.Handlers
 {
-    internal class ReviewCommandHandler : IRequestHandler<AddReviewCommand, Response<string>>
+    internal class ReviewCommandHandler : IRequestHandler<AddOrUpdateReviewCommand, Response<string>>
+                                        , IRequestHandler<DeleteReviewCommand, Response<string>>
     {
         private readonly IReviewService _reviewService;
         private readonly IMapper _mapper;
@@ -18,17 +19,31 @@ namespace Rentora.Application.Features.Review.Commands.Handlers
             _mapper = mapper;
         }
 
-        public async Task<Response<string>> Handle(AddReviewCommand request, CancellationToken cancellationToken)
+        public async Task<Response<string>> Handle(AddOrUpdateReviewCommand request, CancellationToken cancellationToken)
         {
             var IsUserReviewedBefore = await _reviewService.IsUserReviewedBeforeAsync(request.UserId, request.ProductId);
-            if (IsUserReviewedBefore)
-            {
-                return ResponseHandler.BadRequest<string>("The User Reviewed Before!");
-            }
             var review = _mapper.Map<AddReviewDTO>(request);
-            var result = await _reviewService.AddReviewAsync(review);
-            if(result) return ResponseHandler.Success("Review added successfully.");
-            return ResponseHandler.BadRequest<string>("Error!");
+            bool result = false;
+
+            if (IsUserReviewedBefore) // Update
+            {
+                result = await _reviewService.UpdateReviewAsync(review);
+            }
+            else // Add
+            {
+                result = await _reviewService.AddReviewAsync(review);
+            }
+            
+            if(result) return ResponseHandler.Success(Messages.Success);
+            return ResponseHandler.BadRequest<string>(Messages.BadRequest);
+        }
+
+        public async Task<Response<string>> Handle(DeleteReviewCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _reviewService.DeleteReviewAsync(request.reviewId);
+
+            if (result) return ResponseHandler.Success(Messages.Success);
+            return ResponseHandler.NotFound<string>();
         }
     }
 }

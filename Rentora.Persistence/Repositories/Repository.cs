@@ -19,6 +19,11 @@ namespace Rentora.Persistence.Repositories
         {
             return _dbSet.AsQueryable();
         }
+
+        public IQueryable<T> GetAllAsNoTracking()
+        {
+            return _dbSet.AsQueryable().AsNoTracking();
+        }
         public async Task<T> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);

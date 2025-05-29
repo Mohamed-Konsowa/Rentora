@@ -4,7 +4,7 @@ using Rentora.Application.IServices;
 
 namespace Rentora.Application.Features.Review.Commands.Validators
 {
-    public class AddReviewValidator : AbstractValidator<AddReviewCommand>
+    public class AddReviewValidator : AbstractValidator<AddOrUpdateReviewCommand>
     {
         private readonly IReviewService _reviewService;
         private readonly IUserService _userService;

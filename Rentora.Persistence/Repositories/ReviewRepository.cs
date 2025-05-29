@@ -18,6 +18,11 @@ namespace Rentora.Persistence.Repositories
             return _context.Reviews.Where(r => r.ProductId == productId);
         }
 
+        public Task<Review> GetReviewAsync(string userId, int productId)
+        {
+            return _context.Reviews.Where(r => r.ApplicationUserId == userId && r.ProductId == productId).FirstOrDefaultAsync();
+        }
+
         public async Task<bool> IsUserReviewedBefore(string userId, int productId)
         {
             return await _context.Reviews

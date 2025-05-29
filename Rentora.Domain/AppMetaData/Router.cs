@@ -66,8 +66,10 @@ namespace Rentora.Domain.AppMetaData
         public static class Review 
         {
             public const string Prefix = Rule + "Review/";
-            public const string AddReview = Prefix + "addReview";
+            public const string AddOrUpdateReview = Prefix + "addOrUpdateReview";
             public const string GetProductReviews = Prefix + "getProductReviews/{productId}";
+            public const string GetProductRate = Prefix + "getProductRate/{productId}";
+            public const string DeleteReview = Prefix + "deleteReview/{reviewId}";
         }
     }
 }

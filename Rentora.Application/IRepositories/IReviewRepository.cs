@@ -6,5 +6,6 @@ namespace Rentora.Application.IRepositories
     {
         public IQueryable<Review> GetProductReviews(int productId);
         Task<bool> IsUserReviewedBefore(string userId, int productId);
+        Task<Review> GetReviewAsync(string userId, int productId);
     }
 }
