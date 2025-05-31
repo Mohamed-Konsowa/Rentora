@@ -35,7 +35,7 @@ namespace Rentora.Application.Features.Account.Commands.Handlers
 
         public async Task<Response<AuthModel>> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
-            var result = await _userService.GetTokenAsync(request);
+            var result = await _userService.LoginAsync(request);
             if (!result.IsAuthinticated) return ResponseHandler.NotFound<AuthModel>(result.Message);
 
             return ResponseHandler.Success(result);

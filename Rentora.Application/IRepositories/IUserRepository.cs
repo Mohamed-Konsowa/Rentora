@@ -15,6 +15,8 @@ namespace Rentora.Application.IRepositories
         Task<ApplicationUser?> GetById(string id);
         Task<ApplicationUser?> GetByName(string name);
         Task<ApplicationUser?> GetByEmail(string email);
+        Task<ApplicationUser?> GetByNationalID(string nationalID);
+        Task<ApplicationUser?> GetByPhoneNumber(string phoneNumber);
         Task<string> GeneratePasswordResetTokenAsync(ApplicationUser user);
         Task<bool> ResetPasswordAsync(ApplicationUser user, string token, string newPassword);
         Task<IdentityResult> Create(ApplicationUser user, string password);

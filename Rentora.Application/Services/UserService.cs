@@ -9,6 +9,7 @@ using Rentora.Application.IRepositories;
 using Rentora.Application.IServices;
 using Rentora.Application.Helpers;
 using Rentora.Application.Features.Account.Commands.Models;
+using AutoMapper;
 
 namespace Rentora.Application.Services
 {
@@ -16,13 +17,15 @@ namespace Rentora.Application.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IImageService _imageService;
+        private readonly IMapper _mapper;
         private readonly JWT _jwt;
 
-        public UserService(IUnitOfWork unitOfWork, IOptions<JWT> jwt,
-            IImageService imageService)
+        public UserService(IUnitOfWork unitOfWork, 
+            IImageService imageService, IMapper mapper, IOptions<JWT> jwt)
         {
             _unitOfWork = unitOfWork;
             _imageService = imageService;
+            _mapper = mapper;
             _jwt = jwt.Value;
         }
         public async Task<List<ApplicationUser>> GetAllUsers()
@@ -47,45 +50,29 @@ namespace Rentora.Application.Services
         {
             return await _unitOfWork.users.GetByName(username) is not null;
         }
+        public async Task<bool> CheckIfNationalIDExists(string nationalID)
+        {
+            return await _unitOfWork.users.GetByNationalID(nationalID) is not null;
+        }
+
+        public async Task<bool> CheckIfPhoneNumberExists(string phoneNumber)
+        {
+            return await _unitOfWork.users.GetByPhoneNumber(phoneNumber) is not null; ;
+        }
+
         public async Task<(bool, Dictionary<string, List<string>>)> RegisterAsync(RegisterCommand model)
         {
             var errors = new Dictionary<string, List<string>>();
-            if (await _unitOfWork.users.GetByEmail(model.Email) is not null)
-                errors["Email"] = new() { "Email: already exist!" };
-            if (await _unitOfWork.users.GetByName(model.UserName) is not null)
-                errors["Username"] = new() { "Username: already exist!" };
 
-            if (!CommonUtils.IsImage(model.ProfileImage).Item1)
-                errors["ProfileImage"] = new() { "ProfileImage: Invalid file type. Only JPEG, PNG, and GIF are allowed." };
-
-            if (!CommonUtils.IsImage(model.IDImageFront).Item1)
-                errors["IDImageFront"] = new() { "IDImageFront: Invalid file type. Only JPEG, PNG, and GIF are allowed." };
-
-            if (!CommonUtils.IsImage(model.IDImageBack).Item1)
-                errors["IDImageBack"] = new() { "IDImageBack: Invalid file type. Only JPEG, PNG, and GIF are allowed." };
-            if (errors.Count > 0) return (false, errors);
-
-            var profileImage = await _imageService.UploadImageAsync(model.ProfileImage);// await GoogleDriveService.UploadImageAsync(model.ProfileImage);// await CommonUtils.ConvertImageToBase64(model.ProfileImage);
+            var ProfileImage = await _imageService.UploadImageAsync(model.ProfileImage);// await GoogleDriveService.UploadImageAsync(model.ProfileImage);// await CommonUtils.ConvertImageToBase64(model.ProfileImage);
             var IDImageFront = await _imageService.UploadImageAsync(model.IDImageFront);// await GoogleDriveService.UploadImageAsync(model.IDImageFront);// await CommonUtils.ConvertImageToBase64(model.IDImageFront);
             var IDImageBack = await _imageService.UploadImageAsync(model.IDImageBack);// await GoogleDriveService.UploadImageAsync(model.IDImageBack);// await CommonUtils.ConvertImageToBase64(model.IDImageBack);
 
-            var user = new ApplicationUser()
-            {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Email = model.Email,
-                UserName = model.UserName,
-                EmailConfirmed = model.EmailConfirmed,
-                ProfileImage = profileImage,
-                IDImageFront = IDImageFront,
-                IDImageBack = IDImageBack,
-                Personal_summary = model.Personal_summary,
-                NationalID = model.NationalID,
-                Governorate = model.Governorate,
-                Town = model.Town,
-                Address = model.Address,
-                PhoneNumber = model.PhoneNumber,
-            };
+            var user = _mapper.Map<ApplicationUser>(model);
+            user.ProfileImage = ProfileImage;
+            user.IDImageFront = IDImageFront;
+            user.IDImageBack = IDImageBack;
+
             var result = await _unitOfWork.users.Create(user, model.Password);
             if (!result.Succeeded)
             {
@@ -99,7 +86,7 @@ namespace Rentora.Application.Services
 
             return (true, null);
         }
-        public async Task<AuthModel> GetTokenAsync(LoginCommand model)
+        public async Task<AuthModel> LoginAsync(LoginCommand model)
         {
             var authModel = new AuthModel();
 
@@ -136,13 +123,6 @@ namespace Rentora.Application.Services
 
         public async Task<bool> UpdateProfileImageAsync(UpdateProfileImageCommand model)
         {
-            //var errors = new Dictionary<string, List<string>>();
-
-            //if (!CommonUtils.IsImage(model.Image).Item1)
-            //    errors["Image"] = new() { "Image: Invalid file type. Only JPEG, PNG, and GIF are allowed." };
-
-            //if (errors.Count > 0) return (false, errors);
-
             var profileImage = await _imageService.UploadImageAsync(model.Image);
             var user = await _unitOfWork.users.GetById(model.UserId);
             var result = await _imageService.DeleteImageAsync(user.ProfileImage);

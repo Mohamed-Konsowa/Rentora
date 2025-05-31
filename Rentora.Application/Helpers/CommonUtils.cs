@@ -19,7 +19,7 @@ namespace Rentora.Application.Helpers
         public static (bool, string) IsImage(IFormFile file)
         {
             var allowedTypes = new[] { "image/jpeg", "image/png", "image/gif" };
-            if (!allowedTypes.Contains(file.ContentType)) return (false, "Invalid file type. Only JPEG, PNG, and GIF are allowed.");
+            if (!allowedTypes.Contains(file.ContentType)) return (false, "Only JPEG, PNG, and GIF are allowed.");
             return (true, "");
         }
     }

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using Rentora.Application.IRepositories;
 using Rentora.Domain.Models;
 using Rentora.Application.Helpers;
+using Rentora.Persistence.Data.DbContext;
 
 namespace Rentora.Persistence.Repositories
 {
@@ -12,12 +13,17 @@ namespace Rentora.Persistence.Repositories
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ApplicationDbContext _context;
         private readonly JWT _jwt;
 
-        public UserRepository(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IOptions<JWT> jwt)
+        public UserRepository(UserManager<ApplicationUser> userManager, 
+            RoleManager<IdentityRole> roleManager, 
+            ApplicationDbContext context,
+            IOptions<JWT> jwt)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _context = context;
             _jwt = jwt.Value;
         }
 
@@ -31,9 +37,9 @@ namespace Rentora.Persistence.Repositories
             return await _userManager.CheckPasswordAsync(user, password);
         }
 
-        public Task<IdentityResult> Create(ApplicationUser user, string password)
+        public async Task<IdentityResult> Create(ApplicationUser user, string password)
         {
-            return _userManager.CreateAsync(user, password);
+            return await _userManager.CreateAsync(user, password);
         }
 
         public async Task<List<ApplicationUser>> GetAll()
@@ -42,9 +48,9 @@ namespace Rentora.Persistence.Repositories
             return users;
         }
 
-        public Task<ApplicationUser?> GetByEmail(string email)
+        public async Task<ApplicationUser?> GetByEmail(string email)
         {
-            return _userManager.FindByEmailAsync(email);
+            return await _userManager.FindByEmailAsync(email);
         }
 
         public async Task<ApplicationUser?> GetById(string id)
@@ -55,6 +61,18 @@ namespace Rentora.Persistence.Repositories
         public async Task<ApplicationUser?> GetByName(string name)
         {
             return await _userManager.FindByNameAsync(name);
+        }
+
+        public async Task<ApplicationUser?> GetByNationalID(string nationalID)
+        {
+            return await _context.Users.Where(u => u.NationalID == nationalID)
+                                       .FirstOrDefaultAsync();
+        }
+
+        public async Task<ApplicationUser?> GetByPhoneNumber(string phoneNumber)
+        {
+            return await _context.Users.Where(u => u.PhoneNumber == phoneNumber)
+                                       .FirstOrDefaultAsync();
         }
 
         public async Task<string> GeneratePasswordResetTokenAsync(ApplicationUser user)
