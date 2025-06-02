@@ -79,6 +79,15 @@ namespace Rentora.Presentation.Controllers
         }
 
         /// <summary>
+        /// Updates an exist user.
+        /// </summary>
+        [HttpPut(Router.Account.UpdateProfile)]
+        public async Task<IActionResult> UpdateProfileAsync([FromBody] UpdateProfileCommand request)
+        {
+            return NewResult(await _mediator.Send(request));
+        }
+
+        /// <summary>
         /// Authenticates a user and returns a token.
         /// </summary>
         [HttpPost(Router.Account.Login)]

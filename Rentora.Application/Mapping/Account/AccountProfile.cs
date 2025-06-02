@@ -11,6 +11,7 @@ namespace Rentora.Application.Mapping.Account
         {
             GetAllUsersQueryMapping();
             RegisterCommandMapping();
+            UpdateUserCommandMapping();
         }
         public void GetAllUsersQueryMapping()
         {
@@ -19,6 +20,10 @@ namespace Rentora.Application.Mapping.Account
         public void RegisterCommandMapping()
         {
             CreateMap<RegisterCommand, ApplicationUser>();
+        }
+        public void UpdateUserCommandMapping()
+        {
+            CreateMap<UpdateProfileCommand, ApplicationUser>();
         }
     }
 }

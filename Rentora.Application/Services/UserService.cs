@@ -177,5 +177,13 @@ namespace Rentora.Application.Services
             return (true, "Success");
         }
 
+        public async Task<bool> UpdateProfileAsync(UpdateProfileCommand model)
+        {
+            var user = await _unitOfWork.users.GetById(model.Id.ToString());
+            if (user is null) return false;
+            _mapper.Map(model, user);
+            await _unitOfWork.Save();
+            return true;
+        }
     }
 }

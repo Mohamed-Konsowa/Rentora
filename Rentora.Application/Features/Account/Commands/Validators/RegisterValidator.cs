@@ -62,7 +62,7 @@ namespace Rentora.Application.Features.Account.Commands.Validators
                 .NotEmpty().WithMessage("Phone number is required.")
                 .Matches(@"^\d{11}$").WithMessage("Phone number must be exactly 11 digits.")
                 .MustAsync(async (key, can) => !await _userService.CheckIfPhoneNumberExists(key))
-                .WithMessage("Phone Number ID already exist!");
+                .WithMessage("Phone Number already exist!");
 
             RuleFor(u => u.Governorate)
                 .NotEmpty().WithMessage("Governorate is required.")

@@ -18,6 +18,7 @@ namespace Rentora.Application.IServices
         Task<(bool, Dictionary<string, List<string>>)> RegisterAsync(RegisterCommand model);
         Task<AuthModel> LoginAsync(LoginCommand model);
         Task<bool> UpdateProfileImageAsync(UpdateProfileImageCommand model);
+        Task<bool> UpdateProfileAsync(UpdateProfileCommand model);
         Task<(bool, string)> AddRoleAsync(AddRoleCommand model);
     }
 }

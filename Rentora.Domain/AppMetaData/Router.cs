@@ -16,6 +16,7 @@ namespace Rentora.Domain.AppMetaData
             public const string CheckIfEmailExists = Prefix + "checkIfEmailExists/{email}";
             public const string CheckIfUserNameExists = Prefix + "checkIfUserNameExists/{userName}";
             public const string Register = Prefix + "register";
+            public const string UpdateProfile = Prefix + "updateUser";
             public const string Login = Prefix + "login"; 
             public const string ResetPassword = Prefix + "resetPassword";
             public const string UpdateProfileImage = Prefix + "updateProfileImage";
