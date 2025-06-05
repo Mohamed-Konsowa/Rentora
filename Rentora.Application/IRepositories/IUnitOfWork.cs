@@ -11,6 +11,6 @@ namespace Rentora.Application.IRepositories
         IFavoriteRepository favorites { get; }
         IRentRepository rentals { get; }
         IReviewRepository reviews { get; }
-        Task Save();
+        Task SaveChangesAsync();
     }
 }

@@ -4,7 +4,7 @@ namespace Rentora.Application.Helpers
 {
     public static class CommonUtils
     {
-        public static async Task<string> ConvertImageToBase64(IFormFile image)
+        public static async Task<string> ConvertImageToBase64Async(IFormFile image)
         {
             using var memoryStream = new MemoryStream();
             await image.CopyToAsync(memoryStream);

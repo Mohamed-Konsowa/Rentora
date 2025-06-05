@@ -9,16 +9,16 @@ namespace Rentora.Application.IServices
     {
         IQueryable<ProductDTO> GetProductsDTO();
         IQueryable<Product> GetProducts();
-        Task<ProductDTO> GetProductDTOById(int id);
-        Task<Product> GetProductById(int id);
-        Task<ProductDTO> AddProduct(AddProductDTO productDto);
-        Task<ProductDTO> UpdateProduct(UpdateProductCommand product);
+        Task<ProductDTO> GetProductDTOByIdAsync(int id);
+        Task<Product> GetProductByIdAsync(int id);
+        Task<ProductDTO> AddProductAsync(AddProductDTO productDto);
+        Task<ProductDTO> UpdateProductAsync(UpdateProductCommand product);
         Task<Product> UpdateAsync(Product product);
-        Task<bool> DeleteProduct(int id);
-        Task<bool> AddProductImage(int productId, IFormFile productImage);
-        Task<bool> AddProductCategory<T>(T category) where T : class;
-        Task<bool> UpdateProductCategory<T>(int id, T category) where T : class;
-        int GetProductSpecificCategoryId(int id);
+        Task<bool> DeleteProductAsync(int id);
+        Task<bool> AddProductImageAsync(int productId, IFormFile productImage);
+        Task<bool> AddProductCategoryAsync<T>(T category) where T : class;
+        Task<bool> UpdateProductCategoryAsync<T>(int categoryId, T category) where T : class;
+        Task<int> GetProductSpecificCategoryIdAsync(int id);
         Task<List<ProductImage>> GetProductImagesByIdAsync(int productId);
         Task<bool> DeleteImageById(int imageId);
     }

@@ -15,9 +15,9 @@ namespace Rentora.Presentation.Controllers
         /// </summary>
         [HttpGet]
         [Route(Router.Favorite.GetUserFav)]
-        public async Task<IActionResult> GetUserFavoriteItemsAsync([FromRoute]string userId)
+        public async Task<IActionResult> GetUserFavoriteItemsAsync([FromRoute] Guid userId)
         {
-            return NewResult(await _mediator.Send(new GetUserCartItemsQuery { UserId = userId }));
+            return NewResult(await _mediator.Send(new GetUserCartItemsQuery { UserId = userId.ToString() }));
         }
 
         /// <summary>

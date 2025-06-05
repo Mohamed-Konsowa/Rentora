@@ -5,7 +5,7 @@ namespace Rentora.Application.DTOs.Rental
     public class RentProductDTO
     {
         public int ProductId { get; set; }
-        public string ApplicationUserId { get; set; }
+        public Guid ApplicationUserId { get; set; }
         public DateTime StartDate { get; set; }
         public int numOfDays {  get; set; }
         public decimal TotalPrice { get; set; }

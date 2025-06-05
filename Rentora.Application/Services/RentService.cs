@@ -18,7 +18,7 @@ namespace Rentora.Application.Services
         }
         public async Task<List<int>> GetUserRentsAsync(string userId)
         {
-            return await _unitOfWork.rentals.GetUserRents(userId);
+            return await _unitOfWork.rentals.GetUserRentsAsync(userId);
         }
 
         public Rental GetRentalByProductIdAsync(int productId)
@@ -26,7 +26,7 @@ namespace Rentora.Application.Services
             return _unitOfWork.rentals.GetAll().FirstOrDefault(r => r.ProductId == productId && r.RentStatus == ProductStatus.Rented);
         }
 
-        public async Task<bool> RentProduct(RentProductDTO rentProductDTO)
+        public async Task<bool> RentProductAsync(RentProductDTO rentProductDTO)
         {
             var rental = _mapper.Map<Rental>(rentProductDTO);
             var product = await _unitOfWork.products.GetByIdAsync(rentProductDTO.ProductId);
@@ -36,14 +36,14 @@ namespace Rentora.Application.Services
 
             var result = _unitOfWork.rentals.AddAsync(rental);
             product.ProductStatus = ProductStatus.Rented;
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveChangesAsync();
             return result is not null;
         }
 
         public async Task<Rental> UpdateRentalAsync(Rental rental)
         {
             var r = _unitOfWork.rentals.Update(rental);
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveChangesAsync();
             return r;
         }
     }

@@ -16,9 +16,9 @@ namespace Rentora.Presentation.Controllers
         /// <param name="userId">The ID of the user.</param>
         [HttpGet]
         [Route(Router.Cart.GetUserFav)]
-        public async Task<IActionResult> GetUserCartItemsAsync([FromRoute] string userId)
+        public async Task<IActionResult> GetUserCartItemsAsync([FromRoute] Guid userId)
         {
-            return NewResult(await _mediator.Send(new GetUserCartItemsQuery { UserId = userId }));
+            return NewResult(await _mediator.Send(new GetUserCartItemsQuery { UserId = userId.ToString() }));
         }
 
         /// <summary>

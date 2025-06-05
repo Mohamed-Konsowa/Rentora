@@ -2,11 +2,6 @@
 using Rentora.Application.IRepositories;
 using Rentora.Domain.Models;
 using Rentora.Persistence.Data.DbContext;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rentora.Persistence.Repositories
 {
@@ -19,7 +14,7 @@ namespace Rentora.Persistence.Repositories
             _context = context;
         }
 
-        public async Task<List<int>> GetUserRents(string userId)
+        public async Task<List<int>> GetUserRentsAsync(string userId)
         {
             var user = await _context.Users.FindAsync(userId);
             if (user == null) return null;

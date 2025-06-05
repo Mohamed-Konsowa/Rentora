@@ -16,14 +16,14 @@ namespace Rentora.Application.Features.Favorite.Commands.Handlers
         }
         public async Task<Response<string>> Handle(AddInCartCommand request, CancellationToken cancellationToken)
         {
-            var result = await _favoriteService.AddInFavorite(request.UserId, request.ProductId);
+            var result = await _favoriteService.AddInFavoriteAsync(request.UserId.ToString(), request.ProductId);
             if (result) return ResponseHandler.Success("", "Product added to favorites successfully.");
             return ResponseHandler.BadRequest<string>("Failed to add Product!");
         }
 
         public async Task<Response<string>> Handle(RemoveFromCartCommand request, CancellationToken cancellationToken)
         {
-            var result = await _favoriteService.RemoveFromFavorite(request.UserId, request.ProductId);
+            var result = await _favoriteService.RemoveFromFavoriteAsync(request.UserId.ToString(), request.ProductId);
             if (result) return ResponseHandler.Success("", "Product removed successfully.");
             return ResponseHandler.BadRequest<string>("Failed to remove Product!");
         }

@@ -16,14 +16,14 @@ namespace Rentora.Application.Features.Cart.Commands.Handlers
         }
         public async Task<Response<string>> Handle(AddInCartCommand request, CancellationToken cancellationToken)
         {
-            var result = await _cartService.AddInCart(request.UserId, request.ProductId);
+            var result = await _cartService.AddInCartAsync(request.UserId.ToString(), request.ProductId);
             if (result) return ResponseHandler.Success("", "Product added to Cart successfully.");
             return ResponseHandler.BadRequest<string>("Failed to add Product!");
         }
 
         public async Task<Response<string>> Handle(RemoveFromCartCommand request, CancellationToken cancellationToken)
         {
-            var result = await _cartService.RemoveFromCart(request.UserId, request.ProductId);
+            var result = await _cartService.RemoveFromCartAsync(request.UserId.ToString(), request.ProductId);
             if (result) return ResponseHandler.Success("", "Product removed successfully.");
             return ResponseHandler.BadRequest<string>("Failed to remove Product!");
         }

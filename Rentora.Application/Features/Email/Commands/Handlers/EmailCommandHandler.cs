@@ -21,21 +21,21 @@ namespace Rentora.Application.Features.Email.Commands.Handlers
         }
         public async Task<Response<string>> Handle(SendEmailCommand request, CancellationToken cancellationToken)
         {
-            var result = await _emailService.SendEmail(request.Email, request.Message, request.Subject);
+            var result = await _emailService.SendEmailAsync(request.Email, request.Message, request.Subject);
             if(result == "Accepted") return ResponseHandler.Success("", "Email sent successfully");
             return ResponseHandler.BadRequest<string>(result);
         }
 
         public async Task<Response<string>> Handle(SendOTPCommand request, CancellationToken cancellationToken)
         {
-            var result = await _emailService.SendOTP(request.Email);
+            var result = await _emailService.SendOTPAsync(request.Email);
             if (result) return ResponseHandler.Success("", "OTP sent successfully");
             return ResponseHandler.BadRequest<string>("Failed to send OTP!");
         }
 
         public async Task<Response<string>> Handle(VerifyOTPCommand request, CancellationToken cancellationToken)
         {
-            var result = await _emailService.VerifyOtp(request.Email, request.OTPCode);
+            var result = await _emailService.VerifyOtpAsync(request.Email, request.OTPCode);
             if (result.Item1) return ResponseHandler.Success("");
             return ResponseHandler.BadRequest<string>(result.Item2);
         }
@@ -50,7 +50,7 @@ namespace Rentora.Application.Features.Email.Commands.Handlers
                 return ResponseHandler.BadRequest<string>("Email not confirmed!");
 
             var token = await _userService.GeneratePasswordResetTokenAsync(user);
-            var result = await _emailService.SendEmail(request.Email, "Use this tocken to reset your password "+  token, "Reset your password.");
+            var result = await _emailService.SendEmailAsync(request.Email, "Use this tocken to reset your password "+  token, "Reset your password.");
             
             if(result == "Accepted") return ResponseHandler.Success("Success");
             return ResponseHandler.BadRequest<string>("Failed to send token!");

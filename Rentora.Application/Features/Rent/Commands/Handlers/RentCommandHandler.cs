@@ -20,12 +20,12 @@ namespace Rentora.Application.Features.Rent.Commands.Handlers
 
         public async Task<Response<string>> Handle(RentProductCommand request, CancellationToken cancellationToken)
         {
-            var product = await _productService.GetProductById(request.DTO.ProductId);
+            var product = await _productService.GetProductByIdAsync(request.DTO.ProductId);
             if (product.ProductStatus != ProductStatus.Available)
             {
                 return ResponseHandler.BadRequest<string>("Sorry, this product is not available!");
             }
-            var result = await  _rentService.RentProduct(request.DTO);
+            var result = await  _rentService.RentProductAsync(request.DTO);
             if(result) 
             { 
                 return ResponseHandler.Success("Success operation."); 
@@ -36,7 +36,7 @@ namespace Rentora.Application.Features.Rent.Commands.Handlers
         public async Task<Response<string>> Handle(ReturnProductCommand request, CancellationToken cancellationToken)
         {
             var rental = _rentService.GetRentalByProductIdAsync(request.ProductId);
-            var product = await _productService.GetProductById(request.ProductId);
+            var product = await _productService.GetProductByIdAsync(request.ProductId);
             if (rental is null || product is null) return ResponseHandler.BadRequest<string>("Error!");
 
             rental.RentStatus = ProductStatus.Returned;

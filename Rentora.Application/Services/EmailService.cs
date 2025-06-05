@@ -17,7 +17,7 @@ namespace Rentora.Application.Services
             _configuration = configuration;
             _unitOfWork = unitOfWork;
         }
-        public async Task<string> SendEmail(string email, string message, string subj)
+        public async Task<string> SendEmailAsync(string email, string message, string subj)
         {
             var sendGridOptions = _configuration.GetSection("SendGrid").Get<SendGridOptions>();
             var apiKey = sendGridOptions.ApiKey; // API Key
@@ -44,10 +44,10 @@ namespace Rentora.Application.Services
             return response.StatusCode.ToString();
         }
 
-        public async Task<bool> SendOTP(string email)
+        public async Task<bool> SendOTPAsync(string email)
         {
             var otpCode = new Random().Next(1000, 9999);
-            var result = await SendEmail(email, $"Your OTP : {otpCode}", "Verify your email!");
+            var result = await SendEmailAsync(email, $"Your OTP : {otpCode}", "Verify your email!");
             if(result == "Accepted")
             {
                 var otp = new OTP
@@ -55,16 +55,16 @@ namespace Rentora.Application.Services
                     Email = email,
                     Code = otpCode.ToString(),
                 };
-                await _unitOfWork.emails.AddOtp(otp);
-                await _unitOfWork.Save();
+                await _unitOfWork.emails.AddOtpAsync(otp);
+                await _unitOfWork.SaveChangesAsync();
                 return true;
             }
             return false;
         }
 
-        public async Task<(bool, string)> VerifyOtp(string email, string otpcode)
+        public async Task<(bool, string)> VerifyOtpAsync(string email, string otpcode)
         {
-            var otp = await _unitOfWork.emails.GetOtp(email, otpcode);
+            var otp = await _unitOfWork.emails.GetOtpAsync(email, otpcode);
 
             if (otp == null)
             {
@@ -83,7 +83,7 @@ namespace Rentora.Application.Services
             else
             {
                 otp.IsUsed = true;
-                await _unitOfWork.Save();
+                await _unitOfWork.SaveChangesAsync();
                 return (true, "OTP verified successfully!");
             }
         }

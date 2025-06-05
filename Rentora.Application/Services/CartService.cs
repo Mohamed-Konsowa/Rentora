@@ -12,9 +12,9 @@ namespace Rentora.Application.Services
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<bool> AddInCart(string userId, int productId)
+        public async Task<bool> AddInCartAsync(string userId, int productId)
         {
-            if(_unitOfWork.carts.GetCart(userId, productId) is not null)
+            if(_unitOfWork.carts.GetCartAsync(userId, productId) is not null)
             {
                 return false; 
             }
@@ -22,22 +22,22 @@ namespace Rentora.Application.Services
                 ApplicationUserId = userId,
                 ProductId = productId
             });
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveChangesAsync();
             return result is not null;
         }
 
         public async Task<List<int>> GetUserCartItemsAsync(string userId)
         {
-            return await _unitOfWork.carts.GetUserCartItems(userId);
+            return await _unitOfWork.carts.GetUserCartItemsAsync(userId);
         }
 
-        public async Task<bool> RemoveFromCart(string userId, int productId)
+        public async Task<bool> RemoveFromCartAsync(string userId, int productId)
         {
-            var item = await _unitOfWork.carts.GetCart(userId, productId);
+            var item = await _unitOfWork.carts.GetCartAsync(userId, productId);
             
             if(item is null) return false;
             _unitOfWork.carts.Delete(item.RentalCartId);
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveChangesAsync();
             return true;
         }
     }

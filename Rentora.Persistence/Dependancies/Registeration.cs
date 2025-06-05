@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
-using Rentora.Persistence.Services;
+using Rentora.Persistence.BackgroundServices;
 
-namespace Rentora.Persistence.Dependances
+namespace Rentora.Persistence.Dependancies
 {
-    public static class DependancyInjection
+    public static class Registeration
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services, string strConnection)
         {

@@ -14,7 +14,7 @@ namespace Rentora.Application.Features.Favorite.Queries.Handlers
         }
         public async Task<Response<List<int>>> Handle(GetUserCartItemsQuery request, CancellationToken cancellationToken)
         {
-            var Ids = await _favoriteService.GetUserFavoriteItems(request.UserId);
+            var Ids = await _favoriteService.GetUserFavoriteItemsAsync(request.UserId);
             return ResponseHandler.Success(Ids);
         }
     }

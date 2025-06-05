@@ -21,7 +21,7 @@ namespace Rentora.Application.Features.Review.Commands.Handlers
 
         public async Task<Response<string>> Handle(AddOrUpdateReviewCommand request, CancellationToken cancellationToken)
         {
-            var IsUserReviewedBefore = await _reviewService.IsUserReviewedBeforeAsync(request.UserId, request.ProductId);
+            var IsUserReviewedBefore = await _reviewService.IsUserReviewedBeforeAsync(request.UserId.ToString(), request.ProductId);
             var review = _mapper.Map<AddReviewDTO>(request);
             bool result = false;
 

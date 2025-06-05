@@ -5,15 +5,15 @@ namespace Rentora.Application.IRepositories
 {
     public interface IProductRepository : IRepository<Product>
     {
-        Task<T> AddProductSpecificCategory<T>(T category) where T : class;
-        Task<T> GetProductSpecificCategory<T>(Expression<Func<T, bool>> expression) where T : class;
-        Task<T> UpdateProductCategoryAsync<T>(int id, T category) where T : class;
-        Task<bool> DeleteProductCategory(int productId);
+        Task<T> AddProductSpecificCategoryAsync<T>(T category) where T : class;
+        Task<T> GetProductSpecificCategoryAsync<T>(Expression<Func<T, bool>> expression) where T : class;
+        Task<T> UpdateProductCategoryAsync<T>(int categoryId, T category) where T : class;
+        Task<bool> DeleteProductCategoryAsync(int productId);
         bool DeleteProductImages(int productId);
-        Task<bool> AddProductImage(ProductImage productImage);
-        int GetProductSpecificCategoryId(int productId);
-        Task<List<ProductImage>> GetProductImages(int productId);
-        Task<ProductImage> GetProductImageById(int imageId);
+        Task<bool> AddProductImageAsync(ProductImage productImage);
+        Task<int> GetProductSpecificCategoryIdAsync(int productId);
+        Task<List<ProductImage>> GetProductImagesAsync(int productId);
+        Task<ProductImage> GetProductImageByIdAsync(int imageId);
         void DeleteProductImage(ProductImage productImage);
     }
 }

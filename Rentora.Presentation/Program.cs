@@ -4,7 +4,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using Rentora.Application.Helpers;
 using Rentora.Application.Dependancies;
-using Rentora.Persistence.Dependances;
+using Rentora.Persistence.Dependancies;
 using System.Text;
 using Rentora.Presentation.Swagger;
 using CloudinaryDotNet;

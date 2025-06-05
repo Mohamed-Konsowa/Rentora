@@ -7,7 +7,7 @@ namespace Rentora.Application.IServices
     {
         Task<List<int>> GetUserRentsAsync(string userId);
         Rental GetRentalByProductIdAsync(int userId);
-        Task<bool> RentProduct(RentProductDTO rentProductDTO);
+        Task<bool> RentProductAsync(RentProductDTO rentProductDTO);
         Task<Rental> UpdateRentalAsync(Rental rental);
     }
 }

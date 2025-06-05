@@ -27,49 +27,49 @@ namespace Rentora.Persistence.Repositories
             _jwt = jwt.Value;
         }
 
-        public async Task<IdentityResult> AddRole(ApplicationUser user, string role)
+        public async Task<IdentityResult> AddRoleAsync(ApplicationUser user, string role)
         {
             return await _userManager.AddToRoleAsync(user, role);
         }
 
-        public async Task<bool> CheckPassword(ApplicationUser user, string password)
+        public async Task<bool> CheckPasswordAsync(ApplicationUser user, string password)
         {
             return await _userManager.CheckPasswordAsync(user, password);
         }
 
-        public async Task<IdentityResult> Create(ApplicationUser user, string password)
+        public async Task<IdentityResult> CreateAsync(ApplicationUser user, string password)
         {
             return await _userManager.CreateAsync(user, password);
         }
 
-        public async Task<List<ApplicationUser>> GetAll()
+        public IQueryable<ApplicationUser> GetAll()
         {
-            var users = await _userManager.Users.AsNoTracking().ToListAsync();
+            var users = _userManager.Users.AsNoTracking();
             return users;
         }
 
-        public async Task<ApplicationUser?> GetByEmail(string email)
+        public async Task<ApplicationUser?> GetByEmailAsync(string email)
         {
             return await _userManager.FindByEmailAsync(email);
         }
 
-        public async Task<ApplicationUser?> GetById(string id)
+        public async Task<ApplicationUser?> GetByIdAsync(string id)
         {
             return await _userManager.FindByIdAsync(id);
         }
 
-        public async Task<ApplicationUser?> GetByName(string name)
+        public async Task<ApplicationUser?> GetByNameAsync(string name)
         {
             return await _userManager.FindByNameAsync(name);
         }
 
-        public async Task<ApplicationUser?> GetByNationalID(string nationalID)
+        public async Task<ApplicationUser?> GetByNationalIDAsync(string nationalID)
         {
             return await _context.Users.Where(u => u.NationalID == nationalID)
                                        .FirstOrDefaultAsync();
         }
 
-        public async Task<ApplicationUser?> GetByPhoneNumber(string phoneNumber)
+        public async Task<ApplicationUser?> GetByPhoneNumberAsync(string phoneNumber)
         {
             return await _context.Users.Where(u => u.PhoneNumber == phoneNumber)
                                        .FirstOrDefaultAsync();
@@ -84,7 +84,7 @@ namespace Rentora.Persistence.Repositories
             var result =  await _userManager.ResetPasswordAsync(user, token, newPassword);
             return result.Succeeded;
         }
-        public async Task<IList<Claim>> GetClaims(ApplicationUser user)
+        public async Task<IList<Claim>> GetClaimsAsync(ApplicationUser user)
         {
             return await _userManager.GetClaimsAsync(user);
         }
@@ -94,12 +94,12 @@ namespace Rentora.Persistence.Repositories
             return await _userManager.GetRolesAsync(user);
         }
 
-        public async Task<bool> IsInRole(ApplicationUser user, string role)
+        public async Task<bool> IsInRoleAsync(ApplicationUser user, string role)
         {
             return await _userManager.IsInRoleAsync(user, role);
         }
 
-        public async Task<bool> RoleExists(string role)
+        public async Task<bool> RoleExistsAsync(string role)
         {
             return await _roleManager.RoleExistsAsync(role);
         }

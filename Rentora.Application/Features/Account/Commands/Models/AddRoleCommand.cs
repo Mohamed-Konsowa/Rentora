@@ -7,7 +7,7 @@ namespace Rentora.Application.Features.Account.Commands.Models
     public class AddRoleCommand : IRequest<Response<string>>
     {
         [Required]
-        public string UserId { get; set; }
+        public Guid UserId { get; set; }
         [Required]
         public string Role { get; set; }
     }

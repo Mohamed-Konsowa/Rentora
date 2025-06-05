@@ -19,11 +19,11 @@ namespace Rentora.Application.Features.Review.Commands.Validators
         public void ApplyValidationRules()
         {
             RuleFor(r => r.UserId)
-                .MustAsync(async (key, can) => await _userService.GetUserById(key) is not null)
+                .MustAsync(async (key, can) => await _userService.GetUserByIdAsync(key.ToString()) is not null)
                 .WithMessage("User not found!");
 
             RuleFor(r => r.ProductId)
-                .MustAsync(async (key, can) => await _productService.GetProductById(key) is not null)
+                .MustAsync(async (key, can) => await _productService.GetProductByIdAsync(key) is not null)
                 .WithMessage("Product not found!");
 
             RuleFor(r => r.Rating)

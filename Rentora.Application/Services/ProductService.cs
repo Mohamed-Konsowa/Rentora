@@ -34,7 +34,7 @@ namespace Rentora.Application.Services
             var products = _unitOfWork.products.GetAll();
             return products;
         }
-        public async Task<ProductDTO> GetProductDTOById(int id)
+        public async Task<ProductDTO> GetProductDTOByIdAsync(int id)
         {
             var temp = await _unitOfWork.products.GetByIdAsync(id);
             if (temp == null) return null;
@@ -42,26 +42,26 @@ namespace Rentora.Application.Services
             switch (product.CategoryId)
             {
                 case 1:
-                    var SpecificCategory = await _unitOfWork.products.GetProductSpecificCategory<Sport>(c => c.ProductId == id);
+                    var SpecificCategory = await _unitOfWork.products.GetProductSpecificCategoryAsync<Sport>(c => c.ProductId == id);
                     product.Brand = SpecificCategory.Brand;
                     product.Model = SpecificCategory.Model;
                     product.Condition = SpecificCategory.Condition;
                 break;
 
                 case 2:
-                    var SpecificCategory2 = await _unitOfWork.products.GetProductSpecificCategory<Transportation>(c => c.ProductId == id);
+                    var SpecificCategory2 = await _unitOfWork.products.GetProductSpecificCategoryAsync<Transportation>(c => c.ProductId == id);
                     product.Transmission = SpecificCategory2.Transmission;
                     product.Body_Type = SpecificCategory2.Body_Type;
                     product.Fuel_Type = SpecificCategory2.Fuel_Type;
                 break;
 
                 case 3:
-                    var SpecificCategory3 = await _unitOfWork.products.GetProductSpecificCategory<Electronic>(c => c.ProductId == id);
+                    var SpecificCategory3 = await _unitOfWork.products.GetProductSpecificCategoryAsync<Electronic>(c => c.ProductId == id);
                     product.Condition = SpecificCategory3.Condition;
                 break;
 
                 case 4:
-                    var SpecificCategory4 = await _unitOfWork.products.GetProductSpecificCategory<Electronic>(c => c.ProductId == id);
+                    var SpecificCategory4 = await _unitOfWork.products.GetProductSpecificCategoryAsync<Electronic>(c => c.ProductId == id);
                     product.Brand = SpecificCategory4.Brand;
                     product.Model = SpecificCategory4.Model;
                     product.Condition = SpecificCategory4.Condition;
@@ -69,22 +69,22 @@ namespace Rentora.Application.Services
             }
             return product;
         }
-        public async Task<Product> GetProductById(int id)
+        public async Task<Product> GetProductByIdAsync(int id)
         {
             var product = await _unitOfWork.products.GetByIdAsync(id);            
             return product;
         }
-        public async Task<ProductDTO> AddProduct(AddProductDTO productDto)
+        public async Task<ProductDTO> AddProductAsync(AddProductDTO productDto)
         {
             var product = _mapper.Map<Product>(productDto);
             await _unitOfWork.products.AddAsync(product);
 
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveChangesAsync();
             
             switch (productDto.CategoryId)
             {
                 case 1:
-                    await AddProductCategory(new Sport()
+                    await AddProductCategoryAsync(new Sport()
                     {
                         ProductId = product.ProductId,
                         Brand = productDto.Brand,
@@ -92,7 +92,7 @@ namespace Rentora.Application.Services
                         Condition = productDto.Condition
                     }); break;
                 case 2:
-                    await AddProductCategory(new Transportation()
+                    await AddProductCategoryAsync(new Transportation()
                     {
                         ProductId = product.ProductId,
                         Transmission = productDto.Transmission,
@@ -100,13 +100,13 @@ namespace Rentora.Application.Services
                         Fuel_Type = productDto.Fuel_Type
                     }); break;
                 case 3:
-                    await AddProductCategory(new Travel()
+                    await AddProductCategoryAsync(new Travel()
                     {
                         ProductId = product.ProductId,
                         Condition = productDto.Condition
                     }); break;
                 case 4:
-                    await AddProductCategory(new Electronic()
+                    await AddProductCategoryAsync(new Electronic()
                     {
                         ProductId = product.ProductId,
                         Brand = productDto.Brand,
@@ -115,22 +115,22 @@ namespace Rentora.Application.Services
                     }); break;
             }
 
-            await _unitOfWork.Save();
-            return await GetProductDTOById(product.ProductId);
+            await _unitOfWork.SaveChangesAsync();
+            return await GetProductDTOByIdAsync(product.ProductId);
         }
 
-        public async Task<ProductDTO> UpdateProduct(UpdateProductCommand request)
+        public async Task<ProductDTO> UpdateProductAsync(UpdateProductCommand request)
         {
-            var product = await GetProductById(request.ProductId);
+            var product = await GetProductByIdAsync(request.ProductId);
             if (product is null) return null;
 
             _mapper.Map(request, product);
 
-            var categoryId = GetProductSpecificCategoryId(product.ProductId);
+            var categoryId = await GetProductSpecificCategoryIdAsync(product.ProductId);
             switch (product.CategoryId)
             {
                 case 1:
-                    await UpdateProductCategory(1, new Sport()
+                    await UpdateProductCategoryAsync(1, new Sport()
                     {
                         Id = categoryId,
                         ProductId = product.ProductId,
@@ -139,7 +139,7 @@ namespace Rentora.Application.Services
                         Condition = request.Condition
                     }); break;
                 case 2:
-                    await UpdateProductCategory(2, new Transportation()
+                    await UpdateProductCategoryAsync(2, new Transportation()
                     {
                         Id = categoryId,
                         ProductId = product.ProductId,
@@ -148,14 +148,14 @@ namespace Rentora.Application.Services
                         Fuel_Type = request.Fuel_Type
                     }); break;
                 case 3:
-                    await UpdateProductCategory(3, new Travel()
+                    await UpdateProductCategoryAsync(3, new Travel()
                     {
                         Id = categoryId,
                         ProductId = product.ProductId,
                         Condition = request.Condition
                     }); break;
                 case 4:
-                    await UpdateProductCategory(4, new Electronic()
+                    await UpdateProductCategoryAsync(4, new Electronic()
                     {
                         Id = categoryId,
                         ProductId = product.ProductId,
@@ -166,69 +166,69 @@ namespace Rentora.Application.Services
             }
 
             _unitOfWork.products.Update(product);
-            await _unitOfWork.Save();
-            return await GetProductDTOById(product.ProductId);
+            await _unitOfWork.SaveChangesAsync();
+            return await GetProductDTOByIdAsync(product.ProductId);
         }
         public async Task<Product> UpdateAsync(Product product)
         {
             var p = _unitOfWork.products.Update(product);
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveChangesAsync();
             return p;
         }
-        public async Task<bool> DeleteProduct(int id)
+        public async Task<bool> DeleteProductAsync(int id)
         {
-            await _unitOfWork.products.DeleteProductCategory(id);
+            await _unitOfWork.products.DeleteProductCategoryAsync(id);
             _unitOfWork.products.DeleteProductImages(id);
             var result = _unitOfWork.products.Delete(id);
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveChangesAsync();
             return result;
         }
 
-        public async Task<bool> AddProductImage(int productId, IFormFile file)
+        public async Task<bool> AddProductImageAsync(int productId, IFormFile file)
         {
             var imageUrl = await _imageService.UploadImageAsync(file);
-            var result = await _unitOfWork.products.AddProductImage(new ProductImage()
+            var result = await _unitOfWork.products.AddProductImageAsync(new ProductImage()
             {
                 ProductId = productId,
                 Image = imageUrl
             });
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveChangesAsync();
             return result;
         }
 
-        public async Task<bool> AddProductCategory<T>(T category) where T : class
+        public async Task<bool> AddProductCategoryAsync<T>(T category) where T : class
         {
-            var result = await _unitOfWork.products.AddProductSpecificCategory(category);
-            await _unitOfWork.Save();
+            var result = await _unitOfWork.products.AddProductSpecificCategoryAsync(category);
+            await _unitOfWork.SaveChangesAsync();
             return result != null;
         }
 
-        public async Task<bool> UpdateProductCategory<T>(int id, T category) where T : class
+        public async Task<bool> UpdateProductCategoryAsync<T>(int categoryId, T category) where T : class
         {
-            var result = _unitOfWork.products.UpdateProductCategoryAsync(id, category);
-            await _unitOfWork.Save();
+            var result = _unitOfWork.products.UpdateProductCategoryAsync(categoryId, category);
+            await _unitOfWork.SaveChangesAsync();
             return result != null;
         }
 
-        public int GetProductSpecificCategoryId(int id)
+        public async Task<int> GetProductSpecificCategoryIdAsync(int id)
         {
-            return _unitOfWork.products.GetProductSpecificCategoryId(id);
+            return await _unitOfWork.products.GetProductSpecificCategoryIdAsync(id);
         }
 
         public async Task<List<ProductImage>> GetProductImagesByIdAsync(int productId)
         {
-            var images = await _unitOfWork.products.GetProductImages(productId);
+            var images = await _unitOfWork.products.GetProductImagesAsync(productId);
             return images;
         }
 
         public async Task<bool> DeleteImageById(int imageId)
         {
-            var image = await _unitOfWork.products.GetProductImageById(imageId);
+            var image = await _unitOfWork.products.GetProductImageByIdAsync(imageId);
             if (image is null) return false;
 
             await _imageService.DeleteImageAsync(image.Image);
             _unitOfWork.products.DeleteProductImage(image);
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveChangesAsync();
                        
             return true;
         }

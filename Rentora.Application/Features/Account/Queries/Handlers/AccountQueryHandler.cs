@@ -22,14 +22,14 @@ namespace Rentora.Application.Features.Account.Queries.Handlers
         }
         public async Task<Response<List<UserDTO>>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            var users = await _userService.GetAllUsers();
+            var users = _userService.GetAllUsers();
             var usersMapper = _mapper.Map<List<UserDTO>>(users);
             return ResponseHandler.Success(usersMapper);
         }
 
         public async Task<Response<UserDTO>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
-            var user = await _userService.GetUserById(request.UserId);
+            var user = await _userService.GetUserByIdAsync(request.UserId);
             if (user == null) return ResponseHandler.NotFound<UserDTO>();
             var userMapper = _mapper.Map<UserDTO>(user);
             return ResponseHandler.Success(userMapper);
@@ -37,13 +37,13 @@ namespace Rentora.Application.Features.Account.Queries.Handlers
 
         public async Task<Response<bool>> Handle(CheckIfEmailExistsQuery request, CancellationToken cancellationToken)
         {
-            var result = await _userService.CheckIfEmailExists(request.Email);
+            var result = await _userService.CheckIfEmailExistsAsync(request.Email);
             return ResponseHandler.Success(result);
         }
 
         public async Task<Response<bool>> Handle(CheckIfUserNameExistsQuery request, CancellationToken cancellationToken)
         {
-            var result = await _userService.CheckIfUserNameExists(request.UserName);
+            var result = await _userService.CheckIfUserNameExistsAsync(request.UserName);
             return ResponseHandler.Success(result);
         }
     }

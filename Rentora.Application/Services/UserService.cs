@@ -28,36 +28,36 @@ namespace Rentora.Application.Services
             _mapper = mapper;
             _jwt = jwt.Value;
         }
-        public async Task<List<ApplicationUser>> GetAllUsers()
+        public IQueryable<ApplicationUser> GetAllUsers()
         {
-            var allusers = await _unitOfWork.users.GetAll();
+            var allusers = _unitOfWork.users.GetAll();
             return allusers;
         }
-        public async Task<ApplicationUser> GetUserById(string id)
+        public async Task<ApplicationUser> GetUserByIdAsync(string id)
         {
-            var user = await _unitOfWork.users.GetById(id);
+            var user = await _unitOfWork.users.GetByIdAsync(id);
             return user;
         }
         public async Task<ApplicationUser?> GetUserByEmailAsync(string email)
         {
-            return await _unitOfWork.users.GetByEmail(email);
+            return await _unitOfWork.users.GetByEmailAsync(email);
         }
-        public async Task<bool> CheckIfEmailExists(string email)
+        public async Task<bool> CheckIfEmailExistsAsync(string email)
         {
-            return await _unitOfWork.users.GetByEmail(email) is not null;
+            return await _unitOfWork.users.GetByEmailAsync(email) is not null;
         }
-        public async Task<bool> CheckIfUserNameExists(string username)
+        public async Task<bool> CheckIfUserNameExistsAsync(string username)
         {
-            return await _unitOfWork.users.GetByName(username) is not null;
+            return await _unitOfWork.users.GetByNameAsync(username) is not null;
         }
-        public async Task<bool> CheckIfNationalIDExists(string nationalID)
+        public async Task<bool> CheckIfNationalIDExistsAsync(string nationalID)
         {
-            return await _unitOfWork.users.GetByNationalID(nationalID) is not null;
+            return await _unitOfWork.users.GetByNationalIDAsync(nationalID) is not null;
         }
 
-        public async Task<bool> CheckIfPhoneNumberExists(string phoneNumber)
+        public async Task<bool> CheckIfPhoneNumberExistsAsync(string phoneNumber)
         {
-            return await _unitOfWork.users.GetByPhoneNumber(phoneNumber) is not null; ;
+            return await _unitOfWork.users.GetByPhoneNumberAsync(phoneNumber) is not null; ;
         }
 
         public async Task<(bool, Dictionary<string, List<string>>)> RegisterAsync(RegisterCommand model)
@@ -73,7 +73,7 @@ namespace Rentora.Application.Services
             user.IDImageFront = IDImageFront;
             user.IDImageBack = IDImageBack;
 
-            var result = await _unitOfWork.users.Create(user, model.Password);
+            var result = await _unitOfWork.users.CreateAsync(user, model.Password);
             if (!result.Succeeded)
             {
                 foreach (var error in result.Errors)
@@ -82,7 +82,7 @@ namespace Rentora.Application.Services
                 }
                 return (false, errors);
             }
-            await _unitOfWork.users.AddRole(user, "User");
+            await _unitOfWork.users.AddRoleAsync(user, "User");
 
             return (true, null);
         }
@@ -90,9 +90,9 @@ namespace Rentora.Application.Services
         {
             var authModel = new AuthModel();
 
-            var user = await _unitOfWork.users.GetByEmail(model.Email);
+            var user = await _unitOfWork.users.GetByEmailAsync(model.Email);
 
-            if (user is null || !await _unitOfWork.users.CheckPassword(user, model.Password))
+            if (user is null || !await _unitOfWork.users.CheckPasswordAsync(user, model.Password))
             {
                 authModel.Message = "Email or Password is incorrect!";
                 return authModel;
@@ -124,16 +124,16 @@ namespace Rentora.Application.Services
         public async Task<bool> UpdateProfileImageAsync(UpdateProfileImageCommand model)
         {
             var profileImage = await _imageService.UploadImageAsync(model.Image);
-            var user = await _unitOfWork.users.GetById(model.UserId);
+            var user = await _unitOfWork.users.GetByIdAsync(model.UserId.ToString());
             var result = await _imageService.DeleteImageAsync(user.ProfileImage);
             user.ProfileImage = profileImage;
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveChangesAsync();
             return true;
         }
 
         private async Task<JwtSecurityToken> CreateJwtToken(ApplicationUser user)
         {
-            var userClaims = await _unitOfWork.users.GetClaims(user);
+            var userClaims = await _unitOfWork.users.GetClaimsAsync(user);
             var roles = await _unitOfWork.users.GetRoles(user);
             var roleClaims = new List<Claim>();
 
@@ -164,14 +164,14 @@ namespace Rentora.Application.Services
         }
         public async Task<(bool,string)> AddRoleAsync(AddRoleCommand model)
         {
-            var user = await _unitOfWork.users.GetById(model.UserId);
-            var role = await _unitOfWork.users.RoleExists(model.Role);
+            var user = await _unitOfWork.users.GetByIdAsync(model.UserId.ToString());
+            var role = await _unitOfWork.users.RoleExistsAsync(model.Role);
             if (user is null || !role)
                 return (false, "Invalid user Id or role name");
-            if (await _unitOfWork.users.IsInRole(user, model.Role))
+            if (await _unitOfWork.users.IsInRoleAsync(user, model.Role))
                 return (false, "Role assigned to user already");
 
-            var result = await _unitOfWork.users.AddRole(user, model.Role);
+            var result = await _unitOfWork.users.AddRoleAsync(user, model.Role);
             if(!result.Succeeded) return (false,  "Something went wrong");
 
             return (true, "Success");
@@ -179,10 +179,10 @@ namespace Rentora.Application.Services
 
         public async Task<bool> UpdateProfileAsync(UpdateProfileCommand model)
         {
-            var user = await _unitOfWork.users.GetById(model.Id.ToString());
+            var user = await _unitOfWork.users.GetByIdAsync(model.Id.ToString());
             if (user is null) return false;
             _mapper.Map(model, user);
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveChangesAsync();
             return true;
         }
     }

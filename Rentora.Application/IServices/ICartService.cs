@@ -2,8 +2,8 @@
 {
     public interface ICartService
     {
-        Task<bool> AddInCart(string userId, int productId);
-        Task<bool> RemoveFromCart(string userId, int productId);
+        Task<bool> AddInCartAsync(string userId, int productId);
+        Task<bool> RemoveFromCartAsync(string userId, int productId);
         Task<List<int>> GetUserCartItemsAsync(string userId);
 
     }

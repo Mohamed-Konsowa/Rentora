@@ -24,7 +24,7 @@ namespace Rentora.Application.Features.Product.Queries.Handlers
         }
         public async Task<Response<ProductDTO>> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
         {
-            var result = await _productService.GetProductDTOById(request.ProductId);
+            var result = await _productService.GetProductDTOByIdAsync(request.ProductId);
             if (result == null) return ResponseHandler.NotFound<ProductDTO>("Product not found");
             return ResponseHandler.Success(result);
         }

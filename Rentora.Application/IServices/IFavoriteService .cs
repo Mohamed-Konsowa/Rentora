@@ -2,9 +2,9 @@
 {
     public interface IFavoriteService
     {
-        Task<bool> AddInFavorite(string userId, int productId);
-        Task<bool> RemoveFromFavorite(string userId, int productId);
-        Task<List<int>> GetUserFavoriteItems(string userId);
+        Task<bool> AddInFavoriteAsync(string userId, int productId);
+        Task<bool> RemoveFromFavoriteAsync(string userId, int productId);
+        Task<List<int>> GetUserFavoriteItemsAsync(string userId);
 
     }
 }

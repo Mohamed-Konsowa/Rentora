@@ -2,13 +2,8 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Rentora.Persistence.Data.DbContext;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Rentora.Persistence.Services
+namespace Rentora.Persistence.BackgroundServices
 {
     internal class OtpCleanupService : BackgroundService
     {

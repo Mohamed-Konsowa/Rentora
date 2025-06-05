@@ -35,9 +35,9 @@ namespace Rentora.Presentation.Controllers
         [SwaggerResponseExample(StatusCodes.Status200OK, typeof(GetUserByIdOkExample))]
         [SwaggerResponse(StatusCodes.Status404NotFound, Type = typeof(Response<string>))]
         [SwaggerResponseExample(StatusCodes.Status404NotFound, typeof(NotFoundExample))]
-        public async Task<IActionResult> GetUserById(string userId)
+        public async Task<IActionResult> GetUserById(Guid userId)
         {
-            return NewResult(await _mediator.Send(new GetUserByIdQuery { UserId = userId}));
+            return NewResult(await _mediator.Send(new GetUserByIdQuery { UserId = userId.ToString()}));
         }
 
         /// <summary>

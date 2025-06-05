@@ -6,7 +6,7 @@ namespace Rentora.Application.Features.Product.Commands.Models
 {
     public class AddProductCommand : IRequest<Response<ProductDTO>>
     {
-        public string ApplicationUserId { get; set; }
+        public Guid ApplicationUserId { get; set; }
         public int CategoryId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }

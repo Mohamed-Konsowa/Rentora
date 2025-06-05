@@ -6,13 +6,13 @@ namespace Rentora.Application.IServices
 {
     public interface IUserService
     {
-        Task<List<ApplicationUser>> GetAllUsers();
-        Task<ApplicationUser> GetUserById(string id);
+        IQueryable<ApplicationUser> GetAllUsers();
+        Task<ApplicationUser> GetUserByIdAsync(string id);
         Task<ApplicationUser?> GetUserByEmailAsync(string email);
-        Task<bool> CheckIfEmailExists(string email);
-        Task<bool> CheckIfUserNameExists(string userName);
-        Task<bool> CheckIfNationalIDExists(string nationalID);
-        Task<bool> CheckIfPhoneNumberExists(string phoneNumber);
+        Task<bool> CheckIfEmailExistsAsync(string email);
+        Task<bool> CheckIfUserNameExistsAsync(string userName);
+        Task<bool> CheckIfNationalIDExistsAsync(string nationalID);
+        Task<bool> CheckIfPhoneNumberExistsAsync(string phoneNumber);
         Task<string> GeneratePasswordResetTokenAsync(ApplicationUser user);
         Task<bool> ResetPasswordAsync(ApplicationUser user, string token, string newPassword);
         Task<(bool, Dictionary<string, List<string>>)> RegisterAsync(RegisterCommand model);

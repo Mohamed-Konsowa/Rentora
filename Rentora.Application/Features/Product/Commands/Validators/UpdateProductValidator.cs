@@ -16,7 +16,7 @@ namespace Rentora.Application.Features.Product.Commands.Validators
         void ApplyValidationRules()
         {
             RuleFor(p => p.ProductId)
-                .MustAsync(async (Key, Can) => await _productService.GetProductById(Key) is not null)
+                .MustAsync(async (Key, Can) => await _productService.GetProductByIdAsync(Key) is not null)
                 .WithMessage("Product not found!");
 
             RuleFor(p => p.Title)

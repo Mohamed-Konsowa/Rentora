@@ -16,9 +16,9 @@ namespace Rentora.Presentation.Controllers
         /// </summary>
         [HttpGet]
         [Route(Router.Rent.GetUserRents)]
-        public async Task<IActionResult> GetUserRents([FromRoute]string  userId)
+        public async Task<IActionResult> GetUserRents([FromRoute] Guid userId)
         {
-            return NewResult(await _mediator.Send(new GetUserRents { UserId = userId}));
+            return NewResult(await _mediator.Send(new GetUserRents { UserId = userId.ToString()}));
         }
 
         /// <summary>

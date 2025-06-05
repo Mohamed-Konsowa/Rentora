@@ -17,13 +17,13 @@ namespace Rentora.Persistence.Repositories
         {
             _context = context;
         }
-        public async Task<bool> AddOtp(OTP otp)
+        public async Task<bool> AddOtpAsync(OTP otp)
         {
             var r = await _context.OTPs.AddAsync(otp);
             return r != null;
         }
 
-        public async Task<OTP> GetOtp(string email, string otpCode)
+        public async Task<OTP> GetOtpAsync(string email, string otpCode)
         {
             var otp = await _context.OTPs.
                 FirstOrDefaultAsync(otp => otp.Email == email && otp.Code == otpCode);

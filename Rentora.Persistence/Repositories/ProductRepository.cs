@@ -16,25 +16,25 @@ namespace Rentora.Persistence.Repositories
         }
 
         //specific tasks
-        public async Task<T> AddProductSpecificCategory<T>(T category) where T : class 
+        public async Task<T> AddProductSpecificCategoryAsync<T>(T category) where T : class 
         {
             var result = await _context.Set<T>().AddAsync(category);
             return category;
         }
 
-        public async Task<T> UpdateProductCategoryAsync<T>(int id, T category) where T : class
+        public async Task<T> UpdateProductCategoryAsync<T>(int categoryId, T category) where T : class
         {
-            if(id == 1)
+            if (categoryId == 1)
             {
                 var x = category as Sport;
                 var cat = await _context.sports.FirstOrDefaultAsync(c => c.ProductId == x.Id);
-                
+
                 cat.Brand = x.Brand;
                 cat.Model = x.Model;
                 cat.Condition = x.Condition;
                 _context.Set<Sport>().Update(cat);
             }
-            else if (id == 2)
+            else if (categoryId == 2)
             {
                 var x = category as Transportation;
                 var cat = await _context.Transportations.FirstOrDefaultAsync(c => c.ProductId == x.Id);
@@ -44,7 +44,7 @@ namespace Rentora.Persistence.Repositories
                 cat.Fuel_Type = x.Fuel_Type;
                 _context.Set<Transportation>().Update(cat);
             }
-            else if (id == 3)
+            else if (categoryId == 3)
             {
                 var x = category as Travel;
                 var cat = await _context.Travels.FirstOrDefaultAsync(c => c.ProductId == x.Id);
@@ -53,7 +53,7 @@ namespace Rentora.Persistence.Repositories
 
                 _context.Set<Travel>().Update(cat);
             }
-            else //4
+            else if (categoryId == 4)
             {
                 var x = category as Electronic;
                 var cat = await _context.Electronics.FirstOrDefaultAsync(c => c.ProductId == x.Id);
@@ -63,10 +63,10 @@ namespace Rentora.Persistence.Repositories
                 cat.Condition = x.Condition;
                 _context.Set<Electronic>().Update(cat);
             }
-            
+            else return null;
             return category;
         }
-        public async Task<bool> DeleteProductCategory(int productId)
+        public async Task<bool> DeleteProductCategoryAsync(int productId)
         {
             var product = await _context.Products.FindAsync(productId);
             if (product == null) return false;
@@ -102,35 +102,35 @@ namespace Rentora.Persistence.Repositories
             return true;
         }
 
-        public async Task<bool> AddProductImage(ProductImage productImage)
+        public async Task<bool> AddProductImageAsync(ProductImage productImage)
         {
             var result = await _context.ProductImages.AddAsync(productImage);
             return true;
         }
 
-        public int GetProductSpecificCategoryId(int productId)
+        public async Task<int> GetProductSpecificCategoryIdAsync(int productId)
         {
-            var cat = _context.sports.FirstOrDefault(s => s.ProductId == productId);
+            var cat = await _context.sports.FirstOrDefaultAsync(s => s.ProductId == productId);
             if (cat != null) return cat.ProductId;
 
-            var cat2 = _context.Transportations.FirstOrDefault(s => s.ProductId == productId);
+            var cat2 = await _context.Transportations.FirstOrDefaultAsync(s => s.ProductId == productId);
             if (cat2 != null) return cat2.ProductId;
 
-            var cat3 = _context.Travels.FirstOrDefault(s => s.ProductId == productId);
+            var cat3 = await _context.Travels.FirstOrDefaultAsync(s => s.ProductId == productId);
             if (cat3 != null) return cat3.ProductId;
 
-            var cat4 = _context.Electronics.FirstOrDefault(s => s.ProductId == productId);
+            var cat4 = await _context.Electronics.FirstOrDefaultAsync(s => s.ProductId == productId);
             if (cat4 != null) return cat4.ProductId;
 
             return -1;
         }
 
-        public async Task<List<ProductImage>> GetProductImages(int productId)
+        public async Task<List<ProductImage>> GetProductImagesAsync(int productId)
         {
             return await _context.ProductImages.Where(i => i.ProductId == productId).ToListAsync();
         }
 
-        public async Task<ProductImage> GetProductImageById(int imageId)
+        public async Task<ProductImage> GetProductImageByIdAsync(int imageId)
         {
             return await _context.ProductImages.FindAsync(imageId);
         }
@@ -140,7 +140,7 @@ namespace Rentora.Persistence.Repositories
             _context.ProductImages.Remove(productImage);
         }
 
-        public async Task<T> GetProductSpecificCategory<T>(Expression<Func<T,bool>> expression) where T : class
+        public async Task<T> GetProductSpecificCategoryAsync<T>(Expression<Func<T,bool>> expression) where T : class
         {
             return await _context.Set<T>().SingleOrDefaultAsync(expression);
         }

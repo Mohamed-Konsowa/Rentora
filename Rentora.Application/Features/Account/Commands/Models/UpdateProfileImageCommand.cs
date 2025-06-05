@@ -6,7 +6,7 @@ namespace Rentora.Application.Features.Account.Commands.Models
 {
     public class UpdateProfileImageCommand : IRequest<Response<string>>
     {
-        public string UserId { get; set; }
+        public Guid UserId { get; set; }
         public IFormFile Image { get; set; }
     }
 }

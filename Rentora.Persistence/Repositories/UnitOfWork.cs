@@ -27,7 +27,7 @@ namespace Rentora.Application.IRepositories
             reviews = reviewRepository;
         }
 
-        public async Task Save()
+        public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
         }

@@ -61,7 +61,7 @@ namespace Rentora.Application.Features.Account.Commands.Handlers
 
         public async Task<Response<string>> Handle(UpdateProfileCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userService.GetUserById(request.Id.ToString());
+            var user = await _userService.GetUserByIdAsync(request.Id.ToString());
             if(user is null) return ResponseHandler.NotFound<string>("User not found!");
             var result = await _userService.UpdateProfileAsync(request);
             if(result) return ResponseHandler.Success<string>("");

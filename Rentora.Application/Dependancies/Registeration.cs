@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace Rentora.Application.Dependancies
 {
-    public static class DependancyInjection
+    public static class Registeration
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {

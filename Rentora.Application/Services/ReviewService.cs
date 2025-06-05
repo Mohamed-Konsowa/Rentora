@@ -27,7 +27,7 @@ namespace Rentora.Application.Services
                 Comment = reviewDTO.Comment
             };
             var result = await _unitOfWork.reviews.AddAsync(review);
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveChangesAsync();
             return result is not null;
         }
 
@@ -59,7 +59,7 @@ namespace Rentora.Application.Services
 
         public async Task<bool> IsUserReviewedBeforeAsync(string userId, int productId)
         {
-            return await _unitOfWork.reviews.IsUserReviewedBefore(userId, productId);
+            return await _unitOfWork.reviews.IsUserReviewedBeforeAsync(userId, productId);
         }
 
         public async Task<bool> UpdateReviewAsync(AddReviewDTO reviewDTO)
@@ -67,7 +67,7 @@ namespace Rentora.Application.Services
             var re = await _unitOfWork.reviews.GetReviewAsync(reviewDTO.ReviewerId, reviewDTO.ProductId);
             re.Rating = reviewDTO.Rating;
             re.Comment = reviewDTO.Comment;
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveChangesAsync();
             return true;
         }
 
@@ -76,7 +76,7 @@ namespace Rentora.Application.Services
             var r = await _unitOfWork.reviews.GetByIdAsync(reviewId);
             if (r is null) return false;
             _unitOfWork.reviews.Delete(reviewId);
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveChangesAsync();
             return true;
         }
     }

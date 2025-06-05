@@ -4,8 +4,8 @@ namespace Rentora.Presentation.Services
 {
     public interface IEmailService
     {
-        Task<string> SendEmail(string email, string message, string subj);
-        Task<bool> SendOTP(string email);
-        Task<(bool, string)> VerifyOtp(string email, string otpcode);
+        Task<string> SendEmailAsync(string email, string message, string subj);
+        Task<bool> SendOTPAsync(string email);
+        Task<(bool, string)> VerifyOtpAsync(string email, string otpcode);
     }
 }

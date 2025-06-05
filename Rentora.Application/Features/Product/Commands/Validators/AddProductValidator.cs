@@ -18,7 +18,7 @@ namespace Rentora.Application.Features.Product.Commands.Validators
         {
             RuleFor(p => p.ApplicationUserId)
                 .NotEmpty().WithMessage("User ID is required.")
-                .MustAsync(async (Key, can) => await _userService.GetUserById(Key) is not null)
+                .MustAsync(async (Key, can) => await _userService.GetUserByIdAsync(Key.ToString()) is not null)
                 .WithMessage("User not found");
 
             RuleFor(p => p.CategoryId)
