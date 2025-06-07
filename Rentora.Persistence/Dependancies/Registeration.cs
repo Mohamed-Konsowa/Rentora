@@ -23,8 +23,7 @@ namespace Rentora.Persistence.Dependancies
                 var factory = url.GetRequiredService<IUrlHelperFactory>();
                 return factory.GetUrlHelper(actionContext!);
             });
-            //services.AddDataProtection();
-            //services.AddScoped<IEmailService, EmailService>();
+            
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -49,11 +48,6 @@ namespace Rentora.Persistence.Dependancies
             });
 
             
-            //services.AddAuthentication();
-            //services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
-            //services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
-            //services.AddSingleton(nameof(IEmailSender));
-
             services.AddHostedService<OtpCleanupService>();
 
             return services;

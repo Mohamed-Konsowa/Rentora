@@ -55,9 +55,6 @@ namespace Rentora.Application.Features.Product.Queries.Handlers
 
         public async Task<Response<ProductDTO>> Handle(AddProductCommand request, CancellationToken cancellationToken)
         {
-            if (request.CategoryId < 1 || request.CategoryId > 4)
-                return ResponseHandler.BadRequest<ProductDTO>("Invalid Category Id, (1,2,3,4) only");
-            
             var product = _mapper.Map<AddProductDTO>(request);
             var result = await _productService.AddProductAsync(product);
             return ResponseHandler.Success(result);

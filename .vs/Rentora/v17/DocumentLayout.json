@@ -1,16 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Graduation-Project\\Rentora\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|d:\\graduation-project\\rentora\\rentora.application\\features\\review\\commands\\handlers\\reviewcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|solutionrelative:rentora.application\\features\\review\\commands\\handlers\\reviewcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|d:\\graduation-project\\rentora\\rentora.application\\features\\review\\commands\\validators\\addreviewvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|solutionrelative:rentora.application\\features\\review\\commands\\validators\\addreviewvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
@@ -18,12 +9,8 @@
       "DocumentGroups": [
         {
           "DockedHeight": 492,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": -1,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{fbcae063-e2c0-4ab1-a516-996ea3dafb72}"
@@ -33,30 +20,8 @@
               "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ReviewCommandHandler.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Review\\Commands\\Handlers\\ReviewCommandHandler.cs",
-              "RelativeDocumentMoniker": "Rentora.Application\\Features\\Review\\Commands\\Handlers\\ReviewCommandHandler.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Review\\Commands\\Handlers\\ReviewCommandHandler.cs",
-              "RelativeToolTip": "Rentora.Application\\Features\\Review\\Commands\\Handlers\\ReviewCommandHandler.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAhwBcAAABvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T20:58:52.36Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AddReviewValidator.cs",
-              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Review\\Commands\\Validators\\AddReviewValidator.cs",
-              "RelativeDocumentMoniker": "Rentora.Application\\Features\\Review\\Commands\\Validators\\AddReviewValidator.cs",
-              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Review\\Commands\\Validators\\AddReviewValidator.cs",
-              "RelativeToolTip": "Rentora.Application\\Features\\Review\\Commands\\Validators\\AddReviewValidator.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAASwBUAAABhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T20:58:43.446Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             }
           ]
         },

@@ -1,5 +1,4 @@
-﻿
-using FluentValidation;
+﻿using FluentValidation;
 using Rentora.Application.Features.Product.Commands.Models;
 using Rentora.Application.IServices;
 
@@ -11,8 +10,9 @@ namespace Rentora.Application.Features.Product.Commands.Validators
 
         public AddProductValidator(IUserService userService)
         {
-            ApplyValidationRules();
             _userService = userService;
+            ApplyValidationRules();
+            Apply();
         }
         public void ApplyValidationRules()
         {
@@ -32,14 +32,8 @@ namespace Rentora.Application.Features.Product.Commands.Validators
                 .NotEmpty().WithMessage("Description is required.")
                 .MaximumLength(500).WithMessage("Description must not exceed 500 characters.");
 
-            RuleFor(p => p.Quantity)
-                .GreaterThan(0).WithMessage("Quantity must be at least 1.");
-
             RuleFor(p => p.Price)
                 .GreaterThan(0).WithMessage("Price must be greater than zero.");
-
-            RuleFor(p => p.RentalPeriod)
-                .NotEmpty().WithMessage("Rental Period is required.");
 
             RuleFor(p => p.Location)
                 .NotEmpty().WithMessage("Location is required.");
@@ -49,12 +43,39 @@ namespace Rentora.Application.Features.Product.Commands.Validators
 
             RuleFor(p => p.Longitude)
                 .InclusiveBetween(-180, 180).WithMessage("Longitude must be between -180 and 180.");
+        }
+        public void Apply()
+        {
+            RuleFor(p => p.Brand)
+            .NotEmpty()
+            .When(p => p.CategoryId == 1 || p.CategoryId == 4)
+            .WithMessage("Brand is required.");
 
-            RuleFor(p => p.Status)
-                .Must(s => new[] { "Available", "Rented", "Pending" }.Contains(s))
-                .WithMessage("Invalid status. Allowed values: Available, Rented, Pending.");
+            RuleFor(p => p.Model)
+            .NotEmpty()
+            .When(p => p.CategoryId == 1 || p.CategoryId == 4)
+            .WithMessage("Model is required.");
 
+            RuleFor(p => p.Condition)
+            .NotEmpty()
+            .When(p => p.CategoryId == 1 || p.CategoryId == 4 || p.CategoryId == 3)
+            .WithMessage("Condition is required.");
 
+            // Transportation
+            RuleFor(p => p.Transmission)
+            .NotEmpty()
+            .When(p => p.CategoryId == 2)
+            .WithMessage("Transmission is required.");
+
+            RuleFor(p => p.Body_Type)
+            .NotEmpty()
+            .When(p => p.CategoryId == 2)
+            .WithMessage("Body Type is required.");
+
+            RuleFor(p => p.Fuel_Type)
+            .NotEmpty()
+            .When(p => p.CategoryId == 2)
+            .WithMessage("Fuel Type is required.");
         }
     }
 }
