@@ -15,8 +15,9 @@ namespace Rentora.Persistence.Repositories
 
         public async Task<RentalCart> GetCartAsync(string userId, int productId)
         {
-            return await _context.RentalCarts.FirstOrDefaultAsync
+            var cart = await _context.RentalCarts.FirstOrDefaultAsync
                 (c => c.ApplicationUserId == userId && c.ProductId == productId);
+            return cart;
         }
 
         public async Task<List<int>> GetUserCartItemsAsync(string userId)

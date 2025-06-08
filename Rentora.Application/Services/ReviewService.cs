@@ -31,14 +31,19 @@ namespace Rentora.Application.Services
             return result is not null;
         }
 
-        public async Task<List<GetProductReviewsDTO>> GetProductReviewsAsync(int productId)
+        public async Task<(IReadOnlyCollection<GetProductReviewsDTO>, int)> GetProductReviewsPaginatedAsync(int productId, int pageNumber, int pageSize, CancellationToken cancellationToken)
         {
-            var list = await _unitOfWork.reviews.GetProductReviews(productId).ToListAsync();
-            var result = new List<GetProductReviewsDTO>();
-            list.ForEach(review => { result.Add(_mapper.Map<GetProductReviewsDTO>(review)); });
-            return result;
+            return await _unitOfWork.reviews.PaginateAsync
+            (
+            pageNumber,
+            pageSize,
+                r => _mapper.Map<GetProductReviewsDTO>(r),
+                r => r.ProductId == productId,
+                null,
+                null,
+                cancellationToken
+            );
         }
-
         public async Task<(int Count, float Rate)> GetProductRateAsync(int productId)
         {
             var Count = await _unitOfWork.reviews

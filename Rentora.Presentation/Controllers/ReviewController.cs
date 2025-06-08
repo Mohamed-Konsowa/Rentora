@@ -20,12 +20,16 @@ namespace Rentora.Presentation.Controllers
         }
 
         /// <summary>
-        /// Get all product's reviews.
+        /// Get all product's reviews with pagination.
         /// </summary>
         [HttpGet(Router.Review.GetProductReviews)]
-        public async Task<IActionResult> GetProductReviews([FromRoute] int productId)
+        public async Task<IActionResult> GetProductReviewsPaginated([FromRoute] int productId, int pageNumber, int pageSize)
         {
-            return NewResult(await _mediator.Send(new GetProductReviewsQuery() { ProductId = productId}));
+            return NewResult(await _mediator.Send(new GetProductReviewsPaginatedQuery() { 
+                ProductId = productId,
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            }));
         }
 
         /// <summary>

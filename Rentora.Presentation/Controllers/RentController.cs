@@ -12,13 +12,17 @@ namespace Rentora.Presentation.Controllers
     public class RentController : AppControllerBase
     {
         /// <summary>
-        /// Gets all rented items by a user.
+        /// Gets all rented items by a user with pagination.
         /// </summary>
         [HttpGet]
         [Route(Router.Rent.GetUserRents)]
-        public async Task<IActionResult> GetUserRents([FromRoute] Guid userId)
+        public async Task<IActionResult> GetUserRentsPaginated([FromRoute] Guid userId, int pageNumber, int pageSize)
         {
-            return NewResult(await _mediator.Send(new GetUserRents { UserId = userId.ToString()}));
+            return NewResult(await _mediator.Send(new GetUserRentsPaginatedQuery { 
+                UserId = userId.ToString(),
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            }));
         }
 
         /// <summary>

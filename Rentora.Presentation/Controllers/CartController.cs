@@ -11,14 +11,19 @@ namespace Rentora.Presentation.Controllers
     public class CartController : AppControllerBase
     {
         /// <summary>
-        /// Gets all items in a user's cart.
+        /// Gets all items in a user's cart with pagination.
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         [HttpGet]
-        [Route(Router.Cart.GetUserFav)]
-        public async Task<IActionResult> GetUserCartItemsAsync([FromRoute] Guid userId)
+        [Route(Router.Cart.GetUserCart)]
+        public async Task<IActionResult> GetUserCartItemsPaginatedAsync([FromRoute] Guid userId, int pageNumber, int pageSize)
         {
-            return NewResult(await _mediator.Send(new GetUserCartItemsQuery { UserId = userId.ToString() }));
+            return NewResult(await _mediator.Send(new GetUserCartItemsPaginatedQuery 
+            {
+                UserId = userId.ToString(),
+                PageNumber = pageNumber,
+                PageSize = pageSize 
+            }));
         }
 
         /// <summary>

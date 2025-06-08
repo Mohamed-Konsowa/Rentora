@@ -5,7 +5,7 @@ using Rentora.Application.IServices;
 
 namespace Rentora.Application.Features.Rent.Queries.Handlers
 {
-    internal class RentCommandHandler : IRequestHandler<GetUserRents, Response<List<int>>>
+    internal class RentCommandHandler : IRequestHandler<GetUserRentsPaginatedQuery, Response<List<int>>>
     {
         private readonly IRentService _rentService;
 
@@ -13,12 +13,28 @@ namespace Rentora.Application.Features.Rent.Queries.Handlers
         {
             _rentService = rentService;
         }
-        public async Task<Response<List<int>>> Handle(GetUserRents request, CancellationToken cancellationToken)
+        public async Task<Response<List<int>>> Handle(GetUserRentsPaginatedQuery request, CancellationToken cancellationToken)
         {
-            var result = await _rentService.GetUserRentsAsync(request.UserId);
-            if(result == null) return ResponseHandler.NotFound<List<int>>("User not found!");
-            return ResponseHandler.Success(result);
-            throw new NotImplementedException();
+            request.PageNumber = request.PageNumber <= 0 ? 1 : request.PageNumber;
+            request.PageSize = request.PageSize <= 0 ? 10 : request.PageSize;
+            var Ids = await _rentService.GetUserRentsPaginatedAsync
+            (
+                 request.UserId,
+                 request.PageNumber,
+                 request.PageSize,
+                 cancellationToken
+            );
+
+            var response = ResponseHandler.Success(Ids.Item1.ToList());
+            response.Meta = new PaginatedMeta
+            {
+                CurrentPage = request.PageNumber,
+                Succeeded = true,
+                PageSize = request.PageSize,
+                TotalPages = (int)Math.Ceiling((float)Ids.Item2 / request.PageSize),
+                TotalCount = Ids.Item2
+            };
+            return response;
         }
     }
 }

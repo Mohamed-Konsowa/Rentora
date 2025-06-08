@@ -16,9 +16,18 @@ namespace Rentora.Application.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<List<int>> GetUserRentsAsync(string userId)
+        public async Task<(IReadOnlyCollection<int>, int)> GetUserRentsPaginatedAsync(string userId, int pageNumber, int pageSize, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.rentals.GetUserRentsAsync(userId);
+            return await _unitOfWork.rentals.PaginateAsync
+            (
+                pageNumber,
+                pageSize,
+                c => c.ProductId,
+                c => c.ApplicationUserId == userId,
+                null,
+                null,
+                cancellationToken
+            );
         }
 
         public Rental GetRentalByProductIdAsync(int productId)

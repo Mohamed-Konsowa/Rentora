@@ -25,7 +25,7 @@ namespace Rentora.Domain.AppMetaData
         public static class Cart
         {
             public const string Prefix = Rule + "Cart/";
-            public const string GetUserFav = Prefix + "getUserCartItems/{userId}";
+            public const string GetUserCart = Prefix + "getUserCartItemsPaginated/{userId}";
             public const string Add = Prefix + "addProductToCart";
             public const string Remove = Prefix + "removeFromCart";
         }
@@ -40,7 +40,7 @@ namespace Rentora.Domain.AppMetaData
         public static class Favorite
         {
             public const string Prefix = Rule + "Favorite/";
-            public const string GetUserFav = Prefix + "getUserFavoriteItems/{userId}";
+            public const string GetUserFav = Prefix + "getUserFavoriteItemsPaginated/{userId}";
             public const string Add = Prefix + "addProductToFavorite";
             public const string Remove = Prefix + "removeFromFavorite";
         }
@@ -60,7 +60,7 @@ namespace Rentora.Domain.AppMetaData
         public static class Rent
         {
             public const string Prefix = Rule + "Rent/";
-            public const string GetUserRents = Prefix + "getUserRents/{userId}";
+            public const string GetUserRents = Prefix + "getUserRentsPaginated/{userId}";
             public const string RentProduct = Prefix + "rentProduct";
             public const string ReturnProduct = Prefix + "returnProduct/{productId}";
         }
@@ -69,7 +69,7 @@ namespace Rentora.Domain.AppMetaData
         {
             public const string Prefix = Rule + "Review/";
             public const string AddOrUpdateReview = Prefix + "addOrUpdateReview";
-            public const string GetProductReviews = Prefix + "getProductReviews/{productId}";
+            public const string GetProductReviews = Prefix + "getProductReviewsPaginated/{productId}";
             public const string GetProductRate = Prefix + "getProductRate/{productId}";
             public const string DeleteReview = Prefix + "deleteReview/{reviewId}";
         }

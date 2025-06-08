@@ -14,7 +14,7 @@ namespace Rentora.Application.Services
         }
         public async Task<bool> AddInFavoriteAsync(string userId, int productId)
         {
-            if(_unitOfWork.favorites.GetFavoriteAsync(userId, productId) is not null)
+            if(await _unitOfWork.favorites.GetFavoriteAsync(userId, productId) is not null)
             {
                 return false; 
             }
@@ -26,9 +26,18 @@ namespace Rentora.Application.Services
             return result is not null;
         }
 
-        public async Task<List<int>> GetUserFavoriteItemsAsync(string userId)
+        public async Task<(IReadOnlyCollection<int>, int)> GetUserFavoriteItemsPaginatedAsync(string userId, int pageNumber, int pageSize, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.favorites.GetUserFavoriteItemsAsync(userId);
+            return await _unitOfWork.favorites.PaginateAsync
+            (
+                pageNumber,
+                pageSize,
+                f => f.ProductId,
+                f => f.ApplicationUserId == userId,
+                null,
+                null,
+                cancellationToken
+            );
         }
 
         public async Task<bool> RemoveFromFavoriteAsync(string userId, int productId)

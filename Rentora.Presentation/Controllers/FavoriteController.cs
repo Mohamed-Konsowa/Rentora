@@ -11,13 +11,17 @@ namespace Rentora.Presentation.Controllers
     public class FavoriteController : AppControllerBase
     {
         /// <summary>
-        /// Gets all favorite items for a user.
+        /// Gets all favorite items for a user with pagination.
         /// </summary>
         [HttpGet]
         [Route(Router.Favorite.GetUserFav)]
-        public async Task<IActionResult> GetUserFavoriteItemsAsync([FromRoute] Guid userId)
+        public async Task<IActionResult> GetUserFavoriteItemsPaginatedAsync([FromRoute] Guid userId, int pageNumber, int pageSize)
         {
-            return NewResult(await _mediator.Send(new GetUserCartItemsQuery { UserId = userId.ToString() }));
+            return NewResult(await _mediator.Send(new GetUserCartItemsPaginatedQuery { 
+                UserId = userId.ToString(),
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            }));
         }
 
         /// <summary>

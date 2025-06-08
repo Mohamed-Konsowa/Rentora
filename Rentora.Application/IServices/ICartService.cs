@@ -4,7 +4,7 @@
     {
         Task<bool> AddInCartAsync(string userId, int productId);
         Task<bool> RemoveFromCartAsync(string userId, int productId);
-        Task<List<int>> GetUserCartItemsAsync(string userId);
-
+        Task<(IReadOnlyCollection<int>, int)> GetUserCartItemsPaginatedAsync
+            (string userId, int pageNumber, int pageSize, CancellationToken cancellationToken);
     }
 }

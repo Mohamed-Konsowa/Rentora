@@ -1,7 +1,32 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Graduation-Project\\Rentora\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|d:\\graduation-project\\rentora\\rentora.application\\features\\favorite\\commands\\handlers\\favoritecommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|solutionrelative:rentora.application\\features\\favorite\\commands\\handlers\\favoritecommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|d:\\graduation-project\\rentora\\rentora.application\\services\\favoriteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|solutionrelative:rentora.application\\services\\favoriteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|d:\\graduation-project\\rentora\\rentora.application\\services\\cartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|solutionrelative:rentora.application\\services\\cartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE54A0D3-3425-48D7-8ACF-85C7D2896867}|Rentora.Persistence\\Rentora.Persistence.csproj|d:\\graduation-project\\rentora\\rentora.persistence\\repositories\\cartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE54A0D3-3425-48D7-8ACF-85C7D2896867}|Rentora.Persistence\\Rentora.Persistence.csproj|solutionrelative:rentora.persistence\\repositories\\cartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|d:\\graduation-project\\rentora\\rentora.application\\features\\cart\\commands\\handlers\\cartcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07E23BF8-5072-40E5-9AE9-78829B41A5E8}|Rentora.Application\\Rentora.Application.csproj|solutionrelative:rentora.application\\features\\cart\\commands\\handlers\\cartcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BFBBF7D8-83FE-4B08-8B48-9648884FD56F}|Rentora.Presentation\\Rentora.Presentation.csproj|d:\\graduation-project\\rentora\\rentora.presentation\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BFBBF7D8-83FE-4B08-8B48-9648884FD56F}|Rentora.Presentation\\Rentora.Presentation.csproj|solutionrelative:rentora.presentation\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
@@ -9,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 492,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -20,8 +45,82 @@
               "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CartRepository.cs",
+              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Persistence\\Repositories\\CartRepository.cs",
+              "RelativeDocumentMoniker": "Rentora.Persistence\\Repositories\\CartRepository.cs",
+              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Persistence\\Repositories\\CartRepository.cs",
+              "RelativeToolTip": "Rentora.Persistence\\Repositories\\CartRepository.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAqwBMAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T14:55:03.792Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CartService.cs",
+              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Services\\CartService.cs",
+              "RelativeDocumentMoniker": "Rentora.Application\\Services\\CartService.cs",
+              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Services\\CartService.cs",
+              "RelativeToolTip": "Rentora.Application\\Services\\CartService.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAD4vzIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T14:55:37.713Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FavoriteCommandHandler.cs",
+              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Favorite\\Commands\\Handlers\\FavoriteCommandHandler.cs",
+              "RelativeDocumentMoniker": "Rentora.Application\\Features\\Favorite\\Commands\\Handlers\\FavoriteCommandHandler.cs",
+              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Favorite\\Commands\\Handlers\\FavoriteCommandHandler.cs",
+              "RelativeToolTip": "Rentora.Application\\Features\\Favorite\\Commands\\Handlers\\FavoriteCommandHandler.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBQAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T14:55:37.751Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FavoriteService.cs",
+              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Services\\FavoriteService.cs",
+              "RelativeDocumentMoniker": "Rentora.Application\\Services\\FavoriteService.cs",
+              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Services\\FavoriteService.cs",
+              "RelativeToolTip": "Rentora.Application\\Services\\FavoriteService.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAtwBAAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T14:55:37.766Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CartCommandHandler.cs",
+              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Cart\\Commands\\Handlers\\CartCommandHandler.cs",
+              "RelativeDocumentMoniker": "Rentora.Application\\Features\\Cart\\Commands\\Handlers\\CartCommandHandler.cs",
+              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Application\\Features\\Cart\\Commands\\Handlers\\CartCommandHandler.cs",
+              "RelativeToolTip": "Rentora.Application\\Features\\Cart\\Commands\\Handlers\\CartCommandHandler.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBIAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T14:53:00.012Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CartController.cs",
+              "DocumentMoniker": "D:\\Graduation-Project\\Rentora\\Rentora.Presentation\\Controllers\\CartController.cs",
+              "RelativeDocumentMoniker": "Rentora.Presentation\\Controllers\\CartController.cs",
+              "ToolTip": "D:\\Graduation-Project\\Rentora\\Rentora.Presentation\\Controllers\\CartController.cs",
+              "RelativeToolTip": "Rentora.Presentation\\Controllers\\CartController.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAQwCEAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T14:51:06.586Z",
+              "EditorCaption": ""
             }
           ]
         },
@@ -32,10 +131,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }

@@ -2,20 +2,39 @@
 using Rentora.Application.Base;
 using Rentora.Application.Features.Favorite.Queries.Models;
 using Rentora.Application.IServices;
+using Rentora.Application.Services;
 
 namespace Rentora.Application.Features.Favorite.Queries.Handlers
 {
-    public class CartQueryHandler : IRequestHandler<GetUserCartItemsQuery, Response<List<int>>>
+    public class CartQueryHandler : IRequestHandler<GetUserCartItemsPaginatedQuery, Response<List<int>>>
     {
         private readonly IFavoriteService _favoriteService;
         public CartQueryHandler(IFavoriteService favoriteService)
         {
             _favoriteService = favoriteService;
         }
-        public async Task<Response<List<int>>> Handle(GetUserCartItemsQuery request, CancellationToken cancellationToken)
+        public async Task<Response<List<int>>> Handle(GetUserCartItemsPaginatedQuery request, CancellationToken cancellationToken)
         {
-            var Ids = await _favoriteService.GetUserFavoriteItemsAsync(request.UserId);
-            return ResponseHandler.Success(Ids);
+            request.PageNumber = request.PageNumber <= 0 ? 1 : request.PageNumber;
+            request.PageSize = request.PageSize <= 0 ? 10 : request.PageSize;
+            var Ids = await _favoriteService.GetUserFavoriteItemsPaginatedAsync
+            (
+                 request.UserId,
+                 request.PageNumber,
+                 request.PageSize,
+                 cancellationToken
+            );
+
+            var response = ResponseHandler.Success(Ids.Item1.ToList());
+            response.Meta = new PaginatedMeta
+            {
+                CurrentPage = request.PageNumber,
+                Succeeded = true,
+                PageSize = request.PageSize,
+                TotalPages = (int)Math.Ceiling((float)Ids.Item2 / request.PageSize),
+                TotalCount = Ids.Item2
+            };
+            return response;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Rentora.Application.Wrappers
             var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
             
             var response = ResponseHandler.Success(items);
-            response.Meta = new 
+            response.Meta = new PaginatedMeta
             {
                 CurrentPage = pageNumber,
                 Succeeded = true,

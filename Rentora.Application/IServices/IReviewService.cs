@@ -6,7 +6,8 @@ namespace Rentora.Application.IServices
     public interface IReviewService
     {
         Task<bool> AddReviewAsync(AddReviewDTO reviewDTO);
-        Task<List<GetProductReviewsDTO>> GetProductReviewsAsync(int productId);
+        Task<(IReadOnlyCollection<GetProductReviewsDTO>, int)> GetProductReviewsPaginatedAsync
+            (int productId, int pageNumber, int pageSize, CancellationToken cancellationToken);
         Task<(int Count, float Rate)> GetProductRateAsync(int productId);
         Task<bool> IsUserReviewedBeforeAsync(string userId, int productId);
         Task<Review> GetReviewAsync(string userId, int productId);

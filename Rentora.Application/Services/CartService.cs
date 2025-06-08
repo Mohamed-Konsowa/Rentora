@@ -14,7 +14,7 @@ namespace Rentora.Application.Services
         }
         public async Task<bool> AddInCartAsync(string userId, int productId)
         {
-            if(_unitOfWork.carts.GetCartAsync(userId, productId) is not null)
+            if(await _unitOfWork.carts.GetCartAsync(userId, productId) is not null)
             {
                 return false; 
             }
@@ -26,9 +26,18 @@ namespace Rentora.Application.Services
             return result is not null;
         }
 
-        public async Task<List<int>> GetUserCartItemsAsync(string userId)
+        public async Task<(IReadOnlyCollection<int>, int)> GetUserCartItemsPaginatedAsync(string userId, int pageNumber, int pageSize, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.carts.GetUserCartItemsAsync(userId);
+            return await _unitOfWork.carts.PaginateAsync
+            (
+                pageNumber,
+                pageSize,
+                c => c.ProductId,
+                c => c.ApplicationUserId == userId,
+                null,
+                null,
+                cancellationToken
+            );
         }
 
         public async Task<bool> RemoveFromCartAsync(string userId, int productId)
