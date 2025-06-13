@@ -8,12 +8,12 @@ namespace Rentora.Domain.Models
         public string LastName { get; set; }
         public string? Personal_summary { get; set; }
 
-        public string? NationalID {  get; set; }
+        public string NationalID {  get; set; }
         public string? IDImageFront { get; set; }
         public string? IDImageBack { get; set; }
-        public string? Governorate { get; set; }
-        public string? Town { get; set; }
-        public string? Address { get; set; }
+        public string Governorate { get; set; }
+        public string Town { get; set; }
+        public string Address { get; set; }
         public decimal? Balance { get; set; }
         public string? ProfileImage { get; set; }
 

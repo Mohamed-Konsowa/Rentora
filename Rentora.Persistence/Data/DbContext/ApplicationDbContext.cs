@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Rentora.Domain.Models;
 using Rentora.Domain.Models.Categories;
+using System.Reflection;
 
 namespace Rentora.Persistence.Data.DbContext
 {
@@ -31,47 +32,8 @@ namespace Rentora.Persistence.Data.DbContext
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(builder);
-            builder.Entity<Report>()
-                .HasOne(r => r.ReporterUser)
-                .WithMany(u => u.Reports)
-                .HasForeignKey(r => r.ReporterUserId)
-                .OnDelete(DeleteBehavior.NoAction);
-            builder.Entity<Report>()
-                .HasOne(r => r.ReportedUser)
-                .WithMany(u => u.Reporteds)
-                .HasForeignKey(r => r.ReportedUserId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            builder.Entity<TransactionHistory>()
-                .HasOne(t => t.FromUser)
-                .WithMany(u => u.FromTransactionHistories)
-                .HasForeignKey(t => t.FromUserId)
-                .OnDelete(DeleteBehavior.NoAction);
-            builder.Entity<TransactionHistory>()
-                .HasOne(t => t.ToUser)
-                .WithMany(u => u.ToTransactionHistories)
-                .HasForeignKey(t => t.ToUserId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            builder.Entity<RentalCart>()
-                .HasOne(r => r.ApplicationUser)
-                .WithMany(u => u.RentalCarts)
-                .HasForeignKey(r => r.ApplicationUserId);
-
-            builder.Entity<Product>().ToTable("Product");
-
-            builder.Entity<RentalCart>()
-                .HasIndex(c => new { c.ApplicationUserId, c.ProductId })
-                .IsUnique();
-
-            builder.Entity<Favorite>()
-                .HasIndex(f => new { f.ApplicationUserId, f.ProductId })
-                .IsUnique();
-
-            builder.Entity<Review>()
-                .HasIndex(r => new { r.ApplicationUserId, r.ProductId })
-                .IsUnique();
         }
     }
 }
