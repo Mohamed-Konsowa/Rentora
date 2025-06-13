@@ -1,0 +1,33 @@
+﻿using FluentValidation;
+using Rentora.Application.Features.Cart.Commands.Models;
+using Rentora.Application.IServices;
+
+namespace Rentora.Application.Features.Cart.Commands.Validators
+{
+    public class AddInCartValidator : AbstractValidator<AddInCartCommand>
+    {
+        private readonly IUserService _userService;
+        private readonly IProductService _productService;
+        public AddInCartValidator(IUserService userService, IProductService productService)
+        {
+            _userService = userService;
+            _productService = productService;
+            ApplyValidationRules();
+        }
+        public void ApplyValidationRules()
+        {
+            RuleFor(r => r.UserId)
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty().WithMessage("User Id is required!")
+                .MustAsync(async (key, can) => await _userService.GetUserByIdAsync(key.ToString()) is not null)
+                .WithMessage("User not found!");
+
+            RuleFor(r => r.ProductId)
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty().WithMessage("Product Id is required!")
+                .MustAsync(async (key, can) => await _productService.GetProductByIdAsync((int)key) is not null)
+                .WithMessage("Product not found!");
+
+        }
+    }
+}

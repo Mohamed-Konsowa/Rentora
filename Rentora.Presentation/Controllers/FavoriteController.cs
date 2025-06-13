@@ -17,8 +17,8 @@ namespace Rentora.Presentation.Controllers
         [Route(Router.Favorite.GetUserFav)]
         public async Task<IActionResult> GetUserFavoriteItemsPaginatedAsync([FromRoute] Guid userId, int pageNumber, int pageSize)
         {
-            return NewResult(await _mediator.Send(new GetUserCartItemsPaginatedQuery { 
-                UserId = userId.ToString(),
+            return NewResult(await _mediator.Send(new GetUserFavoriteItemsPaginatedQuery { 
+                UserId = userId,
                 PageNumber = pageNumber,
                 PageSize = pageSize
             }));
@@ -29,7 +29,7 @@ namespace Rentora.Presentation.Controllers
         /// </summary>
         [HttpPost]
         [Route(Router.Favorite.Add)]
-        public async Task<IActionResult> AddItemAsync([FromQuery] AddInCartCommand request)
+        public async Task<IActionResult> AddItemAsync([FromQuery] AddToFavoriteCommand request)
         {
             return NewResult(await _mediator.Send(request));
         }
@@ -39,7 +39,7 @@ namespace Rentora.Presentation.Controllers
         /// </summary>
         [HttpDelete]
         [Route(Router.Favorite.Remove)]
-        public async Task<IActionResult> DeleteItemAsync([FromQuery]RemoveFromCartCommand request)
+        public async Task<IActionResult> DeleteItemAsync([FromQuery]RemoveFromFavoriteCommand request)
         {
             return NewResult(await _mediator.Send(request));            
         }

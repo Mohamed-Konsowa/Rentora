@@ -6,7 +6,6 @@ namespace Rentora.Application.Features.Email.Commands.Models
 {
     public class SendOTPCommand : IRequest<Response<string>>
     {
-        [EmailAddress]
-        public string Email { get; set; }
+        public string? Email { get; set; }
     }
 }

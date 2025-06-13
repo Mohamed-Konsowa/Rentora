@@ -15,18 +15,27 @@ namespace Rentora.Application.Features.Account.Commands.Validators
         }
         public void ApplyValidationRules()
         {
+            RuleFor(x => x.Id)
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty().WithMessage("User Id is required.")
+                .MustAsync(async (key, can) => await _userService.GetUserByIdAsync(key.ToString()) is not null)
+                .WithMessage("User not found!");
+
             RuleFor(u => u.FirstName)
-            .NotEmpty().WithMessage("First Name is required.")
-            .MinimumLength(3).WithMessage("First Name must be at least 3 characters long.")
-            .MaximumLength(20).WithMessage("First Name must not exceed 20 characters.");
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty().WithMessage("First Name is required.")
+                .MinimumLength(3).WithMessage("First Name must be at least 3 characters long.")
+                .MaximumLength(20).WithMessage("First Name must not exceed 20 characters.");
 
             RuleFor(u => u.LastName)
+                .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("Last Name is required.")
                 .MinimumLength(3).WithMessage("Last Name must be at least 3 characters long.")
                 .MaximumLength(20).WithMessage("Last Name must not exceed 20 characters.");
 
             
             RuleFor(u => u.PhoneNumber)
+                .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("Phone number is required.")
                 .Matches(@"^\d{11}$").WithMessage("Phone number must be exactly 11 digits.")
                 .MustAsync(async (command, key, can) => {
@@ -37,8 +46,9 @@ namespace Rentora.Application.Features.Account.Commands.Validators
                 }).WithMessage("Phone Number already exist!");
 
             RuleFor(u => u.Governorate)
+                .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("Governorate is required.")
-                .MinimumLength(4).WithMessage("Governorate must be at least 4 characters long.");
+                .MinimumLength(3).WithMessage("Governorate must be at least 3 characters long.");
 
             RuleFor(u => u.Town)
                 .NotEmpty().WithMessage("Town is required.");

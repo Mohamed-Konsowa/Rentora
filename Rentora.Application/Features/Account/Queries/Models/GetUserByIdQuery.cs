@@ -6,6 +6,6 @@ namespace Rentora.Application.Features.Account.Queries.Models
 {
     public class GetUserByIdQuery : IRequest<Response<UserDTO>>
     {
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
     }
 }

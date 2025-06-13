@@ -20,7 +20,7 @@ namespace Rentora.Presentation.Controllers
         {
             return NewResult(await _mediator.Send(new GetUserCartItemsPaginatedQuery 
             {
-                UserId = userId.ToString(),
+                UserId = userId,
                 PageNumber = pageNumber,
                 PageSize = pageSize 
             }));

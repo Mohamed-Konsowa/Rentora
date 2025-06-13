@@ -6,6 +6,6 @@ namespace Rentora.Application.Features.Product.Queries.Models
 {
     public class GetProductByIdQuery : IRequest<Response<ProductDTO>>
     {
-        public int ProductId { get; set; } 
+        public int? ProductId { get; set; } 
     }
 }

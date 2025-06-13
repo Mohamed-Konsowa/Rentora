@@ -19,19 +19,19 @@ namespace Rentora.Application.Features.Rent.Queries.Handlers
             request.PageSize = request.PageSize <= 0 ? 10 : request.PageSize;
             var Ids = await _rentService.GetUserRentsPaginatedAsync
             (
-                 request.UserId,
-                 request.PageNumber,
-                 request.PageSize,
+                 request.UserId.ToString(),
+                 (int)request.PageNumber,
+                 (int)request.PageSize,
                  cancellationToken
             );
 
             var response = ResponseHandler.Success(Ids.Item1.ToList());
             response.Meta = new PaginatedMeta
             {
-                CurrentPage = request.PageNumber,
+                CurrentPage = (int)request.PageNumber,
                 Succeeded = true,
-                PageSize = request.PageSize,
-                TotalPages = (int)Math.Ceiling((float)Ids.Item2 / request.PageSize),
+                PageSize = (int)request.PageSize,
+                TotalPages = (int)Math.Ceiling((float)Ids.Item2 / (int)request.PageSize),
                 TotalCount = Ids.Item2
             };
             return response;

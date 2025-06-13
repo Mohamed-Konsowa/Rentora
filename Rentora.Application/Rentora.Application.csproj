@@ -24,19 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Email\Commands\Validators\" />
     <Folder Include="Features\Email\Queries\Handlers\" />
     <Folder Include="Features\Email\Queries\Models\" />
     <Folder Include="Features\Email\Queries\Validators\" />
-    <Folder Include="Features\Product\Queries\Validators\" />
-    <Folder Include="Features\Rent\Commands\Validators\" />
-    <Folder Include="Features\Rent\Queries\Validators\" />
-    <Folder Include="Features\Account\Queries\Validators\" />
-    <Folder Include="Features\Cart\Commands\Validators\" />
-    <Folder Include="Features\Cart\Queries\Validators\" />
-    <Folder Include="Features\Favorite\Commands\Validators\" />
-    <Folder Include="Features\Favorite\Queries\Validators\" />
-    <Folder Include="Features\Review\Queries\Validators\" />
   </ItemGroup>
 
 </Project>

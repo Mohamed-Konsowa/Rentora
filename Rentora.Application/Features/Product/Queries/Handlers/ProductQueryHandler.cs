@@ -24,7 +24,7 @@ namespace Rentora.Application.Features.Product.Queries.Handlers
         }
         public async Task<Response<ProductDTO>> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
         {
-            var result = await _productService.GetProductDTOByIdAsync(request.ProductId);
+            var result = await _productService.GetProductDTOByIdAsync((int)request.ProductId);
             if (result == null) return ResponseHandler.NotFound<ProductDTO>("Product not found");
             return ResponseHandler.Success(result);
         }
@@ -36,7 +36,7 @@ namespace Rentora.Application.Features.Product.Queries.Handlers
 
         public async Task<Response<List<ProductImage>>> Handle(GetProductImagesQuery request, CancellationToken cancellationToken)
         {
-            return ResponseHandler.Success(await _productService.GetProductImagesByIdAsync(request.ProductId)); 
+            return ResponseHandler.Success(await _productService.GetProductImagesByIdAsync((int)request.ProductId)); 
         }
 
         public Task<Response<List<ProductDTO>>> Handle(GetProductsPaginatedQuery request, CancellationToken cancellationToken)
@@ -74,7 +74,7 @@ namespace Rentora.Application.Features.Product.Queries.Handlers
             }
 
             return products.Select(p => new ProductDTO(p))
-                .ToPaginatedListAsync(request.PageNumber, request.PageSize);
+                .ToPaginatedListAsync((int)request.PageNumber, (int)request.PageSize);
         }
     }
 }

@@ -23,19 +23,19 @@ namespace Rentora.Application.Features.Review.Queries.Handlers
             request.PageSize = request.PageSize <= 0 ? 10 : request.PageSize;
             var Ids = await _reviewService.GetProductReviewsPaginatedAsync
             (
-                 request.ProductId,
-                 request.PageNumber,
-                 request.PageSize,
+                 (int)request.ProductId,
+                 (int)request.PageNumber,
+                 (int)request.PageSize,
                  cancellationToken
             );
 
             var response = ResponseHandler.Success(Ids.Item1.ToList());
             response.Meta = new PaginatedMeta
             {
-                CurrentPage = request.PageNumber,
+                CurrentPage = (int)request.PageNumber,
                 Succeeded = true,
-                PageSize = request.PageSize,
-                TotalPages = (int)Math.Ceiling((float)Ids.Item2 / request.PageSize),
+                PageSize = (int)request.PageSize,
+                TotalPages = (int)Math.Ceiling((float)Ids.Item2 / (int)request.PageSize),
                 TotalCount = Ids.Item2
             };
             return response;
@@ -43,7 +43,7 @@ namespace Rentora.Application.Features.Review.Queries.Handlers
 
         public async Task<Response<GetProductRateResult>> Handle(GetProductRateQuery request, CancellationToken cancellationToken)
         {
-            var x = await _reviewService.GetProductRateAsync(request.ProductId);
+            var x = await _reviewService.GetProductRateAsync((int)request.ProductId);
             return ResponseHandler.Success(new GetProductRateResult { NumOfReviews = x.Count, ProductRate = x.Rate});
         }
     }

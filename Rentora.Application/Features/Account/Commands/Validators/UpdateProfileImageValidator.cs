@@ -19,7 +19,10 @@ namespace Rentora.Application.Features.Account.Commands.Validators
             RuleFor(x => x.Image)
                 .Must(I => CommonUtils.IsImage(I).Item1)
                 .WithMessage(u => CommonUtils.IsImage(u.Image).Item2);
+
             RuleFor(x => x.UserId)
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty().WithMessage("User Id is required.")
                 .MustAsync(async (key, can) => await _userService.GetUserByIdAsync(key.ToString()) is not null)
                 .WithMessage("User not found!");
         }

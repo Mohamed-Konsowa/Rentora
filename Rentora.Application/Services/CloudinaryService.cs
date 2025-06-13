@@ -14,8 +14,9 @@ namespace Rentora.Application.Services
             _cloudinary = cloudinary;
         }
 
-        public async Task<string> UploadImageAsync(IFormFile file)
+        public async Task<string?> UploadImageAsync(IFormFile? file)
         {
+            if (file == null) return null;
             using var stream = file.OpenReadStream();
             var uploadParams = new ImageUploadParams()
             {
@@ -29,7 +30,7 @@ namespace Rentora.Application.Services
 
         public async Task<bool> DeleteImageAsync(string imageUrl)
         {
-            string publicId = ExtractPublicId(imageUrl);
+            string? publicId = ExtractPublicId(imageUrl);
             if (string.IsNullOrEmpty(publicId))
                 return false;
 
@@ -38,18 +39,25 @@ namespace Rentora.Application.Services
 
             return result.Result == "ok";
         }
-        public static string ExtractPublicId(string imageUrl)
+        public static string? ExtractPublicId(string imageUrl)
         {
-            var uri = new Uri(imageUrl);
-            var pathSegments = uri.AbsolutePath.Split('/');
+            try
+            {
+                var uri = new Uri(imageUrl);
+                var pathSegments = uri.AbsolutePath.Split('/');
 
-            // البحث عن "upload" ثم أخذ الجزء الذي بعده كـ PublicId
-            int uploadIndex = Array.IndexOf(pathSegments, "upload");
-            if (uploadIndex == -1 || uploadIndex + 2 >= pathSegments.Length) // +2 لأن الفهرس التالي هو رقم الإصدار
+                // البحث عن "upload" ثم أخذ الجزء الذي بعده كـ PublicId
+                int uploadIndex = Array.IndexOf(pathSegments, "upload");
+                if (uploadIndex == -1 || uploadIndex + 2 >= pathSegments.Length) // +2 لأن الفهرس التالي هو رقم الإصدار
+                    return null;
+
+                // تجاوز رقم الإصدار وأخذ باقي المسار كـ PublicId
+                return string.Join("/", pathSegments.Skip(uploadIndex + 2)).Split('.')[0]; // إزالة الامتداد
+            }
+            catch (Exception)
+            {
                 return null;
-
-            // تجاوز رقم الإصدار وأخذ باقي المسار كـ PublicId
-            return string.Join("/", pathSegments.Skip(uploadIndex + 2)).Split('.')[0]; // إزالة الامتداد
+            }
         }
     }
 }

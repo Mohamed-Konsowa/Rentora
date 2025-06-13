@@ -19,7 +19,7 @@ namespace Rentora.Presentation.Controllers
         public async Task<IActionResult> GetUserRentsPaginated([FromRoute] Guid userId, int pageNumber, int pageSize)
         {
             return NewResult(await _mediator.Send(new GetUserRentsPaginatedQuery { 
-                UserId = userId.ToString(),
+                UserId = userId,
                 PageNumber = pageNumber,
                 PageSize = pageSize
             }));
@@ -30,9 +30,9 @@ namespace Rentora.Presentation.Controllers
         /// </summary>
         [HttpPost]
         [Route(Router.Rent.RentProduct)]
-        public async Task<IActionResult> RentProductAsync(RentProductDTO rent)
+        public async Task<IActionResult> RentProductAsync([FromBody]RentProductCommand request)
         {
-            return NewResult(await _mediator.Send(new RentProductCommand { DTO = rent}));
+            return NewResult(await _mediator.Send(request));
         }
 
         /// <summary>

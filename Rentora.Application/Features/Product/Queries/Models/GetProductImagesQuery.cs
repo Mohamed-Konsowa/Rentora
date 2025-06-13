@@ -6,6 +6,6 @@ namespace Rentora.Application.Features.Product.Queries.Models
 {
     public class GetProductImagesQuery : IRequest<Response<List<ProductImage>>>
     {
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
     }
 }

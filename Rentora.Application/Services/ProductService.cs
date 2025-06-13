@@ -121,7 +121,7 @@ namespace Rentora.Application.Services
 
         public async Task<ProductDTO> UpdateProductAsync(UpdateProductCommand request)
         {
-            var product = await GetProductByIdAsync(request.ProductId);
+            var product = await GetProductByIdAsync((int)request.ProductId);
             if (product is null) return null;
 
             _mapper.Map(request, product);

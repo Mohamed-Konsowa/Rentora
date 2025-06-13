@@ -1,12 +1,10 @@
 ﻿using FluentValidation;
 using Rentora.Application.Features.Product.Commands.Models;
-using Rentora.Application.IServices;
 
 namespace Rentora.Application.Features.Product.Commands.Validators
 {
     public class UpdateProductValidator : AbstractValidator<UpdateProductCommand>
     {
-
         public UpdateProductValidator()
         {
             ApplyValidationRules();

@@ -1,6 +1,5 @@
-﻿
-using AutoMapper;
-using Rentora.Application.DTOs.Rental;
+﻿using AutoMapper;
+using Rentora.Application.Features.Rent.Commands.Models;
 using Rentora.Domain.Models;
 
 namespace Rentora.Application.Mapping.Rent
@@ -9,7 +8,7 @@ namespace Rentora.Application.Mapping.Rent
     {
         public RentProfile() 
         {
-            CreateMap<RentProductDTO, Rental>();
+            CreateMap<RentProductCommand, Rental>();
         }
     }
 }

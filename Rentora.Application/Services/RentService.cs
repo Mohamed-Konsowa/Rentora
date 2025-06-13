@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Rentora.Application.DTOs.Rental;
+using Rentora.Application.Features.Rent.Commands.Models;
 using Rentora.Application.IRepositories;
 using Rentora.Application.IServices;
 using Rentora.Domain.Enums.Product;
@@ -35,12 +36,12 @@ namespace Rentora.Application.Services
             return _unitOfWork.rentals.GetAll().FirstOrDefault(r => r.ProductId == productId && r.RentStatus == ProductStatus.Rented);
         }
 
-        public async Task<bool> RentProductAsync(RentProductDTO rentProductDTO)
+        public async Task<bool> RentProductAsync(RentProductCommand rentProduct)
         {
-            var rental = _mapper.Map<Rental>(rentProductDTO);
-            var product = await _unitOfWork.products.GetByIdAsync(rentProductDTO.ProductId);
-            rental.EndDate = rentProductDTO.StartDate.AddDays(rentProductDTO.numOfDays);
-            rental.TotalPrice = rentProductDTO.numOfDays * product.Price;
+            var rental = _mapper.Map<Rental>(rentProduct);
+            var product = await _unitOfWork.products.GetByIdAsync((int)rentProduct.ProductId);
+            rental.EndDate = ((DateTime)rentProduct.StartDate).AddDays((int)rentProduct.numOfDays);
+            rental.TotalPrice = (decimal)(rentProduct.numOfDays * product.Price);
             rental.RentStatus = ProductStatus.Rented;
 
             var result = _unitOfWork.rentals.AddAsync(rental);

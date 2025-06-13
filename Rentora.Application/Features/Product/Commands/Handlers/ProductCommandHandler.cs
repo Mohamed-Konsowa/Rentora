@@ -25,7 +25,7 @@ namespace Rentora.Application.Features.Product.Queries.Handlers
 
         public async Task<Response<string>> Handle(DeleteImageCommand request, CancellationToken cancellationToken)
         {
-            var result = await _productService.DeleteImageById(request.ImageId);
+            var result = await _productService.DeleteImageById((int)request.ImageId);
             if(result) return ResponseHandler.Success("Image deleted successfully.");
             return ResponseHandler.BadRequest<string>("Failed to delete the image");
         }
@@ -35,14 +35,14 @@ namespace Rentora.Application.Features.Product.Queries.Handlers
             var isImage = CommonUtils.IsImage(request.Image);
             if (!isImage.Item1) return ResponseHandler.BadRequest<string>(isImage.Item2);
 
-            var result = await _productService.AddProductImageAsync(request.ProductId, request.Image);
+            var result = await _productService.AddProductImageAsync((int)request.ProductId, request.Image);
             if (result) return ResponseHandler.Success("Image was added successfully");
             return ResponseHandler.BadRequest<string>("Failed to add Image!");
         }
 
         public async Task<Response<string>> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
-            var result = await _productService.DeleteProductAsync(request.ProductId);
+            var result = await _productService.DeleteProductAsync((int)request.ProductId);
             return result ? ResponseHandler.Success("The product is deleted.") : ResponseHandler.BadRequest<string>("Failed to delete product!");
         }
 

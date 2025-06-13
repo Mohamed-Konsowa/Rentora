@@ -6,6 +6,6 @@ namespace Rentora.Application.Features.Review.Queries.Models
 {
     public class GetProductRateQuery : IRequest<Response<GetProductRateResult>>
     {
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
     }
 }
