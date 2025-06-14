@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Rentora.Application.Features.Product.Commands.Models;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Rentora.Application.Features.Product.Queries.Models;
+using Rentora.Application.DTOs.ProductImage;
 
 namespace Rentora.Application.Services
 {
@@ -23,10 +25,59 @@ namespace Rentora.Application.Services
             _mapper = mapper;
         }
 
-        public  IQueryable<ProductDTO> GetProductsDTO()
+        public async Task<List<ProductDTO>> GetProductsDTOAsync()
         {
-            var temp = _unitOfWork.products.GetAll();
-            var products =  temp.Select(p => new ProductDTO(p)).AsQueryable();
+            var temp = _unitOfWork.products.GetAll().ToList();
+            var products = new List<ProductDTO>();
+            foreach (var product in temp)
+            {
+                products.Add(await GetProductDTOByIdAsync(product.ProductId));
+            }
+            
+            return products;
+        }
+
+        public async Task<List<ProductDTO>> GetProductsDTOPaginatedAsync(GetProductsPaginatedQuery request)
+        {
+            var allProducts = GetProducts().AsNoTracking();
+
+            if (!string.IsNullOrWhiteSpace(request.Search))
+            {
+                var keywords = request.Search
+                    .ToLowerInvariant()
+                    .Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (var keyword in keywords)
+                {
+                    var temp = keyword;
+                    allProducts = allProducts.Where(p =>
+                        p.Title.ToLower().Contains(temp) ||
+                        p.Description.ToLower().Contains(temp)
+                    );
+                }
+            }
+
+            if (request.FromPrice is not null)
+                allProducts = allProducts.Where(p => p.Price >= request.FromPrice);
+
+            if (request.ToPrice is not null)
+                allProducts = allProducts.Where(p => p.Price <= request.ToPrice);
+
+            if (request.CategoryId is not null)
+            {
+                allProducts = allProducts.Where
+                (
+                    p => p.CategoryId == request.CategoryId
+                );
+            }
+
+
+            var products = new List<ProductDTO>();
+            foreach (var product in allProducts)
+            {
+                products.Add(await GetProductDTOByIdAsync(product.ProductId));
+            }
+
             return products;
         }
         public IQueryable<Product> GetProducts()
@@ -177,11 +228,27 @@ namespace Rentora.Application.Services
         }
         public async Task<bool> DeleteProductAsync(int id)
         {
-            await _unitOfWork.products.DeleteProductCategoryAsync(id);
-            _unitOfWork.products.DeleteProductImages(id);
-            var result = _unitOfWork.products.Delete(id);
-            await _unitOfWork.SaveChangesAsync();
-            return result;
+            using var transaction = await _unitOfWork.BeginTransactionAsync();
+            try
+            {
+                //await _unitOfWork.products.DeleteProductCategoryAsync(id);
+                var images = await _unitOfWork.products.GetProductImagesAsync(id);
+                _unitOfWork.products.DeleteProductImages(id);
+                var result = _unitOfWork.products.Delete(id);
+                
+                await _unitOfWork.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                if(result) 
+                    images.ForEach(async i => await _imageService.DeleteImageAsync(i.ImageUrl));
+
+                return result;
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                return false;
+            }
         }
 
         public async Task<bool> AddProductImageAsync(int productId, IFormFile file)
@@ -215,7 +282,7 @@ namespace Rentora.Application.Services
             return await _unitOfWork.products.GetProductSpecificCategoryIdAsync(id);
         }
 
-        public async Task<List<ProductImage>> GetProductImagesByIdAsync(int productId)
+        public async Task<List<ProductImageDTO>> GetProductImagesByIdAsync(int productId)
         {
             var images = await _unitOfWork.products.GetProductImagesAsync(productId);
             return images;

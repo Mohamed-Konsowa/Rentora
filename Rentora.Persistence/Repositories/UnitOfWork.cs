@@ -1,4 +1,5 @@
-﻿using Rentora.Persistence.Data.DbContext;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using Rentora.Persistence.Data.DbContext;
 
 namespace Rentora.Application.IRepositories
 {
@@ -27,14 +28,19 @@ namespace Rentora.Application.IRepositories
             reviews = reviewRepository;
         }
 
+        public async Task<IDbContextTransaction> BeginTransactionAsync()
+        {
+            return await _context.Database.BeginTransactionAsync();
+        }
+
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
         }
 
-        public async void Dispose()
+        public async ValueTask DisposeAsync()
         {
-             await _context.DisposeAsync();
+            await _context.DisposeAsync();
         }
     }
 }

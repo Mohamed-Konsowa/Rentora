@@ -1,4 +1,5 @@
-﻿using Rentora.Domain.Models;
+﻿using Rentora.Application.DTOs.ProductImage;
+using Rentora.Domain.Models;
 using System.Linq.Expressions;
 
 namespace Rentora.Application.IRepositories
@@ -12,7 +13,7 @@ namespace Rentora.Application.IRepositories
         bool DeleteProductImages(int productId);
         Task<bool> AddProductImageAsync(ProductImage productImage);
         Task<int> GetProductSpecificCategoryIdAsync(int productId);
-        Task<List<ProductImage>> GetProductImagesAsync(int productId);
+        Task<List<ProductImageDTO>> GetProductImagesAsync(int productId);
         Task<ProductImage> GetProductImageByIdAsync(int imageId);
         void DeleteProductImage(ProductImage productImage);
     }

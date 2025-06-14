@@ -62,9 +62,9 @@ namespace Rentora.Presentation.Controllers
         /// </summary>
         //[Authorize]
         [HttpDelete(Router.Product.Delete)]
-        public async Task<IActionResult> DeleteProductAsync(DeleteProductCommand request)
+        public async Task<IActionResult> DeleteProductAsync([FromRoute] int productId)
         {
-            return NewResult(await _mediator.Send(request));
+            return NewResult(await _mediator.Send(new DeleteProductCommand { ProductId = productId }));
         }
 
         /// <summary>

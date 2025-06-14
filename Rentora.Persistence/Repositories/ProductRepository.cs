@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Rentora.Application.DTOs.ProductImage;
 using Rentora.Application.IRepositories;
 using Rentora.Domain.Models;
 using Rentora.Domain.Models.Categories;
@@ -125,9 +126,13 @@ namespace Rentora.Persistence.Repositories
             return -1;
         }
 
-        public async Task<List<ProductImage>> GetProductImagesAsync(int productId)
+        public async Task<List<ProductImageDTO>> GetProductImagesAsync(int productId)
         {
-            return await _context.ProductImages.Where(i => i.ProductId == productId).ToListAsync();
+            return await _context.ProductImages.Where(i => i.ProductId == productId).Select(i => new ProductImageDTO
+            {
+                ImageId = i.Id,
+                ImageUrl = i.Image,
+            }).ToListAsync();
         }
 
         public async Task<ProductImage> GetProductImageByIdAsync(int imageId)
