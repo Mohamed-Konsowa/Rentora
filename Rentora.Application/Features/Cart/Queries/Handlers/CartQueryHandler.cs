@@ -8,12 +8,17 @@ namespace Rentora.Application.Features.Cart.Queries.Handlers
     public class CartQueryHandler : IRequestHandler<GetUserCartItemsPaginatedQuery, Response<List<int>>>
     {
         private readonly ICartService _cartService;
-        public CartQueryHandler(ICartService cartService)
+        private readonly IUserService _userService;
+        public CartQueryHandler(ICartService cartService, IUserService userService)
         {
             _cartService = cartService;
+            _userService = userService;
         }
         public async Task<Response<List<int>>> Handle(GetUserCartItemsPaginatedQuery request, CancellationToken cancellationToken)
         {
+            if (await _userService.GetUserByIdAsync(request.UserId.ToString()) is null)
+                return ResponseHandler.NotFound<List<int>>("User not found!");
+
             request.PageNumber = request.PageNumber <= 0 ? 1 : request.PageNumber;
             request.PageSize = request.PageSize <= 0 ? 10 : request.PageSize;
             var Ids = await _cartService.GetUserCartItemsPaginatedAsync

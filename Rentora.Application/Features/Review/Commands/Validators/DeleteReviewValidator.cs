@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using Rentora.Application.Features.Review.Commands.Models;
-using Rentora.Application.IServices;
 
 namespace Rentora.Application.Features.Review.Commands.Validators
 {

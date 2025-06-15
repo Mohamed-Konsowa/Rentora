@@ -35,6 +35,9 @@ namespace Rentora.Application.Features.Product.Queries.Handlers
 
         public async Task<Response<List<ProductImageDTO>>> Handle(GetProductImagesQuery request, CancellationToken cancellationToken)
         {
+            if (await _productService.GetProductByIdAsync((int)request.ProductId) is null)
+                return ResponseHandler.NotFound<List<ProductImageDTO>> ("Product not found!");
+
             return ResponseHandler.Success(await _productService.GetProductImagesByIdAsync((int)request.ProductId)); 
         }
 

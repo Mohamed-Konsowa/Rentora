@@ -1,25 +1,20 @@
 ﻿using FluentValidation;
 using Rentora.Application.Features.Product.Queries.Models;
-using Rentora.Application.IServices;
 
 namespace Rentora.Application.Features.Product.Queries.Validators
 {
     public class GetProductByIdValidator : AbstractValidator<GetProductByIdQuery>
     {
-        private readonly IProductService _productService;
 
-        public GetProductByIdValidator(IProductService productService)
+        public GetProductByIdValidator()
         {
-            _productService = productService;
             ApplyValidationRules();
         }
         public void ApplyValidationRules()
         {
             RuleFor(r => r.ProductId)
                 .Cascade(CascadeMode.Stop)
-                .NotEmpty().WithMessage("Product Id is required!")
-                .MustAsync(async (key, can) => await _productService.GetProductByIdAsync((int)key) is not null)
-                .WithMessage("Product not found!");
+                .NotEmpty().WithMessage("Product Id is required!");
         }
     }
 }

@@ -11,7 +11,6 @@ namespace Rentora.Application.Features.Account.Commands.Validators
 
         public RegisterValidator(IUserService userService)
         {
-            _userService = userService;
             ApplyValidationRules();
         }
         public void ApplyValidationRules()

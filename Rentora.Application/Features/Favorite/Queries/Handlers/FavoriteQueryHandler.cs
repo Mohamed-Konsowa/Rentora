@@ -2,19 +2,24 @@
 using Rentora.Application.Base;
 using Rentora.Application.Features.Favorite.Queries.Models;
 using Rentora.Application.IServices;
-using Rentora.Application.Services;
 
 namespace Rentora.Application.Features.Favorite.Queries.Handlers
 {
     public class CartQueryHandler : IRequestHandler<GetUserFavoriteItemsPaginatedQuery, Response<List<int>>>
     {
         private readonly IFavoriteService _favoriteService;
-        public CartQueryHandler(IFavoriteService favoriteService)
+        private readonly IUserService _userService;
+
+        public CartQueryHandler(IFavoriteService favoriteService, IUserService userService)
         {
             _favoriteService = favoriteService;
+            _userService = userService;
         }
         public async Task<Response<List<int>>> Handle(GetUserFavoriteItemsPaginatedQuery request, CancellationToken cancellationToken)
         {
+            if (await _userService.GetUserByIdAsync(request.UserId.ToString()) is null)
+                return ResponseHandler.NotFound<List<int>>("User not found!");
+
             request.PageNumber = request.PageNumber <= 0 ? 1 : request.PageNumber;
             request.PageSize = request.PageSize <= 0 ? 10 : request.PageSize;
             var Ids = await _favoriteService.GetUserFavoriteItemsPaginatedAsync

@@ -1,16 +1,13 @@
 ﻿using FluentValidation;
 using Rentora.Application.Features.Account.Commands.Models;
 using Rentora.Application.Helpers;
-using Rentora.Application.IServices;
 
 namespace Rentora.Application.Features.Account.Commands.Validators
 {
     public class UpdateProfileImageValidator : AbstractValidator<UpdateProfileImageCommand>
     {
-        IUserService _userService;
-        public UpdateProfileImageValidator(IUserService userService)
+        public UpdateProfileImageValidator()
         {
-            _userService = userService;
             ApplyValidationRules();
         }
 
@@ -22,9 +19,7 @@ namespace Rentora.Application.Features.Account.Commands.Validators
 
             RuleFor(x => x.UserId)
                 .Cascade(CascadeMode.Stop)
-                .NotEmpty().WithMessage("User Id is required.")
-                .MustAsync(async (key, can) => await _userService.GetUserByIdAsync(key.ToString()) is not null)
-                .WithMessage("User not found!");
+                .NotEmpty().WithMessage("User Id is required.");
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Rentora.Application.Base;
 using Rentora.Application.Features.Product.Commands.Models;
 using Rentora.Application.Helpers;
@@ -15,11 +16,13 @@ namespace Rentora.Application.Features.Product.Queries.Handlers
                                        , IRequestHandler<AddProductCommand, Response<ProductDTO>>
     {
         private readonly IProductService _productService;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public ProductCommandHandler(IProductService productService, IMapper mapper)
+        public ProductCommandHandler(IProductService productService, IUserService userService, IMapper mapper)
         {
             _productService = productService;
+            _userService = userService;
             _mapper = mapper;
         }
 
@@ -32,9 +35,9 @@ namespace Rentora.Application.Features.Product.Queries.Handlers
 
         public async Task<Response<string>> Handle(AddImageCommand request, CancellationToken cancellationToken)
         {
-            var isImage = CommonUtils.IsImage(request.Image);
-            if (!isImage.Item1) return ResponseHandler.BadRequest<string>(isImage.Item2);
-
+            if (await _productService.GetProductByIdAsync((int)request.ProductId) is null)
+                return ResponseHandler.NotFound<string>("Product not found!");
+            
             var result = await _productService.AddProductImageAsync((int)request.ProductId, request.Image);
             if (result) return ResponseHandler.Success("Image was added successfully");
             return ResponseHandler.BadRequest<string>("Failed to add Image!");
@@ -42,6 +45,9 @@ namespace Rentora.Application.Features.Product.Queries.Handlers
 
         public async Task<Response<string>> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
+            if (await _productService.GetProductByIdAsync((int)request.ProductId) is null)
+                return ResponseHandler.NotFound<string>("Product not found!");
+
             var result = await _productService.DeleteProductAsync((int)request.ProductId);
             return result ? ResponseHandler.Success("The product is deleted.") : ResponseHandler.BadRequest<string>("Failed to delete product!");
         }
@@ -55,6 +61,9 @@ namespace Rentora.Application.Features.Product.Queries.Handlers
 
         public async Task<Response<ProductDTO>> Handle(AddProductCommand request, CancellationToken cancellationToken)
         {
+            if (await _userService.GetUserByIdAsync(request.ApplicationUserId.ToString()) is null)
+                return ResponseHandler.NotFound<ProductDTO>("User not found!");
+
             var product = _mapper.Map<AddProductDTO>(request);
             var result = await _productService.AddProductAsync(product);
             return ResponseHandler.Success(result);

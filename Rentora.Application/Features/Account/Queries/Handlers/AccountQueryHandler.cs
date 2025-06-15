@@ -30,7 +30,7 @@ namespace Rentora.Application.Features.Account.Queries.Handlers
         public async Task<Response<UserDTO>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
             var user = await _userService.GetUserByIdAsync(request.UserId);
-            if (user == null) return ResponseHandler.NotFound<UserDTO>();
+            if (user == null) return ResponseHandler.NotFound<UserDTO>("User not found!");
             var userMapper = _mapper.Map<UserDTO>(user);
             return ResponseHandler.Success(userMapper);
         }

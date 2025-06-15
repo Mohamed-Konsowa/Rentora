@@ -1,24 +1,19 @@
 ﻿using FluentValidation;
 using Rentora.Application.Features.Cart.Queries.Models;
-using Rentora.Application.IServices;
 
 namespace Rentora.Application.Features.Cart.Queries.Validators
 {
     public class GetUserCartItemsPaginatedValidator : AbstractValidator<GetUserCartItemsPaginatedQuery>
     {
-        private readonly IUserService _userService;
-        public GetUserCartItemsPaginatedValidator(IUserService userService)
+        public GetUserCartItemsPaginatedValidator()
         {
-            _userService = userService;
             ApplyValidationRules();
         }
         public void ApplyValidationRules()
         {
             RuleFor(r => r.UserId)
                 .Cascade(CascadeMode.Stop)
-                .NotEmpty().WithMessage("User Id is required!")
-                .MustAsync(async (key, can) => await _userService.GetUserByIdAsync(key.ToString()) is not null)
-                .WithMessage("User not found!");
+                .NotEmpty().WithMessage("User Id is required!");
 
             RuleFor(r => r.PageSize)
                 .Cascade(CascadeMode.Stop)

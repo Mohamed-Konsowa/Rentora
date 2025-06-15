@@ -1,33 +1,24 @@
 ﻿using FluentValidation;
 using Rentora.Application.Features.Rent.Commands.Models;
-using Rentora.Application.IServices;
 
 namespace Rentora.Application.Features.Product.Commands.Validators
 {
     public class RentProductValidator : AbstractValidator<RentProductCommand>
     {
-        private readonly IUserService _userService;
-        private readonly IProductService _productService;
 
-        public RentProductValidator(IUserService userService, IProductService productService)
+        public RentProductValidator()
         {
-            _userService = userService;
-            _productService = productService;
             ApplyValidationRules();
         }
         public void ApplyValidationRules()
         {
             RuleFor(r => r.ProductId)
                 .Cascade(CascadeMode.Stop)
-                .NotEmpty().WithMessage("Product Id is required!")
-                .MustAsync(async (key, can) => await _productService.GetProductByIdAsync((int)key) is not null)
-                .WithMessage("Product not found!");
+                .NotEmpty().WithMessage("Product Id is required!");
 
             RuleFor(x => x.ApplicationUserId)
                 .Cascade(CascadeMode.Stop)
-                .NotEmpty().WithMessage("User Id is required.")
-                .MustAsync(async (key, can) => await _userService.GetUserByIdAsync(key.ToString()) is not null)
-                .WithMessage("User not found!");
+                .NotEmpty().WithMessage("User Id is required.");
 
             RuleFor(x => x.StartDate)
                 .NotNull().WithMessage("Start Date is required!");

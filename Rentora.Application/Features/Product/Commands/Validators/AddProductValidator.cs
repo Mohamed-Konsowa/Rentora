@@ -1,25 +1,20 @@
 ﻿using FluentValidation;
 using Rentora.Application.Features.Product.Commands.Models;
-using Rentora.Application.IServices;
 
 namespace Rentora.Application.Features.Product.Commands.Validators
 {
     public class AddProductValidator : AbstractValidator<AddProductCommand>
     {
-        private readonly IUserService _userService;
 
-        public AddProductValidator(IUserService userService)
+        public AddProductValidator()
         {
-            _userService = userService;
             ApplyValidationRules();
             Apply();
         }
         public void ApplyValidationRules()
         {
             RuleFor(p => p.ApplicationUserId)
-                .NotEmpty().WithMessage("User ID is required.")
-                .MustAsync(async (Key, can) => await _userService.GetUserByIdAsync(Key.ToString()) is not null)
-                .WithMessage("User not found");
+                .NotEmpty().WithMessage("User ID is required.");
 
             RuleFor(p => p.CategoryId)
                 .InclusiveBetween(1, 4).WithMessage("Invalid Category ID. Allowed values: 1, 2, 3, 4.");

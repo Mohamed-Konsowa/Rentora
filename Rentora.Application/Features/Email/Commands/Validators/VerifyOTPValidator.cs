@@ -17,7 +17,7 @@ namespace Rentora.Application.Features.Email.Commands.Validators
                 .EmailAddress().WithMessage("Invalid email format.");
 
             RuleFor(x => x.OTPCode)
-                .NotEmpty().WithMessage("Message is required.");
+                .NotEmpty().WithMessage("OTP is required.");
 
         }
     }

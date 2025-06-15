@@ -17,9 +17,7 @@ namespace Rentora.Application.Features.Account.Commands.Validators
         {
             RuleFor(x => x.Id)
                 .Cascade(CascadeMode.Stop)
-                .NotEmpty().WithMessage("User Id is required.")
-                .MustAsync(async (key, can) => await _userService.GetUserByIdAsync(key.ToString()) is not null)
-                .WithMessage("User not found!");
+                .NotEmpty().WithMessage("User Id is required.");
 
             RuleFor(u => u.FirstName)
                 .Cascade(CascadeMode.Stop)

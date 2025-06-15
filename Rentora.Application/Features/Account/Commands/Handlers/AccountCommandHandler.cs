@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Rentora.Application.Base;
 using Rentora.Application.DTOs.Account;
 using Rentora.Application.Features.Account.Commands.Models;
@@ -44,6 +45,10 @@ namespace Rentora.Application.Features.Account.Commands.Handlers
 
         public async Task<Response<string>> Handle(AddRoleCommand request, CancellationToken cancellationToken)
         {
+            if(await _userService.GetUserByIdAsync(request.UserId.ToString()) is null)
+            {
+                return ResponseHandler.NotFound<string>("User not found!");
+            }
             var result = await _userService.AddRoleAsync(request);
             if (result.Item1) return ResponseHandler.Success(result.Item2);
             else return ResponseHandler.BadRequest<string>(result.Item2);
@@ -52,7 +57,7 @@ namespace Rentora.Application.Features.Account.Commands.Handlers
         public async Task<Response<string>> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
         {
             var user = await _userService.GetUserByEmailAsync(request.Email);
-            if (user == null) return ResponseHandler.NotFound<string>();
+            if (user == null) return ResponseHandler.NotFound<string>("This email not found!");
 
             var result = await _userService.ResetPasswordAsync(user, request.Token, request.NewPassword);
             if (result) return ResponseHandler.Success(Messages.Success);
@@ -70,6 +75,8 @@ namespace Rentora.Application.Features.Account.Commands.Handlers
 
         public async Task<Response<string>> Handle(UpdateProfileImageCommand request, CancellationToken cancellationToken)
         {
+            var user = await _userService.GetUserByIdAsync(request.UserId.ToString());
+            if (user is null) return ResponseHandler.NotFound<string>("User not found!");
             var result = await _userService.UpdateProfileImageAsync(request);
             if(result) return ResponseHandler.Success(Messages.Success);
             return ResponseHandler.BadRequest<string>();
